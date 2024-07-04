@@ -55,12 +55,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // 好きなことの要素を生成
         data.like_factors_options.forEach((option, index) => {
+            const factor = option.match(/\(([^)]+)\)/)[1];
             const optionDiv = document.createElement('div');
             optionDiv.className = 'question';
             optionDiv.innerHTML = `
                 <label for="likeFactor${index + 1}">
-                    <input type="checkbox" id="likeFactor${index + 1}" name="likeFactors" value="${option.match(/\(([^)]+)\)/)[1]}">
-                    ${option.match(/\(([^)]+)\)/)[1]}
+                    <input type="checkbox" id="likeFactor${index + 1}" name="likeFactors" value="${factor}">
+                    ${factor}
                 </label>
             `;
             likeFactorsOptionsContainer.appendChild(optionDiv);
@@ -68,12 +69,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // 大事にしたいことの要素を生成
         data.important_factors_options.forEach((option, index) => {
+            const factor = option.match(/\(([^)]+)\)/)[1];
             const optionDiv = document.createElement('div');
             optionDiv.className = 'question';
             optionDiv.innerHTML = `
                 <label for="importantFactor${index + 1}">
-                    <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${option.match(/\(([^)]+)\)/)[1]}">
-                    ${option.match(/\(([^)]+)\)/)[1]}
+                    <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${factor}">
+                    ${factor}
                 </label>
             `;
             importantFactorsOptionsContainer.appendChild(optionDiv);
