@@ -6,7 +6,3 @@
   from = "/*"
   to = "/index.html"
   status = 200
-
-[context.production.environment]
-  RECAPTCHA_SITE_KEY = "6LflUQgqAAAAALyiXwGXM67L_QAVaTwzMr17mMQt"
-  RECAPTCHA_SECRET_KEY = "6LflUQgqAAAAAEApvOzkRoKb61JDdoS834qlcSx1"

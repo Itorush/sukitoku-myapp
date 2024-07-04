@@ -4,10 +4,10 @@ const path = require('path');
 exports.handler = async (event, context) => {
     try {
         // Excelファイルのパスを設定します
-        const hobbyOptionsPath = path.resolve(__dirname, 'data', 'hobby_options.xlsx');
-        const importantFactorsOptionsPath = path.resolve(__dirname, 'data', 'important_factors_options.xlsx');
-        const likeFactorsOptionsPath = path.resolve(__dirname, 'data', 'like_factors_options.xlsx');
-        const skillsDiagnosisQuestionsPath = path.resolve(__dirname, 'data', 'skills_diagnosis_questions.xlsx');
+        const hobbyOptionsPath = path.resolve(__dirname, '..', 'data', 'hobby_options.xlsx');
+        const importantFactorsOptionsPath = path.resolve(__dirname, '..', 'data', 'important_factors_options.xlsx');
+        const likeFactorsOptionsPath = path.resolve(__dirname, '..', 'data', 'like_factors_options.xlsx');
+        const skillsDiagnosisQuestionsPath = path.resolve(__dirname, '..', 'data', 'skills_diagnosis_questions.xlsx');
 
         // Excelファイルを読み込みます
         const hobbyOptionsWorkbook = XLSX.readFile(hobbyOptionsPath);
