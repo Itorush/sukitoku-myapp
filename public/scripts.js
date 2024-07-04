@@ -6,8 +6,21 @@ document.addEventListener("DOMContentLoaded", function() {
             const recaptchaElement = document.querySelector('.g-recaptcha');
             if (recaptchaElement) {
                 recaptchaElement.setAttribute('data-sitekey', data.siteKey);
+            } else {
+                console.error("reCAPTCHA element not found.");
             }
+        })
+        .catch(error => {
+            console.error("Error fetching site key:", error);
         });
+
+    // フェーズを表示する関数を定義
+    function showPhase(phase) {
+        document.querySelectorAll('.phase').forEach(function(phaseDiv) {
+            phaseDiv.classList.remove('active');
+        });
+        document.getElementById('phase' + phase).classList.add('active');
+    }
 
     // フェーズを表示する関数を呼び出します
     showPhase(1);
@@ -17,6 +30,9 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(response => response.json())
         .then(data => {
             generateQuestions(data);
+        })
+        .catch(error => {
+            console.error("Error fetching questions:", error);
         });
 
     function generateQuestions(data) {
@@ -81,14 +97,6 @@ document.addEventListener("DOMContentLoaded", function() {
             skillsQuestionsContainer.appendChild(questionDiv);
         });
     }
-
-    // フェーズを表示する関数
-    window.showPhase = function(phase) {
-        document.querySelectorAll('.phase').forEach(function(phaseDiv) {
-            phaseDiv.classList.remove('active');
-        });
-        document.getElementById('phase' + phase).classList.add('active');
-    };
 
     // フォーム送信時の処理
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
