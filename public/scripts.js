@@ -1,7 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
     // サイトキーを取得して設定
     fetch('/.netlify/functions/get-recaptcha-key')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             const recaptchaElement = document.querySelector('.g-recaptcha');
             if (recaptchaElement) {
@@ -27,7 +32,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // サーバーから質問データを取得します
     fetch('/.netlify/functions/get-questions')
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             generateQuestions(data);
         })
