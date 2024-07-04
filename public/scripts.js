@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", function() {
             optionDiv.className = 'question';
             optionDiv.innerHTML = `
                 <label for="hobby${index + 1}">
-                    <input type="checkbox" id="hobby${index + 1}" name="hobbies" value="${option.hobby}">
-                    ${option.hobby}
+                    <input type="checkbox" id="hobby${index + 1}" name="hobbies" value="${option}">
+                    ${option}
                 </label>
             `;
             hobbyOptionsContainer.appendChild(optionDiv);
@@ -55,8 +55,8 @@ document.addEventListener("DOMContentLoaded", function() {
             optionDiv.className = 'question';
             optionDiv.innerHTML = `
                 <label for="likeFactor${index + 1}">
-                    <input type="checkbox" id="likeFactor${index + 1}" name="likeFactors" value="${option.factor}">
-                    ${option.factor}
+                    <input type="checkbox" id="likeFactor${index + 1}" name="likeFactors" value="${option}">
+                    ${option}
                 </label>
             `;
             likeFactorsOptionsContainer.appendChild(optionDiv);
@@ -66,10 +66,10 @@ document.addEventListener("DOMContentLoaded", function() {
         data.important_factors_options.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'question';
-            optionDiv.innerHTML = `
+            questionDiv.innerHTML = `
                 <label for="importantFactor${index + 1}">
-                    <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${option.factor}">
-                    ${option.factor}
+                    <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${option}">
+                    ${option}
                 </label>
             `;
             importantFactorsOptionsContainer.appendChild(optionDiv);
