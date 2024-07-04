@@ -1,39 +1,11 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // サイトキーを取得して設定
-    fetch('/.netlify/functions/get-recaptcha-key')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            const recaptchaElement = document.querySelector('.g-recaptcha');
-            if (recaptchaElement) {
-                recaptchaElement.setAttribute('data-sitekey', data.siteKey);
-            } else {
-                console.error("reCAPTCHA element not found.");
-            }
-        })
-        .catch(error => {
-            console.error("Error fetching site key:", error);
-        });
-
-    // フェーズを表示する関数を定義
     function showPhase(phase) {
         document.querySelectorAll('.phase').forEach(function(phaseDiv) {
             phaseDiv.classList.remove('active');
         });
-        const activePhase = document.getElementById('phase' + phase);
-        if (activePhase) {
-            activePhase.classList.add('active');
-        }
+        document.getElementById('phase' + phase).classList.add('active');
     }
 
-    // フェーズを表示する関数を呼び出します
-    showPhase(1);
-
-    // サーバーから質問データを取得します
     fetch('/.netlify/functions/get-questions')
         .then(response => {
             if (!response.ok) {
@@ -96,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         // 得意なことの質問を生成
-        data.skills_questions.forEach((question, index) => {
+        data.skills_questions.sort(() => 0.5 - Math.random()).forEach((question, index) => {
             const questionDiv = document.createElement('div');
             questionDiv.className = 'question';
             questionDiv.innerHTML = `
@@ -111,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // フォーム送信時の処理
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
         event.preventDefault();
 
@@ -123,39 +94,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const data = { skills, hobbies, likeFactors, importantFactors };
 
-        // CAPTCHAトークンを取得
-        const captchaToken = grecaptcha.getResponse();
-
-        // CAPTCHAトークンをサーバーに送信して検証
-        fetch('/.netlify/functions/verify-captcha', {
+        fetch('/.netlify/functions/save-results', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ token: captchaToken })
+            body: JSON.stringify(data)
         })
         .then(response => response.json())
         .then(result => {
-            if (result.statusCode === 200) {
-                // CAPTCHAが成功した場合、診断結果を保存
-                fetch('/.netlify/functions/save-results', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(result => {
-                    console.log(result.message);
-                    window.location.href = 'diagnosis-results.html';
-                });
-            } else {
-                alert('CAPTCHA verification failed');
-            }
+            console.log(result.message);
+            window.location.href = 'diagnosis-results.html';
         });
 
-        // データをローカルストレージに保存
         localStorage.setItem('diagnosisData', JSON.stringify(data));
     });
 });

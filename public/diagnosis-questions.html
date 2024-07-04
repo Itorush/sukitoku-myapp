@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>好き得 適職診断 - 質問ページ</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script defer src="scripts.js"></script>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>好き得 適職診断</h1>
+            <h1>診断のための質問</h1>
             <nav>
                 <ul>
                     <li><a href="/">ホーム</a></li>
@@ -29,9 +28,30 @@
             <div class="container">
                 <h2>診断用質問ページ</h2>
                 <form id="diagnosisForm">
-                    <!-- 質問内容 -->
-                    <div class="g-recaptcha" data-sitekey=""></div>
-                    <button type="submit">診断結果を見る</button>
+                    <!-- フェーズ1: 趣味の選択 -->
+                    <div id="phase1" class="phase active">
+                        <p>選択肢からご自身の趣味に近いものを１～３つ選択してください</p>
+                        <div id="hobbyOptions"></div>
+                        <button type="button" onclick="showPhase(2)">次へ</button>
+                    </div>
+                    <!-- フェーズ2: 好きなことの要素選択 -->
+                    <div id="phase2" class="phase">
+                        <p>選択した趣味に共通していると思う好きなことの要素を、１～３つ選んでください</p>
+                        <div id="likeFactorsOptions"></div>
+                        <button type="button" onclick="showPhase(3)">次へ</button>
+                    </div>
+                    <!-- フェーズ3: 仕事を選ぶうえで大事にしたいこと -->
+                    <div id="phase3" class="phase">
+                        <p>仕事を選ぶうえで大事にしたいことを１～３つ選んでください</p>
+                        <div id="importantFactorsOptions"></div>
+                        <button type="button" onclick="showPhase(4)">次へ</button>
+                    </div>
+                    <!-- フェーズ4: 得意なことの診断 -->
+                    <div id="phase4" class="phase">
+                        <p>得意なことを診断します。質問に対して、直観に近い位置にあるボタンを選んでください。回答は6段階に分かれています。</p>
+                        <div id="skillsQuestions"></div>
+                        <button type="submit">診断結果を見る</button>
+                    </div>
                 </form>
             </div>
         </section>
