@@ -1,0 +1,17 @@
+{
+  "name": "myapp",
+  "version": "1.0.0",
+  "description": "適職診断サイト",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify dev"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1030.0",
+    "axios": "^0.21.1",
+    "xlsx": "^0.17.4"
+  },
+  "devDependencies": {
+    "netlify-cli": "^6.0.0"
+  }
+}
