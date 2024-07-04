@@ -2,15 +2,18 @@
 // このファイルは、フロントエンドのロジックを管理します。
 
 document.addEventListener('DOMContentLoaded', function() {
+    // 最初のフェーズを表示します
     showPhase(1);
 
-    // サーバーから質問データを取得
+    // サーバーから質問データを取得します
     fetch('/.netlify/functions/get-questions')
         .then(response => response.json())
         .then(data => {
+            // 質問を生成します
             generateQuestions(data);
         });
 
+    // 質問を生成する関数
     function generateQuestions(data) {
         const skillsQuestionsContainer = document.getElementById('skillsQuestions');
         const hobbyOptionsContainer = document.getElementById('hobbyOptions');
@@ -70,9 +73,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // フェーズを表示する関数
     window.showPhase = function(phase) {
+        // 全てのフェーズを非表示にします
         document.querySelectorAll('.phase').forEach(function(phaseDiv) {
             phaseDiv.classList.remove('active');
         });
+        // 指定したフェーズを表示します
         document.getElementById('phase' + phase).classList.add('active');
     };
 
@@ -88,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // フォーム送信時の処理
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
-        event.preventDefault();
+        event.preventDefault(); // フォームのデフォルトの送信を防止します
 
         const formData = new FormData(this);
         const skills = formData.getAll('skills');
