@@ -30,8 +30,12 @@ document.addEventListener("DOMContentLoaded", function() {
             const questionDiv = document.createElement('div');
             questionDiv.className = 'question';
             questionDiv.innerHTML = `
-                <label for="skill${index + 1}">${question.question}</label>
-                <input type="range" id="skill${index + 1}" name="skills" min="1" max="6">
+                <label>${question.question}</label>
+                <div class="options">
+                    <span>${question.options[0]}</span>
+                    <input type="range" id="skill${index + 1}" name="skills" min="1" max="6">
+                    <span>${question.options[1]}</span>
+                </div>
             `;
             skillsQuestionsContainer.appendChild(questionDiv);
         });
@@ -55,8 +59,8 @@ document.addEventListener("DOMContentLoaded", function() {
             optionDiv.className = 'question';
             optionDiv.innerHTML = `
                 <label for="likeFactor${index + 1}">
-                    <input type="checkbox" id="likeFactor${index + 1}" name="likeFactors" value="${option}">
-                    ${option}
+                    <input type="checkbox" id="likeFactor${index + 1}" name="likeFactors" value="${option.match(/\(([^)]+)\)/)[1]}">
+                    ${option.match(/\(([^)]+)\)/)[1]}
                 </label>
             `;
             likeFactorsOptionsContainer.appendChild(optionDiv);
@@ -66,10 +70,10 @@ document.addEventListener("DOMContentLoaded", function() {
         data.important_factors_options.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'question';
-            questionDiv.innerHTML = `
+            optionDiv.innerHTML = `
                 <label for="importantFactor${index + 1}">
-                    <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${option}">
-                    ${option}
+                    <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${option.match(/\(([^)]+)\)/)[1]}">
+                    ${option.match(/\(([^)]+)\)/)[1]}
                 </label>
             `;
             importantFactorsOptionsContainer.appendChild(optionDiv);
@@ -127,5 +131,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 alert('CAPTCHA verification failed');
             }
         });
+
+        // データをローカルストレージに保存
+        localStorage.setItem('diagnosisData', JSON.stringify(data));
     });
 });
