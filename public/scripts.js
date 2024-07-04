@@ -76,6 +76,16 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('phase' + phase).classList.add('active');
     };
 
+    // reCAPTCHAサイトキーの設定
+    fetch('/.netlify/functions/get-recaptcha-key')
+        .then(response => response.json())
+        .then(data => {
+            const recaptchaElement = document.querySelector('.g-recaptcha');
+            if (recaptchaElement) {
+                recaptchaElement.setAttribute('data-sitekey', data.siteKey);
+            }
+        });
+
     // フォーム送信時の処理
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
         event.preventDefault();
