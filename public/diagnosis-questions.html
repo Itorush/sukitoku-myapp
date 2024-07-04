@@ -27,12 +27,24 @@
     <main>
         <section id="questions">
             <div class="container">
-                <h2>診断用質問ページ</h2>
+                <h2>診断のための質問</h2>
                 <form id="diagnosisForm">
-                    <div id="hobbyOptions" class="phase"></div>
-                    <div id="likeFactorsOptions" class="phase"></div>
-                    <div id="importantFactorsOptions" class="phase"></div>
-                    <div id="skillsQuestions" class="phase"></div>
+                    <div id="phase1" class="phase">
+                        <h3>選択肢からご自身の趣味に近いものを１～３つ選択してください</h3>
+                        <div id="hobbyOptions"></div>
+                    </div>
+                    <div id="phase2" class="phase">
+                        <h3>選択した趣味に共通していると思う好きなことの要素を、１～３つ選んでください</h3>
+                        <div id="likeFactorsOptions"></div>
+                    </div>
+                    <div id="phase3" class="phase">
+                        <h3>仕事を選ぶうえで大事にしたいことを１～３つ選んでください</h3>
+                        <div id="importantFactorsOptions"></div>
+                    </div>
+                    <div id="phase4" class="phase">
+                        <h3>得意なことを診断します。質問に対して、直観に近い位置にあるボタンを選んでください。回答は6段階に分かれています。</h3>
+                        <div id="skillsQuestions"></div>
+                    </div>
                     <div class="g-recaptcha" data-sitekey=""></div>
                     <button type="submit">診断結果を見る</button>
                 </form>
