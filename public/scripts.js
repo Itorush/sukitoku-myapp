@@ -25,25 +25,10 @@ document.addEventListener("DOMContentLoaded", function() {
         const likeFactorsOptionsContainer = document.getElementById('likeFactorsOptions');
         const importantFactorsOptionsContainer = document.getElementById('importantFactorsOptions');
 
-        // 得意なことの質問を生成
-        data.skills_questions.forEach((question, index) => {
-            const questionDiv = document.createElement('div');
-            questionDiv.className = 'question';
-            questionDiv.innerHTML = `
-                <label>${question.question}</label>
-                <div class="options">
-                    <span>${question.options[0]}</span>
-                    <input type="range" id="skill${index + 1}" name="skills" min="1" max="6">
-                    <span>${question.options[1]}</span>
-                </div>
-            `;
-            skillsQuestionsContainer.appendChild(questionDiv);
-        });
-
         // 趣味の選択肢を生成
         data.hobby_options.forEach((option, index) => {
             const optionDiv = document.createElement('div');
-            optionDiv.className = 'question';
+            optionDiv.className = 'option';
             optionDiv.innerHTML = `
                 <label for="hobby${index + 1}">
                     <input type="checkbox" id="hobby${index + 1}" name="hobbies" value="${option}">
@@ -57,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
         data.like_factors_options.forEach((option, index) => {
             const factor = option.match(/\(([^)]+)\)/)[1];
             const optionDiv = document.createElement('div');
-            optionDiv.className = 'question';
+            optionDiv.className = 'option';
             optionDiv.innerHTML = `
                 <label for="likeFactor${index + 1}">
                     <input type="checkbox" id="likeFactor${index + 1}" name="likeFactors" value="${factor}">
@@ -71,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
         data.important_factors_options.forEach((option, index) => {
             const factor = option.match(/\(([^)]+)\)/)[1];
             const optionDiv = document.createElement('div');
-            optionDiv.className = 'question';
+            optionDiv.className = 'option';
             optionDiv.innerHTML = `
                 <label for="importantFactor${index + 1}">
                     <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${factor}">
@@ -79,6 +64,21 @@ document.addEventListener("DOMContentLoaded", function() {
                 </label>
             `;
             importantFactorsOptionsContainer.appendChild(optionDiv);
+        });
+
+        // 得意なことの質問を生成
+        data.skills_questions.forEach((question, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.innerHTML = `
+                <label>${question.question}</label>
+                <div class="options">
+                    <span>${question.options[0]}</span>
+                    <input type="range" id="skill${index + 1}" name="skills" min="1" max="6">
+                    <span>${question.options[1]}</span>
+                </div>
+            `;
+            skillsQuestionsContainer.appendChild(questionDiv);
         });
     }
 

@@ -1,6 +1,5 @@
 const XLSX = require('xlsx');
 const path = require('path');
-const fs = require('fs');
 
 exports.handler = async (event, context) => {
     // Excelファイルのパスを設定します
