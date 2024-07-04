@@ -1,25 +1,35 @@
-// 必要なモジュールをインポートします。
-const AWS = require('aws-sdk'); // AWS SDKを使用してS3からデータを取得します。
-const s3 = new AWS.S3(); // S3クライアントを作成します。
-const XLSX = require('xlsx'); // XLSXライブラリを使用してExcelファイルを解析します。
-const BUCKET_NAME = 'your-s3-bucket-name'; // 使用するS3バケットの名前を設定します。
+const XLSX = require('xlsx');
+const path = require('path');
 
-// AWS Lambda関数のエントリポイントです。
 exports.handler = async (event, context) => {
     try {
-        // S3バケットからExcelファイルを取得します。
-        const skillsData = await s3.getObject({ Bucket: BUCKET_NAME, Key: 'skills_diagnosis_questions.xlsx' }).promise();
-        const hobbyData = await s3.getObject({ Bucket: BUCKET_NAME, Key: 'hobby_options.xlsx' }).promise();
-        const likeFactorsData = await s3.getObject({ Bucket: BUCKET_NAME, Key: 'like_factors_options.xlsx' }).promise();
-        const importantFactorsData = await s3.getObject({ Bucket: BUCKET_NAME, Key: 'important_factors_options.xlsx' }).promise();
+        // Excelファイルのパスを設定します
+        const hobbyOptionsPath = path.resolve(__dirname, 'hobby_options.xlsx');
+        const importantFactorsOptionsPath = path.resolve(__dirname, 'important_factors_options.xlsx');
+        const likeFactorsOptionsPath = path.resolve(__dirname, 'like_factors_options.xlsx');
+        const skillsDiagnosisQuestionsPath = path.resolve(__dirname, 'skills_diagnosis_questions.xlsx');
 
-        // 取得したExcelデータを解析します。
-        const skillsQuestions = parseExcel(skillsData.Body);
-        const hobbyOptions = parseExcel(hobbyData.Body);
-        const likeFactorsOptions = parseExcel(likeFactorsData.Body);
-        const importantFactorsOptions = parseExcel(importantFactorsData.Body);
+        // Excelファイルを読み込みます
+        const hobbyOptionsWorkbook = XLSX.readFile(hobbyOptionsPath);
+        const importantFactorsOptionsWorkbook = XLSX.readFile(importantFactorsOptionsPath);
+        const likeFactorsOptionsWorkbook = XLSX.readFile(likeFactorsOptionsPath);
+        const skillsDiagnosisQuestionsWorkbook = XLSX.readFile(skillsDiagnosisQuestionsPath);
 
-        // 解析結果をJSON形式で返します。
+        // シートからデータを取得します
+        const hobbyOptionsSheet = hobbyOptionsWorkbook.Sheets[hobbyOptionsWorkbook.SheetNames[0]];
+        const importantFactorsOptionsSheet = importantFactorsOptionsWorkbook.Sheets[importantFactorsOptionsWorkbook.SheetNames[0]];
+        const likeFactorsOptionsSheet = likeFactorsOptionsWorkbook.Sheets[likeFactorsOptionsWorkbook.SheetNames[0]];
+        const skillsDiagnosisQuestionsSheet = skillsDiagnosisQuestionsWorkbook.Sheets[skillsDiagnosisQuestionsWorkbook.SheetNames[0]];
+
+        // データをJSON形式に変換します
+        const hobbyOptions = XLSX.utils.sheet_to_json(hobbyOptionsSheet).map(row => row['趣味']);
+        const importantFactorsOptions = XLSX.utils.sheet_to_json(importantFactorsOptionsSheet).map(row => row['職種選択で大事にしたいこと選択肢']);
+        const likeFactorsOptions = XLSX.utils.sheet_to_json(likeFactorsOptionsSheet).map(row => row['好きなこと選択肢']);
+        const skillsQuestions = XLSX.utils.sheet_to_json(skillsDiagnosisQuestionsSheet).map(row => ({
+            question: row['前提質問'],
+            options: [row['選択肢１'], row['選択肢２']]
+        }));
+
         return {
             statusCode: 200,
             body: JSON.stringify({
@@ -30,15 +40,9 @@ exports.handler = async (event, context) => {
             })
         };
     } catch (error) {
-        // エラーハンドリング：エラーが発生した場合、500ステータスコードとエラーメッセージを返します。
-        return { statusCode: 500, body: error.toString() };
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ error: 'Error fetching questions' })
+        };
     }
 };
-
-// Excelデータを解析してJSON形式に変換するヘルパー関数です。
-function parseExcel(buffer) {
-    const workbook = XLSX.read(buffer, { type: 'buffer' }); // バッファからExcelワークブックを読み込みます。
-    const sheetName = workbook.SheetNames[0]; // 最初のシートの名前を取得します。
-    const worksheet = workbook.Sheets[sheetName]; // 最初のシートを取得します。
-    return XLSX.utils.sheet_to_json(worksheet); // シートをJSON形式に変換して返します。
-}
