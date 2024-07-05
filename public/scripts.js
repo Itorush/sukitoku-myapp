@@ -42,13 +42,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // 好きなことの要素を生成
         data.like_factors_options.forEach((option, index) => {
-            const factor = option.match(/\(([^)]+)\)/)[1];
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
             optionDiv.innerHTML = `
                 <label for="likeFactor${index + 1}">
-                    <input type="checkbox" id="likeFactor${index + 1}" name="likeFactors" value="${factor}">
-                    ${factor}
+                    <input type="checkbox" id="likeFactor${index + 1}" name="likeFactors" value="${option}">
+                    ${option}
                 </label>
             `;
             likeFactorsOptionsContainer.appendChild(optionDiv);
@@ -56,13 +55,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // 大事にしたいことの要素を生成
         data.important_factors_options.forEach((option, index) => {
-            const factor = option.match(/\(([^)]+)\)/)[1];
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
             optionDiv.innerHTML = `
                 <label for="importantFactor${index + 1}">
-                    <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${factor}">
-                    ${factor}
+                    <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${option}">
+                    ${option}
                 </label>
             `;
             importantFactorsOptionsContainer.appendChild(optionDiv);
@@ -95,30 +93,6 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             warning.textContent = '';
             showPhase(2);
-        }
-    }
-
-    window.validateLikeFactors = function() {
-        const selectedLikeFactors = document.querySelectorAll('input[name="likeFactors"]:checked');
-        const warning = document.getElementById('likeFactorsWarning');
-        
-        if (selectedLikeFactors.length < 1 || selectedLikeFactors.length > 3) {
-            warning.textContent = '好きなことの要素は1つ以上3つ以内で選択してください。';
-        } else {
-            warning.textContent = '';
-            showPhase(3);
-        }
-    }
-
-    window.validateImportantFactors = function() {
-        const selectedImportantFactors = document.querySelectorAll('input[name="importantFactors"]:checked');
-        const warning = document.getElementById('importantFactorsWarning');
-        
-        if (selectedImportantFactors.length < 1 || selectedImportantFactors.length > 3) {
-            warning.textContent = '仕事を選ぶうえで大事にしたいことは1つ以上3つ以内で選択してください。';
-        } else {
-            warning.textContent = '';
-            showPhase(4);
         }
     }
 

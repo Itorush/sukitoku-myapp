@@ -2,8 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');
 
-// CSVファイルを読み込む関数
-async function readCSV(filePath) {
+function readCSVFile(filePath) {
     return new Promise((resolve, reject) => {
         const results = [];
         fs.createReadStream(filePath)
@@ -16,25 +15,15 @@ async function readCSV(filePath) {
 
 exports.handler = async (event, context) => {
     try {
-        // CSVファイルのパスを設定
-        const dataDir = path.resolve(__dirname, '..', 'data');
-        const hobbyOptionsPath = path.join(dataDir, 'hobby_options.csv');
-        const importantFactorsOptionsPath = path.join(dataDir, 'important_factors_options.csv');
-        const likeFactorsOptionsPath = path.join(dataDir, 'like_factors_options.csv');
-        const skillsDiagnosisQuestionsPath = path.join(dataDir, 'skills_diagnosis_questions.csv');
+        const hobbyOptionsPath = path.resolve(__dirname, '..', 'data', 'hobby_options.csv');
+        const importantFactorsOptionsPath = path.resolve(__dirname, '..', 'data', 'important_factors_options.csv');
+        const likeFactorsOptionsPath = path.resolve(__dirname, '..', 'data', 'like_factors_options.csv');
+        const skillsDiagnosisQuestionsPath = path.resolve(__dirname, '..', 'data', 'skills_diagnosis_questions.csv');
 
-        console.log('Reading CSV files from:', {
-            hobbyOptionsPath,
-            importantFactorsOptionsPath,
-            likeFactorsOptionsPath,
-            skillsDiagnosisQuestionsPath
-        });
-
-        // CSVファイルを読み込む
-        const hobbyOptions = await readCSV(hobbyOptionsPath);
-        const importantFactorsOptions = await readCSV(importantFactorsOptionsPath);
-        const likeFactorsOptions = await readCSV(likeFactorsOptionsPath);
-        const skillsQuestions = await readCSV(skillsDiagnosisQuestionsPath);
+        const hobbyOptions = await readCSVFile(hobbyOptionsPath);
+        const importantFactorsOptions = await readCSVFile(importantFactorsOptionsPath);
+        const likeFactorsOptions = await readCSVFile(likeFactorsOptionsPath);
+        const skillsQuestions = await readCSVFile(skillsDiagnosisQuestionsPath);
 
         console.log('Data fetched successfully:', {
             hobby_options: hobbyOptions,
@@ -43,32 +32,26 @@ exports.handler = async (event, context) => {
             skills_questions: skillsQuestions
         });
 
-        // データを整形
-        const formattedHobbyOptions = hobbyOptions.map(row => row['趣味']);
-        const formattedImportantFactorsOptions = importantFactorsOptions.map(row => {
-            const match = row['職種選択で大事にしたいこと選択肢'].match(/\(([^)]+)\)/);
-            return match ? match[1] : '';
-        });
-        const formattedLikeFactorsOptions = likeFactorsOptions.map(row => {
-            const match = row['好きなこと選択肢'].match(/\(([^)]+)\)/);
-            return match ? match[1] : '';
-        });
-        const formattedSkillsQuestions = skillsQuestions.map(row => ({
-            question: row['前提質問'],
-            options: [row['選択肢１'], row['選択肢２']]
-        }));
-
         return {
             statusCode: 200,
             body: JSON.stringify({
-                hobby_options: formattedHobbyOptions,
-                important_factors_options: formattedImportantFactorsOptions,
-                like_factors_options: formattedLikeFactorsOptions,
-                skills_questions: formattedSkillsQuestions
+                hobby_options: hobbyOptions.map(row => row['趣味']),
+                important_factors_options: importantFactorsOptions.map(row => {
+                    const match = row['職種選択で大事にしたいこと選択肢'].match(/\(([^)]+)\)/);
+                    return match ? match[1] : '';
+                }),
+                like_factors_options: likeFactorsOptions.map(row => {
+                    const match = row['好きなこと選択肢'].match(/\(([^)]+)\)/);
+                    return match ? match[1] : '';
+                }),
+                skills_questions: skillsQuestions.map(row => ({
+                    question: row['前提質問'],
+                    options: [row['選択肢１'], row['選択肢２']]
+                }))
             })
         };
     } catch (error) {
-        console.error('Error fetching questions:', error);
+        console.error('Error fetching questions:', error.message);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: 'Error fetching questions', details: error.message })
