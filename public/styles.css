@@ -44,7 +44,7 @@ form {
 
 .options label span {
     display: inline-block;
-    width: 100%;
+    width: 30px;
     height: 30px;
     border-radius: 50%;
     background-color: #ddd;
@@ -58,10 +58,30 @@ form {
     background-color: #007bff;
 }
 
+.question {
+    margin-bottom: 20px; /* 質問間の余白 */
+}
+
+.question-label {
+    margin-bottom: 10px;
+    display: block;
+    text-align: center;
+}
+
+.warning {
+    color: red;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons label {
+    margin: 0 5px;
+}
+
 @media (max-width: 600px) {
-    .options span {
-        width: auto;
-    }
     .options {
         flex-wrap: wrap;
     }
@@ -71,3 +91,4 @@ form {
         margin: 5px;
     }
 }
+
