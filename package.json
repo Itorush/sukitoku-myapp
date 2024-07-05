@@ -10,6 +10,7 @@
   "dependencies": {
     "aws-sdk": "^2.1030.0",
     "axios": "^0.21.1",
+    "csv-parser": "^3.0.0",
     "xlsx": "^0.17.5"
   },
   "devDependencies": {
