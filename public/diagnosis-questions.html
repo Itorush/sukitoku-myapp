@@ -32,7 +32,8 @@
                     <div id="phase1" class="phase active">
                         <p>選択肢からご自身の趣味に近いものを１～３つ選択してください</p>
                         <div id="hobbyOptions"></div>
-                        <button type="button" onclick="showPhase(2)">選択肢から選ぶ</button>
+                        <p id="hobbyWarning" class="warning"></p>
+                        <button type="button" onclick="validateHobbies()">選択肢から選ぶ</button>
                     </div>
                     <!-- フェーズ2: 好きなことの要素選択 -->
                     <div id="phase2" class="phase">

@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const importantFactorsOptionsContainer = document.getElementById('importantFactorsOptions');
 
         // 趣味の選択肢を生成
-        data.hobby_options.forEach((option, index) => {
+        data.hobby_options.slice(1).forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
             optionDiv.innerHTML = `
@@ -81,6 +81,18 @@ document.addEventListener("DOMContentLoaded", function() {
             `;
             skillsQuestionsContainer.appendChild(questionDiv);
         });
+    }
+
+    window.validateHobbies = function() {
+        const selectedHobbies = document.querySelectorAll('input[name="hobbies"]:checked');
+        const warning = document.getElementById('hobbyWarning');
+        
+        if (selectedHobbies.length < 1 || selectedHobbies.length > 3) {
+            warning.textContent = '趣味は1つ以上3つ以内で選択してください。';
+        } else {
+            warning.textContent = '';
+            showPhase(2);
+        }
     }
 
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {

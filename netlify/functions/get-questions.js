@@ -22,7 +22,7 @@ exports.handler = async (event, context) => {
         const skillsDiagnosisQuestionsSheet = skillsDiagnosisQuestionsWorkbook.Sheets[skillsDiagnosisQuestionsWorkbook.SheetNames[0]];
 
         // データをJSON形式に変換します
-        const hobbyOptions = XLSX.utils.sheet_to_json(hobbyOptionsSheet).map(row => row['趣味']);
+        const hobbyOptions = XLSX.utils.sheet_to_json(hobbyOptionsSheet).slice(1).map(row => row['趣味']);
         const importantFactorsOptions = XLSX.utils.sheet_to_json(importantFactorsOptionsSheet).map(row => {
             const match = row['職種選択で大事にしたいこと選択肢'].match(/\(([^)]+)\)/);
             return match ? match[1] : '';
