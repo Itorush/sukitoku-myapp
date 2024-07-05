@@ -66,7 +66,7 @@ exports.handler = async (event, context) => {
             })
         };
     } catch (error) {
-        console.error('Error fetching questions:', error.message);
+        console.error('Error fetching questions:', error);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: 'Error fetching questions', details: error.message })
