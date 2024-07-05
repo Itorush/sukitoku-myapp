@@ -3,54 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>診断のための質問</title>
+    <title>診断用質問ページ</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="scripts.js"></script>
+    <script src="scripts.js" defer></script>
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>診断のための質問</h1>
-        </div>
+        <h1>診断用質問ページ</h1>
     </header>
     <main>
-        <section id="phase1" class="phase active">
-            <div class="container">
+        <form id="diagnosisForm">
+            <section id="phase1" class="phase active">
                 <h2>選択肢からご自身の趣味に近いものを１～３つ選択してください</h2>
                 <div id="hobbyOptions"></div>
                 <p id="hobbyWarning" class="warning"></p>
-                <button onclick="validateHobbies()">次へ</button>
-            </div>
-        </section>
-        <section id="phase2" class="phase">
-            <div class="container">
+                <button type="button" onclick="if(validateHobbies()) showPhase(2)">次へ</button>
+            </section>
+
+            <section id="phase2" class="phase">
                 <h2>選択した趣味に共通していると思う好きなことの要素を、１～３つ選んでください</h2>
                 <div id="likeFactorsOptions"></div>
                 <p id="likeFactorsWarning" class="warning"></p>
-                <button onclick="validateLikeFactors()">次へ</button>
-            </div>
-        </section>
-        <section id="phase3" class="phase">
-            <div class="container">
+                <button type="button" onclick="if(validateLikeFactors()) showPhase(3)">次へ</button>
+            </section>
+
+            <section id="phase3" class="phase">
                 <h2>仕事を選ぶうえで大事にしたいことを１～３つ選んでください</h2>
                 <div id="importantFactorsOptions"></div>
                 <p id="importantFactorsWarning" class="warning"></p>
-                <button onclick="validateImportantFactors()">次へ</button>
-            </div>
-        </section>
-        <section id="phase4" class="phase">
-            <div class="container">
+                <button type="button" onclick="if(validateImportantFactors()) showPhase(4)">次へ</button>
+            </section>
+
+            <section id="phase4" class="phase">
                 <h2>得意なことを診断します。質問に対して、直観に近い位置にあるボタンを選んでください。回答は6段階に分かれています。</h2>
                 <div id="skillsQuestions"></div>
                 <p id="skillsWarning" class="warning"></p>
-                <button onclick="validateSkills()">診断結果を見る</button>
-            </div>
-        </section>
+                <button type="button" onclick="if(validateSkills()) showPhase(5)">次へ</button>
+            </section>
+
+            <section id="phase5" class="phase">
+                <h2>診断結果</h2>
+                <p>診断が完了しました。以下のボタンをクリックして結果を確認してください。</p>
+                <button type="submit">診断結果を見る</button>
+            </section>
+        </form>
     </main>
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 好き得 仕事ナビ. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>
