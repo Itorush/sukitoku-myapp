@@ -126,7 +126,18 @@ document.addEventListener("DOMContentLoaded", function() {
                 <label>${question.question}</label>
                 <div class="options">
                     <span>${question.options[0]}</span>
-                    <input type="range" id="skill${index + 1}" name="skills" min="1" max="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <input type="radio" id="skill${index + 1}_1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}_1"><span></span></label>
+                    <input type="radio" id="skill${index + 1}_2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}_2"><span></span></label>
+                    <input type="radio" id="skill${index + 1}_3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}_3"><span></span></label>
+                    <input type="radio" id="skill${index + 1}_4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}_4"><span></span></label>
+                    <input type="radio" id="skill${index + 1}_5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}_5"><span></span></label>
+                    <input type="radio" id="skill${index + 1}_6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}_6"><span></span></label>
                     <span>${question.options[1]}</span>
                 </div>
             `;
@@ -182,14 +193,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function validateSkills() {
-        const skillInputs = document.querySelectorAll('input[name="skills"]');
-        let valid = true;
-
-        skillInputs.forEach(input => {
-            if (!input.value) {
-                valid = false;
-            }
-        });
+        const skillInputs = document.querySelectorAll('input[type="radio"]:checked');
+        let valid = skillInputs.length === 15; // 15個の質問に対して全て選択されているか
 
         const warning = document.getElementById('skillsWarning');
         if (!valid) {
@@ -205,7 +210,13 @@ document.addEventListener("DOMContentLoaded", function() {
         const hobbies = formData.getAll('hobbies');
         const likeFactors = formData.getAll('likeFactors');
         const importantFactors = formData.getAll('importantFactors');
-        const skills = formData.getAll('skills');
+        const skills = [];
+
+        formData.forEach((value, key) => {
+            if (key.startsWith('skills')) {
+                skills.push({ value, axis1: document.querySelector(`input[name="${key}"]:checked`).dataset.axis1, axis2: document.querySelector(`input[name="${key}"]:checked`).dataset.axis2 });
+            }
+        });
 
         const data = { hobbies, likeFactors, importantFactors, skills };
 
@@ -220,13 +231,18 @@ document.addEventListener("DOMContentLoaded", function() {
         if (validateHobbies() && validateLikeFactors() && validateImportantFactors() && validateSkills()) {
             saveSelectionsToLocalStorage(formData);
 
-            const skills = formData.getAll('skills');
-            const points = {};
+            const skills = [];
+            formData.forEach((value, key) => {
+                if (key.startsWith('skills')) {
+                    skills.push({ value, axis1: document.querySelector(`input[name="${key}"]:checked`).dataset.axis1, axis2: document.querySelector(`input[name="${key}"]:checked`).dataset.axis2 });
+                }
+            });
 
+            const points = {};
             skills.forEach(skill => {
                 const value = parseInt(skill.value);
-                const axis1 = skill.dataset.axis1;
-                const axis2 = skill.dataset.axis2;
+                const axis1 = skill.axis1;
+                const axis2 = skill.axis2;
 
                 if (!points[axis1]) points[axis1] = 0;
                 if (!points[axis2]) points[axis2] = 0;
@@ -265,4 +281,3 @@ document.addEventListener("DOMContentLoaded", function() {
 
     generateQuestions();
 });
-

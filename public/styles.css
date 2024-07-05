@@ -1,154 +1,38 @@
-/* styles.css */
-/* 全体のスタイルを定義するCSSファイル */
-
-/* 基本のリセット */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
     color: #333;
 }
 
-/* ヘッダーのスタイル */
 header {
-    background: #333;
+    background-color: #007bff;
     color: #fff;
-    padding: 20px 0;
+    padding: 20px;
+    text-align: center;
 }
 
-header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-header h1 {
-    font-size: 24px;
-    margin: 0;
-}
-
-header nav ul {
-    list-style: none;
-    display: flex;
-}
-
-header nav ul li {
-    margin-left: 20px;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-header nav ul li a:hover {
-    text-decoration: underline;
-}
-
-/* メインコンテンツのスタイル */
 main {
-    padding: 40px 0;
+    padding: 20px;
 }
 
-main .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    text-align: center;
+h1, h2 {
+    margin: 0 0 20px;
 }
 
-main h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-}
-
-main p {
-    font-size: 18px;
-}
-
-main ul {
-    text-align: left;
-    margin: 20px 0;
-}
-
-main ul li {
-    margin-bottom: 10px;
-}
-
-main .button {
-    display: inline-block;
-    background: #007BFF;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
+form {
+    background-color: #fff;
+    padding: 20px;
     border-radius: 5px;
-    margin-top: 20px;
-}
-
-main .button:hover {
-    background: #0056b3;
-}
-
-/* フッターのスタイル */
-footer {
-    background: #333;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-}
-
-footer .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* 追加部分: 質問ページのスタイル */
-.phase {
-    display: none;
-}
-
-.phase.active {
-    display: block;
-}
-
-.warning {
-    color: red;
-    margin-bottom: 20px;
-}
-
-.question {
-    margin-bottom: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .options {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px;
-}
-
-.options span {
-    width: 20%;
-    text-align: center;
-}
-
-.options input[type="range"] {
-    width: 60%;
-}
-
-.options input[type="radio"] {
-    display: none;
+    margin-bottom: 20px; /* 質問間の余白 */
 }
 
 .options label {
@@ -164,6 +48,10 @@ footer .container {
     height: 30px;
     border-radius: 50%;
     background-color: #ddd;
+}
+
+.options input[type="radio"] {
+    display: none;
 }
 
 .options input[type="radio"]:checked + label span {
