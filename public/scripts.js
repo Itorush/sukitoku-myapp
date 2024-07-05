@@ -98,6 +98,30 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    window.validateLikeFactors = function() {
+        const selectedLikeFactors = document.querySelectorAll('input[name="likeFactors"]:checked');
+        const warning = document.getElementById('likeFactorsWarning');
+        
+        if (selectedLikeFactors.length < 1 || selectedLikeFactors.length > 3) {
+            warning.textContent = '好きなことの要素は1つ以上3つ以内で選択してください。';
+        } else {
+            warning.textContent = '';
+            showPhase(3);
+        }
+    }
+
+    window.validateImportantFactors = function() {
+        const selectedImportantFactors = document.querySelectorAll('input[name="importantFactors"]:checked');
+        const warning = document.getElementById('importantFactorsWarning');
+        
+        if (selectedImportantFactors.length < 1 || selectedImportantFactors.length > 3) {
+            warning.textContent = '仕事を選ぶうえで大事にしたいことは1つ以上3つ以内で選択してください。';
+        } else {
+            warning.textContent = '';
+            showPhase(4);
+        }
+    }
+
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
         event.preventDefault();
 

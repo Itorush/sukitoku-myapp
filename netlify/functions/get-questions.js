@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const csv = require('csv-parser');
 
+// CSVファイルを読み込む関数
 async function readCSV(filePath) {
     return new Promise((resolve, reject) => {
         const results = [];
@@ -15,10 +16,12 @@ async function readCSV(filePath) {
 
 exports.handler = async (event, context) => {
     try {
-        const hobbyOptionsPath = path.resolve(__dirname, '..', 'data', 'hobby_options.csv');
-        const importantFactorsOptionsPath = path.resolve(__dirname, '..', 'data', 'important_factors_options.csv');
-        const likeFactorsOptionsPath = path.resolve(__dirname, '..', 'data', 'like_factors_options.csv');
-        const skillsDiagnosisQuestionsPath = path.resolve(__dirname, '..', 'data', 'skills_diagnosis_questions.csv');
+        // CSVファイルのパスを設定
+        const dataDir = path.resolve(__dirname, '..', 'data');
+        const hobbyOptionsPath = path.join(dataDir, 'hobby_options.csv');
+        const importantFactorsOptionsPath = path.join(dataDir, 'important_factors_options.csv');
+        const likeFactorsOptionsPath = path.join(dataDir, 'like_factors_options.csv');
+        const skillsDiagnosisQuestionsPath = path.join(dataDir, 'skills_diagnosis_questions.csv');
 
         console.log('Reading CSV files from:', {
             hobbyOptionsPath,
@@ -27,6 +30,7 @@ exports.handler = async (event, context) => {
             skillsDiagnosisQuestionsPath
         });
 
+        // CSVファイルを読み込む
         const hobbyOptions = await readCSV(hobbyOptionsPath);
         const importantFactorsOptions = await readCSV(importantFactorsOptionsPath);
         const likeFactorsOptions = await readCSV(likeFactorsOptionsPath);
@@ -39,6 +43,7 @@ exports.handler = async (event, context) => {
             skills_questions: skillsQuestions
         });
 
+        // データを整形
         const formattedHobbyOptions = hobbyOptions.map(row => row['趣味']);
         const formattedImportantFactorsOptions = importantFactorsOptions.map(row => {
             const match = row['職種選択で大事にしたいこと選択肢'].match(/\(([^)]+)\)/);
