@@ -84,6 +84,8 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    window.showPhase = showPhase;
+
     window.validateHobbies = function() {
         const selectedHobbies = document.querySelectorAll('input[name="hobbies"]:checked');
         const warning = document.getElementById('hobbyWarning');
@@ -114,10 +116,18 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             body: JSON.stringify(data)
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(result => {
             console.log(result.message);
             window.location.href = 'diagnosis-results.html';
+        })
+        .catch(error => {
+            console.error("Error saving results:", error);
         });
 
         localStorage.setItem('diagnosisData', JSON.stringify(data));
