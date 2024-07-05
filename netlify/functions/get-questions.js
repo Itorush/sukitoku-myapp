@@ -9,6 +9,13 @@ exports.handler = async (event, context) => {
         const likeFactorsOptionsPath = path.resolve(__dirname, '..', 'data', 'like_factors_options.xlsx');
         const skillsDiagnosisQuestionsPath = path.resolve(__dirname, '..', 'data', 'skills_diagnosis_questions.xlsx');
 
+        console.log('Reading Excel files from:', {
+            hobbyOptionsPath,
+            importantFactorsOptionsPath,
+            likeFactorsOptionsPath,
+            skillsDiagnosisQuestionsPath
+        });
+
         // Excelファイルを読み込みます
         const hobbyOptionsWorkbook = XLSX.readFile(hobbyOptionsPath);
         const importantFactorsOptionsWorkbook = XLSX.readFile(importantFactorsOptionsPath);
@@ -36,6 +43,13 @@ exports.handler = async (event, context) => {
             options: [row['選択肢１'], row['選択肢２']]
         }));
 
+        console.log('Data fetched successfully:', {
+            skills_questions: skillsQuestions,
+            hobby_options: hobbyOptions,
+            like_factors_options: likeFactorsOptions,
+            important_factors_options: importantFactorsOptions
+        });
+
         return {
             statusCode: 200,
             body: JSON.stringify({
@@ -46,6 +60,7 @@ exports.handler = async (event, context) => {
             })
         };
     } catch (error) {
+        console.error('Error fetching questions:', error.message);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: 'Error fetching questions', details: error.message })

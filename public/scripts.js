@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const importantFactorsOptionsContainer = document.getElementById('importantFactorsOptions');
 
         // 趣味の選択肢を生成
-        data.hobby_options.slice(1).forEach((option, index) => {
+        data.hobby_options.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
             optionDiv.innerHTML = `
