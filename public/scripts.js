@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             return response.json();
         })
         .then(data => {
+            console.log('Questions data:', data);
             generateQuestions(data);
         })
         .catch(error => {
