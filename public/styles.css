@@ -37,7 +37,7 @@ form {
 
 .question {
     margin-bottom: 40px; /* 質問間の余白 */
-    font-weight: normal; /* questionを太文字に */
+    font-weight: bold; /* questionを太文字に */
 }
 
 .label-container {
@@ -49,6 +49,7 @@ form {
 .label-container .center-label {
     flex: 2;
     text-align: center;
+    font-weight: normal; /* どちらともいえないを普通の太さに */
 }
 
 .label-container .strong-agree {
@@ -106,7 +107,7 @@ form {
 .label-row .neutral {
     flex: 2;
     text-align: center;
-    font-weight: normal; /* どちらともいえないを普通サイズにあああ */
+    font-weight: normal; /* どちらともいえないを普通の太さに */
 }
 
 .options-row {
