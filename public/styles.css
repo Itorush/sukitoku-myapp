@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #87ceeb;
+    background-color: #7fbf7f;  /* 優しい色に変更 */
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -32,55 +32,17 @@ form {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* 質問間の余白 */
 }
 
-.question {
-    margin-bottom: 60px; /* 質問間の余白 */
-}
-
-.question-label {
-    margin-bottom: 10px;
-    display: block;
-    text-align: left;
-    font-weight: bold; /* 質問を太文字に */
-}
-
-.label-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-
-.label-strong-agree, .label-neutral {
-    font-weight: bold; /* 太文字 */
-    text-align: center;
-}
-
-.label-neutral {
-    flex: 1;
-    text-align: center;
-    margin-left: -15%;
-}
-
-.buttons-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.buttons-container label {
+.options label {
     flex: 1;
     text-align: center;
     cursor: pointer;
     user-select: none;
 }
 
-.buttons-container input[type="radio"] {
-    display: none;
-}
-
-.buttons-container input[type="radio"] + label span {
+.options label span {
     display: inline-block;
     width: 30px;
     height: 30px;
@@ -88,12 +50,61 @@ form {
     background-color: #ddd;
 }
 
-.buttons-container input[type="radio"]:checked + label span {
-    background-color: #87ceeb;
+.options input[type="radio"] {
+    display: none;
+}
+
+.options input[type="radio"]:checked + label span {
+    background-color: #7fbf7f;  /* 優しい色に変更 */
+}
+
+.question {
+    margin-bottom: 20px; /* 質問間の余白 */
+}
+
+.question-label {
+    margin-bottom: 10px;
+    display: block;
+    text-align: left;  /* 左寄せに変更 */
 }
 
 .warning {
     color: red;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;  /* ボタンの間隔を確保 */
+}
+
+.buttons label {
+    margin: 0 5px;
+}
+
+.label-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.label-container div {
+    flex: 1;
+    text-align: center;
+}
+
+.label-container .strong-agree {
+    text-align: left;
+    padding-left: 30px;
+}
+
+.label-container .neutral {
+    text-align: center;
+}
+
+.label-container .strong-disagree {
+    text-align: right;
+    padding-right: 30px;
 }
 
 @media (max-width: 600px) {
@@ -105,69 +116,4 @@ form {
         width: calc(16.66% - 10px);
         margin: 5px;
     }
-}
-
-/* 追加されたスタイル */
-.buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px; /* ボタン間の余白 */
-}
-
-.buttons label {
-    flex: 1;
-    text-align: center;
-}
-
-.options span {
-    font-weight: bold; /* オプションを太文字に */
-}
-
-/* 追加スタイル */
-.table-container {
-    display: grid;
-    grid-template-columns: repeat(13, 1fr);
-    grid-template-rows: repeat(6, auto);
-    gap: 10px;
-}
-
-.table-container .empty {
-    grid-column: span 13;
-}
-
-.table-container .question {
-    grid-column: 1 / span 1;
-    font-weight: bold;
-}
-
-.table-container .label-strong-agree {
-    grid-column: 2 / span 1;
-    text-align: center;
-}
-
-.table-container .label-neutral {
-    grid-column: 7 / span 1;
-    text-align: center;
-}
-
-.table-container .label-strong-agree-right {
-    grid-column: 12 / span 1;
-    text-align: center;
-}
-
-.table-container .buttons-container {
-    grid-column: 2 / span 11;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.table-container .options-left {
-    grid-column: 2 / span 1;
-    font-weight: bold;
-}
-
-.table-container .options-right {
-    grid-column: 12 / span 1;
-    font-weight: bold;
 }
