@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function() {
             hobbyOptionsContainer.appendChild(optionDiv);
         });
 
-        // 好きなことの要素を生成 (4段階)
+        // 好きなことの要素を生成
         likeFactorsOptions1.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
@@ -165,18 +165,31 @@ document.addEventListener("DOMContentLoaded", function() {
             questionDiv.className = 'question';
             questionDiv.innerHTML = `
                 <label class="question-label">${question.question}</label>
-                <div class="options">
-                    <span class="left-label">強く同意する</span>
-                    <span class="center-label">どちらともいえない</span>
-                    <span class="right-label">強く同意する</span>
-                    <div class="skill-options">
-                        <label><input type="radio" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}"><span></span></label>
-                        <label><input type="radio" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}"><span></span></label>
-                        <label><input type="radio" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}"><span></span></label>
-                        <label><input type="radio" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}"><span></span></label>
-                        <label><input type="radio" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}"><span></span></label>
-                        <label><input type="radio" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}"><span></span></label>
+                <div class="skill-options">
+                    <span>${question.options[0]}</span>
+                    <div class="buttons">
+                        <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                        <label for="skill${index + 1}-1"><span></span></label>
+                        <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                        <label for="skill${index + 1}-2"><span></span></label>
+                        <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                        <label for="skill${index + 1}-3"><span></span></label>
+                        <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                        <label for="skill${index + 1}-4"><span></span></label>
+                        <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                        <label for="skill${index + 1}-5"><span></span></label>
+                        <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                        <label for="skill${index + 1}-6"><span></span></label>
                     </div>
+                    <span>${question.options[1]}</span>
+                </div>
+                <div class="label-container">
+                    <span>強く同意する</span>
+                    <span></span>
+                    <span>どちらともいえない</span>
+                    <span></span>
+                    <span></span>
+                    <span>強く同意する</span>
                 </div>
             `;
             skillsQuestionsContainer.appendChild(questionDiv);
@@ -204,56 +217,49 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    window.validateLikeFactors1 = function() {
-        const selectedLikeFactors = document.querySelectorAll('input[name="likeFactors1"]:checked');
-        const warning = document.getElementById('likeFactorsWarning1');
-        
-        if (selectedLikeFactors.length !== 1) {
-            warning.textContent = 'この項目は1つ選択してください。';
-            return false;
-        } else {
-            warning.textContent = '';
-            return true;
-        }
-    }
+    window.validateLikeFactors = function() {
+        const selectedLikeFactors1 = document.querySelectorAll('input[name="likeFactors1"]:checked');
+        const selectedLikeFactors2 = document.querySelectorAll('input[name="likeFactors2"]:checked');
+        const selectedLikeFactors3 = document.querySelectorAll('input[name="likeFactors3"]:checked');
+        const selectedLikeFactors4 = document.querySelectorAll('input[name="likeFactors4"]:checked');
+        const warnings = [
+            document.getElementById('likeFactorsWarning1'),
+            document.getElementById('likeFactorsWarning2'),
+            document.getElementById('likeFactorsWarning3'),
+            document.getElementById('likeFactorsWarning4')
+        ];
 
-    window.validateLikeFactors2 = function() {
-        const selectedLikeFactors = document.querySelectorAll('input[name="likeFactors2"]:checked');
-        const warning = document.getElementById('likeFactorsWarning2');
-        
-        if (selectedLikeFactors.length !== 1) {
-            warning.textContent = 'この項目は1つ選択してください。';
-            return false;
-        } else {
-            warning.textContent = '';
-            return true;
-        }
-    }
+        let valid = true;
 
-    window.validateLikeFactors3 = function() {
-        const selectedLikeFactors = document.querySelectorAll('input[name="likeFactors3"]:checked');
-        const warning = document.getElementById('likeFactorsWarning3');
-        
-        if (selectedLikeFactors.length !== 1) {
-            warning.textContent = 'この項目は1つ選択してください。';
-            return false;
+        if (selectedLikeFactors1.length !== 1) {
+            warnings[0].textContent = '好きなことの要素を1つ選んでください。';
+            valid = false;
         } else {
-            warning.textContent = '';
-            return true;
+            warnings[0].textContent = '';
         }
-    }
 
-    window.validateLikeFactors4 = function() {
-        const selectedLikeFactors = document.querySelectorAll('input[name="likeFactors4"]:checked');
-        const warning = document.getElementById('likeFactorsWarning4');
-        
-        if (selectedLikeFactors.length < 1 || selectedLikeFactors.length > 3) {
-            warning.textContent = '好きなことの要素は1つ以上3つ以内で選択してください。';
-            return false;
+        if (selectedLikeFactors2.length !== 1) {
+            warnings[1].textContent = '好きなことの要素を1つ選んでください。';
+            valid = false;
         } else {
-            warning.textContent = '';
-            return true;
+            warnings[1].textContent = '';
         }
+
+        if (selectedLikeFactors3.length !== 1) {
+            warnings[2].textContent = '好きなことの要素を1つ選んでください。';
+            valid = false;
+        } else {
+            warnings[2].textContent = '';
+        }
+
+        if (selectedLikeFactors4.length < 1 || selectedLikeFactors4.length > 3) {
+            warnings[3].textContent = '好きなことの要素は1つ以上3つ以内で選択してください。';
+            valid = false;
+        } else {
+            warnings[3].textContent = '';
+        }
+
+        return valid;
     }
 
     window.validateImportantFactors = function() {
@@ -285,9 +291,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function saveSelectionsToLocalStorage(formData) {
         const hobbies = formData.getAll('hobbies');
-        const likeFactors1 = formData.getAll('likeFactors1');
-        const likeFactors2 = formData.getAll('likeFactors2');
-        const likeFactors3 = formData.getAll('likeFactors3');
+        const likeFactors1 = formData.get('likeFactors1');
+        const likeFactors2 = formData.get('likeFactors2');
+        const likeFactors3 = formData.get('likeFactors3');
         const likeFactors4 = formData.getAll('likeFactors4');
         const importantFactors = formData.getAll('importantFactors');
         const skills = formData.getAll('skills');
@@ -302,7 +308,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         const formData = new FormData(this);
         
-        if (validateHobbies() && validateLikeFactors1() && validateLikeFactors2() && validateLikeFactors3() && validateLikeFactors4() && validateImportantFactors() && validateSkills()) {
+        if (validateHobbies() && validateLikeFactors() && validateImportantFactors() && validateSkills()) {
             saveSelectionsToLocalStorage(formData);
 
             const skills = formData.getAll('skills');
@@ -330,7 +336,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ hobbies: formData.getAll('hobbies'), likeFactors1: formData.getAll('likeFactors1'), likeFactors2: formData.getAll('likeFactors2'), likeFactors3: formData.getAll('likeFactors3'), likeFactors4: formData.getAll('likeFactors4'), importantFactors: formData.getAll('importantFactors'), skills })
+                body: JSON.stringify({ hobbies: formData.getAll('hobbies'), likeFactors1: formData.get('likeFactors1'), likeFactors2: formData.get('likeFactors2'), likeFactors3: formData.get('likeFactors3'), likeFactors4: formData.getAll('likeFactors4'), importantFactors: formData.getAll('importantFactors'), skills })
             })
             .then(response => {
                 if (!response.ok) {
@@ -350,5 +356,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     generateQuestions();
 });
+
 
 
