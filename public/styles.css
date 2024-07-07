@@ -50,7 +50,7 @@ form {
 }
 
 .question-label {
-    font-size: 1.4em; /* questionの文字サイズをさらに大きく */
+    font-size: 1.2em; /* questionの文字サイズをさらに大きくせずに小さく */
 }
 
 .label-container {
