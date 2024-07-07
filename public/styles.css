@@ -36,7 +36,7 @@ form {
 }
 
 .question {
-    margin-bottom: 40px;
+    margin-bottom: 40px; /* 質問間の余白を調整 */
 }
 
 .label-container {
@@ -47,10 +47,6 @@ form {
 
 .label-container .center-label {
     flex: 1;
-    text-align: center;
-}
-
-.label-container .center-label:nth-child(3) {
     text-align: center;
 }
 
@@ -96,4 +92,29 @@ form {
         width: calc(16.66% - 10px);
         margin: 5px;
     }
+}
+
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.label-row .center-label {
+    text-align: center;
+    flex: 1;
+}
+
+.buttons-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.buttons-row label {
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
 }
