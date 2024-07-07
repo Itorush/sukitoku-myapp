@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #87ceeb;
+    background-color: #87ceeb; /* 優しい青色 */
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -96,4 +96,64 @@ form {
         width: calc(16.66% - 10px);
         margin: 5px;
     }
+}
+
+/* 追加されたスタイル */
+.question-label {
+    margin-bottom: 10px;
+    display: block;
+    text-align: left;
+    font-weight: bold; /* 太文字 */
+}
+
+.label-strong-agree, .label-neutral {
+    font-weight: bold; /* 太文字 */
+    text-align: center;
+    display: inline-block;
+    width: 100%; /* 幅を100%に設定して中央揃え */
+}
+
+.label-neutral {
+    margin-left: 33%; /* 真ん中に表示されるように設定 */
+}
+
+.options span {
+    font-weight: bold; /* 太文字 */
+}
+
+.options {
+    display: flex;
+    flex-direction: column; /* 縦方向に並べる */
+    align-items: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 500px; /* 最大幅を設定 */
+    margin: 10px 0; /* 上下の余白 */
+}
+
+.buttons label {
+    display: inline-block;
+    flex: 1;
+    text-align: center;
+}
+
+.buttons input[type="radio"] {
+    display: none;
+}
+
+.buttons input[type="radio"] + label span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+.buttons input[type="radio"]:checked + label span {
+    background-color: #87ceeb;
 }
