@@ -1,3 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+header {
+    background-color: #7cb342; /* 優しめの色に変更 */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
 main {
     padding: 20px;
 }
