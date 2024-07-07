@@ -33,7 +33,7 @@ form {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    font-weight: bold; /* optionsを太文字に */
+    /* optionsのスタイルをここで定義 */
 }
 
 .question {
@@ -116,6 +116,7 @@ form {
     display: flex;
     justify-content: space-between;
     margin-top: 10px; /* オプション行の上に余白 */
+    font-size: 1em; /* optionsの文字サイズを元に戻す */
 }
 
 .warning {
