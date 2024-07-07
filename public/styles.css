@@ -98,19 +98,19 @@ form {
 .label-row .strong-agree {
     flex: 1;
     text-align: center;
-    font-weight: normal !important; /* !importantを追加 */
+    font-weight: normal !important; /* !importantを追加して優先度を高める */
 }
 
 .label-row .neutral {
     flex: 2;
     text-align: center;
-    font-weight: normal !important; /* !importantを追加 */
+    font-weight: bold; /* どちらともいえないを太文字に */
 }
 
 .label-row .strong-agree {
     flex: 1;
     text-align: center;
-    font-weight: normal !important; /* !importantを追加 */
+    font-weight: normal !important; /* !importantを追加して優先度を高める */
 }
 
 .options-row {
