@@ -169,9 +169,19 @@ document.addEventListener("DOMContentLoaded", function() {
             questionDiv.innerHTML = `
                 <label class="question-label">${question.question}</label>
                 <div class="label-container">
-                    <div class="label">強く同意する</div>
-                    <div class="center-label">どちらともいえない</div>
-                    <div class="label">強く同意する</div>
+                    <div class="empty"></div>
+                    <div class="label strong-agree">強く同意する</div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="label center-label">どちらともいえない</div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="label strong-agree">強く同意する</div>
+                    <div class="empty"></div>
                 </div>
                 <div class="buttons-container">
                     <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
@@ -364,6 +374,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
     generateQuestions();
 });
-
 
 

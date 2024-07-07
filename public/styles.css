@@ -37,7 +37,7 @@ form {
 
 .question {
     margin-bottom: 40px; /* 質問間の余白 */
-    font-weight: bold; /* questionを太文字にaaa */
+    font-weight: bold; /* questionを太文字に */
 }
 
 .label-container {
@@ -47,12 +47,14 @@ form {
 }
 
 .label-container .center-label {
-    flex: 1;
+    flex: 2;
     text-align: center;
 }
 
-.label-container .center-label:nth-child(3) {
+.label-container .strong-agree {
+    flex: 1;
     text-align: center;
+    font-weight: normal; /* 強く同意するを普通の太さに */
 }
 
 .buttons-container {
@@ -98,19 +100,13 @@ form {
 .label-row .strong-agree {
     flex: 1;
     text-align: center;
-    font-weight: normal !important; /* !importantを追加して優先度を高める */
+    font-weight: normal; /* 普通の太さに変更 */
 }
 
 .label-row .neutral {
     flex: 2;
     text-align: center;
     font-weight: bold; /* どちらともいえないを太文字に */
-}
-
-.label-row .strong-agree {
-    flex: 1;
-    text-align: center;
-    font-weight: normal !important; /* !importantを追加して優先度を高める */
 }
 
 .options-row {
