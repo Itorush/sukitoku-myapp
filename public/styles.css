@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #7cb342; /* 優しめの色に変更 */
+    background-color: #87ceeb;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -30,57 +30,57 @@ form {
 
 .options {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px; /* 質問間の余白 */
+    margin-bottom: 20px;
 }
 
-.labels {
+.question {
+    margin-bottom: 40px;
+}
+
+.label-container {
     display: flex;
-    width: 100%;
     justify-content: space-between;
     margin-bottom: 10px;
 }
 
-.buttons {
+.label-container .center-label {
+    flex: 1;
+    text-align: center;
+}
+
+.label-container .center-label:nth-child(3) {
+    text-align: center;
+}
+
+.buttons-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.buttons label {
-    margin: 0 5px;
-}
-
-.options label {
+.buttons-container label {
+    flex: 1;
     text-align: center;
     cursor: pointer;
     user-select: none;
 }
 
-.options label span {
+.buttons-container input[type="radio"] {
+    display: none;
+}
+
+.buttons-container input[type="radio"] + label span {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background-color: #ddd;
 }
 
-.options input[type="radio"] {
-    display: none;
-}
-
-.options input[type="radio"]:checked + label span {
-    background-color: #7cb342; /* 優しめの色に変更 */
-}
-
-.question {
-    margin-bottom: 40px; /* 質問間の余白を広げる */
-}
-
-.question-label {
-    margin-bottom: 10px;
-    display: block;
-    text-align: center;
+.buttons-container input[type="radio"]:checked + label span {
+    background-color: #87ceeb;
 }
 
 .warning {
