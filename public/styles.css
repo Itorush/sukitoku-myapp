@@ -2,12 +2,12 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background-color: #f0f8ff;
     color: #333;
 }
 
 header {
-    background-color: #007bff;
+    background-color: #87ceeb;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -55,7 +55,7 @@ form {
 }
 
 .options input[type="radio"]:checked + label span {
-    background-color: #007bff;
+    background-color: #87ceeb;
 }
 
 .question {
@@ -81,14 +81,54 @@ form {
     margin: 0 5px;
 }
 
+.scale-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scale-container label {
+    margin: 0 5px;
+    display: inline-block;
+}
+
+.scale-container .scale-item {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.scale-container input[type="radio"] {
+    display: none;
+}
+
+.scale-container input[type="radio"]:checked + .scale-item {
+    background-color: #87ceeb;
+}
+
+.scale-text {
+    flex: 1;
+    text-align: center;
+}
+
 @media (max-width: 600px) {
     .options {
         flex-wrap: wrap;
     }
     .options label {
         flex: none;
-        width: calc(16.66% - 10px);
+        width: calc(50% - 10px);
+        margin: 5px;
+    }
+
+    .scale-container {
+        flex-wrap: wrap;
+    }
+
+    .scale-container .scale-item {
         margin: 5px;
     }
 }
-
