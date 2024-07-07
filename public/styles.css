@@ -39,6 +39,7 @@ form {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    position: relative;
 }
 
 .options .skill-options label {
@@ -87,15 +88,26 @@ form {
     margin: 0 5px;
 }
 
-.left-label, .right-label {
-    width: calc(16.66% - 10px); /* ボタン1つ分の幅 */
+.left-label, .right-label, .center-label {
     text-align: center;
+    position: absolute;
+    width: 100%;
+    top: -25px; /* ボタンの上にラベルを配置 */
+}
+
+.left-label {
+    left: 0;
+    width: calc(16.66% - 10px); /* ボタン1つ分の幅 */
 }
 
 .center-label {
-    width: calc(16.66% - 10px); /* もしボタン2つ分の幅にしたければ33.33% - 20px */
-    text-align: center;
-    margin: 0 10px;
+    left: calc(16.66% - 10px); /* ボタン2つ分の幅の中央であれば50% - 50px */
+    width: 100px;
+}
+
+.right-label {
+    right: 0;
+    width: calc(16.66% - 10px); /* ボタン1つ分の幅 */
 }
 
 .skill-options-text {
