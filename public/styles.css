@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #87ceeb; /* 優しい青色 */
+    background-color: #87ceeb;
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -121,4 +121,53 @@ form {
 
 .options span {
     font-weight: bold; /* オプションを太文字に */
+}
+
+/* 追加スタイル */
+.table-container {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    grid-template-rows: repeat(6, auto);
+    gap: 10px;
+}
+
+.table-container .empty {
+    grid-column: span 13;
+}
+
+.table-container .question {
+    grid-column: 1 / span 1;
+    font-weight: bold;
+}
+
+.table-container .label-strong-agree {
+    grid-column: 2 / span 1;
+    text-align: center;
+}
+
+.table-container .label-neutral {
+    grid-column: 7 / span 1;
+    text-align: center;
+}
+
+.table-container .label-strong-agree-right {
+    grid-column: 12 / span 1;
+    text-align: center;
+}
+
+.table-container .buttons-container {
+    grid-column: 2 / span 11;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table-container .options-left {
+    grid-column: 2 / span 1;
+    font-weight: bold;
+}
+
+.table-container .options-right {
+    grid-column: 12 / span 1;
+    font-weight: bold;
 }
