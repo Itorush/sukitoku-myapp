@@ -118,3 +118,82 @@ form {
     cursor: pointer;
     user-select: none;
 }
+
+/* 既存のCSSに続けて以下の修正を追加します */
+
+.buttons-container {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    align-items: center;
+    gap: 5px;
+}
+
+.buttons-container label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    grid-column: span 1;
+}
+
+.buttons-container input[type="radio"] + label span {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #ddd;
+}
+
+.buttons-container input[type="radio"]:checked + label span {
+    background-color: #87ceeb;
+}
+
+.question {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+.question .question-label {
+    grid-column: span 13;
+    font-weight: bold;
+}
+
+.label-container {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+    margin-bottom: 10px;
+}
+
+.label-container .center-label {
+    text-align: center;
+    grid-column: span 3;
+}
+
+.label-container .center-label:nth-child(3) {
+    grid-column: span 5;
+    text-align: center;
+}
+
+.label-container .side-label {
+    grid-column: span 2;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media (max-width: 600px) {
+    .buttons-container {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .label-container {
+        grid-template-columns: repeat(6, 1fr);
+    }
+
+    .label-container .center-label,
+    .label-container .side-label {
+        grid-column: span 3;
+    }
+}
