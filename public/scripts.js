@@ -222,28 +222,28 @@ document.addEventListener("DOMContentLoaded", function() {
         let valid = true;
 
         if (!selectedLikeFactors1) {
-            warning1.textContent = '選択肢1は1つ選択してください。';
+            warning1.textContent = '1つ選択してください。';
             valid = false;
         } else {
             warning1.textContent = '';
         }
 
         if (!selectedLikeFactors2) {
-            warning2.textContent = '選択肢2は1つ選択してください。';
+            warning2.textContent = '1つ選択してください。';
             valid = false;
         } else {
             warning2.textContent = '';
         }
 
         if (!selectedLikeFactors3) {
-            warning3.textContent = '選択肢3は1つ選択してください。';
+            warning3.textContent = '1つ選択してください。';
             valid = false;
         } else {
             warning3.textContent = '';
         }
 
         if (selectedLikeFactors4.length < 1 || selectedLikeFactors4.length > 3) {
-            warning4.textContent = '好きなことの要素4は1つ以上3つ以内で選択してください。';
+            warning4.textContent = '1つ以上3つ以内で選択してください。';
             valid = false;
         } else {
             warning4.textContent = '';
