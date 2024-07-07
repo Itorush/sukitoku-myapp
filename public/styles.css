@@ -33,13 +33,19 @@ form {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    /* optionsのスタイルをここで定義 */
 }
 
 .question {
     margin-bottom: 40px; /* 質問間の余白 */
     font-weight: bold; /* questionを太文字に */
-    font-size: 1.6em; /* questionの文字サイズを大きく */
+}
+
+.question-label-container {
+    margin-bottom: 10px;
+}
+
+.question-label {
+    font-size: 1.4em; /* questionの文字サイズを大きく */
 }
 
 .label-container {
@@ -52,12 +58,14 @@ form {
     flex: 2;
     text-align: center;
     font-weight: normal; /* どちらともいえないを普通の太さに */
+    font-size: 1em; /* どちらともいえないの文字サイズ */
 }
 
 .label-container .strong-agree {
     flex: 1;
     text-align: center;
     font-weight: normal; /* 強く同意するを普通の太さに */
+    font-size: 1em; /* 強く同意するの文字サイズ */
 }
 
 .buttons-container {
@@ -104,19 +112,25 @@ form {
     flex: 1;
     text-align: center;
     font-weight: normal; /* 普通の太さに変更 */
+    font-size: 1em; /* 強く同意するの文字サイズ */
 }
 
 .label-row .neutral {
     flex: 2;
     text-align: center;
     font-weight: normal; /* どちらともいえないを普通の太さに */
+    font-size: 1em; /* どちらともいえないの文字サイズ */
 }
 
 .options-row {
     display: flex;
     justify-content: space-between;
     margin-top: 10px; /* オプション行の上に余白 */
-    font-size: 1em; /* optionsの文字サイズを元に戻す */
+    font-size: 1em; /* optionsの文字サイズ */
+}
+
+.option {
+    font-weight: bold; /* optionsを太文字に */
 }
 
 .warning {

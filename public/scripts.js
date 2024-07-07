@@ -167,20 +167,22 @@ document.addEventListener("DOMContentLoaded", function() {
             const questionDiv = document.createElement('div');
             questionDiv.className = 'question';
             questionDiv.innerHTML = `
-                <label class="question-label">${question.question}</label>
-                <div class="label-container">
+                <div class="question-label-container">
+                    <label class="question-label">${question.question}</label>
+                </div>
+                <div class="label-row">
                     <div class="empty"></div>
-                    <div class="label strong-agree">強く同意する</div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="label center-label">どちらともいえない</div>
+                    <div class="strong-agree">強く同意する</div>
                     <div class="empty"></div>
                     <div class="empty"></div>
                     <div class="empty"></div>
                     <div class="empty"></div>
-                    <div class="label strong-agree">強く同意する</div>
+                    <div class="neutral">どちらともいえない</div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="strong-agree">強く同意する</div>
                     <div class="empty"></div>
                 </div>
                 <div class="buttons-container">
@@ -197,9 +199,20 @@ document.addEventListener("DOMContentLoaded", function() {
                     <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
                     <label for="skill${index + 1}-6"><span></span></label>
                 </div>
-                <div class="options">
-                    <span>${question.options[0]}</span>
-                    <span>${question.options[1]}</span>
+                <div class="options-row">
+                    <div class="empty"></div>
+                    <div class="option">${question.options[0]}</div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="option">${question.options[1]}</div>
+                    <div class="empty"></div>
                 </div>
             `;
             skillsQuestionsContainer.appendChild(questionDiv);
@@ -219,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const warning = document.getElementById('hobbyWarning');
         
         if (selectedHobbies.length < 1 || selectedHobbies.length > 3) {
-            warning.textContent = '1つ以上3つ以内で選択してください。';
+            warning.textContent = '趣味は1つ以上3つ以内で選択してください。';
             return false;
         } else {
             warning.textContent = '';
@@ -242,21 +255,21 @@ document.addEventListener("DOMContentLoaded", function() {
         let valid = true;
 
         if (selectedLikeFactors1.length < 1) {
-            warnings[0].textContent = '1つ選択してください。';
+            warnings[0].textContent = '1つ以上選択してください。';
             valid = false;
         } else {
             warnings[0].textContent = '';
         }
 
         if (selectedLikeFactors2.length < 1) {
-            warnings[1].textContent = '1つ選択してください。';
+            warnings[1].textContent = '1つ以上選択してください。';
             valid = false;
         } else {
             warnings[1].textContent = '';
         }
 
         if (selectedLikeFactors3.length < 1) {
-            warnings[2].textContent = '1つ選択してください。';
+            warnings[2].textContent = '1つ以上選択してください。';
             valid = false;
         } else {
             warnings[2].textContent = '';
@@ -277,7 +290,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const warning = document.getElementById('importantFactorsWarning');
         
         if (selectedImportantFactors.length < 1 || selectedImportantFactors.length > 3) {
-            warning.textContent = '1つ以上3つ以内で選択してください。';
+            warning.textContent = '大事にしたいことは1つ以上3つ以内で選択してください。';
             return false;
         } else {
             warning.textContent = '';
@@ -374,5 +387,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     generateQuestions();
 });
+
 
 
