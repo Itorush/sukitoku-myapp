@@ -40,6 +40,7 @@ form {
     justify-content: space-between;
     width: 100%;
     position: relative;
+    margin-top: 20px; /* ボタンの上にラベルを配置 */
 }
 
 .options .skill-options label {
@@ -66,7 +67,7 @@ form {
 }
 
 .question {
-    margin-bottom: 20px; /* 質問間の余白 */
+    margin-bottom: 40px; /* 質問間の余白を増やす */
 }
 
 .question-label {
@@ -93,6 +94,7 @@ form {
     position: absolute;
     width: 100%;
     top: -25px; /* ボタンの上にラベルを配置 */
+    font-size: 14px; /* ラベルのサイズを統一 */
 }
 
 .left-label {
@@ -101,7 +103,7 @@ form {
 }
 
 .center-label {
-    left: calc(16.66% - 10px); /* ボタン2つ分の幅の中央であれば50% - 50px */
+    left: calc(50% - 50px); /* ボタン2つ分の幅の中央 */
     width: 100px;
 }
 

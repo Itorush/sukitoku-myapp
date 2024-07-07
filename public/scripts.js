@@ -177,10 +177,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         <label><input type="radio" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}"><span></span></label>
                         <label><input type="radio" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}"><span></span></label>
                     </div>
-                    <div class="skill-options-text">
-                        <span>${question.options[0]}</span>
-                        <span>${question.options[1]}</span>
-                    </div>
                 </div>
             `;
             skillsQuestionsContainer.appendChild(questionDiv);
