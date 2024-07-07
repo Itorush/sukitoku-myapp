@@ -123,7 +123,6 @@ form {
 
 .options {
     display: flex;
-    flex-direction: column; /* 縦方向に並べる */
     align-items: center;
 }
 
