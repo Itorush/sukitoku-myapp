@@ -7,16 +7,27 @@ document.addEventListener("DOMContentLoaded", function() {
         "書道", "コスプレ・アニメ・漫画", "ワイン・コーヒー・グルメ"
     ];
 
-    const likeFactorsOptions1 = ["都会的環境", "自然的環境"];
-    const likeFactorsOptions2 = ["大勢の環境", "少数の環境"];
-    const likeFactorsOptions3 = ["人と関われる要素やチームワーク", "単独の活動や個人作業"];
+    const likeFactorsOptions1 = [
+        "都会的環境", "自然的環境"
+    ];
+
+    const likeFactorsOptions2 = [
+        "大勢の環境", "少数の環境"
+    ];
+
+    const likeFactorsOptions3 = [
+        "人と関われる要素やチームワーク", "単独の活動や個人作業"
+    ];
+
     const likeFactorsOptions4 = [
-        "アクティブな要素やエネルギッシュな活動", "リラックスできる要素や安全で安心な活動", "新しい経験や学びの要素や変化がはやく飽きない活動",
-        "慣れた経験やマイペースでできる活動", "実生活に役立つ要素", "論理的な要素", "技術的な要素", "芸術的な要素や自己表現できる活動",
-        "楽な活動", "競争的な要素や挑戦的な活動", "社会から評価される要素や達成感がある活動", "プロセスが面白い要素や自由に楽しめる活動",
-        "手先の作業", "頭脳の作業", "学び続ける要素", "不思議な要素や神秘的な要素", "奥が深い要素や熱中できる活動", "ファンタジーの要素",
-        "人に喜んでもらえる要素", "稼げる要素やお金に関わる活動", "かっこいい要素や目立つ要素", "異性にモテやすい要素", "機械に関係している要素",
-        "いきものに関係している要素"
+        "アクティブな要素やエネルギッシュな活動", "リラックスできる要素や安全で安心な活動", 
+        "新しい経験や学びの要素や変化がはやく飽きない活動", "慣れた経験やマイペースでできる活動", 
+        "実生活に役立つ要素", "論理的な要素", "技術的な要素", "芸術的な要素や自己表現できる活動", 
+        "楽な活動", "競争的な要素や挑戦的な活動", "社会から評価される要素や達成感がある活動", 
+        "プロセスが面白い要素や自由に楽しめる活動", "手先の作業", "頭脳の作業", "学び続ける要素", 
+        "不思議な要素や神秘的な要素", "奥が深い要素や熱中できる活動", "ファンタジーの要素", 
+        "人に喜んでもらえる要素", "稼げる要素やお金に関わる活動", "かっこいい要素や目立つ要素", 
+        "異性にモテやすい要素", "機械に関係している要素", "いきものに関係している要素"
     ];
 
     const importantFactorsOptions = [
@@ -82,49 +93,52 @@ document.addEventListener("DOMContentLoaded", function() {
             hobbyOptionsContainer.appendChild(optionDiv);
         });
 
-        // 好きなことの要素を生成
+        // 好きなことの要素1を生成
         likeFactorsOptions1.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
             optionDiv.innerHTML = `
-                <label for="likeFactor1-${index + 1}">
-                    <input type="radio" id="likeFactor1-${index + 1}" name="likeFactors1" value="${option}">
+                <label for="likeFactor1_${index + 1}">
+                    <input type="radio" id="likeFactor1_${index + 1}" name="likeFactors1" value="${option}">
                     ${option}
                 </label>
             `;
             likeFactorsOptionsContainer1.appendChild(optionDiv);
         });
 
+        // 好きなことの要素2を生成
         likeFactorsOptions2.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
             optionDiv.innerHTML = `
-                <label for="likeFactor2-${index + 1}">
-                    <input type="radio" id="likeFactor2-${index + 1}" name="likeFactors2" value="${option}">
+                <label for="likeFactor2_${index + 1}">
+                    <input type="radio" id="likeFactor2_${index + 1}" name="likeFactors2" value="${option}">
                     ${option}
                 </label>
             `;
             likeFactorsOptionsContainer2.appendChild(optionDiv);
         });
 
+        // 好きなことの要素3を生成
         likeFactorsOptions3.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
             optionDiv.innerHTML = `
-                <label for="likeFactor3-${index + 1}">
-                    <input type="radio" id="likeFactor3-${index + 1}" name="likeFactors3" value="${option}">
+                <label for="likeFactor3_${index + 1}">
+                    <input type="radio" id="likeFactor3_${index + 1}" name="likeFactors3" value="${option}">
                     ${option}
                 </label>
             `;
             likeFactorsOptionsContainer3.appendChild(optionDiv);
         });
 
+        // 好きなことの要素4を生成
         likeFactorsOptions4.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
             optionDiv.innerHTML = `
-                <label for="likeFactor4-${index + 1}">
-                    <input type="checkbox" id="likeFactor4-${index + 1}" name="likeFactors4" value="${option}">
+                <label for="likeFactor4_${index + 1}">
+                    <input type="checkbox" id="likeFactor4_${index + 1}" name="likeFactors4" value="${option}">
                     ${option}
                 </label>
             `;
@@ -165,8 +179,14 @@ document.addEventListener("DOMContentLoaded", function() {
             questionDiv.className = 'question';
             questionDiv.innerHTML = `
                 <label class="question-label">${question.question}</label>
-                <div class="skill-options">
-                    <span>${question.options[0]}</span>
+                <div class="options">
+                    <div class="labels">
+                        <span class="label">強く同意する</span>
+                        <span class="label" style="flex: 1;"></span>
+                        <span class="label" style="flex: 1;">どちらともいえない</span>
+                        <span class="label" style="flex: 1;"></span>
+                        <span class="label">強く同意する</span>
+                    </div>
                     <div class="buttons">
                         <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
                         <label for="skill${index + 1}-1"><span></span></label>
@@ -181,15 +201,6 @@ document.addEventListener("DOMContentLoaded", function() {
                         <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
                         <label for="skill${index + 1}-6"><span></span></label>
                     </div>
-                    <span>${question.options[1]}</span>
-                </div>
-                <div class="label-container">
-                    <span>強く同意する</span>
-                    <span></span>
-                    <span>どちらともいえない</span>
-                    <span></span>
-                    <span></span>
-                    <span>強く同意する</span>
                 </div>
             `;
             skillsQuestionsContainer.appendChild(questionDiv);
@@ -222,41 +233,39 @@ document.addEventListener("DOMContentLoaded", function() {
         const selectedLikeFactors2 = document.querySelectorAll('input[name="likeFactors2"]:checked');
         const selectedLikeFactors3 = document.querySelectorAll('input[name="likeFactors3"]:checked');
         const selectedLikeFactors4 = document.querySelectorAll('input[name="likeFactors4"]:checked');
-        const warnings = [
-            document.getElementById('likeFactorsWarning1'),
-            document.getElementById('likeFactorsWarning2'),
-            document.getElementById('likeFactorsWarning3'),
-            document.getElementById('likeFactorsWarning4')
-        ];
-
+        const warning1 = document.getElementById('likeFactorsWarning1');
+        const warning2 = document.getElementById('likeFactorsWarning2');
+        const warning3 = document.getElementById('likeFactorsWarning3');
+        const warning4 = document.getElementById('likeFactorsWarning4');
+        
         let valid = true;
-
+        
         if (selectedLikeFactors1.length !== 1) {
-            warnings[0].textContent = '好きなことの要素を1つ選んでください。';
+            warning1.textContent = '選択肢から1つ選んでください。';
             valid = false;
         } else {
-            warnings[0].textContent = '';
+            warning1.textContent = '';
         }
 
         if (selectedLikeFactors2.length !== 1) {
-            warnings[1].textContent = '好きなことの要素を1つ選んでください。';
+            warning2.textContent = '選択肢から1つ選んでください。';
             valid = false;
         } else {
-            warnings[1].textContent = '';
+            warning2.textContent = '';
         }
 
         if (selectedLikeFactors3.length !== 1) {
-            warnings[2].textContent = '好きなことの要素を1つ選んでください。';
+            warning3.textContent = '選択肢から1つ選んでください。';
             valid = false;
         } else {
-            warnings[2].textContent = '';
+            warning3.textContent = '';
         }
 
         if (selectedLikeFactors4.length < 1 || selectedLikeFactors4.length > 3) {
-            warnings[3].textContent = '好きなことの要素は1つ以上3つ以内で選択してください。';
+            warning4.textContent = '1つ以上3つ以内で選択してください。';
             valid = false;
         } else {
-            warnings[3].textContent = '';
+            warning4.textContent = '';
         }
 
         return valid;
@@ -291,9 +300,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function saveSelectionsToLocalStorage(formData) {
         const hobbies = formData.getAll('hobbies');
-        const likeFactors1 = formData.get('likeFactors1');
-        const likeFactors2 = formData.get('likeFactors2');
-        const likeFactors3 = formData.get('likeFactors3');
+        const likeFactors1 = formData.getAll('likeFactors1');
+        const likeFactors2 = formData.getAll('likeFactors2');
+        const likeFactors3 = formData.getAll('likeFactors3');
         const likeFactors4 = formData.getAll('likeFactors4');
         const importantFactors = formData.getAll('importantFactors');
         const skills = formData.getAll('skills');
@@ -336,7 +345,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ hobbies: formData.getAll('hobbies'), likeFactors1: formData.get('likeFactors1'), likeFactors2: formData.get('likeFactors2'), likeFactors3: formData.get('likeFactors3'), likeFactors4: formData.getAll('likeFactors4'), importantFactors: formData.getAll('importantFactors'), skills })
+                body: JSON.stringify({
+                    hobbies: formData.getAll('hobbies'),
+                    likeFactors1: formData.getAll('likeFactors1'),
+                    likeFactors2: formData.getAll('likeFactors2'),
+                    likeFactors3: formData.getAll('likeFactors3'),
+                    likeFactors4: formData.getAll('likeFactors4'),
+                    importantFactors: formData.getAll('importantFactors'),
+                    skills
+                })
             })
             .then(response => {
                 if (!response.ok) {
@@ -356,6 +373,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
     generateQuestions();
 });
-
 
 
