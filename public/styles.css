@@ -1,4 +1,3 @@
-/* 基本的なスタイル設定 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,15 +6,13 @@ body {
     color: #333;
 }
 
-/* ヘッダーのスタイル */
 header {
-    background-color: #87ceeb; /* 背景色を明るい青に設定 */
+    background-color: #87ceeb; /* 優しい色に変更 */
     color: #fff;
     padding: 20px;
     text-align: center;
 }
 
-/* メインコンテンツのスタイル */
 main {
     padding: 20px;
 }
@@ -24,7 +21,6 @@ h1, h2 {
     margin: 0 0 20px;
 }
 
-/* フォーム全体のスタイル */
 form {
     background-color: #fff;
     padding: 20px;
@@ -32,12 +28,18 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* 質問間のマージンを大きめに設定 */
-.question {
-    margin-bottom: 40px;
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-/* ラベルコンテナのスタイル */
+.question {
+    margin-bottom: 40px; /* 質問間の余白 */
+    font-weight: bold; /* questionを太文字に */
+}
+
 .label-container {
     display: flex;
     justify-content: space-between;
@@ -49,14 +51,17 @@ form {
     text-align: center;
 }
 
-/* ボタンコンテナのスタイル */
+.label-container .center-label:nth-child(3) {
+    text-align: center;
+}
+
 .buttons-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 20px; /* ボタン間の余白 */
 }
 
-/* ボタンのラベルスタイル */
 .buttons-container label {
     flex: 1;
     text-align: center;
@@ -64,12 +69,10 @@ form {
     user-select: none;
 }
 
-/* ラジオボタンを非表示 */
 .buttons-container input[type="radio"] {
     display: none;
 }
 
-/* ラジオボタンのラベルのスタイル */
 .buttons-container input[type="radio"] + label span {
     display: inline-block;
     width: 30px;
@@ -78,17 +81,49 @@ form {
     background-color: #ddd;
 }
 
-/* 選択されたラジオボタンのラベルのスタイル */
 .buttons-container input[type="radio"]:checked + label span {
-    background-color: #87ceeb; /* 選択時の色を明るい青に設定 */
+    background-color: #87ceeb; /* 優しい色に変更 */
 }
 
-/* 警告メッセージのスタイル */
+.label-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px; /* ラベル行の下に余白 */
+}
+
+.label-row .empty {
+    flex: 1;
+}
+
+.label-row .strong-agree {
+    flex: 1;
+    text-align: center;
+    font-weight: bold; /* 強く同意を太文字に */
+}
+
+.label-row .neutral {
+    flex: 2;
+    text-align: center;
+    font-weight: bold; /* どちらともいえないを太文字に */
+}
+
+.label-row .strong-agree {
+    flex: 1;
+    text-align: center;
+    font-weight: bold; /* 強く同意を太文字に */
+}
+
+.options-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px; /* オプション行の上に余白 */
+    font-weight: bold; /* optionsを太文字に */
+}
+
 .warning {
     color: red;
 }
 
-/* モバイルデバイス向けのスタイル調整 */
 @media (max-width: 600px) {
     .options {
         flex-wrap: wrap;
@@ -98,47 +133,4 @@ form {
         width: calc(16.66% - 10px);
         margin: 5px;
     }
-}
-
-/* 得意なことの質問セクションの特定のスタイル */
-.skills-question-container {
-    display: grid;
-    grid-template-columns: repeat(13, 1fr);
-    gap: 10px;
-}
-
-.skills-question-container .question-label {
-    grid-column: span 13; /* 全幅にする */
-    font-weight: bold; /* 太文字にする */
-}
-
-.skills-question-container .label-container {
-    grid-column: span 13;
-    display: flex;
-    justify-content: space-between;
-}
-
-.skills-question-container .label-container .strong-agree {
-    grid-column: span 2;
-    text-align: center;
-}
-
-.skills-question-container .label-container .neutral {
-    grid-column: span 2;
-    text-align: center;
-    justify-self: center;
-}
-
-.skills-question-container .button-container {
-    grid-column: span 13;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-.skills-question-container .options {
-    grid-column: span 13;
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold; /* 太文字にする */
 }
