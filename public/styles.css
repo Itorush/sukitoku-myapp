@@ -37,7 +37,7 @@ form {
 
 .question {
     margin-bottom: 40px; /* 質問間の余白 */
-    font-weight: bold; /* questionを太文字に */
+    font-weight: normal; /* questionを太文字に */
 }
 
 .label-container {
