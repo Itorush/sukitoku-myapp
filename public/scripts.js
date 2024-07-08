@@ -250,17 +250,17 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="empty"></div>
                 </div>
                 <div class="buttons-container">
-                    <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-firstname="${question.el_ID}" data-secondname="${question.ax1_id}" data-thirdname="three">
+                    <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-el_ID="${question.el_ID}" data-ax1_id="${question.ax1_id}" data-ax2_id="${question.ax2_id}" data-thirdname="three">
                     <label for="skill${index + 1}-1"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-firstname="${question.el_ID}" data-secondname="${question.ax1_id}" data-thirdname="two">
+                    <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-el_ID="${question.el_ID}" data-ax1_id="${question.ax1_id}" data-ax2_id="${question.ax2_id}" data-thirdname="two">
                     <label for="skill${index + 1}-2"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-firstname="${question.el_ID}" data-secondname="${question.ax1_id}" data-thirdname="one">
+                    <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-el_ID="${question.el_ID}" data-ax1_id="${question.ax1_id}" data-ax2_id="${question.ax2_id}" data-thirdname="one">
                     <label for="skill${index + 1}-3"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-firstname="${question.el_ID}" data-secondname="${question.ax2_id}" data-thirdname="one">
+                    <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-el_ID="${question.el_ID}" data-ax1_id="${question.ax1_id}" data-ax2_id="${question.ax2_id}" data-thirdname="one">
                     <label for="skill${index + 1}-4"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-firstname="${question.el_ID}" data-secondname="${question.ax2_id}" data-thirdname="two">
+                    <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-el_ID="${question.el_ID}" data-ax1_id="${question.ax1_id}" data-ax2_id="${question.ax2_id}" data-thirdname="two">
                     <label for="skill${index + 1}-5"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-firstname="${question.el_ID}" data-secondname="${question.ax2_id}" data-thirdname="three">
+                    <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-el_ID="${question.el_ID}" data-ax1_id="${question.ax1_id}" data-ax2_id="${question.ax2_id}" data-thirdname="three">
                     <label for="skill${index + 1}-6"><span></span></label>
                 </div>
                 <div class="options-row">
@@ -415,14 +415,27 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const preprocessingTable = skillsQuestions.map(question => {
-            const chosenButton = Array.from(document.querySelectorAll(`[name^="skills"]`)).find(input => {
-                const skillQuestion = skillsQuestions.find(q => q.elementname === question.elementname);
-                return skillQuestion && input.checked && input.getAttribute('data-firstname') === question.el_ID;
-            });
+            const chosenSkill = document.querySelector(`[name^="skills"]:checked[data-el_ID="${question.el_ID}"]`);
+            const isChosen = chosenSkill !== null;
+            let axis1Score = 0;
+            let axis2Score = 0;
 
-            const isChosen = !!chosenButton;
-            const axis1Score = isChosen && chosenButton.getAttribute('data-secondname') === question.ax1_id ? getScoreByThirdname(chosenButton.getAttribute('data-thirdname')) : 0;
-            const axis2Score = isChosen && chosenButton.getAttribute('data-secondname') === question.ax2_id ? getScoreByThirdname(chosenButton.getAttribute('data-thirdname')) : 0;
+            if (isChosen) {
+                const secondname = chosenSkill.getAttribute('data-ax1_id') === question.ax1_id ? "ax1_id" : "ax2_id";
+                const thirdname = chosenSkill.getAttribute('data-thirdname');
+
+                if (secondname === "ax1_id") {
+                    if (thirdname === "one") axis1Score = 1;
+                    if (thirdname === "two") axis1Score = 2;
+                    if (thirdname === "three") axis1Score = 3;
+                }
+
+                if (secondname === "ax2_id") {
+                    if (thirdname === "one") axis2Score = 1;
+                    if (thirdname === "two") axis2Score = 2;
+                    if (thirdname === "three") axis2Score = 3;
+                }
+            }
 
             return {
                 chosen: isChosen ? 1 : 0,
@@ -438,19 +451,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         localStorage.setItem('preprocessingTable', JSON.stringify(preprocessingTable));
         return preprocessingTable;
-    }
-
-    function getScoreByThirdname(thirdname) {
-        switch (thirdname) {
-            case 'one':
-                return 1;
-            case 'two':
-                return 2;
-            case 'three':
-                return 3;
-            default:
-                return 0;
-        }
     }
 
     function generateScoreTable() {
@@ -526,54 +526,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 elementname: preprocess.elementname
             }))
         ];
-
-        // 「得意な要素の合計スコア」の計算
-        const sumScores = {
-            eg1: 0,
-            eg2: 0,
-            eh1: 0,
-            eh2: 0,
-            ei1: 0,
-            ei2: 0,
-            ej1: 0,
-            ej2: 0,
-            ek1: 0,
-            ek2: 0
-        };
-
-        preprocessingTable.forEach(preprocess => {
-            if (preprocess.sy2 === 'l') {
-                sumScores.eg1 += preprocess.axis1score;
-                sumScores.eg2 += preprocess.axis2score;
-            } else if (preprocess.sy2 === 'm') {
-                sumScores.eh1 += preprocess.axis1score;
-                sumScores.eh2 += preprocess.axis2score;
-            } else if (preprocess.sy2 === 'n') {
-                sumScores.ei1 += preprocess.axis1score;
-                sumScores.ei2 += preprocess.axis2score;
-            } else if (preprocess.sy2 === 'o') {
-                sumScores.ej1 += preprocess.axis1score;
-                sumScores.ej2 += preprocess.axis2score;
-            } else if (preprocess.sy2 === 'p') {
-                sumScores.ek1 += preprocess.axis1score;
-                sumScores.ek2 += preprocess.axis2score;
-            }
-        });
-
-        const elementSumScores = [
-            { score: sumScores.eg1, sy1: 'e', sy2: 'g', sy3: 1, id: 'eg1', elementname: '論理' },
-            { score: sumScores.eg2, sy1: 'e', sy2: 'g', sy3: 2, id: 'eg2', elementname: '感情' },
-            { score: sumScores.eh1, sy1: 'e', sy2: 'h', sy3: 1, id: 'eh1', elementname: '精密性' },
-            { score: sumScores.eh2, sy1: 'e', sy2: 'h', sy3: 2, id: 'eh2', elementname: '全体像' },
-            { score: sumScores.ei1, sy1: 'e', sy2: 'i', sy3: 1, id: 'ei1', elementname: '伝統性' },
-            { score: sumScores.ei2, sy1: 'e', sy2: 'i', sy3: 2, id: 'ei2', elementname: '創造性' },
-            { score: sumScores.ej1, sy1: 'e', sy2: 'j', sy3: 1, id: 'ej1', elementname: '熟考' },
-            { score: sumScores.ej2, sy1: 'e', sy2: 'j', sy3: 2, id: 'ej2', elementname: '即座' },
-            { score: sumScores.ek1, sy1: 'e', sy2: 'k', sy3: 1, id: 'ek1', elementname: '身体能力' },
-            { score: sumScores.ek2, sy1: 'e', sy2: 'k', sy3: 2, id: 'ek2', elementname: '学力' }
-        ];
-
-        scoreTable.push(...elementSumScores);
 
         localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
     }
