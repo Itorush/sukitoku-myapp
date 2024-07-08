@@ -3,40 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>好き得 適職診断 - 結果ページ</title>
+    <title>診断結果</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="scripts.js"></script>
+    <script src="results.js" defer></script>
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>好き得 適職診断</h1>
-            <nav>
-                <ul>
-                    <li><a href="/">ホーム</a></li>
-                    <li><a href="/diagnosis-top.html">診断トップページ</a></li>
-                    <li><a href="/job-encyclopedia.html">仕事図鑑</a></li>
-                    <li><a href="/qualification-encyclopedia.html">資格図鑑</a></li>
-                    <li><a href="/learning-supporter.html">学習書お探しサポーター</a></li>
-                    <li><a href="/job-ranking.html">転職サイトランキング</a></li>
-                </ul>
-            </nav>
-        </div>
+        <h1>診断結果</h1>
     </header>
     <main>
-        <section id="results">
-            <div class="container">
-                <h2>診断結果</h2>
-                <p id="resultMessage">あなたにぴったりの仕事は...</p>
-                <ul id="resultList"></ul>
-                <a href="/diagnosis-top.html" class="button">もう一度診断する</a>
-            </div>
-        </section>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Score</th>
+                    <th>sy1</th>
+                    <th>sy2</th>
+                    <th>sy3</th>
+                    <th>ID</th>
+                    <th>日本語要素名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 結果がここに表示されます -->
+            </tbody>
+        </table>
     </main>
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 好き得 仕事ナビ. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>
