@@ -47,7 +47,30 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    function generateScoreTable() {
+    function displaySkillScoreResults() {
+        const skillScoreResultsBody = document.getElementById('skillScoreResultsBody');
+        const skillScoreTable = JSON.parse(localStorage.getItem('skillScoreTable'));
+        
+        if (!skillScoreTable) {
+            console.error('得意な要素の合計スコアが見つかりませんでした。');
+            return;
+        }
+
+        skillScoreTable.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.score}</td>
+                <td>${row.sy1}</td>
+                <td>${row.sy2}</td>
+                <td>${row.sy3}</td>
+                <td>${row.id}</td>
+                <td>${row.elementname}</td>
+            `;
+            skillScoreResultsBody.appendChild(tr);
+        });
+    }
+
+    function generateSkillScoreTable() {
         const data = JSON.parse(localStorage.getItem('diagnosisData'));
         const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable'));
         if (!data || !preprocessingTable) {
@@ -55,94 +78,24 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        const scoreTable = [
-            // 趣味
-            ...hobbyOptions.map(option => ({
-                score: data.hobbies.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 好きなこと（likeFactorsOptions1）
-            ...likeFactorsOptions1.map(option => ({
-                score: data.likeFactors1.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 好きなこと（likeFactorsOptions2）
-            ...likeFactorsOptions2.map(option => ({
-                score: data.likeFactors2.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 好きなこと（likeFactorsOptions3）
-            ...likeFactorsOptions3.map(option => ({
-                score: data.likeFactors3.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 好きなこと（likeFactorsOptions4）
-            ...likeFactorsOptions4.map(option => ({
-                score: data.likeFactors4.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 大事にしたいこと
-            ...importantFactorsOptions.map(option => ({
-                score: data.importantFactors.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 得意なこと（option1とoption2を含む）
-            ...preprocessingTable.flatMap(preprocess => [
-                {
-                    score: preprocess.chosen ? `${preprocess.axis1score}/${preprocess.axis2score}` : '0/0',
-                    sy1: preprocess.sy1,
-                    sy2: preprocess.sy2,
-                    sy3: preprocess.sy3,
-                    id: preprocess.id,
-                    elementname: preprocess.elementname
-                },
-                {
-                    score: preprocess.chosen ? '1' : '0',
-                    sy1: preprocess.ax1_sy1,
-                    sy2: preprocess.ax1_sy2,
-                    sy3: preprocess.ax1_sy3,
-                    id: preprocess.ax1_id,
-                    elementname: preprocess.option1
-                },
-                {
-                    score: preprocess.chosen ? '1' : '0',
-                    sy1: preprocess.ax2_sy1,
-                    sy2: preprocess.ax2_sy2,
-                    sy3: preprocess.ax2_sy3,
-                    id: preprocess.ax2_id,
-                    elementname: preprocess.option2
-                }
-            ])
+        const skillScoreTable = [
+            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'g', sy3: 1, id: 'eg1', elementname: '論理' },
+            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'g', sy3: 2, id: 'eg2', elementname: '感情' },
+            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'h', sy3: 1, id: 'eh1', elementname: '精密性' },
+            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'h', sy3: 2, id: 'eh2', elementname: '全体像' },
+            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'i', sy3: 1, id: 'ei1', elementname: '伝統性' },
+            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'i', sy3: 2, id: 'ei2', elementname: '創造性' },
+            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'j', sy3: 1, id: 'ej1', elementname: '熟考' },
+            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'j', sy3: 2, id: 'ej2', elementname: '即座' },
+            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'k', sy3: 1, id: 'ek1', elementname: '身体能力' },
+            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'k', sy3: 2, id: 'ek2', elementname: '学力' }
         ];
 
-        localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
+        localStorage.setItem('skillScoreTable', JSON.stringify(skillScoreTable));
     }
 
     displayPreprocessingResults();
     displayScoreResults();
-    generateScoreTable();
+    generateSkillScoreTable();
+    displaySkillScoreResults();
 });
