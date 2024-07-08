@@ -318,21 +318,21 @@ document.addEventListener("DOMContentLoaded", function() {
         let valid = true;
 
         if (selectedLikeFactors1.length < 1) {
-            warnings[0].textContent = '1つ以上選択してください。';
+            warnings[0].textContent = 'どちらか1つ選択してください。';
             valid = false;
         } else {
             warnings[0].textContent = '';
         }
 
         if (selectedLikeFactors2.length < 1) {
-            warnings[1].textContent = '1つ以上選択してください。';
+            warnings[1].textContent = 'どちらか1つ選択してください。';
             valid = false;
         } else {
             warnings[1].textContent = '';
         }
 
         if (selectedLikeFactors3.length < 1) {
-            warnings[2].textContent = '1つ以上選択してください。';
+            warnings[2].textContent = 'どちらか1つ選択してください。';
             valid = false;
         } else {
             warnings[2].textContent = '';
@@ -385,7 +385,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         if (!valid) {
-            warning.textContent = '全ての質問に対して6段階評価を選択してください。';
+            warning.textContent = '全ての質問に対して6つの中から１つを選択してください。';
         } else {
             warning.textContent = '';
         }
