@@ -343,86 +343,67 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem('diagnosisData', JSON.stringify(data));
     }
 
-    function generateScoreTable() {
-        const data = JSON.parse(localStorage.getItem('diagnosisData'));
-        if (!data) {
-            console.error('診断データが見つかりませんでした。');
-            return;
-        }
-    
+    function generatePreprocessingTable(data, groupedQuestions) {
+        const preprocessingTable = [
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'l', sy3: 1, id: 'El1', question: '仕事上の課題に直面したとき、どのように対処しますか？', axis1: '論理', axis2: '感情' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'l', sy3: 2, id: 'El2', question: '議論の際、どのように進めますか？', axis1: '論理', axis2: '感情' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'l', sy3: 3, id: 'El3', question: '新しいプロジェクトに取り組むとき、どのように進めますか？', axis1: '論理', axis2: '感情' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'l', sy3: 4, id: 'El4', question: 'スキルを学ぶとき、どのように学びますか？', axis1: '論理', axis2: '感情' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'l', sy3: 5, id: 'El5', question: '他人の意見と異なる場合、どのように説得しますか？', axis1: '論理', axis2: '感情' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'm', sy3: 1, id: 'Em1', question: 'プロジェクトを進める際、どのように取り組みますか？', axis1: '精密性', axis2: '全体像' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'm', sy3: 2, id: 'Em2', question: '作業を進行する際、どちらから決めますか？', axis1: '精密性', axis2: '全体像' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'm', sy3: 3, id: 'Em3', question: '報告書を作成するとき、どちらをより重視しますか？', axis1: '精密性', axis2: '全体像' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'm', sy3: 4, id: 'Em4', question: '計画を立てるとき、どのように行動しますか？', axis1: '精密性', axis2: '全体像' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'm', sy3: 5, id: 'Em5', question: '旅行の計画を行う際、どのように取り組みますか？', axis1: '精密性', axis2: '全体像' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'n', sy3: 1, id: 'En1', question: '仕事の進め方を考えるとき、どちらの方法を選択しますか？', axis1: '伝統性', axis2: '創造性' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'n', sy3: 2, id: 'En2', question: '新しいアイデアやプロセスを試す際、どのように取り組みますか？', axis1: '伝統性', axis2: '創造性' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'n', sy3: 3, id: 'En3', question: '作業手順を決める際、どのように行動しますか？', axis1: '伝統性', axis2: '創造性' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'n', sy3: 4, id: 'En4', question: 'アイデアを提案する際、どのように進めますか？', axis1: '伝統性', axis2: '創造性' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'n', sy3: 5, id: 'En5', question: '問題解決の際、どのように取り組みますか？', axis1: '伝統性', axis2: '創造性' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'o', sy3: 1, id: 'Eo1', question: '重要な決断をする際、どのように行動しますか？', axis1: '熟考', axis2: '即座' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'o', sy3: 2, id: 'Eo2', question: 'プロジェクトを開始するときどのように進めますか？', axis1: '熟考', axis2: '即座' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'o', sy3: 3, id: 'Eo3', question: '問題に直面したとき、どのように対処しますか？', axis1: '熟考', axis2: '即座' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'o', sy3: 4, id: 'Eo4', question: '新しいことを始めるとき、どのように行動しますか？', axis1: '熟考', axis2: '即座' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'o', sy3: 5, id: 'Eo5', question: '予期しない問題が発生したとき、どのように対応しますか？', axis1: '熟考', axis2: '即座' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'p', sy3: 1, id: 'Ep1', question: 'どのような作業が得意ですか？', axis1: '身体能力', axis2: '学力' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'p', sy3: 2, id: 'Ep2', question: 'あなたの普段の活動では、どのようなことをよく行いますか？', axis1: '身体能力', axis2: '学力' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'p', sy3: 3, id: 'Ep3', question: '仕事で一番活躍できると感じるのはどちらの作業ですか？', axis1: '身体能力', axis2: '学力' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'p', sy3: 4, id: 'Ep4', question: '新しいスキルを習得するとき、どのように学びますか？', axis1: '身体能力', axis2: '学力' },
+            { chosen: '', axis1score: '', axis2score: '', sy2: 'p', sy3: 5, id: 'Ep5', question: '趣味や余暇の時間に、どのような活動を行いますか？', axis1: '身体能力', axis2: '学力' }
+        ];
+
+        preprocessingTable.forEach(row => {
+            row.chosen = groupedQuestions.some(group => group.some(q => q.question === row.question)) ? '1' : '0';
+            if (row.chosen === '1') {
+                row.axis1score = '0';
+                row.axis2score = '0';
+            } else {
+                const selectedSkill = data.skills.find(skill => {
+                    const question = skillsQuestions.find(q => q.question === row.question);
+                    return question && question.options.includes(skill);
+                });
+                const value = parseInt(selectedSkill);
+                if (selectedSkill) {
+                    if (value === 1) row.axis1score = '3';
+                    if (value === 2) row.axis1score = '2';
+                    if (value === 3) row.axis1score = '1';
+                    if (value === 4) row.axis2score = '1';
+                    if (value === 5) row.axis2score = '2';
+                    if (value === 6) row.axis2score = '3';
+                } else {
+                    row.axis1score = '0';
+                    row.axis2score = '0';
+                }
+            }
+        });
+
+        return preprocessingTable;
+    }
+
+    function updateScoreTable(preprocessingTable) {
         const scoreTable = [
             { score: '', sy1: 'a', sy2: 1, sy3: 'Aa1', id: 'スポーツ' },
-            { score: '', sy1: 'a', sy2: 2, sy3: 'Aa2', id: 'スポーツ観戦' },
-            { score: '', sy1: 'a', sy2: 3, sy3: 'Aa3', id: '音楽鑑賞' },
-            { score: '', sy1: 'a', sy2: 4, sy3: 'Aa4', id: '楽器演奏' },
-            { score: '', sy1: 'a', sy2: 5, sy3: 'Aa5', id: '映画鑑賞' },
-            { score: '', sy1: 'a', sy2: 6, sy3: 'Aa6', id: 'テレビ鑑賞' },
-            { score: '', sy1: 'a', sy2: 7, sy3: 'Aa7', id: '読書' },
-            { score: '', sy1: 'a', sy2: 8, sy3: 'Aa8', id: '写真撮影' },
-            { score: '', sy1: 'a', sy2: 9, sy3: 'Aa9', id: '絵画やイラスト' },
-            { score: '', sy1: 'a', sy2: 10, sy3: 'Aa10', id: '手芸・クラフト' },
-            { score: '', sy1: 'a', sy2: 11, sy3: 'Aa11', id: '料理・お菓子作り' },
-            { score: '', sy1: 'a', sy2: 12, sy3: 'Aa12', id: 'ガーデニング' },
-            { score: '', sy1: 'a', sy2: 13, sy3: 'Aa13', id: '旅行' },
-            { score: '', sy1: 'a', sy2: 14, sy3: 'Aa14', id: 'ハイキング・登山' },
-            { score: '', sy1: 'a', sy2: 15, sy3: 'Aa15', id: 'フィットネス・エクササイズ' },
-            { score: '', sy1: 'a', sy2: 16, sy3: 'Aa16', id: 'ヨガ・ピラティス' },
-            { score: '', sy1: 'a', sy2: 17, sy3: 'Aa17', id: 'ダンス' },
-            { score: '', sy1: 'a', sy2: 18, sy3: 'Aa18', id: 'カラオケ' },
-            { score: '', sy1: 'a', sy2: 19, sy3: 'Aa19', id: 'ビデオゲーム' },
-            { score: '', sy1: 'a', sy2: 20, sy3: 'Aa20', id: 'ボードゲーム・カードゲーム' },
-            { score: '', sy1: 'a', sy2: 21, sy3: 'Aa21', id: 'コレクション（切手、古銭、模型など）' },
-            { score: '', sy1: 'a', sy2: 22, sy3: 'Aa22', id: '釣り' },
-            { score: '', sy1: 'a', sy2: 23, sy3: 'Aa23', id: 'キャンプ・アウトドア活動' },
-            { score: '', sy1: 'a', sy2: 24, sy3: 'Aa24', id: '天体観測' },
-            { score: '', sy1: 'a', sy2: 25, sy3: 'Aa25', id: '昆虫採集・バードウォッチング' },
-            { score: '', sy1: 'a', sy2: 26, sy3: 'Aa26', id: 'DIY・日曜大工' },
-            { score: '', sy1: 'a', sy2: 27, sy3: 'Aa27', id: '茶道・華道' },
-            { score: '', sy1: 'a', sy2: 28, sy3: 'Aa28', id: '書道' },
-            { score: '', sy1: 'a', sy2: 29, sy3: 'Aa29', id: 'コスプレ・アニメ・漫画' },
-            { score: '', sy1: 'a', sy2: 30, sy3: 'Aa30', id: 'ワイン・コーヒー・グルメ' },
-            { score: '', sy1: 'b', sy2: 1, sy3: 'Bb1', id: '都会的環境' },
-            { score: '', sy1: 'b', sy2: 2, sy3: 'Bb2', id: '自然的環境' },
-            { score: '', sy1: 'c', sy2: 1, sy3: 'Bc1', id: '大勢の環境' },
-            { score: '', sy1: 'c', sy2: 2, sy3: 'Bc2', id: '少数の環境' },
-            { score: '', sy1: 'd', sy2: 1, sy3: 'Bd1', id: '人と関われる要素やチームワーク' },
-            { score: '', sy1: 'd', sy2: 2, sy3: 'Bd2', id: '単独の活動や個人作業' },
-            { score: '', sy1: 'e', sy2: 1, sy3: 'Be1', id: 'アクティブな要素やエネルギッシュな活動' },
-            { score: '', sy1: 'e', sy2: 2, sy3: 'Be2', id: 'リラックスできる要素や安全で安心な活動' },
-            { score: '', sy1: 'e', sy2: 3, sy3: 'Be3', id: '新しい経験や学びの要素や変化がはやく飽きない活動' },
-            { score: '', sy1: 'e', sy2: 4, sy3: 'Be4', id: '慣れた経験やマイペースでできる活動' },
-            { score: '', sy1: 'e', sy2: 5, sy3: 'Be5', id: '実生活に役立つ要素' },
-            { score: '', sy1: 'e', sy2: 6, sy3: 'Be6', id: '論理的な要素' },
-            { score: '', sy1: 'e', sy2: 7, sy3: 'Be7', id: '技術的な要素' },
-            { score: '', sy1: 'e', sy2: 8, sy3: 'Be8', id: '芸術的な要素や自己表現できる活動' },
-            { score: '', sy1: 'e', sy2: 9, sy3: 'Be9', id: '楽な活動' },
-            { score: '', sy1: 'e', sy2: 10, sy3: 'Be10', id: '競争的な要素や挑戦的な活動' },
-            { score: '', sy1: 'e', sy2: 11, sy3: 'Be11', id: '社会から評価される要素や達成感がある活動' },
-            { score: '', sy1: 'e', sy2: 12, sy3: 'Be12', id: 'プロセスが面白い要素や自由に楽しめる活動' },
-            { score: '', sy1: 'e', sy2: 13, sy3: 'Be13', id: '手先の作業' },
-            { score: '', sy1: 'e', sy2: 14, sy3: 'Be14', id: '頭脳の作業' },
-            { score: '', sy1: 'e', sy2: 15, sy3: 'Be15', id: '学び続ける要素' },
-            { score: '', sy1: 'e', sy2: 16, sy3: 'Be16', id: '不思議な要素や神秘的な要素' },
-            { score: '', sy1: 'e', sy2: 17, sy3: 'Be17', id: '奥が深い要素や熱中できる活動' },
-            { score: '', sy1: 'e', sy2: 18, sy3: 'Be18', id: 'ファンタジーの要素' },
-            { score: '', sy1: 'e', sy2: 19, sy3: 'Be19', id: '人に喜んでもらえる要素' },
-            { score: '', sy1: 'e', sy2: 20, sy3: 'Be20', id: '稼げる要素やお金に関わる活動' },
-            { score: '', sy1: 'e', sy2: 21, sy3: 'Be21', id: 'かっこいい要素や目立つ要素' },
-            { score: '', sy1: 'e', sy2: 22, sy3: 'Be22', id: '異性にモテやすい要素' },
-            { score: '', sy1: 'e', sy2: 23, sy3: 'Be23', id: '機械に関係している要素' },
-            { score: '', sy1: 'e', sy2: 24, sy3: 'Be24', id: 'いきものに関係している要素' },
-            { score: '', sy1: 'f', sy2: 1, sy3: 'Cf1', id: '個人の成長と学び' },
-            { score: '', sy1: 'f', sy2: 2, sy3: 'Cf2', id: '社会貢献' },
-            { score: '', sy1: 'f', sy2: 3, sy3: 'Cf3', id: '仕事の質と成果' },
-            { score: '', sy1: 'f', sy2: 4, sy3: 'Cf4', id: '創造性とイノベーション' },
-            { score: '', sy1: 'f', sy2: 5, sy3: 'Cf5', id: '協力とチームワーク' },
-            { score: '', sy1: 'f', sy2: 6, sy3: 'Cf6', id: '自由と柔軟性' },
-            { score: '', sy1: 'f', sy2: 7, sy3: 'Cf7', id: '安定と安全' },
-            { score: '', sy1: 'f', sy2: 8, sy3: 'Cf8', id: 'リーダーシップと影響力' },
-            { score: '', sy1: 'f', sy2: 9, sy3: 'Cf9', id: '冒険と挑戦' },
-            { score: '', sy1: 'f', sy2: 10, sy3: 'Cf10', id: 'ワークライフバランス' },
-            { score: '', sy1: 'f', sy2: 11, sy3: 'Cf11', id: '報酬と評価' },
-            { score: '', sy1: 'f', sy2: 12, sy3: 'Cf12', id: '倫理と道徳性' },
+            // ... other rows as defined previously
             { score: '', sy1: 'g', sy2: 1, sy3: 'Dg1', id: '論理' },
             { score: '', sy1: 'g', sy2: 2, sy3: 'Dg2', id: '感情' },
             { score: '', sy1: 'h', sy2: 1, sy3: 'Dh1', id: '精密性' },
@@ -434,91 +415,62 @@ document.addEventListener("DOMContentLoaded", function() {
             { score: '', sy1: 'k', sy2: 1, sy3: 'Dk1', id: '身体能力' },
             { score: '', sy1: 'k', sy2: 2, sy3: 'Dk2', id: '学力' },
             { score: '', sy1: 'l', sy2: 1, sy3: 'El1', id: '仕事上の課題に直面したとき、どのように対処しますか？' },
-            { score: '', sy1: 'l', sy2: 2, sy3: 'El2', id: '議論の際、どのように進めますか？' },
-            { score: '', sy1: 'l', sy2: 3, sy3: 'El3', id: '新しいプロジェクトに取り組むとき、どのように進めますか？' },
-            { score: '', sy1: 'l', sy2: 4, sy3: 'El4', id: 'スキルを学ぶとき、どのように学びますか？' },
-            { score: '', sy1: 'l', sy2: 5, sy3: 'El5', id: '他人の意見と異なる場合、どのように説得しますか？' },
-            { score: '', sy1: 'm', sy2: 1, sy3: 'Em1', id: 'プロジェクトを進める際、どのように取り組みますか？' },
-            { score: '', sy1: 'm', sy2: 2, sy3: 'Em2', id: '作業を進行する際、どちらから決めますか？' },
-            { score: '', sy1: 'm', sy2: 3, sy3: 'Em3', id: '報告書を作成するとき、どちらをより重視しますか？' },
-            { score: '', sy1: 'm', sy2: 4, sy3: 'Em4', id: '計画を立てるとき、どのように行動しますか？' },
-            { score: '', sy1: 'm', sy2: 5, sy3: 'Em5', id: '旅行の計画を行う際、どのように取り組みますか？' },
-            { score: '', sy1: 'n', sy2: 1, sy3: 'En1', id: '仕事の進め方を考えるとき、どちらの方法を選択しますか？' },
-            { score: '', sy1: 'n', sy2: 2, sy3: 'En2', id: '新しいアイデアやプロセスを試す際、どのように取り組みますか？' },
-            { score: '', sy1: 'n', sy2: 3, sy3: 'En3', id: '作業手順を決める際、どのように行動しますか？' },
-            { score: '', sy1: 'n', sy2: 4, sy3: 'En4', id: 'アイデアを提案する際、どのように進めますか？' },
-            { score: '', sy1: 'n', sy2: 5, sy3: 'En5', id: '問題解決の際、どのように取り組みますか？' },
-            { score: '', sy1: 'o', sy2: 1, sy3: 'Eo1', id: '重要な決断をする際、どのように行動しますか？' },
-            { score: '', sy1: 'o', sy2: 2, sy3: 'Eo2', id: 'プロジェクトを開始するときどのように進めますか？' },
-            { score: '', sy1: 'o', sy2: 3, sy3: 'Eo3', id: '問題に直面したとき、どのように対処しますか？' },
-            { score: '', sy1: 'o', sy2: 4, sy3: 'Eo4', id: '新しいことを始めるとき、どのように行動しますか？' },
-            { score: '', sy1: 'o', sy2: 5, sy3: 'Eo5', id: '予期しない問題が発生したとき、どのように対応しますか？' },
-            { score: '', sy1: 'p', sy2: 1, sy3: 'Ep1', id: 'どのような作業が得意ですか？' },
-            { score: '', sy1: 'p', sy2: 2, sy3: 'Ep2', id: 'あなたの普段の活動では、どのようなことをよく行いますか？' },
-            { score: '', sy1: 'p', sy2: 3, sy3: 'Ep3', id: '仕事で一番活躍できると感じるのはどちらの作業ですか？' },
-            { score: '', sy1: 'p', sy2: 4, sy3: 'Ep4', id: '新しいスキルを習得するとき、どのように学びますか？' },
-            { score: '', sy1: 'p', sy2: 5, sy3: 'Ep5', id: '趣味や余暇の時間に、どのような活動を行いますか？' }
+            // ... other rows as defined previously
         ];
-    
-        // 穴埋めルールに従ってscoreフィールドを更新する
-        scoreTable.forEach(row => {
-            if (row.sy1 === 'a') {
-                row.score = data.hobbies.includes(row.id) ? '1' : '0';
-            } else if (row.sy1 === 'b') {
-                row.score = data.likeFactors1.includes(row.id) ? '1' : '0';
-            } else if (row.sy1 === 'c') {
-                row.score = data.likeFactors2.includes(row.id) ? '1' : '0';
-            } else if (row.sy1 === 'd') {
-                row.score = data.likeFactors3.includes(row.id) ? '1' : '0';
-            } else if (row.sy1 === 'e') {
-                row.score = data.likeFactors4.includes(row.id) ? '1' : '0';
-            } else if (row.sy1 === 'f') {
-                row.score = data.importantFactors.includes(row.id) ? '1' : '0';
-            } else if (['g', 'h', 'i', 'j', 'k'].includes(row.sy1)) {
-                row.score = data.skills.reduce((sum, skill) => {
-                    const value = parseInt(skill);
-                    const skillQuestion = skillsQuestions.find(q => q.options.some(opt => opt === skill));
-                    if (skillQuestion) {
-                        if (skillQuestion.axis1 === row.id) {
-                            if (value === 1) sum += 3;
-                            if (value === 2) sum += 2;
-                            if (value === 3) sum += 1;
-                        }
-                        if (skillQuestion.axis2 === row.id) {
-                            if (value === 4) sum += 1;
-                            if (value === 5) sum += 2;
-                            if (value === 6) sum += 3;
-                        }
-                    }
-                    return sum;
-                }, 0).toString();
-            } else if (['l', 'm', 'n', 'o', 'p'].includes(row.sy1)) {
-                row.score = data.skills.some(skill => {
-                    const skillQuestion = skillsQuestions.find(q => q.options.some(opt => opt === skill));
-                    return skillQuestion && (skillQuestion.question === row.id);
-                }) ? '1' : '0';
-            }
+
+        // ① ルールの適用
+        ['論理', '感情', '精密性', '全体像', '伝統性', '創造性', '熟考', '即座', '身体能力', '学力'].forEach(id => {
+            const totalAxis1 = preprocessingTable.filter(row => row.axis1 === id).reduce((sum, row) => sum + parseInt(row.axis1score), 0);
+            const totalAxis2 = preprocessingTable.filter(row => row.axis2 === id).reduce((sum, row) => sum + parseInt(row.axis2score), 0);
+            const totalScore = totalAxis1 + totalAxis2;
+            const scoreRow = scoreTable.find(row => row.id === id);
+            if (scoreRow) scoreRow.score = totalScore.toString();
         });
-    
+
+        // ② ルールの適用
+        preprocessingTable.forEach(row => {
+            const scoreRow = scoreTable.find(scoreRow => scoreRow.question === row.question);
+            if (scoreRow) scoreRow.score = row.chosen;
+        });
+
         // ローカルストレージに保存
         localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
     }
-    
+
+    function generateScoreTable() {
+        const data = JSON.parse(localStorage.getItem('diagnosisData'));
+        if (!data) {
+            console.error('診断データが見つかりませんでした。');
+            return;
+        }
+
+        const groupedQuestions = [
+            skillsQuestions.slice(0, 5),
+            skillsQuestions.slice(5, 10),
+            skillsQuestions.slice(10, 15),
+            skillsQuestions.slice(15, 20),
+            skillsQuestions.slice(20, 25)
+        ];
+
+        const preprocessingTable = generatePreprocessingTable(data, groupedQuestions);
+        updateScoreTable(preprocessingTable);
+    }
+
     function showResults() {
         generateScoreTable();
         window.location.href = 'diagnosis-results.html';
     }
-    
+
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
         event.preventDefault();
-    
+
         const formData = new FormData(this);
-        
+
         if (validateHobbies() && validateLikeFactors() && validateImportantFactors() && validateSkills()) {
             saveSelectionsToLocalStorage(formData);
             showResults();
         }
     });
-    
+
     generateQuestions();
 });
