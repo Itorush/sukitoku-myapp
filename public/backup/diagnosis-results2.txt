@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>診断結果</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="results.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>診断結果</h1>
+    </header>
+    <main>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Score</th>
+                    <th>sy1</th>
+                    <th>sy2</th>
+                    <th>sy3</th>
+                    <th>ID</th>
+                    <th>日本語要素名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 結果がここに表示されます -->
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

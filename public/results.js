@@ -1,8 +1,39 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const resultsTableBody = document.querySelector('#resultsTable tbody');
-    const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
+    function displayPreprocessingResults() {
+        const preprocessingResultsBody = document.getElementById('preprocessingResultsBody');
+        const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable'));
+        
+        if (!preprocessingTable) {
+            console.error('前処理結果が見つかりませんでした。');
+            return;
+        }
 
-    if (scoreTable) {
+        preprocessingTable.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.chosen}</td>
+                <td>${row.axis1score}</td>
+                <td>${row.axis2score}</td>
+                <td>${row.sy2}</td>
+                <td>${row.sy3}</td>
+                <td>${row.id}</td>
+                <td>${row.question}</td>
+                <td>${row.axis1}</td>
+                <td>${row.axis2}</td>
+            `;
+            preprocessingResultsBody.appendChild(tr);
+        });
+    }
+
+    function displayScoreResults() {
+        const scoreResultsBody = document.getElementById('scoreResultsBody');
+        const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
+        
+        if (!scoreTable) {
+            console.error('スコア結果が見つかりませんでした。');
+            return;
+        }
+
         scoreTable.forEach(row => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
@@ -11,11 +42,11 @@ document.addEventListener("DOMContentLoaded", function() {
                 <td>${row.sy2}</td>
                 <td>${row.sy3}</td>
                 <td>${row.id}</td>
-                <td>${row['日本語要素名']}</td>
             `;
-            resultsTableBody.appendChild(tr);
+            scoreResultsBody.appendChild(tr);
         });
-    } else {
-        console.error('診断結果が見つかりませんでした。');
     }
+
+    displayPreprocessingResults();
+    displayScoreResults();
 });

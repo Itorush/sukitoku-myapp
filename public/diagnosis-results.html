@@ -5,28 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>診断結果</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="results.js" defer></script>
 </head>
 <body>
     <header>
         <h1>診断結果</h1>
     </header>
     <main>
-        <table id="resultsTable">
-            <thead>
-                <tr>
-                    <th>Score</th>
-                    <th>sy1</th>
-                    <th>sy2</th>
-                    <th>sy3</th>
-                    <th>ID</th>
-                    <th>日本語要素名</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- 結果がここに表示されます -->
-            </tbody>
-        </table>
+        <section id="preprocessingResults">
+            <h2>前処理結果</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Chosen</th>
+                        <th>Axis1 Score</th>
+                        <th>Axis2 Score</th>
+                        <th>SY2</th>
+                        <th>SY3</th>
+                        <th>ID</th>
+                        <th>Question</th>
+                        <th>Axis1</th>
+                        <th>Axis2</th>
+                    </tr>
+                </thead>
+                <tbody id="preprocessingResultsBody">
+                    <!-- 前処理結果がここに表示されます -->
+                </tbody>
+            </table>
+        </section>
+        <section id="scoreResults">
+            <h2>スコア結果</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Score</th>
+                        <th>SY1</th>
+                        <th>SY2</th>
+                        <th>SY3</th>
+                        <th>ID</th>
+                    </tr>
+                </thead>
+                <tbody id="scoreResultsBody">
+                    <!-- スコア結果がここに表示されます -->
+                </tbody>
+            </table>
+        </section>
     </main>
+    <script src="results.js"></script>
 </body>
 </html>

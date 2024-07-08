@@ -538,9 +538,11 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
         const preprocessingTable = generatePreprocessingTable(data, skillsQuestions);
+        localStorage.setItem('preprocessingTable', JSON.stringify(preprocessingTable));
         generateScoreTable(preprocessingTable, data);
         window.location.href = 'diagnosis-results.html';
     }
+    
 
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
         event.preventDefault();
