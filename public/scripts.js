@@ -353,7 +353,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const warning = document.getElementById('importantFactorsWarning');
         
         if (selectedImportantFactors.length < 1 || selectedImportantFactors.length > 3) {
-            warning.textContent = '大事にしたいことは1つ以上3つ以内で選択してください。';
+            warning.textContent = '仕事を選ぶうえで大事にしたいことは1つ以上3つ以内で選択してください。';
             return false;
         } else {
             warning.textContent = '';

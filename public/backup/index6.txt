@@ -30,7 +30,7 @@
             </div>
         </section>
     </main>
-    <footer class="footer">
+    <footer>
         <div class="container">
             <p>&copy; 2024 好き得 仕事ナビ. All rights reserved.</p>
         </div>
