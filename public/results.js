@@ -110,24 +110,33 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
-            // 得意なこと option1
-            ...skillsQuestions.map(question => ({
-                score: data.skills.includes(question.option1) ? '1' : '0',
-                sy1: question.ax1_sy1,
-                sy2: question.ax1_sy2,
-                sy3: question.ax1_sy3,
-                id: question.ax1_id,
-                elementname: question.option1
-            })),
-            // 得意なこと option2
-            ...skillsQuestions.map(question => ({
-                score: data.skills.includes(question.option2) ? '1' : '0',
-                sy1: question.ax2_sy1,
-                sy2: question.ax2_sy2,
-                sy3: question.ax2_sy3,
-                id: question.ax2_id,
-                elementname: question.option2
-            }))
+            // 得意なこと（option1とoption2を含む）
+            ...preprocessingTable.flatMap(preprocess => [
+                {
+                    score: preprocess.chosen ? `${preprocess.axis1score}/${preprocess.axis2score}` : '0/0',
+                    sy1: preprocess.sy1,
+                    sy2: preprocess.sy2,
+                    sy3: preprocess.sy3,
+                    id: preprocess.id,
+                    elementname: preprocess.elementname
+                },
+                {
+                    score: preprocess.chosen ? '1' : '0',
+                    sy1: preprocess.ax1_sy1,
+                    sy2: preprocess.ax1_sy2,
+                    sy3: preprocess.ax1_sy3,
+                    id: preprocess.ax1_id,
+                    elementname: preprocess.option1
+                },
+                {
+                    score: preprocess.chosen ? '1' : '0',
+                    sy1: preprocess.ax2_sy1,
+                    sy2: preprocess.ax2_sy2,
+                    sy3: preprocess.ax2_sy3,
+                    id: preprocess.ax2_id,
+                    elementname: preprocess.option2
+                }
+            ])
         ];
 
         localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
@@ -135,4 +144,5 @@ document.addEventListener("DOMContentLoaded", function() {
 
     displayPreprocessingResults();
     displayScoreResults();
+    generateScoreTable();
 });
