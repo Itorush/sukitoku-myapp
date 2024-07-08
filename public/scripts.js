@@ -1,92 +1,92 @@
 document.addEventListener("DOMContentLoaded", function() {
     const hobbyOptions = [
-        { sy1: "a", sy2: "a", sy3: 1, id: "aa1", elementname: "スポーツ" },
-        { sy1: "a", sy2: "a", sy3: 2, id: "aa2", elementname: "スポーツ観戦" },
-        { sy1: "a", sy2: "a", sy3: 3, id: "aa3", elementname: "音楽鑑賞" },
-        { sy1: "a", sy2: "a", sy3: 4, id: "aa4", elementname: "楽器演奏" },
-        { sy1: "a", sy2: "a", sy3: 5, id: "aa5", elementname: "映画鑑賞" },
-        { sy1: "a", sy2: "a", sy3: 6, id: "aa6", elementname: "テレビ鑑賞" },
-        { sy1: "a", sy2: "a", sy3: 7, id: "aa7", elementname: "読書" },
-        { sy1: "a", sy2: "a", sy3: 8, id: "aa8", elementname: "写真撮影" },
-        { sy1: "a", sy2: "a", sy3: 9, id: "aa9", elementname: "絵画やイラスト" },
-        { sy1: "a", sy2: "a", sy3: 10, id: "aa10", elementname: "手芸・クラフト" },
-        { sy1: "a", sy2: "a", sy3: 11, id: "aa11", elementname: "料理・お菓子作り" },
-        { sy1: "a", sy2: "a", sy3: 12, id: "aa12", elementname: "ガーデニング" },
-        { sy1: "a", sy2: "a", sy3: 13, id: "aa13", elementname: "旅行" },
-        { sy1: "a", sy2: "a", sy3: 14, id: "aa14", elementname: "ハイキング・登山" },
-        { sy1: "a", sy2: "a", sy3: 15, id: "aa15", elementname: "フィットネス・エクササイズ" },
-        { sy1: "a", sy2: "a", sy3: 16, id: "aa16", elementname: "ヨガ・ピラティス" },
-        { sy1: "a", sy2: "a", sy3: 17, id: "aa17", elementname: "ダンス" },
-        { sy1: "a", sy2: "a", sy3: 18, id: "aa18", elementname: "カラオケ" },
-        { sy1: "a", sy2: "a", sy3: 19, id: "aa19", elementname: "ビデオゲーム" },
-        { sy1: "a", sy2: "a", sy3: 20, id: "aa20", elementname: "ボードゲーム・カードゲーム" },
-        { sy1: "a", sy2: "a", sy3: 21, id: "aa21", elementname: "コレクション（切手、古銭、模型など）" },
-        { sy1: "a", sy2: "a", sy3: 22, id: "aa22", elementname: "釣り" },
-        { sy1: "a", sy2: "a", sy3: 23, id: "aa23", elementname: "キャンプ・アウトドア活動" },
-        { sy1: "a", sy2: "a", sy3: 24, id: "aa24", elementname: "天体観測" },
-        { sy1: "a", sy2: "a", sy3: 25, id: "aa25", elementname: "昆虫採集・バードウォッチング" },
-        { sy1: "a", sy2: "a", sy3: 26, id: "aa26", elementname: "DIY・日曜大工" },
-        { sy1: "a", sy2: "a", sy3: 27, id: "aa27", elementname: "茶道・華道" },
-        { sy1: "a", sy2: "a", sy3: 28, id: "aa28", elementname: "書道" },
-        { sy1: "a", sy2: "a", sy3: 29, id: "aa29", elementname: "コスプレ・アニメ・漫画" },
-        { sy1: "a", sy2: "a", sy3: 30, id: "aa30", elementname: "ワイン・コーヒー・グルメ" }
+        { sy1: 'a', sy2: 'a', sy3: 1, id: 'aa1', elementname: 'スポーツ' },
+        { sy1: 'a', sy2: 'a', sy3: 2, id: 'aa2', elementname: 'スポーツ観戦' },
+        { sy1: 'a', sy2: 'a', sy3: 3, id: 'aa3', elementname: '音楽鑑賞' },
+        { sy1: 'a', sy2: 'a', sy3: 4, id: 'aa4', elementname: '楽器演奏' },
+        { sy1: 'a', sy2: 'a', sy3: 5, id: 'aa5', elementname: '映画鑑賞' },
+        { sy1: 'a', sy2: 'a', sy3: 6, id: 'aa6', elementname: 'テレビ鑑賞' },
+        { sy1: 'a', sy2: 'a', sy3: 7, id: 'aa7', elementname: '読書' },
+        { sy1: 'a', sy2: 'a', sy3: 8, id: 'aa8', elementname: '写真撮影' },
+        { sy1: 'a', sy2: 'a', sy3: 9, id: 'aa9', elementname: '絵画やイラスト' },
+        { sy1: 'a', sy2: 'a', sy3: 10, id: 'aa10', elementname: '手芸・クラフト' },
+        { sy1: 'a', sy2: 'a', sy3: 11, id: 'aa11', elementname: '料理・お菓子作り' },
+        { sy1: 'a', sy2: 'a', sy3: 12, id: 'aa12', elementname: 'ガーデニング' },
+        { sy1: 'a', sy2: 'a', sy3: 13, id: 'aa13', elementname: '旅行' },
+        { sy1: 'a', sy2: 'a', sy3: 14, id: 'aa14', elementname: 'ハイキング・登山' },
+        { sy1: 'a', sy2: 'a', sy3: 15, id: 'aa15', elementname: 'フィットネス・エクササイズ' },
+        { sy1: 'a', sy2: 'a', sy3: 16, id: 'aa16', elementname: 'ヨガ・ピラティス' },
+        { sy1: 'a', sy2: 'a', sy3: 17, id: 'aa17', elementname: 'ダンス' },
+        { sy1: 'a', sy2: 'a', sy3: 18, id: 'aa18', elementname: 'カラオケ' },
+        { sy1: 'a', sy2: 'a', sy3: 19, id: 'aa19', elementname: 'ビデオゲーム' },
+        { sy1: 'a', sy2: 'a', sy3: 20, id: 'aa20', elementname: 'ボードゲーム・カードゲーム' },
+        { sy1: 'a', sy2: 'a', sy3: 21, id: 'aa21', elementname: 'コレクション（切手、古銭、模型など）' },
+        { sy1: 'a', sy2: 'a', sy3: 22, id: 'aa22', elementname: '釣り' },
+        { sy1: 'a', sy2: 'a', sy3: 23, id: 'aa23', elementname: 'キャンプ・アウトドア活動' },
+        { sy1: 'a', sy2: 'a', sy3: 24, id: 'aa24', elementname: '天体観測' },
+        { sy1: 'a', sy2: 'a', sy3: 25, id: 'aa25', elementname: '昆虫採集・バードウォッチング' },
+        { sy1: 'a', sy2: 'a', sy3: 26, id: 'aa26', elementname: 'DIY・日曜大工' },
+        { sy1: 'a', sy2: 'a', sy3: 27, id: 'aa27', elementname: '茶道・華道' },
+        { sy1: 'a', sy2: 'a', sy3: 28, id: 'aa28', elementname: '書道' },
+        { sy1: 'a', sy2: 'a', sy3: 29, id: 'aa29', elementname: 'コスプレ・アニメ・漫画' },
+        { sy1: 'a', sy2: 'a', sy3: 30, id: 'aa30', elementname: 'ワイン・コーヒー・グルメ' }
     ];
 
     const likeFactorsOptions1 = [
-        { sy1: "i", sy2: "b", sy3: 1, id: "ib1", elementname: "都会的環境" },
-        { sy1: "i", sy2: "b", sy3: 2, id: "ib2", elementname: "自然的環境" }
+        { sy1: 'i', sy2: 'b', sy3: 1, id: 'ib1', elementname: '都会的環境' },
+        { sy1: 'i', sy2: 'b', sy3: 2, id: 'ib2', elementname: '自然的環境' }
     ];
 
     const likeFactorsOptions2 = [
-        { sy1: "i", sy2: "c", sy3: 1, id: "ic1", elementname: "大勢の環境" },
-        { sy1: "i", sy2: "c", sy3: 2, id: "ic2", elementname: "少数の環境" }
+        { sy1: 'i', sy2: 'c', sy3: 1, id: 'ic1', elementname: '大勢の環境' },
+        { sy1: 'i', sy2: 'c', sy3: 2, id: 'ic2', elementname: '少数の環境' }
     ];
 
     const likeFactorsOptions3 = [
-        { sy1: "i", sy2: "d", sy3: 1, id: "id1", elementname: "人と関われる要素やチームワーク" },
-        { sy1: "i", sy2: "d", sy3: 2, id: "id2", elementname: "単独の活動や個人作業" }
+        { sy1: 'i', sy2: 'd', sy3: 1, id: 'id1', elementname: '人と関われる要素やチームワーク' },
+        { sy1: 'i', sy2: 'd', sy3: 2, id: 'id2', elementname: '単独の活動や個人作業' }
     ];
 
     const likeFactorsOptions4 = [
-        { sy1: "i", sy2: "e", sy3: 1, id: "ie1", elementname: "アクティブな要素やエネルギッシュな活動" },
-        { sy1: "i", sy2: "e", sy3: 2, id: "ie2", elementname: "リラックスできる要素や安全で安心な活動" },
-        { sy1: "i", sy2: "e", sy3: 3, id: "ie3", elementname: "新しい経験や学びの要素や変化がはやく飽きない活動" },
-        { sy1: "i", sy2: "e", sy3: 4, id: "ie4", elementname: "慣れた経験やマイペースでできる活動" },
-        { sy1: "i", sy2: "e", sy3: 5, id: "ie5", elementname: "実生活に役立つ要素" },
-        { sy1: "i", sy2: "e", sy3: 6, id: "ie6", elementname: "論理的な要素" },
-        { sy1: "i", sy2: "e", sy3: 7, id: "ie7", elementname: "技術的な要素" },
-        { sy1: "i", sy2: "e", sy3: 8, id: "ie8", elementname: "芸術的な要素や自己表現できる活動" },
-        { sy1: "i", sy2: "e", sy3: 9, id: "ie9", elementname: "楽な活動" },
-        { sy1: "i", sy2: "e", sy3: 10, id: "ie10", elementname: "競争的な要素や挑戦的な活動" },
-        { sy1: "i", sy2: "e", sy3: 11, id: "ie11", elementname: "社会から評価される要素や達成感がある活動" },
-        { sy1: "i", sy2: "e", sy3: 12, id: "ie12", elementname: "プロセスが面白い要素や自由に楽しめる活動" },
-        { sy1: "i", sy2: "e", sy3: 13, id: "ie13", elementname: "手先の作業" },
-        { sy1: "i", sy2: "e", sy3: 14, id: "ie14", elementname: "頭脳の作業" },
-        { sy1: "i", sy2: "e", sy3: 15, id: "ie15", elementname: "学び続ける要素" },
-        { sy1: "i", sy2: "e", sy3: 16, id: "ie16", elementname: "不思議な要素や神秘的な要素" },
-        { sy1: "i", sy2: "e", sy3: 17, id: "ie17", elementname: "奥が深い要素や熱中できる活動" },
-        { sy1: "i", sy2: "e", sy3: 18, id: "ie18", elementname: "ファンタジーの要素" },
-        { sy1: "i", sy2: "e", sy3: 19, id: "ie19", elementname: "人に喜んでもらえる要素" },
-        { sy1: "i", sy2: "e", sy3: 20, id: "ie20", elementname: "稼げる要素やお金に関わる活動" },
-        { sy1: "i", sy2: "e", sy3: 21, id: "ie21", elementname: "かっこいい要素や目立つ要素" },
-        { sy1: "i", sy2: "e", sy3: 22, id: "ie22", elementname: "異性にモテやすい要素" },
-        { sy1: "i", sy2: "e", sy3: 23, id: "ie23", elementname: "機械に関係している要素" },
-        { sy1: "i", sy2: "e", sy3: 24, id: "ie24", elementname: "いきものに関係している要素" }
+        { sy1: 'i', sy2: 'e', sy3: 1, id: 'ie1', elementname: 'アクティブな要素やエネルギッシュな活動' },
+        { sy1: 'i', sy2: 'e', sy3: 2, id: 'ie2', elementname: 'リラックスできる要素や安全で安心な活動' },
+        { sy1: 'i', sy2: 'e', sy3: 3, id: 'ie3', elementname: '新しい経験や学びの要素や変化がはやく飽きない活動' },
+        { sy1: 'i', sy2: 'e', sy3: 4, id: 'ie4', elementname: '慣れた経験やマイペースでできる活動' },
+        { sy1: 'i', sy2: 'e', sy3: 5, id: 'ie5', elementname: '実生活に役立つ要素' },
+        { sy1: 'i', sy2: 'e', sy3: 6, id: 'ie6', elementname: '論理的な要素' },
+        { sy1: 'i', sy2: 'e', sy3: 7, id: 'ie7', elementname: '技術的な要素' },
+        { sy1: 'i', sy2: 'e', sy3: 8, id: 'ie8', elementname: '芸術的な要素や自己表現できる活動' },
+        { sy1: 'i', sy2: 'e', sy3: 9, id: 'ie9', elementname: '楽な活動' },
+        { sy1: 'i', sy2: 'e', sy3: 10, id: 'ie10', elementname: '競争的な要素や挑戦的な活動' },
+        { sy1: 'i', sy2: 'e', sy3: 11, id: 'ie11', elementname: '社会から評価される要素や達成感がある活動' },
+        { sy1: 'i', sy2: 'e', sy3: 12, id: 'ie12', elementname: 'プロセスが面白い要素や自由に楽しめる活動' },
+        { sy1: 'i', sy2: 'e', sy3: 13, id: 'ie13', elementname: '手先の作業' },
+        { sy1: 'i', sy2: 'e', sy3: 14, id: 'ie14', elementname: '頭脳の作業' },
+        { sy1: 'i', sy2: 'e', sy3: 15, id: 'ie15', elementname: '学び続ける要素' },
+        { sy1: 'i', sy2: 'e', sy3: 16, id: 'ie16', elementname: '不思議な要素や神秘的な要素' },
+        { sy1: 'i', sy2: 'e', sy3: 17, id: 'ie17', elementname: '奥が深い要素や熱中できる活動' },
+        { sy1: 'i', sy2: 'e', sy3: 18, id: 'ie18', elementname: 'ファンタジーの要素' },
+        { sy1: 'i', sy2: 'e', sy3: 19, id: 'ie19', elementname: '人に喜んでもらえる要素' },
+        { sy1: 'i', sy2: 'e', sy3: 20, id: 'ie20', elementname: '稼げる要素やお金に関わる活動' },
+        { sy1: 'i', sy2: 'e', sy3: 21, id: 'ie21', elementname: 'かっこいい要素や目立つ要素' },
+        { sy1: 'i', sy2: 'e', sy3: 22, id: 'ie22', elementname: '異性にモテやすい要素' },
+        { sy1: 'i', sy2: 'e', sy3: 23, id: 'ie23', elementname: '機械に関係している要素' },
+        { sy1: 'i', sy2: 'e', sy3: 24, id: 'ie24', elementname: 'いきものに関係している要素' }
     ];
 
     const importantFactorsOptions = [
-        { sy1: "u", sy2: "f", sy3: 1, id: "uf1", elementname: "個人の成長と学び" },
-        { sy1: "u", sy2: "f", sy3: 2, id: "uf2", elementname: "社会貢献" },
-        { sy1: "u", sy2: "f", sy3: 3, id: "uf3", elementname: "仕事の質と成果" },
-        { sy1: "u", sy2: "f", sy3: 4, id: "uf4", elementname: "創造性とイノベーション" },
-        { sy1: "u", sy2: "f", sy3: 5, id: "uf5", elementname: "協力とチームワーク" },
-        { sy1: "u", sy2: "f", sy3: 6, id: "uf6", elementname: "自由と柔軟性" },
-        { sy1: "u", sy2: "f", sy3: 7, id: "uf7", elementname: "安定と安全" },
-        { sy1: "u", sy2: "f", sy3: 8, id: "uf8", elementname: "リーダーシップと影響力" },
-        { sy1: "u", sy2: "f", sy3: 9, id: "uf9", elementname: "冒険と挑戦" },
-        { sy1: "u", sy2: "f", sy3: 10, id: "uf10", elementname: "ワークライフバランス" },
-        { sy1: "u", sy2: "f", sy3: 11, id: "uf11", elementname: "報酬と評価" },
-        { sy1: "u", sy2: "f", sy3: 12, id: "uf12", elementname: "倫理と道徳性" }
+        { sy1: 'u', sy2: 'f', sy3: 1, id: 'uf1', elementname: '個人の成長と学び' },
+        { sy1: 'u', sy2: 'f', sy3: 2, id: 'uf2', elementname: '社会貢献' },
+        { sy1: 'u', sy2: 'f', sy3: 3, id: 'uf3', elementname: '仕事の質と成果' },
+        { sy1: 'u', sy2: 'f', sy3: 4, id: 'uf4', elementname: '創造性とイノベーション' },
+        { sy1: 'u', sy2: 'f', sy3: 5, id: 'uf5', elementname: '協力とチームワーク' },
+        { sy1: 'u', sy2: 'f', sy3: 6, id: 'uf6', elementname: '自由と柔軟性' },
+        { sy1: 'u', sy2: 'f', sy3: 7, id: 'uf7', elementname: '安定と安全' },
+        { sy1: 'u', sy2: 'f', sy3: 8, id: 'uf8', elementname: 'リーダーシップと影響力' },
+        { sy1: 'u', sy2: 'f', sy3: 9, id: 'uf9', elementname: '冒険と挑戦' },
+        { sy1: 'u', sy2: 'f', sy3: 10, id: 'uf10', elementname: 'ワークライフバランス' },
+        { sy1: 'u', sy2: 'f', sy3: 11, id: 'uf11', elementname: '報酬と評価' },
+        { sy1: 'u', sy2: 'f', sy3: 12, id: 'uf12', elementname: '倫理と道徳性' }
     ];
 
     const skillsQuestions = [
@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const importantFactorsOptionsContainer = document.getElementById('importantFactorsOptions');
         const skillsQuestionsContainer = document.getElementById('skillsQuestions');
 
+        // 趣味の選択肢を生成
         hobbyOptions.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
@@ -145,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function() {
             hobbyOptionsContainer.appendChild(optionDiv);
         });
 
+        // 好きなことの要素を生成（1つ目のセット）
         likeFactorsOptions1.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
@@ -157,6 +159,7 @@ document.addEventListener("DOMContentLoaded", function() {
             likeFactorsOptionsContainer1.appendChild(optionDiv);
         });
 
+        // 好きなことの要素を生成（2つ目のセット）
         likeFactorsOptions2.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
@@ -169,6 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
             likeFactorsOptionsContainer2.appendChild(optionDiv);
         });
 
+        // 好きなことの要素を生成（3つ目のセット）
         likeFactorsOptions3.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
@@ -181,6 +185,7 @@ document.addEventListener("DOMContentLoaded", function() {
             likeFactorsOptionsContainer3.appendChild(optionDiv);
         });
 
+        // 好きなことの要素を生成（4つ目のセット）
         likeFactorsOptions4.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
@@ -193,6 +198,7 @@ document.addEventListener("DOMContentLoaded", function() {
             likeFactorsOptionsContainer4.appendChild(optionDiv);
         });
 
+        // 大事にしたいことの要素を生成
         importantFactorsOptions.forEach((option, index) => {
             const optionDiv = document.createElement('div');
             optionDiv.className = 'option';
@@ -205,6 +211,7 @@ document.addEventListener("DOMContentLoaded", function() {
             importantFactorsOptionsContainer.appendChild(optionDiv);
         });
 
+        // 得意なことの質問を生成
         const groupedQuestions = [
             skillsQuestions.slice(0, 5),
             skillsQuestions.slice(5, 10),
@@ -244,31 +251,17 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
                 <div class="buttons-container">
                     <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-1"><span></span></label>
+                    <label for="skill${index + 1}-1">${question.option1}</label>
                     <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-2"><span></span></label>
+                    <label for="skill${index + 1}-2">${question.option1}</label>
                     <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-3"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-4"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-5"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-6"><span></span></label>
-                </div>
-                    <div class="options-row">
-                    <div class="empty"></div>
-                    <div class="option">${question.option1}</div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="option">${question.option2}</div>
-                    <div class="empty"></div>
+                    <label for="skill${index + 1}-3">${question.option1}</label>
+                    <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis2}" data-axis2="${question.axis1}">
+                    <label for="skill${index + 1}-4">${question.option2}</label>
+                    <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis2}" data-axis2="${question.axis1}">
+                    <label for="skill${index + 1}-5">${question.option2}</label>
+                    <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis2}" data-axis2="${question.axis1}">
+                    <label for="skill${index + 1}-6">${question.option2}</label>
                 </div>
             `;
             skillsQuestionsContainer.appendChild(questionDiv);
@@ -283,30 +276,60 @@ document.addEventListener("DOMContentLoaded", function() {
         return array;
     }
 
-    function generatePreprocessingTable(data, selectedQuestions) {
-        const preprocessingTable = skillsQuestions.map(question => {
-            const isChosen = selectedQuestions.some(selected => selected.elementname === question.elementname);
-            const chosenScore = isChosen ? 1 : 0;
-            let axis1score = 0;
-            let axis2score = 0;
-
-            if (chosenScore === 1) {
-                const chosenValue = data.skills.find(skill => skill.includes(question.elementname));
-                if (chosenValue) {
-                    const value = parseInt(chosenValue.split(':')[1], 10);
-                    if (value === 1) axis1score = 3;
-                    else if (value === 2) axis1score = 2;
-                    else if (value === 3) axis1score = 1;
-                    else if (value === 4) axis2score = 1;
-                    else if (value === 5) axis2score = 2;
-                    else if (value === 6) axis2score = 3;
-                }
-            }
-
+    function collectAnswers() {
+        const hobbies = Array.from(document.querySelectorAll('input[name="hobbies"]:checked')).map(input => input.value);
+        const likeFactors1 = document.querySelector('input[name="likeFactors1"]:checked')?.value || '';
+        const likeFactors2 = document.querySelector('input[name="likeFactors2"]:checked')?.value || '';
+        const likeFactors3 = document.querySelector('input[name="likeFactors3"]:checked')?.value || '';
+        const likeFactors4 = Array.from(document.querySelectorAll('input[name="likeFactors4"]:checked')).map(input => input.value);
+        const importantFactors = Array.from(document.querySelectorAll('input[name="importantFactors"]:checked')).map(input => input.value);
+        const skills = Array.from(document.querySelectorAll('.buttons-container input:checked')).map(input => {
             return {
-                chosen: chosenScore,
-                axis1score: axis1score,
-                axis2score: axis2score,
+                value: parseInt(input.value),
+                axis1: input.dataset.axis1,
+                axis2: input.dataset.axis2
+            };
+        });
+
+        const answers = {
+            hobbies,
+            likeFactors1,
+            likeFactors2,
+            likeFactors3,
+            likeFactors4,
+            importantFactors,
+            skills
+        };
+
+        localStorage.setItem('answers', JSON.stringify(answers));
+    }
+
+    function showResults() {
+        const answers = JSON.parse(localStorage.getItem('answers'));
+        if (!answers) {
+            console.error('回答データが見つかりませんでした。');
+            return;
+        }
+
+        const preprocessingTable = generatePreprocessingTable(answers.skills);
+        const scoreTable = generateScoreTable(preprocessingTable);
+
+        localStorage.setItem('preprocessingTable', JSON.stringify(preprocessingTable));
+        localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
+
+        window.location.href = 'diagnosis-results.html';
+    }
+
+    function generatePreprocessingTable(skills) {
+        const preprocessingTable = skillsQuestions.map(question => {
+            const chosenSkill = skills.find(skill => skill.axis1 === question.axis1 && skill.axis2 === question.axis2);
+            const chosen = chosenSkill ? 1 : 0;
+            const axis1score = chosenSkill && chosenSkill.axis1 === question.axis1 ? chosenSkill.value : 0;
+            const axis2score = chosenSkill && chosenSkill.axis2 === question.axis2 ? chosenSkill.value : 0;
+            return {
+                chosen,
+                axis1score,
+                axis2score,
                 sy1: question.el_sy1,
                 sy2: question.el_sy2,
                 sy3: question.el_sy3,
@@ -314,99 +337,31 @@ document.addEventListener("DOMContentLoaded", function() {
                 elementname: question.elementname
             };
         });
-
         return preprocessingTable;
     }
 
-    function generateScoreTable(data, preprocessingTable) {
-        const scoreTable = [
-            // 趣味
-            ...hobbyOptions.map(option => ({
-                score: data.hobbies.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 好きなこと（likeFactorsOptions1）
-            ...likeFactorsOptions1.map(option => ({
-                score: data.likeFactors1.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 好きなこと（likeFactorsOptions2）
-            ...likeFactorsOptions2.map(option => ({
-                score: data.likeFactors2.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 好きなこと（likeFactorsOptions3）
-            ...likeFactorsOptions3.map(option => ({
-                score: data.likeFactors3.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 好きなこと（likeFactorsOptions4）
-            ...likeFactorsOptions4.map(option => ({
-                score: data.likeFactors4.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 大事にしたいこと
-            ...importantFactorsOptions.map(option => ({
-                score: data.importantFactors.includes(option.elementname) ? '1' : '0',
-                sy1: option.sy1,
-                sy2: option.sy2,
-                sy3: option.sy3,
-                id: option.id,
-                elementname: option.elementname
-            })),
-            // 得意なこと
-            ...preprocessingTable.map(preprocess => ({
-                score: preprocess.chosen ? `${preprocess.axis1score}/${preprocess.axis2score}` : '0/0',
-                sy1: preprocess.sy1,
-                sy2: preprocess.sy2,
-                sy3: preprocess.sy3,
-                id: preprocess.id,
-                elementname: preprocess.elementname
-            }))
-        ];
-
-        localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
+    function generateScoreTable(preprocessingTable) {
+        const scoreTable = preprocessingTable.map(row => {
+            return {
+                score: row.axis1score - row.axis2score,
+                sy1: row.sy1,
+                sy2: row.sy2,
+                sy3: row.sy3,
+                id: row.id,
+                elementname: row.elementname
+            };
+        });
+        return scoreTable;
     }
 
-    function showResults() {
-        const formData = JSON.parse(localStorage.getItem('diagnosisData'));
-        const selectedQuestions = skillsQuestions.filter(q => formData.skills.includes(q.elementname));
-
-        const preprocessingTable = generatePreprocessingTable(formData, selectedQuestions);
-        generateScoreTable(formData, preprocessingTable);
-        window.location.href = 'diagnosis-results.html';
-    }
-
-    document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-    
-        const formData = new FormData(this);
-        
-        if (validateHobbies() && validateLikeFactors() && validateImportantFactors() && validateSkills()) {
-            saveSelectionsToLocalStorage(formData);
-            showResults();
-        }
+    document.getElementById('startButton').addEventListener('click', function() {
+        showPhase(2);
     });
-    
+
+    document.getElementById('submitButton').addEventListener('click', function() {
+        collectAnswers();
+        showResults();
+    });
+
     generateQuestions();
 });

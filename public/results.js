@@ -1,32 +1,52 @@
 document.addEventListener("DOMContentLoaded", function() {
-    function displayResults() {
-        const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
-        if (!scoreTable) {
-            console.error('スコアデータが見つかりませんでした。');
+    function displayPreprocessingResults() {
+        const preprocessingResultsBody = document.getElementById('preprocessingResultsBody');
+        const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable'));
+        
+        if (!preprocessingTable) {
+            console.error('前処理結果が見つかりませんでした。');
             return;
         }
 
-        const resultsContainer = document.getElementById('resultsContainer');
-        
-        // タイトル行を追加
-        const headerDiv = document.createElement('div');
-        headerDiv.className = 'result-header';
-        headerDiv.innerHTML = `
-            <div class="elementname">項目</div>
-            <div class="score">スコア</div>
-        `;
-        resultsContainer.appendChild(headerDiv);
-
-        scoreTable.forEach(entry => {
-            const resultDiv = document.createElement('div');
-            resultDiv.className = 'result-entry';
-            resultDiv.innerHTML = `
-                <div class="elementname">${entry.elementname}</div>
-                <div class="score">${entry.score}</div>
+        preprocessingTable.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.chosen}</td>
+                <td>${row.axis1score}</td>
+                <td>${row.axis2score}</td>
+                <td>${row.sy1}</td>
+                <td>${row.sy2}</td>
+                <td>${row.sy3}</td>
+                <td>${row.id}</td>
+                <td>${row.elementname}</td>
             `;
-            resultsContainer.appendChild(resultDiv);
+            preprocessingResultsBody.appendChild(tr);
         });
     }
 
-    displayResults();
+    function displayScoreResults() {
+        const scoreResultsBody = document.getElementById('scoreResultsBody');
+        const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
+        
+        if (!scoreTable) {
+            console.error('スコア結果が見つかりませんでした。');
+            return;
+        }
+
+        scoreTable.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.score}</td>
+                <td>${row.sy1}</td>
+                <td>${row.sy2}</td>
+                <td>${row.sy3}</td>
+                <td>${row.id}</td>
+                <td>${row.elementname}</td>
+            `;
+            scoreResultsBody.appendChild(tr);
+        });
+    }
+
+    displayPreprocessingResults();
+    displayScoreResults();
 });
