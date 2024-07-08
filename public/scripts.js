@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('診断データが見つかりませんでした。');
             return;
         }
-
+    
         const scoreTable = [
             { score: '', sy1: 'a', sy2: 1, sy3: 'Aa1', id: 'スポーツ' },
             { score: '', sy1: 'a', sy2: 2, sy3: 'Aa2', id: 'スポーツ観戦' },
@@ -459,7 +459,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { score: '', sy1: 'p', sy2: 4, sy3: 'Ep4', id: '新しいスキルを習得するとき、どのように学びますか？' },
             { score: '', sy1: 'p', sy2: 5, sy3: 'Ep5', id: '趣味や余暇の時間に、どのような活動を行いますか？' }
         ];
-
+    
         // 穴埋めルールに従ってscoreフィールドを更新する
         scoreTable.forEach(row => {
             if (row.sy1 === 'a') {
@@ -476,35 +476,42 @@ document.addEventListener("DOMContentLoaded", function() {
                 row.score = data.importantFactors.includes(row.id) ? '1' : '0';
             } else if (['g', 'h', 'i', 'j', 'k'].includes(row.sy1)) {
                 row.score = data.skills.reduce((sum, skill) => {
-                    const value = parseInt(skill.value);
-                    if (skill.dataset.axis1 === row.id) {
-                        if (value <= 3) {
-                            sum += (4 - value);
+                    const value = parseInt(skill);
+                    const skillQuestion = skillsQuestions.find(q => q.options.some(opt => opt === skill));
+                    if (skillQuestion) {
+                        if (skillQuestion.axis1 === row.id) {
+                            if (value === 1) sum += 3;
+                            if (value === 2) sum += 2;
+                            if (value === 3) sum += 1;
                         }
-                    } else if (skill.dataset.axis2 === row.id) {
-                        if (value > 3) {
-                            sum += (value - 3);
+                        if (skillQuestion.axis2 === row.id) {
+                            if (value === 4) sum += 1;
+                            if (value === 5) sum += 2;
+                            if (value === 6) sum += 3;
                         }
                     }
                     return sum;
                 }, 0).toString();
             } else if (['l', 'm', 'n', 'o', 'p'].includes(row.sy1)) {
-                row.score = data.skills.some(skill => skill.dataset.axis1 === row.id || skill.dataset.axis2 === row.id) ? '1' : '0';
+                row.score = data.skills.some(skill => {
+                    const skillQuestion = skillsQuestions.find(q => q.options.some(opt => opt === skill));
+                    return skillQuestion && (skillQuestion.question === row.id);
+                }) ? '1' : '0';
             }
         });
-
+    
         // ローカルストレージに保存
         localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
     }
-
+    
     function showResults() {
         generateScoreTable();
         window.location.href = 'diagnosis-results.html';
     }
-
+    
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
         event.preventDefault();
-
+    
         const formData = new FormData(this);
         
         if (validateHobbies() && validateLikeFactors() && validateImportantFactors() && validateSkills()) {
@@ -512,8 +519,9 @@ document.addEventListener("DOMContentLoaded", function() {
             showResults();
         }
     });
-
+    
     generateQuestions();
+    
 });
 
 
