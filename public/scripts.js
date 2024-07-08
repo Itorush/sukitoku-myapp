@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // 既存のデータと関数の定義
     const hobbyOptions = [
         "スポーツ", "スポーツ観戦", "音楽鑑賞", "楽器演奏", "映画鑑賞", "テレビ鑑賞", "読書", "写真撮影", "絵画やイラスト",
         "手芸・クラフト", "料理・お菓子作り", "ガーデニング", "旅行", "ハイキング・登山", "フィットネス・エクササイズ",
@@ -187,19 +188,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
                 <div class="buttons-container">
                     <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-1"><span>1</span></label>
+                    <label for="skill${index + 1}-1"><span></span></label>
                     <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-2"><span>2</span></label>
+                    <label for="skill${index + 1}-2"><span></span></label>
                     <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-3"><span>3</span></label>
+                    <label for="skill${index + 1}-3"><span></span></label>
                     <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-4"><span>4</span></label>
+                    <label for="skill${index + 1}-4"><span></span></label>
                     <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-5"><span>5</span></label>
+                    <label for="skill${index + 1}-5"><span></span></label>
                     <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-6"><span>6</span></label>
+                    <label for="skill${index + 1}-6"><span></span></label>
                 </div>
-                <div class="options-row">
+                    <div class="options-row">
                     <div class="empty"></div>
                     <div class="option">${question.options[0]}</div>
                     <div class="empty"></div>
@@ -378,8 +379,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 const skill = data.skills.find(skill => skill.includes(skillQuestion.question));
                 row.chosen = skill ? '1' : '0';
 
-                console.log(`Question: ${row.question}, Chosen: ${row.chosen}`);
-
                 if (row.chosen === '1') {
                     row.axis1score = '0';
                     row.axis2score = '0';
@@ -395,8 +394,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     if (value === 5) row.axis2score = '2';
                     if (value === 6) row.axis2score = '3';
                 }
-
-                console.log(`Axis1Score: ${row.axis1score}, Axis2Score: ${row.axis2score}`);
             }
         });
 
@@ -515,7 +512,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { score: '', sy1: 'p', sy2: 4, sy3: 'Ep4', id: '新しいスキルを習得するとき、どのように学びますか？' },
             { score: '', sy1: 'p', sy2: 5, sy3: 'Ep5', id: '趣味や余暇の時間に、どのような活動を行いますか？' }
         ];
-
+    
         // 穴埋めルールに従ってscoreフィールドを更新する
         scoreTable.forEach(row => {
             if (row.sy1 === 'a') {
@@ -530,24 +527,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 row.score = data.likeFactors4.includes(row.id) ? '1' : '0';
             } else if (row.sy1 === 'f') {
                 row.score = data.importantFactors.includes(row.id) ? '1' : '0';
-            } else if (['g', 'h', 'i', 'j', 'k'].includes(row.sy1)) {
-                row.score = preprocessingTable.reduce((sum, row) => {
-                    if (row.axis1 === row.id) {
-                        return sum + parseInt(row.axis1score, 10);
-                    }
-                    if (row.axis2 === row.id) {
-                        return sum + parseInt(row.axis2score, 10);
-                    }
-                    return sum;
-                }, 0).toString();
-            } else if (['l', 'm', 'n', 'o', 'p'].includes(row.sy1)) {
-                row.score = preprocessingTable.find(row => row.question === row.id).chosen === '1' ? '1' : '0';
+            } else {
+                const rowPreprocess = preprocessingTable.find(p => p.sy2 === row.sy2 && p.sy3 === row.sy3);
+                row.score = rowPreprocess ? (parseInt(rowPreprocess.axis1score) + parseInt(rowPreprocess.axis2score)).toString() : '0';
             }
         });
 
         console.log('scoreTable:', scoreTable);  // ここでscoreTableをログ出力
-
-        return scoreTable;
+    
+        // ローカルストレージに保存
+        localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
     }
 
     function showResults() {
@@ -556,26 +545,22 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('診断データが見つかりませんでした。');
             return;
         }
-
         const preprocessingTable = generatePreprocessingTable(data, skillsQuestions);
-        const scoreTable = generateScoreTable(preprocessingTable, data);
-
-        // ローカルストレージに保存
-        localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
+        localStorage.setItem('preprocessingTable', JSON.stringify(preprocessingTable));
+        generateScoreTable(preprocessingTable, data);
         window.location.href = 'diagnosis-results.html';
     }
 
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
         event.preventDefault();
-
+    
         const formData = new FormData(this);
-
+        
         if (validateHobbies() && validateLikeFactors() && validateImportantFactors() && validateSkills()) {
             saveSelectionsToLocalStorage(formData);
             showResults();
         }
     });
-
+    
     generateQuestions();
-
 });
