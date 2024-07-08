@@ -251,17 +251,31 @@ document.addEventListener("DOMContentLoaded", function() {
                 </div>
                 <div class="buttons-container">
                     <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-1">${question.option1}</label>
+                    <label for="skill${index + 1}-1"><span></span></label>
                     <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-2">${question.option1}</label>
+                    <label for="skill${index + 1}-2"><span></span></label>
                     <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-3">${question.option1}</label>
-                    <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis2}" data-axis2="${question.axis1}">
-                    <label for="skill${index + 1}-4">${question.option2}</label>
-                    <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis2}" data-axis2="${question.axis1}">
-                    <label for="skill${index + 1}-5">${question.option2}</label>
-                    <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis2}" data-axis2="${question.axis1}">
-                    <label for="skill${index + 1}-6">${question.option2}</label>
+                    <label for="skill${index + 1}-3"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}-4"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}-5"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}-6"><span></span></label>
+                </div>
+                <div class="options-row">
+                    <div class="empty"></div>
+                    <div class="option">${question.option1}</div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="option">${question.option2}</div>
+                    <div class="empty"></div>
                 </div>
             `;
             skillsQuestionsContainer.appendChild(questionDiv);
@@ -276,60 +290,157 @@ document.addEventListener("DOMContentLoaded", function() {
         return array;
     }
 
-    function collectAnswers() {
-        const hobbies = Array.from(document.querySelectorAll('input[name="hobbies"]:checked')).map(input => input.value);
-        const likeFactors1 = document.querySelector('input[name="likeFactors1"]:checked')?.value || '';
-        const likeFactors2 = document.querySelector('input[name="likeFactors2"]:checked')?.value || '';
-        const likeFactors3 = document.querySelector('input[name="likeFactors3"]:checked')?.value || '';
-        const likeFactors4 = Array.from(document.querySelectorAll('input[name="likeFactors4"]:checked')).map(input => input.value);
-        const importantFactors = Array.from(document.querySelectorAll('input[name="importantFactors"]:checked')).map(input => input.value);
-        const skills = Array.from(document.querySelectorAll('.buttons-container input:checked')).map(input => {
-            return {
-                value: parseInt(input.value),
-                axis1: input.dataset.axis1,
-                axis2: input.dataset.axis2
-            };
-        });
-
-        const answers = {
-            hobbies,
-            likeFactors1,
-            likeFactors2,
-            likeFactors3,
-            likeFactors4,
-            importantFactors,
-            skills
-        };
-
-        localStorage.setItem('answers', JSON.stringify(answers));
+    window.validateHobbies = function() {
+        const selectedHobbies = document.querySelectorAll('input[name="hobbies"]:checked');
+        const warning = document.getElementById('hobbyWarning');
+        
+        if (selectedHobbies.length < 1 || selectedHobbies.length > 3) {
+            warning.textContent = '趣味は1つ以上3つ以内で選択してください。';
+            return false;
+        } else {
+            warning.textContent = '';
+            return true;
+        }
     }
 
-    function showResults() {
-        const answers = JSON.parse(localStorage.getItem('answers'));
-        if (!answers) {
-            console.error('回答データが見つかりませんでした。');
-            return;
+    window.validateLikeFactors = function() {
+        const selectedLikeFactors1 = document.querySelectorAll('input[name="likeFactors1"]:checked');
+        const selectedLikeFactors2 = document.querySelectorAll('input[name="likeFactors2"]:checked');
+        const selectedLikeFactors3 = document.querySelectorAll('input[name="likeFactors3"]:checked');
+        const selectedLikeFactors4 = document.querySelectorAll('input[name="likeFactors4"]:checked');
+        const warnings = [
+            document.getElementById('likeFactorsWarning1'),
+            document.getElementById('likeFactorsWarning2'),
+            document.getElementById('likeFactorsWarning3'),
+            document.getElementById('likeFactorsWarning4')
+        ];
+
+        let valid = true;
+
+        if (selectedLikeFactors1.length < 1) {
+            warnings[0].textContent = '1つ以上選択してください。';
+            valid = false;
+        } else {
+            warnings[0].textContent = '';
         }
 
-        const preprocessingTable = generatePreprocessingTable(answers.skills);
-        const scoreTable = generateScoreTable(preprocessingTable);
+        if (selectedLikeFactors2.length < 1) {
+            warnings[1].textContent = '1つ以上選択してください。';
+            valid = false;
+        } else {
+            warnings[1].textContent = '';
+        }
 
-        localStorage.setItem('preprocessingTable', JSON.stringify(preprocessingTable));
-        localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
+        if (selectedLikeFactors3.length < 1) {
+            warnings[2].textContent = '1つ以上選択してください。';
+            valid = false;
+        } else {
+            warnings[2].textContent = '';
+        }
 
-        window.location.href = 'diagnosis-results.html';
+        if (selectedLikeFactors4.length < 1 || selectedLikeFactors4.length > 3) {
+            warnings[3].textContent = '1つ以上3つ以内で選択してください。';
+            valid = false;
+        } else {
+            warnings[3].textContent = '';
+        }
+
+        return valid;
     }
 
-    function generatePreprocessingTable(skills) {
+    window.validateImportantFactors = function() {
+        const selectedImportantFactors = document.querySelectorAll('input[name="importantFactors"]:checked');
+        const warning = document.getElementById('importantFactorsWarning');
+        
+        if (selectedImportantFactors.length < 1 || selectedImportantFactors.length > 3) {
+            warning.textContent = '大事にしたいことは1つ以上3つ以内で選択してください。';
+            return false;
+        } else {
+            warning.textContent = '';
+            return true;
+        }
+    }
+
+    function validateSkills() {
+        const skillQuestions = document.querySelectorAll('[name^="skills"]');
+        const warning = document.getElementById('skillsWarning');
+        
+        let valid = true;
+        const questionsMap = new Map();
+
+        skillQuestions.forEach(input => {
+            const questionName = input.getAttribute('name');
+            if (!questionsMap.has(questionName)) {
+                questionsMap.set(questionName, false);
+            }
+            if (input.checked) {
+                questionsMap.set(questionName, true);
+            }
+        });
+
+        questionsMap.forEach((answered, questionName) => {
+            if (!answered) {
+                valid = false;
+            }
+        });
+
+        if (!valid) {
+            warning.textContent = '全ての質問に対して6段階評価を選択してください。';
+        } else {
+            warning.textContent = '';
+        }
+
+        return valid;
+    }
+
+    function saveSelectionsToLocalStorage(formData) {
+        const hobbies = formData.getAll('hobbies');
+        const likeFactors1 = formData.getAll('likeFactors1');
+        const likeFactors2 = formData.getAll('likeFactors2');
+        const likeFactors3 = formData.getAll('likeFactors3');
+        const likeFactors4 = formData.getAll('likeFactors4');
+        const importantFactors = formData.getAll('importantFactors');
+        const skills = formData.getAll('skills');
+
+        const data = { hobbies, likeFactors1, likeFactors2, likeFactors3, likeFactors4, importantFactors, skills };
+
+        localStorage.setItem('diagnosisData', JSON.stringify(data));
+    }
+
+    function generatePreprocessingTable() {
+        const data = JSON.parse(localStorage.getItem('diagnosisData'));
+        if (!data) {
+            console.error('診断データが見つかりませんでした。');
+            return [];
+        }
+
         const preprocessingTable = skillsQuestions.map(question => {
-            const chosenSkill = skills.find(skill => skill.axis1 === question.axis1 && skill.axis2 === question.axis2);
-            const chosen = chosenSkill ? 1 : 0;
-            const axis1score = chosenSkill && chosenSkill.axis1 === question.axis1 ? chosenSkill.value : 0;
-            const axis2score = chosenSkill && chosenSkill.axis2 === question.axis2 ? chosenSkill.value : 0;
+            const isChosen = data.skills.some(skill => {
+                const skillQuestion = skillsQuestions.find(q => q.elementname === skill);
+                return skillQuestion && skillQuestion.elementname === question.elementname;
+            });
+
+            let axis1Score = 0;
+            let axis2Score = 0;
+
+            if (isChosen) {
+                data.skills.forEach(skill => {
+                    if (question.elementname === skill) {
+                        const value = parseInt(skill, 10);
+                        if (value === 1) axis1Score += 3;
+                        if (value === 2) axis1Score += 2;
+                        if (value === 3) axis1Score += 1;
+                        if (value === 4) axis2Score += 1;
+                        if (value === 5) axis2Score += 2;
+                        if (value === 6) axis2Score += 3;
+                    }
+                });
+            }
+
             return {
-                chosen,
-                axis1score,
-                axis2score,
+                chosen: isChosen ? 1 : 0,
+                axis1score: isChosen ? axis1Score : 0,
+                axis2score: isChosen ? axis2Score : 0,
                 sy1: question.el_sy1,
                 sy2: question.el_sy2,
                 sy3: question.el_sy3,
@@ -337,31 +448,104 @@ document.addEventListener("DOMContentLoaded", function() {
                 elementname: question.elementname
             };
         });
+
+        localStorage.setItem('preprocessingTable', JSON.stringify(preprocessingTable));
         return preprocessingTable;
     }
 
-    function generateScoreTable(preprocessingTable) {
-        const scoreTable = preprocessingTable.map(row => {
-            return {
-                score: row.axis1score - row.axis2score,
-                sy1: row.sy1,
-                sy2: row.sy2,
-                sy3: row.sy3,
-                id: row.id,
-                elementname: row.elementname
-            };
-        });
-        return scoreTable;
+    function generateScoreTable() {
+        const data = JSON.parse(localStorage.getItem('diagnosisData'));
+        const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable'));
+        if (!data || !preprocessingTable) {
+            console.error('診断データまたは前処理データが見つかりませんでした。');
+            return;
+        }
+
+        const scoreTable = [
+            // 趣味
+            ...hobbyOptions.map(option => ({
+                score: data.hobbies.includes(option.elementname) ? '1' : '0',
+                sy1: option.sy1,
+                sy2: option.sy2,
+                sy3: option.sy3,
+                id: option.id,
+                elementname: option.elementname
+            })),
+            // 好きなこと（likeFactorsOptions1）
+            ...likeFactorsOptions1.map(option => ({
+                score: data.likeFactors1.includes(option.elementname) ? '1' : '0',
+                sy1: option.sy1,
+                sy2: option.sy2,
+                sy3: option.sy3,
+                id: option.id,
+                elementname: option.elementname
+            })),
+            // 好きなこと（likeFactorsOptions2）
+            ...likeFactorsOptions2.map(option => ({
+                score: data.likeFactors2.includes(option.elementname) ? '1' : '0',
+                sy1: option.sy1,
+                sy2: option.sy2,
+                sy3: option.sy3,
+                id: option.id,
+                elementname: option.elementname
+            })),
+            // 好きなこと（likeFactorsOptions3）
+            ...likeFactorsOptions3.map(option => ({
+                score: data.likeFactors3.includes(option.elementname) ? '1' : '0',
+                sy1: option.sy1,
+                sy2: option.sy2,
+                sy3: option.sy3,
+                id: option.id,
+                elementname: option.elementname
+            })),
+            // 好きなこと（likeFactorsOptions4）
+            ...likeFactorsOptions4.map(option => ({
+                score: data.likeFactors4.includes(option.elementname) ? '1' : '0',
+                sy1: option.sy1,
+                sy2: option.sy2,
+                sy3: option.sy3,
+                id: option.id,
+                elementname: option.elementname
+            })),
+            // 大事にしたいこと
+            ...importantFactorsOptions.map(option => ({
+                score: data.importantFactors.includes(option.elementname) ? '1' : '0',
+                sy1: option.sy1,
+                sy2: option.sy2,
+                sy3: option.sy3,
+                id: option.id,
+                elementname: option.elementname
+            })),
+            // 得意なこと
+            ...preprocessingTable.map(preprocess => ({
+                score: preprocess.chosen ? `${preprocess.axis1score}/${preprocess.axis2score}` : '0/0',
+                sy1: preprocess.sy1,
+                sy2: preprocess.sy2,
+                sy3: preprocess.sy3,
+                id: preprocess.id,
+                elementname: preprocess.elementname
+            }))
+        ];
+
+        localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
     }
 
-    document.getElementById('startButton').addEventListener('click', function() {
-        showPhase(2);
-    });
+    function showResults() {
+        generatePreprocessingTable();
+        generateScoreTable();
+        window.location.href = 'diagnosis-results.html';
+    }
 
-    document.getElementById('submitButton').addEventListener('click', function() {
-        collectAnswers();
-        showResults();
+    document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        const formData = new FormData(this);
+        
+        if (validateHobbies() && validateLikeFactors() && validateImportantFactors() && validateSkills()) {
+            saveSelectionsToLocalStorage(formData);
+            showResults();
+        }
     });
-
+    
     generateQuestions();
 });
