@@ -199,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
                     <label for="skill${index + 1}-6"><span></span></label>
                 </div>
-                <div class="options-row">
+                    <div class="options-row">
                     <div class="empty"></div>
                     <div class="option">${question.options[0]}</div>
                     <div class="empty"></div>
@@ -298,10 +298,28 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function validateSkills() {
-        const skillInputs = document.querySelectorAll('input[type="radio"]:checked');
-        let valid = skillInputs.length === 15;  // 15問すべてに回答されているか確認
-
+        const skillQuestions = document.querySelectorAll('[name^="skills"]');
         const warning = document.getElementById('skillsWarning');
+        
+        let valid = true;
+        const questionsMap = new Map();
+
+        skillQuestions.forEach(input => {
+            const questionName = input.getAttribute('name');
+            if (!questionsMap.has(questionName)) {
+                questionsMap.set(questionName, false);
+            }
+            if (input.checked) {
+                questionsMap.set(questionName, true);
+            }
+        });
+
+        questionsMap.forEach((answered, questionName) => {
+            if (!answered) {
+                valid = false;
+            }
+        });
+
         if (!valid) {
             warning.textContent = '全ての質問に対して6段階評価を選択してください。';
         } else {
