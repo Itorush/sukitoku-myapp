@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // 既存のデータと関数の定義
     const hobbyOptions = [
         "スポーツ", "スポーツ観戦", "音楽鑑賞", "楽器演奏", "映画鑑賞", "テレビ鑑賞", "読書", "写真撮影", "絵画やイラスト",
         "手芸・クラフト", "料理・お菓子作り", "ガーデニング", "旅行", "ハイキング・登山", "フィットネス・エクササイズ",
@@ -396,6 +397,8 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
+        console.log('preprocessingTable:', preprocessingTable);  // ここでpreprocessingTableをログ出力
+
         return preprocessingTable;
     }
 
@@ -525,10 +528,12 @@ document.addEventListener("DOMContentLoaded", function() {
             } else if (row.sy1 === 'f') {
                 row.score = data.importantFactors.includes(row.id) ? '1' : '0';
             } else {
-                const rowPreprocess = preprocessingTable.find(p => p.sy2 === row.sy1 && p.sy3 === row.sy2);
+                const rowPreprocess = preprocessingTable.find(p => p.sy2 === row.sy2 && p.sy3 === row.sy3);
                 row.score = rowPreprocess ? (parseInt(rowPreprocess.axis1score) + parseInt(rowPreprocess.axis2score)).toString() : '0';
             }
         });
+
+        console.log('scoreTable:', scoreTable);  // ここでscoreTableをログ出力
     
         // ローカルストレージに保存
         localStorage.setItem('scoreTable', JSON.stringify(scoreTable));
