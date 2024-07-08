@@ -250,18 +250,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="empty"></div>
                 </div>
                 <div class="buttons-container">
-                    <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-1">${question.el_ID}_${question.ax1_id}_three</label>
-                    <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-2">${question.el_ID}_${question.ax1_id}_two</label>
-                    <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-3">${question.el_ID}_${question.ax1_id}_one</label>
-                    <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-4">${question.el_ID}_${question.ax2_id}_one</label>
-                    <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-5">${question.el_ID}_${question.ax2_id}_two</label>
-                    <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-6">${question.el_ID}_${question.ax2_id}_three</label>
+                    <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-name="el_ID:${question.el_ID}_ax1_id:${question.ax1_id}_one">
+                    <label for="skill${index + 1}-1"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-name="el_ID:${question.el_ID}_ax1_id:${question.ax1_id}_two">
+                    <label for="skill${index + 1}-2"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-name="el_ID:${question.el_ID}_ax1_id:${question.ax1_id}_three">
+                    <label for="skill${index + 1}-3"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-name="el_ID:${question.el_ID}_ax2_id:${question.ax2_id}_one">
+                    <label for="skill${index + 1}-4"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-name="el_ID:${question.el_ID}_ax2_id:${question.ax2_id}_two">
+                    <label for="skill${index + 1}-5"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-name="el_ID:${question.el_ID}_ax2_id:${question.ax2_id}_three">
+                    <label for="skill${index + 1}-6"><span></span></label>
                 </div>
                 <div class="options-row">
                     <div class="empty"></div>
