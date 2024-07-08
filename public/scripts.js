@@ -117,56 +117,210 @@ document.addEventListener("DOMContentLoaded", function() {
         { elementname: "趣味や余暇の時間に、どのような活動を行いますか？", option1: "身体活動", option2: "勉強", axis1: "身体能力", axis2: "学力", el_sy1: "o", el_sy2: "p", el_sy3: 5, el_ID: "op5", ax1_sy1: "e", ax1_sy2: "k", ax1_sy3: 1, ax1_id: "ek1", ax2_sy1: "e", ax2_sy2: "k", ax2_sy3: 2, ax2_id: "ek2" }
     ];
 
-    const preprocessingTable = skillsQuestions.map(question => ({
-        chosen: false,
-        axis1score: 0,
-        axis2score: 0,
-        sy1: question.el_sy1,
-        sy2: question.el_sy2,
-        sy3: question.el_sy3,
-        id: question.el_ID,
-        elementname: question.elementname
-    }));
+    function showPhase(phase) {
+        document.querySelectorAll('.phase').forEach(function(phaseDiv) {
+            phaseDiv.classList.remove('active');
+        });
+        document.getElementById('phase' + phase).classList.add('active');
+    }
 
-    function updatePreprocessingTable(data) {
-        const selectedSkills = data.skills || [];
-        preprocessingTable.forEach(row => {
-            const question = skillsQuestions.find(q => q.el_ID === row.id);
-            if (question) {
-                const selectedOption = selectedSkills.find(skill => skill.startsWith(row.id));
-                if (selectedOption) {
-                    row.chosen = true;
-                    const value = parseInt(selectedOption.split('-')[1], 10);
-                    if (value >= 1 && value <= 3) {
-                        row.axis1score = 4 - value;
-                    } else if (value >= 4 && value <= 6) {
-                        row.axis2score = value - 3;
-                    }
-                }
-            }
+    function generateQuestions() {
+        const hobbyOptionsContainer = document.getElementById('hobbyOptions');
+        const likeFactorsOptionsContainer1 = document.getElementById('likeFactorsOptions1');
+        const likeFactorsOptionsContainer2 = document.getElementById('likeFactorsOptions2');
+        const likeFactorsOptionsContainer3 = document.getElementById('likeFactorsOptions3');
+        const likeFactorsOptionsContainer4 = document.getElementById('likeFactorsOptions4');
+        const importantFactorsOptionsContainer = document.getElementById('importantFactorsOptions');
+        const skillsQuestionsContainer = document.getElementById('skillsQuestions');
+
+        hobbyOptions.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'option';
+            optionDiv.innerHTML = `
+                <label for="hobby${index + 1}">
+                    <input type="checkbox" id="hobby${index + 1}" name="hobbies" value="${option.elementname}">
+                    ${option.elementname}
+                </label>
+            `;
+            hobbyOptionsContainer.appendChild(optionDiv);
+        });
+
+        likeFactorsOptions1.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'option';
+            optionDiv.innerHTML = `
+                <label for="likeFactor1-${index + 1}">
+                    <input type="radio" id="likeFactor1-${index + 1}" name="likeFactors1" value="${option.elementname}">
+                    ${option.elementname}
+                </label>
+            `;
+            likeFactorsOptionsContainer1.appendChild(optionDiv);
+        });
+
+        likeFactorsOptions2.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'option';
+            optionDiv.innerHTML = `
+                <label for="likeFactor2-${index + 1}">
+                    <input type="radio" id="likeFactor2-${index + 1}" name="likeFactors2" value="${option.elementname}">
+                    ${option.elementname}
+                </label>
+            `;
+            likeFactorsOptionsContainer2.appendChild(optionDiv);
+        });
+
+        likeFactorsOptions3.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'option';
+            optionDiv.innerHTML = `
+                <label for="likeFactor3-${index + 1}">
+                    <input type="radio" id="likeFactor3-${index + 1}" name="likeFactors3" value="${option.elementname}">
+                    ${option.elementname}
+                </label>
+            `;
+            likeFactorsOptionsContainer3.appendChild(optionDiv);
+        });
+
+        likeFactorsOptions4.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'option';
+            optionDiv.innerHTML = `
+                <label for="likeFactor4-${index + 1}">
+                    <input type="checkbox" id="likeFactor4-${index + 1}" name="likeFactors4" value="${option.elementname}">
+                    ${option.elementname}
+                </label>
+            `;
+            likeFactorsOptionsContainer4.appendChild(optionDiv);
+        });
+
+        importantFactorsOptions.forEach((option, index) => {
+            const optionDiv = document.createElement('div');
+            optionDiv.className = 'option';
+            optionDiv.innerHTML = `
+                <label for="importantFactor${index + 1}">
+                    <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${option.elementname}">
+                    ${option.elementname}
+                </label>
+            `;
+            importantFactorsOptionsContainer.appendChild(optionDiv);
+        });
+
+        const groupedQuestions = [
+            skillsQuestions.slice(0, 5),
+            skillsQuestions.slice(5, 10),
+            skillsQuestions.slice(10, 15),
+            skillsQuestions.slice(15, 20),
+            skillsQuestions.slice(20, 25)
+        ];
+
+        let selectedQuestions = [];
+        groupedQuestions.forEach(group => {
+            selectedQuestions = selectedQuestions.concat(shuffleArray(group).slice(0, 3));
+        });
+
+        selectedQuestions = shuffleArray(selectedQuestions);
+
+        selectedQuestions.forEach((question, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question';
+            questionDiv.innerHTML = `
+                <div class="question-label-container">
+                    <label class="question-label">${question.elementname}</label>
+                </div>
+                <div class="label-row">
+                    <div class="empty"></div>
+                    <div class="strong-agree">強く同意する</div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="neutral">どちらともいえない</div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="strong-agree">強く同意する</div>
+                    <div class="empty"></div>
+                </div>
+                <div class="buttons-container">
+                    <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}-1"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}-2"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}-3"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}-4"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}-5"><span></span></label>
+                    <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                    <label for="skill${index + 1}-6"><span></span></label>
+                </div>
+                    <div class="options-row">
+                    <div class="empty"></div>
+                    <div class="option">${question.option1}</div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="empty"></div>
+                    <div class="option">${question.option2}</div>
+                    <div class="empty"></div>
+                </div>
+            `;
+            skillsQuestionsContainer.appendChild(questionDiv);
         });
     }
 
-    function generatePreprocessingTable() {
-        const data = JSON.parse(localStorage.getItem('diagnosisData'));
-        if (!data) {
-            console.error('診断データが見つかりませんでした。');
-            return;
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
         }
-        updatePreprocessingTable(data);
-        localStorage.setItem('preprocessingTable', JSON.stringify(preprocessingTable));
+        return array;
     }
 
-    function generateScoreTable() {
-        const data = JSON.parse(localStorage.getItem('diagnosisData'));
-        const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable'));
+    function generatePreprocessingTable(data, selectedQuestions) {
+        const preprocessingTable = skillsQuestions.map(question => {
+            const isChosen = selectedQuestions.some(selected => selected.elementname === question.elementname);
+            const chosenScore = isChosen ? 1 : 0;
+            let axis1score = 0;
+            let axis2score = 0;
 
-        if (!data || !preprocessingTable) {
-            console.error('必要なデータが見つかりませんでした。');
-            return;
-        }
+            if (chosenScore === 1) {
+                const chosenValue = data.skills.find(skill => skill.includes(question.elementname));
+                if (chosenValue) {
+                    const value = parseInt(chosenValue.split(':')[1], 10);
+                    if (value === 1) axis1score = 3;
+                    else if (value === 2) axis1score = 2;
+                    else if (value === 3) axis1score = 1;
+                    else if (value === 4) axis2score = 1;
+                    else if (value === 5) axis2score = 2;
+                    else if (value === 6) axis2score = 3;
+                }
+            }
 
+            return {
+                chosen: chosenScore,
+                axis1score: axis1score,
+                axis2score: axis2score,
+                sy1: question.el_sy1,
+                sy2: question.el_sy2,
+                sy3: question.el_sy3,
+                id: question.el_ID,
+                elementname: question.elementname
+            };
+        });
+
+        return preprocessingTable;
+    }
+
+    function generateScoreTable(data, preprocessingTable) {
         const scoreTable = [
+            // 趣味
             ...hobbyOptions.map(option => ({
                 score: data.hobbies.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -175,6 +329,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
+            // 好きなこと（likeFactorsOptions1）
             ...likeFactorsOptions1.map(option => ({
                 score: data.likeFactors1.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -183,6 +338,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
+            // 好きなこと（likeFactorsOptions2）
             ...likeFactorsOptions2.map(option => ({
                 score: data.likeFactors2.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -191,6 +347,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
+            // 好きなこと（likeFactorsOptions3）
             ...likeFactorsOptions3.map(option => ({
                 score: data.likeFactors3.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -199,6 +356,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
+            // 好きなこと（likeFactorsOptions4）
             ...likeFactorsOptions4.map(option => ({
                 score: data.likeFactors4.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -207,6 +365,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
+            // 大事にしたいこと
             ...importantFactorsOptions.map(option => ({
                 score: data.importantFactors.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -215,6 +374,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
+            // 得意なこと
             ...preprocessingTable.map(preprocess => ({
                 score: preprocess.chosen ? `${preprocess.axis1score}/${preprocess.axis2score}` : '0/0',
                 sy1: preprocess.sy1,
@@ -229,8 +389,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function showResults() {
-        generatePreprocessingTable();
-        generateScoreTable();
+        const formData = JSON.parse(localStorage.getItem('diagnosisData'));
+        const selectedQuestions = skillsQuestions.filter(q => formData.skills.includes(q.elementname));
+
+        const preprocessingTable = generatePreprocessingTable(formData, selectedQuestions);
+        generateScoreTable(formData, preprocessingTable);
         window.location.href = 'diagnosis-results.html';
     }
 
@@ -244,282 +407,6 @@ document.addEventListener("DOMContentLoaded", function() {
             showResults();
         }
     });
-
+    
     generateQuestions();
 });
-
-function validateHobbies() {
-    const selectedHobbies = document.querySelectorAll('input[name="hobbies"]:checked');
-    const warning = document.getElementById('hobbyWarning');
-    
-    if (selectedHobbies.length < 1 || selectedHobbies.length > 3) {
-        warning.textContent = '趣味は1つ以上3つ以内で選択してください。';
-        return false;
-    } else {
-        warning.textContent = '';
-        return true;
-    }
-}
-
-function validateLikeFactors() {
-    const selectedLikeFactors1 = document.querySelectorAll('input[name="likeFactors1"]:checked');
-    const selectedLikeFactors2 = document.querySelectorAll('input[name="likeFactors2"]:checked');
-    const selectedLikeFactors3 = document.querySelectorAll('input[name="likeFactors3"]:checked');
-    const selectedLikeFactors4 = document.querySelectorAll('input[name="likeFactors4"]:checked');
-    const warnings = [
-        document.getElementById('likeFactorsWarning1'),
-        document.getElementById('likeFactorsWarning2'),
-        document.getElementById('likeFactorsWarning3'),
-        document.getElementById('likeFactorsWarning4')
-    ];
-
-    let valid = true;
-
-    if (selectedLikeFactors1.length < 1) {
-        warnings[0].textContent = '1つ以上選択してください。';
-        valid = false;
-    } else {
-        warnings[0].textContent = '';
-    }
-
-    if (selectedLikeFactors2.length < 1) {
-        warnings[1].textContent = '1つ以上選択してください。';
-        valid = false;
-    } else {
-        warnings[1].textContent = '';
-    }
-
-    if (selectedLikeFactors3.length < 1) {
-        warnings[2].textContent = '1つ以上選択してください。';
-        valid = false;
-    } else {
-        warnings[2].textContent = '';
-    }
-
-    if (selectedLikeFactors4.length < 1 || selectedLikeFactors4.length > 3) {
-        warnings[3].textContent = '1つ以上3つ以内で選択してください。';
-        valid = false;
-    } else {
-        warnings[3].textContent = '';
-    }
-
-    return valid;
-}
-
-function validateImportantFactors() {
-    const selectedImportantFactors = document.querySelectorAll('input[name="importantFactors"]:checked');
-    const warning = document.getElementById('importantFactorsWarning');
-    
-    if (selectedImportantFactors.length < 1 || selectedImportantFactors.length > 3) {
-        warning.textContent = '大事にしたいことは1つ以上3つ以内で選択してください。';
-        return false;
-    } else {
-        warning.textContent = '';
-        return true;
-    }
-}
-
-function validateSkills() {
-    const skillQuestions = document.querySelectorAll('[name^="skills"]');
-    const warning = document.getElementById('skillsWarning');
-    
-    let valid = true;
-    const questionsMap = new Map();
-
-    skillQuestions.forEach(input => {
-        const questionName = input.getAttribute('name');
-        if (!questionsMap.has(questionName)) {
-            questionsMap.set(questionName, false);
-        }
-        if (input.checked) {
-            questionsMap.set(questionName, true);
-        }
-    });
-
-    questionsMap.forEach((answered, questionName) => {
-        if (!answered) {
-            valid = false;
-        }
-    });
-
-    if (!valid) {
-        warning.textContent = '全ての質問に対して6段階評価を選択してください。';
-    } else {
-        warning.textContent = '';
-    }
-
-    return valid;
-}
-
-function saveSelectionsToLocalStorage(formData) {
-    const hobbies = formData.getAll('hobbies');
-    const likeFactors1 = formData.getAll('likeFactors1');
-    const likeFactors2 = formData.getAll('likeFactors2');
-    const likeFactors3 = formData.getAll('likeFactors3');
-    const likeFactors4 = formData.getAll('likeFactors4');
-    const importantFactors = formData.getAll('importantFactors');
-    const skills = formData.getAll('skills');
-
-    const data = { hobbies, likeFactors1, likeFactors2, likeFactors3, likeFactors4, importantFactors, skills };
-
-    localStorage.setItem('diagnosisData', JSON.stringify(data));
-}
-
-function generateQuestions() {
-    const hobbyOptionsContainer = document.getElementById('hobbyOptions');
-    const likeFactorsOptionsContainer1 = document.getElementById('likeFactorsOptions1');
-    const likeFactorsOptionsContainer2 = document.getElementById('likeFactorsOptions2');
-    const likeFactorsOptionsContainer3 = document.getElementById('likeFactorsOptions3');
-    const likeFactorsOptionsContainer4 = document.getElementById('likeFactorsOptions4');
-    const importantFactorsOptionsContainer = document.getElementById('importantFactorsOptions');
-    const skillsQuestionsContainer = document.getElementById('skillsQuestions');
-
-    hobbyOptions.forEach(option => {
-        const optionDiv = document.createElement('div');
-        optionDiv.className = 'option';
-        optionDiv.innerHTML = `
-            <label for="${option.id}">
-                <input type="checkbox" id="${option.id}" name="hobbies" value="${option.elementname}">
-                ${option.elementname}
-            </label>
-        `;
-        hobbyOptionsContainer.appendChild(optionDiv);
-    });
-
-    likeFactorsOptions1.forEach(option => {
-        const optionDiv = document.createElement('div');
-        optionDiv.className = 'option';
-        optionDiv.innerHTML = `
-            <label for="${option.id}">
-                <input type="radio" id="${option.id}" name="likeFactors1" value="${option.elementname}">
-                ${option.elementname}
-            </label>
-        `;
-        likeFactorsOptionsContainer1.appendChild(optionDiv);
-    });
-
-    likeFactorsOptions2.forEach(option => {
-        const optionDiv = document.createElement('div');
-        optionDiv.className = 'option';
-        optionDiv.innerHTML = `
-            <label for="${option.id}">
-                <input type="radio" id="${option.id}" name="likeFactors2" value="${option.elementname}">
-                ${option.elementname}
-            </label>
-        `;
-        likeFactorsOptionsContainer2.appendChild(optionDiv);
-    });
-
-    likeFactorsOptions3.forEach(option => {
-        const optionDiv = document.createElement('div');
-        optionDiv.className = 'option';
-        optionDiv.innerHTML = `
-            <label for="${option.id}">
-                <input type="radio" id="${option.id}" name="likeFactors3" value="${option.elementname}">
-                ${option.elementname}
-            </label>
-        `;
-        likeFactorsOptionsContainer3.appendChild(optionDiv);
-    });
-
-    likeFactorsOptions4.forEach(option => {
-        const optionDiv = document.createElement('div');
-        optionDiv.className = 'option';
-        optionDiv.innerHTML = `
-            <label for="${option.id}">
-                <input type="checkbox" id="${option.id}" name="likeFactors4" value="${option.elementname}">
-                ${option.elementname}
-            </label>
-        `;
-        likeFactorsOptionsContainer4.appendChild(optionDiv);
-    });
-
-    importantFactorsOptions.forEach(option => {
-        const optionDiv = document.createElement('div');
-        optionDiv.className = 'option';
-        optionDiv.innerHTML = `
-            <label for="${option.id}">
-                <input type="checkbox" id="${option.id}" name="importantFactors" value="${option.elementname}">
-                ${option.elementname}
-            </label>
-        `;
-        importantFactorsOptionsContainer.appendChild(optionDiv);
-    });
-
-    const groupedQuestions = [
-        skillsQuestions.slice(0, 5),
-        skillsQuestions.slice(5, 10),
-        skillsQuestions.slice(10, 15),
-        skillsQuestions.slice(15, 20),
-        skillsQuestions.slice(20, 25)
-    ];
-
-    let selectedQuestions = [];
-    groupedQuestions.forEach(group => {
-        selectedQuestions = selectedQuestions.concat(shuffleArray(group).slice(0, 3));
-    });
-
-    selectedQuestions = shuffleArray(selectedQuestions);
-
-    selectedQuestions.forEach((question, index) => {
-        const questionDiv = document.createElement('div');
-        questionDiv.className = 'question';
-        questionDiv.innerHTML = `
-            <div class="question-label-container">
-                <label class="question-label">${question.elementname}</label>
-            </div>
-            <div class="label-row">
-                <div class="empty"></div>
-                <div class="strong-agree">強く同意する</div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="neutral">どちらともいえない</div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="strong-agree">強く同意する</div>
-                <div class="empty"></div>
-            </div>
-            <div class="buttons-container">
-                <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="${question.el_ID}-1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                <label for="skill${index + 1}-1"><span></span></label>
-                <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="${question.el_ID}-2" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                <label for="skill${index + 1}-2"><span></span></label>
-                <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="${question.el_ID}-3" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                <label for="skill${index + 1}-3"><span></span></label>
-                <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="${question.el_ID}-4" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                <label for="skill${index + 1}-4"><span></span></label>
-                <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="${question.el_ID}-5" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                <label for="skill${index + 1}-5"><span></span></label>
-                <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="${question.el_ID}-6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                <label for="skill${index + 1}-6"><span></span></label>
-            </div>
-                <div class="options-row">
-                <div class="empty"></div>
-                <div class="option">${question.option1}</div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="empty"></div>
-                <div class="option">${question.option2}</div>
-                <div class="empty"></div>
-            </div>
-        `;
-        skillsQuestionsContainer.appendChild(questionDiv);
-    });
-}
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}

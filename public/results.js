@@ -1,39 +1,32 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const scoreTable = JSON.parse(localStorage.getItem('scoreTable')) || [];
-    const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable')) || [];
+    function displayResults() {
+        const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
+        if (!scoreTable) {
+            console.error('スコアデータが見つかりませんでした。');
+            return;
+        }
 
-    function createTable(data, tableTitle) {
-        let tableHTML = `<h2>${tableTitle}</h2><table><thead><tr>`;
+        const resultsContainer = document.getElementById('resultsContainer');
+        
+        // タイトル行を追加
+        const headerDiv = document.createElement('div');
+        headerDiv.className = 'result-header';
+        headerDiv.innerHTML = `
+            <div class="elementname">項目</div>
+            <div class="score">スコア</div>
+        `;
+        resultsContainer.appendChild(headerDiv);
 
-        // Table headers
-        Object.keys(data[0]).forEach(key => {
-            tableHTML += `<th>${key}</th>`;
+        scoreTable.forEach(entry => {
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'result-entry';
+            resultDiv.innerHTML = `
+                <div class="elementname">${entry.elementname}</div>
+                <div class="score">${entry.score}</div>
+            `;
+            resultsContainer.appendChild(resultDiv);
         });
-        tableHTML += `</tr></thead><tbody>`;
-
-        // Table rows
-        data.forEach(row => {
-            tableHTML += `<tr>`;
-            Object.values(row).forEach(value => {
-                tableHTML += `<td>${value}</td>`;
-            });
-            tableHTML += `</tr>`;
-        });
-
-        tableHTML += `</tbody></table>`;
-        return tableHTML;
     }
 
-    const resultsContainer = document.getElementById('resultsContainer');
-    let resultHTML = "";
-
-    if (scoreTable.length > 0) {
-        resultHTML += createTable(scoreTable, "Score Table");
-    }
-
-    if (preprocessingTable.length > 0) {
-        resultHTML += createTable(preprocessingTable, "Preprocessing Table");
-    }
-
-    resultsContainer.innerHTML = resultHTML;
+    displayResults();
 });
