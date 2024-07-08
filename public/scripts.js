@@ -373,23 +373,26 @@ document.addEventListener("DOMContentLoaded", function() {
         ];
 
         preprocessingTable.forEach(row => {
-            const skill = data.skills.find(skill => skillsQuestions.find(q => q.question === row.question));
-            row.chosen = skill ? '1' : '0';
+            const skillQuestion = skillsQuestions.find(q => q.question === row.question);
+            if (skillQuestion) {
+                const skill = data.skills.find(skill => skill.includes(skillQuestion.question));
+                row.chosen = skill ? '1' : '0';
 
-            if (row.chosen === '1') {
-                row.axis1score = '0';
-                row.axis2score = '0';
-            } else {
-                const value = parseInt(skill);
-                row.axis1score = row.axis1score = '0';
-                row.axis2score = '0';
+                if (row.chosen === '1') {
+                    row.axis1score = '0';
+                    row.axis2score = '0';
+                } else {
+                    const value = parseInt(skill);
+                    row.axis1score = '0';
+                    row.axis2score = '0';
 
-                if (value === 1) row.axis1score = '3';
-                if (value === 2) row.axis1score = '2';
-                if (value === 3) row.axis1score = '1';
-                if (value === 4) row.axis2score = '1';
-                if (value === 5) row.axis2score = '2';
-                if (value === 6) row.axis2score = '3';
+                    if (value === 1) row.axis1score = '3';
+                    if (value === 2) row.axis1score = '2';
+                    if (value === 3) row.axis1score = '1';
+                    if (value === 4) row.axis2score = '1';
+                    if (value === 5) row.axis2score = '2';
+                    if (value === 6) row.axis2score = '3';
+                }
             }
         });
 
@@ -523,7 +526,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 row.score = data.importantFactors.includes(row.id) ? '1' : '0';
             } else {
                 const rowPreprocess = preprocessingTable.find(p => p.sy2 === row.sy1 && p.sy3 === row.sy2);
-                row.score = rowPreprocess ? rowPreprocess.axis1score + rowPreprocess.axis2score : '0';
+                row.score = rowPreprocess ? (parseInt(rowPreprocess.axis1score) + parseInt(rowPreprocess.axis2score)).toString() : '0';
             }
         });
     
@@ -542,7 +545,6 @@ document.addEventListener("DOMContentLoaded", function() {
         generateScoreTable(preprocessingTable, data);
         window.location.href = 'diagnosis-results.html';
     }
-    
 
     document.getElementById('diagnosisForm').addEventListener('submit', function(event) {
         event.preventDefault();
