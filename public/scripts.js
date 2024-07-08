@@ -1,92 +1,92 @@
 document.addEventListener("DOMContentLoaded", function() {
     const hobbyOptions = [
-        { sy1: 'a', sy2: 'a', sy3: 1, id: 'aa1', elementname: 'スポーツ' },
-        { sy1: 'a', sy2: 'a', sy3: 2, id: 'aa2', elementname: 'スポーツ観戦' },
-        { sy1: 'a', sy2: 'a', sy3: 3, id: 'aa3', elementname: '音楽鑑賞' },
-        { sy1: 'a', sy2: 'a', sy3: 4, id: 'aa4', elementname: '楽器演奏' },
-        { sy1: 'a', sy2: 'a', sy3: 5, id: 'aa5', elementname: '映画鑑賞' },
-        { sy1: 'a', sy2: 'a', sy3: 6, id: 'aa6', elementname: 'テレビ鑑賞' },
-        { sy1: 'a', sy2: 'a', sy3: 7, id: 'aa7', elementname: '読書' },
-        { sy1: 'a', sy2: 'a', sy3: 8, id: 'aa8', elementname: '写真撮影' },
-        { sy1: 'a', sy2: 'a', sy3: 9, id: 'aa9', elementname: '絵画やイラスト' },
-        { sy1: 'a', sy2: 'a', sy3: 10, id: 'aa10', elementname: '手芸・クラフト' },
-        { sy1: 'a', sy2: 'a', sy3: 11, id: 'aa11', elementname: '料理・お菓子作り' },
-        { sy1: 'a', sy2: 'a', sy3: 12, id: 'aa12', elementname: 'ガーデニング' },
-        { sy1: 'a', sy2: 'a', sy3: 13, id: 'aa13', elementname: '旅行' },
-        { sy1: 'a', sy2: 'a', sy3: 14, id: 'aa14', elementname: 'ハイキング・登山' },
-        { sy1: 'a', sy2: 'a', sy3: 15, id: 'aa15', elementname: 'フィットネス・エクササイズ' },
-        { sy1: 'a', sy2: 'a', sy3: 16, id: 'aa16', elementname: 'ヨガ・ピラティス' },
-        { sy1: 'a', sy2: 'a', sy3: 17, id: 'aa17', elementname: 'ダンス' },
-        { sy1: 'a', sy2: 'a', sy3: 18, id: 'aa18', elementname: 'カラオケ' },
-        { sy1: 'a', sy2: 'a', sy3: 19, id: 'aa19', elementname: 'ビデオゲーム' },
-        { sy1: 'a', sy2: 'a', sy3: 20, id: 'aa20', elementname: 'ボードゲーム・カードゲーム' },
-        { sy1: 'a', sy2: 'a', sy3: 21, id: 'aa21', elementname: 'コレクション（切手、古銭、模型など）' },
-        { sy1: 'a', sy2: 'a', sy3: 22, id: 'aa22', elementname: '釣り' },
-        { sy1: 'a', sy2: 'a', sy3: 23, id: 'aa23', elementname: 'キャンプ・アウトドア活動' },
-        { sy1: 'a', sy2: 'a', sy3: 24, id: 'aa24', elementname: '天体観測' },
-        { sy1: 'a', sy2: 'a', sy3: 25, id: 'aa25', elementname: '昆虫採集・バードウォッチング' },
-        { sy1: 'a', sy2: 'a', sy3: 26, id: 'aa26', elementname: 'DIY・日曜大工' },
-        { sy1: 'a', sy2: 'a', sy3: 27, id: 'aa27', elementname: '茶道・華道' },
-        { sy1: 'a', sy2: 'a', sy3: 28, id: 'aa28', elementname: '書道' },
-        { sy1: 'a', sy2: 'a', sy3: 29, id: 'aa29', elementname: 'コスプレ・アニメ・漫画' },
-        { sy1: 'a', sy2: 'a', sy3: 30, id: 'aa30', elementname: 'ワイン・コーヒー・グルメ' }
+        { sy1: "a", sy2: "a", sy3: 1, id: "aa1", elementname: "スポーツ" },
+        { sy1: "a", sy2: "a", sy3: 2, id: "aa2", elementname: "スポーツ観戦" },
+        { sy1: "a", sy2: "a", sy3: 3, id: "aa3", elementname: "音楽鑑賞" },
+        { sy1: "a", sy2: "a", sy3: 4, id: "aa4", elementname: "楽器演奏" },
+        { sy1: "a", sy2: "a", sy3: 5, id: "aa5", elementname: "映画鑑賞" },
+        { sy1: "a", sy2: "a", sy3: 6, id: "aa6", elementname: "テレビ鑑賞" },
+        { sy1: "a", sy2: "a", sy3: 7, id: "aa7", elementname: "読書" },
+        { sy1: "a", sy2: "a", sy3: 8, id: "aa8", elementname: "写真撮影" },
+        { sy1: "a", sy2: "a", sy3: 9, id: "aa9", elementname: "絵画やイラスト" },
+        { sy1: "a", sy2: "a", sy3: 10, id: "aa10", elementname: "手芸・クラフト" },
+        { sy1: "a", sy2: "a", sy3: 11, id: "aa11", elementname: "料理・お菓子作り" },
+        { sy1: "a", sy2: "a", sy3: 12, id: "aa12", elementname: "ガーデニング" },
+        { sy1: "a", sy2: "a", sy3: 13, id: "aa13", elementname: "旅行" },
+        { sy1: "a", sy2: "a", sy3: 14, id: "aa14", elementname: "ハイキング・登山" },
+        { sy1: "a", sy2: "a", sy3: 15, id: "aa15", elementname: "フィットネス・エクササイズ" },
+        { sy1: "a", sy2: "a", sy3: 16, id: "aa16", elementname: "ヨガ・ピラティス" },
+        { sy1: "a", sy2: "a", sy3: 17, id: "aa17", elementname: "ダンス" },
+        { sy1: "a", sy2: "a", sy3: 18, id: "aa18", elementname: "カラオケ" },
+        { sy1: "a", sy2: "a", sy3: 19, id: "aa19", elementname: "ビデオゲーム" },
+        { sy1: "a", sy2: "a", sy3: 20, id: "aa20", elementname: "ボードゲーム・カードゲーム" },
+        { sy1: "a", sy2: "a", sy3: 21, id: "aa21", elementname: "コレクション（切手、古銭、模型など）" },
+        { sy1: "a", sy2: "a", sy3: 22, id: "aa22", elementname: "釣り" },
+        { sy1: "a", sy2: "a", sy3: 23, id: "aa23", elementname: "キャンプ・アウトドア活動" },
+        { sy1: "a", sy2: "a", sy3: 24, id: "aa24", elementname: "天体観測" },
+        { sy1: "a", sy2: "a", sy3: 25, id: "aa25", elementname: "昆虫採集・バードウォッチング" },
+        { sy1: "a", sy2: "a", sy3: 26, id: "aa26", elementname: "DIY・日曜大工" },
+        { sy1: "a", sy2: "a", sy3: 27, id: "aa27", elementname: "茶道・華道" },
+        { sy1: "a", sy2: "a", sy3: 28, id: "aa28", elementname: "書道" },
+        { sy1: "a", sy2: "a", sy3: 29, id: "aa29", elementname: "コスプレ・アニメ・漫画" },
+        { sy1: "a", sy2: "a", sy3: 30, id: "aa30", elementname: "ワイン・コーヒー・グルメ" }
     ];
 
     const likeFactorsOptions1 = [
-        { sy1: 'i', sy2: 'b', sy3: 1, id: 'ib1', elementname: '都会的環境' },
-        { sy1: 'i', sy2: 'b', sy3: 2, id: 'ib2', elementname: '自然的環境' }
+        { sy1: "i", sy2: "b", sy3: 1, id: "ib1", elementname: "都会的環境" },
+        { sy1: "i", sy2: "b", sy3: 2, id: "ib2", elementname: "自然的環境" }
     ];
 
     const likeFactorsOptions2 = [
-        { sy1: 'i', sy2: 'c', sy3: 1, id: 'ic1', elementname: '大勢の環境' },
-        { sy1: 'i', sy2: 'c', sy3: 2, id: 'ic2', elementname: '少数の環境' }
+        { sy1: "i", sy2: "c", sy3: 1, id: "ic1", elementname: "大勢の環境" },
+        { sy1: "i", sy2: "c", sy3: 2, id: "ic2", elementname: "少数の環境" }
     ];
 
     const likeFactorsOptions3 = [
-        { sy1: 'i', sy2: 'd', sy3: 1, id: 'id1', elementname: '人と関われる要素やチームワーク' },
-        { sy1: 'i', sy2: 'd', sy3: 2, id: 'id2', elementname: '単独の活動や個人作業' }
+        { sy1: "i", sy2: "d", sy3: 1, id: "id1", elementname: "人と関われる要素やチームワーク" },
+        { sy1: "i", sy2: "d", sy3: 2, id: "id2", elementname: "単独の活動や個人作業" }
     ];
 
     const likeFactorsOptions4 = [
-        { sy1: 'i', sy2: 'e', sy3: 1, id: 'ie1', elementname: 'アクティブな要素やエネルギッシュな活動' },
-        { sy1: 'i', sy2: 'e', sy3: 2, id: 'ie2', elementname: 'リラックスできる要素や安全で安心な活動' },
-        { sy1: 'i', sy2: 'e', sy3: 3, id: 'ie3', elementname: '新しい経験や学びの要素や変化がはやく飽きない活動' },
-        { sy1: 'i', sy2: 'e', sy3: 4, id: 'ie4', elementname: '慣れた経験やマイペースでできる活動' },
-        { sy1: 'i', sy2: 'e', sy3: 5, id: 'ie5', elementname: '実生活に役立つ要素' },
-        { sy1: 'i', sy2: 'e', sy3: 6, id: 'ie6', elementname: '論理的な要素' },
-        { sy1: 'i', sy2: 'e', sy3: 7, id: 'ie7', elementname: '技術的な要素' },
-        { sy1: 'i', sy2: 'e', sy3: 8, id: 'ie8', elementname: '芸術的な要素や自己表現できる活動' },
-        { sy1: 'i', sy2: 'e', sy3: 9, id: 'ie9', elementname: '楽な活動' },
-        { sy1: 'i', sy2: 'e', sy3: 10, id: 'ie10', elementname: '競争的な要素や挑戦的な活動' },
-        { sy1: 'i', sy2: 'e', sy3: 11, id: 'ie11', elementname: '社会から評価される要素や達成感がある活動' },
-        { sy1: 'i', sy2: 'e', sy3: 12, id: 'ie12', elementname: 'プロセスが面白い要素や自由に楽しめる活動' },
-        { sy1: 'i', sy2: 'e', sy3: 13, id: 'ie13', elementname: '手先の作業' },
-        { sy1: 'i', sy2: 'e', sy3: 14, id: 'ie14', elementname: '頭脳の作業' },
-        { sy1: 'i', sy2: 'e', sy3: 15, id: 'ie15', elementname: '学び続ける要素' },
-        { sy1: 'i', sy2: 'e', sy3: 16, id: 'ie16', elementname: '不思議な要素や神秘的な要素' },
-        { sy1: 'i', sy2: 'e', sy3: 17, id: 'ie17', elementname: '奥が深い要素や熱中できる活動' },
-        { sy1: 'i', sy2: 'e', sy3: 18, id: 'ie18', elementname: 'ファンタジーの要素' },
-        { sy1: 'i', sy2: 'e', sy3: 19, id: 'ie19', elementname: '人に喜んでもらえる要素' },
-        { sy1: 'i', sy2: 'e', sy3: 20, id: 'ie20', elementname: '稼げる要素やお金に関わる活動' },
-        { sy1: 'i', sy2: 'e', sy3: 21, id: 'ie21', elementname: 'かっこいい要素や目立つ要素' },
-        { sy1: 'i', sy2: 'e', sy3: 22, id: 'ie22', elementname: '異性にモテやすい要素' },
-        { sy1: 'i', sy2: 'e', sy3: 23, id: 'ie23', elementname: '機械に関係している要素' },
-        { sy1: 'i', sy2: 'e', sy3: 24, id: 'ie24', elementname: 'いきものに関係している要素' }
+        { sy1: "i", sy2: "e", sy3: 1, id: "ie1", elementname: "アクティブな要素やエネルギッシュな活動" },
+        { sy1: "i", sy2: "e", sy3: 2, id: "ie2", elementname: "リラックスできる要素や安全で安心な活動" },
+        { sy1: "i", sy2: "e", sy3: 3, id: "ie3", elementname: "新しい経験や学びの要素や変化がはやく飽きない活動" },
+        { sy1: "i", sy2: "e", sy3: 4, id: "ie4", elementname: "慣れた経験やマイペースでできる活動" },
+        { sy1: "i", sy2: "e", sy3: 5, id: "ie5", elementname: "実生活に役立つ要素" },
+        { sy1: "i", sy2: "e", sy3: 6, id: "ie6", elementname: "論理的な要素" },
+        { sy1: "i", sy2: "e", sy3: 7, id: "ie7", elementname: "技術的な要素" },
+        { sy1: "i", sy2: "e", sy3: 8, id: "ie8", elementname: "芸術的な要素や自己表現できる活動" },
+        { sy1: "i", sy2: "e", sy3: 9, id: "ie9", elementname: "楽な活動" },
+        { sy1: "i", sy2: "e", sy3: 10, id: "ie10", elementname: "競争的な要素や挑戦的な活動" },
+        { sy1: "i", sy2: "e", sy3: 11, id: "ie11", elementname: "社会から評価される要素や達成感がある活動" },
+        { sy1: "i", sy2: "e", sy3: 12, id: "ie12", elementname: "プロセスが面白い要素や自由に楽しめる活動" },
+        { sy1: "i", sy2: "e", sy3: 13, id: "ie13", elementname: "手先の作業" },
+        { sy1: "i", sy2: "e", sy3: 14, id: "ie14", elementname: "頭脳の作業" },
+        { sy1: "i", sy2: "e", sy3: 15, id: "ie15", elementname: "学び続ける要素" },
+        { sy1: "i", sy2: "e", sy3: 16, id: "ie16", elementname: "不思議な要素や神秘的な要素" },
+        { sy1: "i", sy2: "e", sy3: 17, id: "ie17", elementname: "奥が深い要素や熱中できる活動" },
+        { sy1: "i", sy2: "e", sy3: 18, id: "ie18", elementname: "ファンタジーの要素" },
+        { sy1: "i", sy2: "e", sy3: 19, id: "ie19", elementname: "人に喜んでもらえる要素" },
+        { sy1: "i", sy2: "e", sy3: 20, id: "ie20", elementname: "稼げる要素やお金に関わる活動" },
+        { sy1: "i", sy2: "e", sy3: 21, id: "ie21", elementname: "かっこいい要素や目立つ要素" },
+        { sy1: "i", sy2: "e", sy3: 22, id: "ie22", elementname: "異性にモテやすい要素" },
+        { sy1: "i", sy2: "e", sy3: 23, id: "ie23", elementname: "機械に関係している要素" },
+        { sy1: "i", sy2: "e", sy3: 24, id: "ie24", elementname: "いきものに関係している要素" }
     ];
 
     const importantFactorsOptions = [
-        { sy1: 'u', sy2: 'f', sy3: 1, id: 'uf1', elementname: '個人の成長と学び' },
-        { sy1: 'u', sy2: 'f', sy3: 2, id: 'uf2', elementname: '社会貢献' },
-        { sy1: 'u', sy2: 'f', sy3: 3, id: 'uf3', elementname: '仕事の質と成果' },
-        { sy1: 'u', sy2: 'f', sy3: 4, id: 'uf4', elementname: '創造性とイノベーション' },
-        { sy1: 'u', sy2: 'f', sy3: 5, id: 'uf5', elementname: '協力とチームワーク' },
-        { sy1: 'u', sy2: 'f', sy3: 6, id: 'uf6', elementname: '自由と柔軟性' },
-        { sy1: 'u', sy2: 'f', sy3: 7, id: 'uf7', elementname: '安定と安全' },
-        { sy1: 'u', sy2: 'f', sy3: 8, id: 'uf8', elementname: 'リーダーシップと影響力' },
-        { sy1: 'u', sy2: 'f', sy3: 9, id: 'uf9', elementname: '冒険と挑戦' },
-        { sy1: 'u', sy2: 'f', sy3: 10, id: 'uf10', elementname: 'ワークライフバランス' },
-        { sy1: 'u', sy2: 'f', sy3: 11, id: 'uf11', elementname: '報酬と評価' },
-        { sy1: 'u', sy2: 'f', sy3: 12, id: 'uf12', elementname: '倫理と道徳性' }
+        { sy1: "u", sy2: "f", sy3: 1, id: "uf1", elementname: "個人の成長と学び" },
+        { sy1: "u", sy2: "f", sy3: 2, id: "uf2", elementname: "社会貢献" },
+        { sy1: "u", sy2: "f", sy3: 3, id: "uf3", elementname: "仕事の質と成果" },
+        { sy1: "u", sy2: "f", sy3: 4, id: "uf4", elementname: "創造性とイノベーション" },
+        { sy1: "u", sy2: "f", sy3: 5, id: "uf5", elementname: "協力とチームワーク" },
+        { sy1: "u", sy2: "f", sy3: 6, id: "uf6", elementname: "自由と柔軟性" },
+        { sy1: "u", sy2: "f", sy3: 7, id: "uf7", elementname: "安定と安全" },
+        { sy1: "u", sy2: "f", sy3: 8, id: "uf8", elementname: "リーダーシップと影響力" },
+        { sy1: "u", sy2: "f", sy3: 9, id: "uf9", elementname: "冒険と挑戦" },
+        { sy1: "u", sy2: "f", sy3: 10, id: "uf10", elementname: "ワークライフバランス" },
+        { sy1: "u", sy2: "f", sy3: 11, id: "uf11", elementname: "報酬と評価" },
+        { sy1: "u", sy2: "f", sy3: 12, id: "uf12", elementname: "倫理と道徳性" }
     ];
 
     const skillsQuestions = [
@@ -117,352 +117,56 @@ document.addEventListener("DOMContentLoaded", function() {
         { elementname: "趣味や余暇の時間に、どのような活動を行いますか？", option1: "身体活動", option2: "勉強", axis1: "身体能力", axis2: "学力", el_sy1: "o", el_sy2: "p", el_sy3: 5, el_ID: "op5", ax1_sy1: "e", ax1_sy2: "k", ax1_sy3: 1, ax1_id: "ek1", ax2_sy1: "e", ax2_sy2: "k", ax2_sy3: 2, ax2_id: "ek2" }
     ];
 
-    function showPhase(phase) {
-        document.querySelectorAll('.phase').forEach(function(phaseDiv) {
-            phaseDiv.classList.remove('active');
-        });
-        document.getElementById('phase' + phase).classList.add('active');
-    }
+    const preprocessingTable = skillsQuestions.map(question => ({
+        chosen: false,
+        axis1score: 0,
+        axis2score: 0,
+        sy1: question.el_sy1,
+        sy2: question.el_sy2,
+        sy3: question.el_sy3,
+        id: question.el_ID,
+        elementname: question.elementname
+    }));
 
-    function generateQuestions() {
-        const hobbyOptionsContainer = document.getElementById('hobbyOptions');
-        const likeFactorsOptionsContainer1 = document.getElementById('likeFactorsOptions1');
-        const likeFactorsOptionsContainer2 = document.getElementById('likeFactorsOptions2');
-        const likeFactorsOptionsContainer3 = document.getElementById('likeFactorsOptions3');
-        const likeFactorsOptionsContainer4 = document.getElementById('likeFactorsOptions4');
-        const importantFactorsOptionsContainer = document.getElementById('importantFactorsOptions');
-        const skillsQuestionsContainer = document.getElementById('skillsQuestions');
-
-        // 趣味の選択肢を生成
-        hobbyOptions.forEach((option, index) => {
-            const optionDiv = document.createElement('div');
-            optionDiv.className = 'option';
-            optionDiv.innerHTML = `
-                <label for="hobby${index + 1}">
-                    <input type="checkbox" id="hobby${index + 1}" name="hobbies" value="${option.elementname}">
-                    ${option.elementname}
-                </label>
-            `;
-            hobbyOptionsContainer.appendChild(optionDiv);
-        });
-
-        // 好きなことの要素を生成（1つ目のセット）
-        likeFactorsOptions1.forEach((option, index) => {
-            const optionDiv = document.createElement('div');
-            optionDiv.className = 'option';
-            optionDiv.innerHTML = `
-                <label for="likeFactor1-${index + 1}">
-                    <input type="radio" id="likeFactor1-${index + 1}" name="likeFactors1" value="${option.elementname}">
-                    ${option.elementname}
-                </label>
-            `;
-            likeFactorsOptionsContainer1.appendChild(optionDiv);
-        });
-
-        // 好きなことの要素を生成（2つ目のセット）
-        likeFactorsOptions2.forEach((option, index) => {
-            const optionDiv = document.createElement('div');
-            optionDiv.className = 'option';
-            optionDiv.innerHTML = `
-                <label for="likeFactor2-${index + 1}">
-                    <input type="radio" id="likeFactor2-${index + 1}" name="likeFactors2" value="${option.elementname}">
-                    ${option.elementname}
-                </label>
-            `;
-            likeFactorsOptionsContainer2.appendChild(optionDiv);
-        });
-
-        // 好きなことの要素を生成（3つ目のセット）
-        likeFactorsOptions3.forEach((option, index) => {
-            const optionDiv = document.createElement('div');
-            optionDiv.className = 'option';
-            optionDiv.innerHTML = `
-                <label for="likeFactor3-${index + 1}">
-                    <input type="radio" id="likeFactor3-${index + 1}" name="likeFactors3" value="${option.elementname}">
-                    ${option.elementname}
-                </label>
-            `;
-            likeFactorsOptionsContainer3.appendChild(optionDiv);
-        });
-
-        // 好きなことの要素を生成（4つ目のセット）
-        likeFactorsOptions4.forEach((option, index) => {
-            const optionDiv = document.createElement('div');
-            optionDiv.className = 'option';
-            optionDiv.innerHTML = `
-                <label for="likeFactor4-${index + 1}">
-                    <input type="checkbox" id="likeFactor4-${index + 1}" name="likeFactors4" value="${option.elementname}">
-                    ${option.elementname}
-                </label>
-            `;
-            likeFactorsOptionsContainer4.appendChild(optionDiv);
-        });
-
-        // 大事にしたいことの要素を生成
-        importantFactorsOptions.forEach((option, index) => {
-            const optionDiv = document.createElement('div');
-            optionDiv.className = 'option';
-            optionDiv.innerHTML = `
-                <label for="importantFactor${index + 1}">
-                    <input type="checkbox" id="importantFactor${index + 1}" name="importantFactors" value="${option.elementname}">
-                    ${option.elementname}
-                </label>
-            `;
-            importantFactorsOptionsContainer.appendChild(optionDiv);
-        });
-
-        // 得意なことの質問を生成
-        const groupedQuestions = [
-            skillsQuestions.slice(0, 5),
-            skillsQuestions.slice(5, 10),
-            skillsQuestions.slice(10, 15),
-            skillsQuestions.slice(15, 20),
-            skillsQuestions.slice(20, 25)
-        ];
-
-        let selectedQuestions = [];
-        groupedQuestions.forEach(group => {
-            selectedQuestions = selectedQuestions.concat(shuffleArray(group).slice(0, 3));
-        });
-
-        selectedQuestions = shuffleArray(selectedQuestions);
-
-        selectedQuestions.forEach((question, index) => {
-            const questionDiv = document.createElement('div');
-            questionDiv.className = 'question';
-            questionDiv.innerHTML = `
-                <div class="question-label-container">
-                    <label class="question-label">${question.elementname}</label>
-                </div>
-                <div class="label-row">
-                    <div class="empty"></div>
-                    <div class="strong-agree">強く同意する</div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="neutral">どちらともいえない</div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="strong-agree">強く同意する</div>
-                    <div class="empty"></div>
-                </div>
-                <div class="buttons-container">
-                    <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-1"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="2" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-2"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="3" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-3"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="4" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-4"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="5" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-5"><span></span></label>
-                    <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
-                    <label for="skill${index + 1}-6"><span></span></label>
-                </div>
-                <div class="options-row">
-                    <div class="empty"></div>
-                    <div class="option">${question.option1}</div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="empty"></div>
-                    <div class="option">${question.option2}</div>
-                    <div class="empty"></div>
-                </div>
-            `;
-            skillsQuestionsContainer.appendChild(questionDiv);
-        });
-    }
-
-    function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    }
-
-    window.validateHobbies = function() {
-        const selectedHobbies = document.querySelectorAll('input[name="hobbies"]:checked');
-        const warning = document.getElementById('hobbyWarning');
-        
-        if (selectedHobbies.length < 1 || selectedHobbies.length > 3) {
-            warning.textContent = '趣味は1つ以上3つ以内で選択してください。';
-            return false;
-        } else {
-            warning.textContent = '';
-            return true;
-        }
-    }
-
-    window.validateLikeFactors = function() {
-        const selectedLikeFactors1 = document.querySelectorAll('input[name="likeFactors1"]:checked');
-        const selectedLikeFactors2 = document.querySelectorAll('input[name="likeFactors2"]:checked');
-        const selectedLikeFactors3 = document.querySelectorAll('input[name="likeFactors3"]:checked');
-        const selectedLikeFactors4 = document.querySelectorAll('input[name="likeFactors4"]:checked');
-        const warnings = [
-            document.getElementById('likeFactorsWarning1'),
-            document.getElementById('likeFactorsWarning2'),
-            document.getElementById('likeFactorsWarning3'),
-            document.getElementById('likeFactorsWarning4')
-        ];
-
-        let valid = true;
-
-        if (selectedLikeFactors1.length < 1) {
-            warnings[0].textContent = '1つ以上選択してください。';
-            valid = false;
-        } else {
-            warnings[0].textContent = '';
-        }
-
-        if (selectedLikeFactors2.length < 1) {
-            warnings[1].textContent = '1つ以上選択してください。';
-            valid = false;
-        } else {
-            warnings[1].textContent = '';
-        }
-
-        if (selectedLikeFactors3.length < 1) {
-            warnings[2].textContent = '1つ以上選択してください。';
-            valid = false;
-        } else {
-            warnings[2].textContent = '';
-        }
-
-        if (selectedLikeFactors4.length < 1 || selectedLikeFactors4.length > 3) {
-            warnings[3].textContent = '1つ以上3つ以内で選択してください。';
-            valid = false;
-        } else {
-            warnings[3].textContent = '';
-        }
-
-        return valid;
-    }
-
-    window.validateImportantFactors = function() {
-        const selectedImportantFactors = document.querySelectorAll('input[name="importantFactors"]:checked');
-        const warning = document.getElementById('importantFactorsWarning');
-        
-        if (selectedImportantFactors.length < 1 || selectedImportantFactors.length > 3) {
-            warning.textContent = '大事にしたいことは1つ以上3つ以内で選択してください。';
-            return false;
-        } else {
-            warning.textContent = '';
-            return true;
-        }
-    }
-
-    function validateSkills() {
-        const skillQuestions = document.querySelectorAll('[name^="skills"]');
-        const warning = document.getElementById('skillsWarning');
-        
-        let valid = true;
-        const questionsMap = new Map();
-
-        skillQuestions.forEach(input => {
-            const questionName = input.getAttribute('name');
-            if (!questionsMap.has(questionName)) {
-                questionsMap.set(questionName, false);
-            }
-            if (input.checked) {
-                questionsMap.set(questionName, true);
+    function updatePreprocessingTable(data) {
+        const selectedSkills = data.skills || [];
+        preprocessingTable.forEach(row => {
+            const question = skillsQuestions.find(q => q.el_ID === row.id);
+            if (question) {
+                const selectedOption = selectedSkills.find(skill => skill.startsWith(row.id));
+                if (selectedOption) {
+                    row.chosen = true;
+                    const value = parseInt(selectedOption.split('-')[1], 10);
+                    if (value >= 1 && value <= 3) {
+                        row.axis1score = 4 - value;
+                    } else if (value >= 4 && value <= 6) {
+                        row.axis2score = value - 3;
+                    }
+                }
             }
         });
-
-        questionsMap.forEach((answered, questionName) => {
-            if (!answered) {
-                valid = false;
-            }
-        });
-
-        if (!valid) {
-            warning.textContent = '全ての質問に対して6段階評価を選択してください。';
-        } else {
-            warning.textContent = '';
-        }
-
-        return valid;
-    }
-
-    function saveSelectionsToLocalStorage(formData) {
-        const hobbies = formData.getAll('hobbies');
-        const likeFactors1 = formData.getAll('likeFactors1');
-        const likeFactors2 = formData.getAll('likeFactors2');
-        const likeFactors3 = formData.getAll('likeFactors3');
-        const likeFactors4 = formData.getAll('likeFactors4');
-        const importantFactors = formData.getAll('importantFactors');
-        const skills = formData.getAll('skills');
-
-        const data = { hobbies, likeFactors1, likeFactors2, likeFactors3, likeFactors4, importantFactors, skills };
-
-        localStorage.setItem('diagnosisData', JSON.stringify(data));
     }
 
     function generatePreprocessingTable() {
         const data = JSON.parse(localStorage.getItem('diagnosisData'));
         if (!data) {
             console.error('診断データが見つかりませんでした。');
-            return [];
+            return;
         }
-
-        const preprocessingTable = skillsQuestions.map(question => {
-            const isChosen = data.skills.some(skill => {
-                const skillQuestion = skillsQuestions.find(q => q.elementname === skill);
-                return skillQuestion && skillQuestion.elementname === question.elementname;
-            });
-
-            let axis1Score = 0;
-            let axis2Score = 0;
-
-            if (isChosen) {
-                data.skills.forEach(skill => {
-                    if (question.elementname === skill) {
-                        const value = parseInt(skill, 10);
-                        if (value === 1) axis1Score += 3;
-                        if (value === 2) axis1Score += 2;
-                        if (value === 3) axis1Score += 1;
-                        if (value === 4) axis2Score += 1;
-                        if (value === 5) axis2Score += 2;
-                        if (value === 6) axis2Score += 3;
-                    }
-                });
-            }
-
-            return {
-                chosen: isChosen ? 1 : 0,
-                axis1score: isChosen ? axis1Score : 0,
-                axis2score: isChosen ? axis2Score : 0,
-                sy1: question.el_sy1,
-                sy2: question.el_sy2,
-                sy3: question.el_sy3,
-                id: question.el_ID,
-                elementname: question.elementname
-            };
-        });
-
+        updatePreprocessingTable(data);
         localStorage.setItem('preprocessingTable', JSON.stringify(preprocessingTable));
-        return preprocessingTable;
     }
 
     function generateScoreTable() {
         const data = JSON.parse(localStorage.getItem('diagnosisData'));
         const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable'));
+
         if (!data || !preprocessingTable) {
-            console.error('診断データまたは前処理データが見つかりませんでした。');
+            console.error('必要なデータが見つかりませんでした。');
             return;
         }
 
         const scoreTable = [
-            // 趣味
             ...hobbyOptions.map(option => ({
                 score: data.hobbies.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -471,7 +175,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
-            // 好きなこと（likeFactorsOptions1）
             ...likeFactorsOptions1.map(option => ({
                 score: data.likeFactors1.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -480,7 +183,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
-            // 好きなこと（likeFactorsOptions2）
             ...likeFactorsOptions2.map(option => ({
                 score: data.likeFactors2.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -489,7 +191,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
-            // 好きなこと（likeFactorsOptions3）
             ...likeFactorsOptions3.map(option => ({
                 score: data.likeFactors3.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -498,7 +199,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
-            // 好きなこと（likeFactorsOptions4）
             ...likeFactorsOptions4.map(option => ({
                 score: data.likeFactors4.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -507,7 +207,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
-            // 大事にしたいこと
             ...importantFactorsOptions.map(option => ({
                 score: data.importantFactors.includes(option.elementname) ? '1' : '0',
                 sy1: option.sy1,
@@ -516,7 +215,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 id: option.id,
                 elementname: option.elementname
             })),
-            // 得意なこと
             ...preprocessingTable.map(preprocess => ({
                 score: preprocess.chosen ? `${preprocess.axis1score}/${preprocess.axis2score}` : '0/0',
                 sy1: preprocess.sy1,
@@ -546,6 +244,282 @@ document.addEventListener("DOMContentLoaded", function() {
             showResults();
         }
     });
-    
+
     generateQuestions();
 });
+
+function validateHobbies() {
+    const selectedHobbies = document.querySelectorAll('input[name="hobbies"]:checked');
+    const warning = document.getElementById('hobbyWarning');
+    
+    if (selectedHobbies.length < 1 || selectedHobbies.length > 3) {
+        warning.textContent = '趣味は1つ以上3つ以内で選択してください。';
+        return false;
+    } else {
+        warning.textContent = '';
+        return true;
+    }
+}
+
+function validateLikeFactors() {
+    const selectedLikeFactors1 = document.querySelectorAll('input[name="likeFactors1"]:checked');
+    const selectedLikeFactors2 = document.querySelectorAll('input[name="likeFactors2"]:checked');
+    const selectedLikeFactors3 = document.querySelectorAll('input[name="likeFactors3"]:checked');
+    const selectedLikeFactors4 = document.querySelectorAll('input[name="likeFactors4"]:checked');
+    const warnings = [
+        document.getElementById('likeFactorsWarning1'),
+        document.getElementById('likeFactorsWarning2'),
+        document.getElementById('likeFactorsWarning3'),
+        document.getElementById('likeFactorsWarning4')
+    ];
+
+    let valid = true;
+
+    if (selectedLikeFactors1.length < 1) {
+        warnings[0].textContent = '1つ以上選択してください。';
+        valid = false;
+    } else {
+        warnings[0].textContent = '';
+    }
+
+    if (selectedLikeFactors2.length < 1) {
+        warnings[1].textContent = '1つ以上選択してください。';
+        valid = false;
+    } else {
+        warnings[1].textContent = '';
+    }
+
+    if (selectedLikeFactors3.length < 1) {
+        warnings[2].textContent = '1つ以上選択してください。';
+        valid = false;
+    } else {
+        warnings[2].textContent = '';
+    }
+
+    if (selectedLikeFactors4.length < 1 || selectedLikeFactors4.length > 3) {
+        warnings[3].textContent = '1つ以上3つ以内で選択してください。';
+        valid = false;
+    } else {
+        warnings[3].textContent = '';
+    }
+
+    return valid;
+}
+
+function validateImportantFactors() {
+    const selectedImportantFactors = document.querySelectorAll('input[name="importantFactors"]:checked');
+    const warning = document.getElementById('importantFactorsWarning');
+    
+    if (selectedImportantFactors.length < 1 || selectedImportantFactors.length > 3) {
+        warning.textContent = '大事にしたいことは1つ以上3つ以内で選択してください。';
+        return false;
+    } else {
+        warning.textContent = '';
+        return true;
+    }
+}
+
+function validateSkills() {
+    const skillQuestions = document.querySelectorAll('[name^="skills"]');
+    const warning = document.getElementById('skillsWarning');
+    
+    let valid = true;
+    const questionsMap = new Map();
+
+    skillQuestions.forEach(input => {
+        const questionName = input.getAttribute('name');
+        if (!questionsMap.has(questionName)) {
+            questionsMap.set(questionName, false);
+        }
+        if (input.checked) {
+            questionsMap.set(questionName, true);
+        }
+    });
+
+    questionsMap.forEach((answered, questionName) => {
+        if (!answered) {
+            valid = false;
+        }
+    });
+
+    if (!valid) {
+        warning.textContent = '全ての質問に対して6段階評価を選択してください。';
+    } else {
+        warning.textContent = '';
+    }
+
+    return valid;
+}
+
+function saveSelectionsToLocalStorage(formData) {
+    const hobbies = formData.getAll('hobbies');
+    const likeFactors1 = formData.getAll('likeFactors1');
+    const likeFactors2 = formData.getAll('likeFactors2');
+    const likeFactors3 = formData.getAll('likeFactors3');
+    const likeFactors4 = formData.getAll('likeFactors4');
+    const importantFactors = formData.getAll('importantFactors');
+    const skills = formData.getAll('skills');
+
+    const data = { hobbies, likeFactors1, likeFactors2, likeFactors3, likeFactors4, importantFactors, skills };
+
+    localStorage.setItem('diagnosisData', JSON.stringify(data));
+}
+
+function generateQuestions() {
+    const hobbyOptionsContainer = document.getElementById('hobbyOptions');
+    const likeFactorsOptionsContainer1 = document.getElementById('likeFactorsOptions1');
+    const likeFactorsOptionsContainer2 = document.getElementById('likeFactorsOptions2');
+    const likeFactorsOptionsContainer3 = document.getElementById('likeFactorsOptions3');
+    const likeFactorsOptionsContainer4 = document.getElementById('likeFactorsOptions4');
+    const importantFactorsOptionsContainer = document.getElementById('importantFactorsOptions');
+    const skillsQuestionsContainer = document.getElementById('skillsQuestions');
+
+    hobbyOptions.forEach(option => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'option';
+        optionDiv.innerHTML = `
+            <label for="${option.id}">
+                <input type="checkbox" id="${option.id}" name="hobbies" value="${option.elementname}">
+                ${option.elementname}
+            </label>
+        `;
+        hobbyOptionsContainer.appendChild(optionDiv);
+    });
+
+    likeFactorsOptions1.forEach(option => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'option';
+        optionDiv.innerHTML = `
+            <label for="${option.id}">
+                <input type="radio" id="${option.id}" name="likeFactors1" value="${option.elementname}">
+                ${option.elementname}
+            </label>
+        `;
+        likeFactorsOptionsContainer1.appendChild(optionDiv);
+    });
+
+    likeFactorsOptions2.forEach(option => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'option';
+        optionDiv.innerHTML = `
+            <label for="${option.id}">
+                <input type="radio" id="${option.id}" name="likeFactors2" value="${option.elementname}">
+                ${option.elementname}
+            </label>
+        `;
+        likeFactorsOptionsContainer2.appendChild(optionDiv);
+    });
+
+    likeFactorsOptions3.forEach(option => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'option';
+        optionDiv.innerHTML = `
+            <label for="${option.id}">
+                <input type="radio" id="${option.id}" name="likeFactors3" value="${option.elementname}">
+                ${option.elementname}
+            </label>
+        `;
+        likeFactorsOptionsContainer3.appendChild(optionDiv);
+    });
+
+    likeFactorsOptions4.forEach(option => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'option';
+        optionDiv.innerHTML = `
+            <label for="${option.id}">
+                <input type="checkbox" id="${option.id}" name="likeFactors4" value="${option.elementname}">
+                ${option.elementname}
+            </label>
+        `;
+        likeFactorsOptionsContainer4.appendChild(optionDiv);
+    });
+
+    importantFactorsOptions.forEach(option => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'option';
+        optionDiv.innerHTML = `
+            <label for="${option.id}">
+                <input type="checkbox" id="${option.id}" name="importantFactors" value="${option.elementname}">
+                ${option.elementname}
+            </label>
+        `;
+        importantFactorsOptionsContainer.appendChild(optionDiv);
+    });
+
+    const groupedQuestions = [
+        skillsQuestions.slice(0, 5),
+        skillsQuestions.slice(5, 10),
+        skillsQuestions.slice(10, 15),
+        skillsQuestions.slice(15, 20),
+        skillsQuestions.slice(20, 25)
+    ];
+
+    let selectedQuestions = [];
+    groupedQuestions.forEach(group => {
+        selectedQuestions = selectedQuestions.concat(shuffleArray(group).slice(0, 3));
+    });
+
+    selectedQuestions = shuffleArray(selectedQuestions);
+
+    selectedQuestions.forEach((question, index) => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question';
+        questionDiv.innerHTML = `
+            <div class="question-label-container">
+                <label class="question-label">${question.elementname}</label>
+            </div>
+            <div class="label-row">
+                <div class="empty"></div>
+                <div class="strong-agree">強く同意する</div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="neutral">どちらともいえない</div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="strong-agree">強く同意する</div>
+                <div class="empty"></div>
+            </div>
+            <div class="buttons-container">
+                <input type="radio" id="skill${index + 1}-1" name="skills${index + 1}" value="${question.el_ID}-1" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                <label for="skill${index + 1}-1"><span></span></label>
+                <input type="radio" id="skill${index + 1}-2" name="skills${index + 1}" value="${question.el_ID}-2" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                <label for="skill${index + 1}-2"><span></span></label>
+                <input type="radio" id="skill${index + 1}-3" name="skills${index + 1}" value="${question.el_ID}-3" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                <label for="skill${index + 1}-3"><span></span></label>
+                <input type="radio" id="skill${index + 1}-4" name="skills${index + 1}" value="${question.el_ID}-4" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                <label for="skill${index + 1}-4"><span></span></label>
+                <input type="radio" id="skill${index + 1}-5" name="skills${index + 1}" value="${question.el_ID}-5" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                <label for="skill${index + 1}-5"><span></span></label>
+                <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="${question.el_ID}-6" data-axis1="${question.axis1}" data-axis2="${question.axis2}">
+                <label for="skill${index + 1}-6"><span></span></label>
+            </div>
+                <div class="options-row">
+                <div class="empty"></div>
+                <div class="option">${question.option1}</div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="empty"></div>
+                <div class="option">${question.option2}</div>
+                <div class="empty"></div>
+            </div>
+        `;
+        skillsQuestionsContainer.appendChild(questionDiv);
+    });
+}
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
