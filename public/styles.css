@@ -121,7 +121,7 @@ h2 {
 .circle-text-left {
     position: absolute;
     top: 50%;
-    left: 10%;
+    left: 20%;
     transform: translate(-50%, -50%);
 }
 
@@ -135,13 +135,13 @@ h2 {
 .circle-text-right {
     position: absolute;
     top: 50%;
-    right: 10%;
+    right: 20%;
     transform: translate(50%, -50%);
 }
 
 #circle1 {
     background-color: rgba(255, 0, 0, 0.2);
-    top: 30%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -155,7 +155,7 @@ h2 {
 
 #circle3 {
     background-color: rgba(0, 0, 255, 0.2);
-    top: 70%;
+    top: 65%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
