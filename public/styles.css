@@ -1,8 +1,7 @@
-/* Add this to the existing CSS file */
-
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #1e1e1e;
+    color: #fff;
     margin: 0;
     padding: 0;
 }
@@ -47,7 +46,7 @@ nav ul li a:hover {
 }
 
 main {
-    background: #fff;
+    background: #2e2e2e;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -56,7 +55,7 @@ main {
 
 h2 {
     text-align: center;
-    color: #333;
+    color: #fff;
 }
 
 .steps {
@@ -66,9 +65,9 @@ h2 {
 }
 
 .step {
-    background: #f9f9f9;
+    background: #444;
     padding: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid #555;
     border-radius: 8px;
 }
 
@@ -78,7 +77,7 @@ h2 {
     margin: 10px 0;
     font-size: 16px;
     color: #fff;
-    background-color: #333;
+    background-color: #007bff;
     border: none;
     border-radius: 8px;
     text-align: center;
@@ -87,47 +86,64 @@ h2 {
 }
 
 .button:hover {
-    background-color: #555;
+    background-color: #0056b3;
 }
 
-.ikigai-diagram {
+.ikigai-diagram-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+}
+
+.ikigai-table {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 600px;
+}
+
+.ikigai-table .ikigai-cell {
+    width: 14.28%;
+    height: 50px;
+}
+
+.ikigai-table .ikigai-center {
+    text-align: center;
+    vertical-align: middle;
     position: relative;
-    width: 400px;
-    height: 400px;
-    margin: 40px auto;
+    font-size: 0.9em;
+    padding: 10px;
+    color: #fff;
 }
 
-.ikigai-element {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-color: rgba(51, 51, 51, 0.8);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 10px;
-    box-sizing: border-box;
+.ikigai-table .ikigai-core {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ff9900;
 }
 
-.ikigai-core {
-    position: absolute;
-    width: 150px;
-    height: 150px;
+.ikigai-table .ikigai-top {
+    background-color: rgba(255, 0, 0, 0.2);
+    border: 2px solid #fff;
     border-radius: 50%;
-    background-color: #ff9900;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 10px;
-    box-sizing: border-box;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+}
+
+.ikigai-table .ikigai-left {
+    background-color: rgba(0, 255, 0, 0.2);
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.ikigai-table .ikigai-right {
+    background-color: rgba(0, 0, 255, 0.2);
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.ikigai-table .ikigai-bottom {
+    background-color: rgba(255, 255, 0, 0.2);
+    border: 2px solid #fff;
+    border-radius: 50%;
 }
 
 footer {
