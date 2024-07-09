@@ -88,11 +88,6 @@ h2 {
     background-color: #555;
 }
 
-.ikigai-container {
-    display: flex;
-    justify-content: flex-start;
-}
-
 .ikigai-diagram {
     position: relative;
     width: 400px;
