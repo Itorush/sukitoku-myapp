@@ -97,8 +97,8 @@ h2 {
 
 .ikigai-circle {
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: 230px;
+    height: 230px;
     border-radius: 50%;
     border: 2px solid #333;
     display: flex;
@@ -108,12 +108,12 @@ h2 {
     padding: 10px;
     box-sizing: border-box;
     font-weight: bold;
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
 
 .circle-text-top {
     position: absolute;
-    top: -20%;
+    top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -121,13 +121,13 @@ h2 {
 .circle-text-left {
     position: absolute;
     top: 50%;
-    left: -20%;
+    left: 10%;
     transform: translate(-50%, -50%);
 }
 
 .circle-text-bottom {
     position: absolute;
-    bottom: -20%;
+    bottom: 10%;
     left: 50%;
     transform: translate(-50%, 50%);
 }
@@ -135,13 +135,13 @@ h2 {
 .circle-text-right {
     position: absolute;
     top: 50%;
-    right: -20%;
+    right: 10%;
     transform: translate(50%, -50%);
 }
 
 #circle1 {
     background-color: rgba(255, 0, 0, 0.2);
-    top: 20%;
+    top: 50px;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -149,13 +149,13 @@ h2 {
 #circle2 {
     background-color: rgba(0, 255, 0, 0.2);
     top: 50%;
-    left: 20%;
+    left: 50px;
     transform: translate(-50%, -50%);
 }
 
 #circle3 {
     background-color: rgba(0, 0, 255, 0.2);
-    top: 80%;
+    top: 75%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -163,13 +163,13 @@ h2 {
 #circle4 {
     background-color: rgba(255, 255, 0, 0.2);
     top: 50%;
-    left: 80%;
+    left: 75%;
     transform: translate(-50%, -50%);
 }
 
 .ikigai-text {
     position: absolute;
-    font-size: 0.6em;
+    font-size: 0.7em;
     font-weight: bold;
     text-align: center;
     color: #333;
