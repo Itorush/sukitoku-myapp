@@ -179,31 +179,31 @@ h2 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 0.7em;
+    font-size: 1.5em;
 }
 
 #text-passion {
     top: 30%;
     left: 30%;
-    font-size: 0.7em;
+    font-size: 1.0em;
 }
 
 #text-mission {
     top: 30%;
     right: 30%;
-    font-size: 0.7em;
+    font-size: 1.0em;
 }
 
 #text-profession {
     bottom: 30%;
     left: 30%;
-    font-size: 0.7em;
+    font-size: 1.0em;
 }
 
 #text-vocation {
     bottom: 30%;
     right: 30%;
-    font-size: 0.7em;
+    font-size: 1.0em;
 }
 
 .small-text {
