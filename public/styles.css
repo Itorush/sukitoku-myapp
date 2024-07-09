@@ -216,4 +216,10 @@ tr:nth-child(even) {
     position: fixed;
     bottom: 0;
     width: 100%;
+    
+}
+
+.affiliate-link {
+    margin: 20px 0;
+    text-align: center;
 }
