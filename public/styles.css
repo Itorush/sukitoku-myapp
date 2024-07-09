@@ -92,15 +92,15 @@ h2 {
 
 .ikigai-diagram {
     position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 20px auto;
+    width: 400px;
+    height: 400px;
+    margin: 40px auto;
 }
 
 .ikigai-element {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     background-color: rgba(51, 51, 51, 0.8);
     color: white;
@@ -114,8 +114,8 @@ h2 {
 
 .ikigai-core {
     position: absolute;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
     background-color: #ff9900;
     color: white;
@@ -126,30 +126,6 @@ h2 {
     padding: 10px;
     box-sizing: border-box;
     top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.ikigai-element:nth-child(1) {
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.ikigai-element:nth-child(2) {
-    top: 50%;
-    left: 0;
-    transform: translate(-50%, -50%);
-}
-
-.ikigai-element:nth-child(3) {
-    top: 50%;
-    left: 100%;
-    transform: translate(-50%, -50%);
-}
-
-.ikigai-element:nth-child(4) {
-    top: 100%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
