@@ -185,49 +185,49 @@ h2 {
 #text-passion {
     top: 38%;
     left: 38%;
+    font-size: 0.7em;
 }
 
 #text-mission {
     top: 38%;
     right: 38%;
+    font-size: 0.7em;
 }
 
 #text-profession {
     bottom: 38%;
     left: 38%;
+    font-size: 0.7em;
 }
 
 #text-vocation {
     bottom: 38%;
     right: 38%;
+    font-size: 0.7em;
 }
 
 .small-text {
-    font-size: 0.3em;
+    font-size: 0.2em;
 }
 
 #text-love {
     bottom: 42%;
     right: 44%;
-    font-size: 0.3em;
 }
 
 #text-good {
     bottom: 48%;
     left: 38%;
-    font-size: 0.3em;
 }
 
 #text-paid {
     top: 48%;
     right: 38%;
-    font-size: 0.3em;
 }
 
 #text-need {
     top: 42%;
     left: 44%;
-    font-size: 0.3em;
 }
 
 footer {
