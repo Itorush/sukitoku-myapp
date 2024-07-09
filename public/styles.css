@@ -93,10 +93,10 @@ h2 {
     width: 600px;
     height: 600px;
     margin: 40px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    gap: 5px;
 }
 
 .ikigai-circle {
@@ -117,30 +117,22 @@ h2 {
 
 #circle1 {
     background-color: rgba(255, 0, 0, 0.2);
-    top: 50px;
-    left: 50%;
-    transform: translateX(-50%);
+    grid-area: 2 / 5 / span 3 / span 3;
 }
 
 #circle2 {
     background-color: rgba(0, 255, 0, 0.2);
-    top: 50%;
-    left: 50px;
-    transform: translateY(-50%);
+    grid-area: 5 / 2 / span 3 / span 3;
 }
 
 #circle3 {
     background-color: rgba(0, 0, 255, 0.2);
-    top: 50%;
-    right: 50px;
-    transform: translateY(-50%);
+    grid-area: 7 / 5 / span 3 / span 3;
 }
 
 #circle4 {
     background-color: rgba(255, 255, 0, 0.2);
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
+    grid-area: 5 / 7 / span 3 / span 3;
 }
 
 .ikigai-text {
@@ -150,63 +142,46 @@ h2 {
     color: #333;
     background: #fff;
     padding: 5px;
+    font-size: 0.9em;
 }
 
 #ikigai {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(255, 255, 255, 0.8);
-    padding: 10px 20px;
-    border-radius: 10px;
-}
-
-#text-passion {
-    top: 20%;
-    left: 30%;
-    transform: translate(-50%, -50%);
-}
-
-#text-mission {
-    top: 20%;
-    right: 30%;
-    transform: translate(50%, -50%);
-}
-
-#text-profession {
-    bottom: 20%;
-    left: 30%;
-    transform: translate(-50%, 50%);
-}
-
-#text-vocation {
-    bottom: 20%;
-    right: 30%;
-    transform: translate(50%, 50%);
+    grid-area: 5 / 5;
+    background: rgba(255, 165, 0, 0.7);
+    font-size: 1.2em;
+    font-weight: bold;
 }
 
 #text-love {
-    top: 50%;
-    left: 15%;
-    transform: translate(-50%, -50%);
+    grid-area: 5 / 4;
+}
+
+#text-passion {
+    grid-area: 4 / 4;
 }
 
 #text-good {
-    bottom: 50%;
-    left: 15%;
-    transform: translate(-50%, 50%);
+    grid-area: 6 / 4;
 }
 
 #text-paid {
-    top: 50%;
-    right: 15%;
-    transform: translate(50%, -50%);
+    grid-area: 6 / 6;
 }
 
 #text-need {
-    bottom: 50%;
-    right: 15%;
-    transform: translate(50%, 50%);
+    grid-area: 4 / 6;
+}
+
+#text-mission {
+    grid-area: 4 / 5;
+}
+
+#text-profession {
+    grid-area: 6 / 5;
+}
+
+#text-vocation {
+    grid-area: 5 / 6;
 }
 
 footer {
