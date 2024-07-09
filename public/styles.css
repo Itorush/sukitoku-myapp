@@ -93,10 +93,6 @@ h2 {
     width: 600px;
     height: 600px;
     margin: 40px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
 }
 
 .ikigai-circle {
@@ -111,14 +107,42 @@ h2 {
     text-align: center;
     padding: 10px;
     box-sizing: border-box;
-    color: white;
     font-weight: bold;
-    font-size: 0.8em;
+    font-size: 0.7em;
+    color: white;
+}
+
+.circle-text-top {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.circle-text-left {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+}
+
+.circle-text-bottom {
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.circle-text-right {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translate(50%, -50%);
 }
 
 #circle1 {
     background-color: rgba(255, 0, 0, 0.2);
-    top: 10%;
+    top: 15%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -126,13 +150,13 @@ h2 {
 #circle2 {
     background-color: rgba(0, 255, 0, 0.2);
     top: 50%;
-    left: 10%;
+    left: 15%;
     transform: translate(-50%, -50%);
 }
 
 #circle3 {
     background-color: rgba(0, 0, 255, 0.2);
-    bottom: 10%;
+    bottom: 15%;
     left: 50%;
     transform: translate(-50%, 50%);
 }
@@ -140,18 +164,16 @@ h2 {
 #circle4 {
     background-color: rgba(255, 255, 0, 0.2);
     top: 50%;
-    right: 10%;
+    right: 15%;
     transform: translate(50%, -50%);
 }
 
 .ikigai-text {
     position: absolute;
-    text-align: center;
-    font-weight: bold;
-    color: #333;
-    background: #fff;
-    padding: 5px;
     font-size: 0.8em;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
 }
 
 #ikigai {
