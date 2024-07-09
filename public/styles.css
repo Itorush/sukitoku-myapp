@@ -113,7 +113,7 @@ h2 {
 
 .circle-text-top {
     position: absolute;
-    top: 10%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -127,7 +127,7 @@ h2 {
 
 .circle-text-bottom {
     position: absolute;
-    bottom: 10%;
+    bottom: 20%;
     left: 50%;
     transform: translate(-50%, 50%);
 }
@@ -183,8 +183,8 @@ h2 {
 }
 
 #text-passion {
-    top: 38%;
-    left: 38%;
+    top: 45%;
+    left: 45%;
     font-size: 0.7em;
 }
 
