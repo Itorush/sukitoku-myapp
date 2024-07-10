@@ -48,6 +48,7 @@ main {
 h2 {
     font-size: 1.8em;
     color: #34495e;
+    text-align: left;
 }
 
 p {
@@ -216,4 +217,153 @@ tr:nth-child(even) {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.ikigai-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.ikigai-diagram {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+
+.ikigai-circle {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 0.7em;
+}
+
+.circle-text-top {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.circle-text-left {
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
+
+.circle-text-bottom {
+    position: absolute;
+    bottom: 20%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+}
+
+.circle-text-right {
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    transform: translate(50%, -50%);
+}
+
+#circle1 {
+    background-color: rgba(255, 0, 0, 0.2);
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#circle2 {
+    background-color: rgba(0, 255, 0, 0.2);
+    top: 50%;
+    left: 35%;
+    transform: translate(-50%, -50%);
+}
+
+#circle3 {
+    background-color: rgba(0, 0, 255, 0.2);
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#circle4 {
+    background-color: rgba(255, 255, 0, 0.2);
+    top: 50%;
+    left: 65%;
+    transform: translate(-50%, -50%);
+}
+
+.ikigai-text {
+    position: absolute;
+    font-size: 0.5em;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+#ikigai {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    color: gold;
+}
+
+#text-passion {
+    top: 30%;
+    left: 30%;
+    font-size: 1.0em;
+}
+
+#text-mission {
+    top: 30%;
+    right: 30%;
+    font-size: 1.0em;
+}
+
+#text-profession {
+    bottom: 30%;
+    left: 30%;
+    font-size: 1.0em;
+}
+
+#text-vocation {
+    bottom: 30%;
+    right: 30%;
+    font-size: 1.0em;
+}
+
+.small-text {
+    font-size: 0.2em;
+    color: #555;
+}
+
+#text-love {
+    bottom: 36%;
+    right: 45%;
+}
+
+#text-good {
+    bottom: 48%;
+    left: 32%;
+}
+
+#text-paid {
+    top: 48%;
+    right: 32%;
+}
+
+#text-need {
+    top: 36%;
+    left: 45%;
 }
