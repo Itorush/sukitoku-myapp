@@ -88,11 +88,26 @@ h2 {
     background-color: #555;
 }
 
+.button-primary {
+    background-color: #e74c3c;
+    font-size: 18px;
+    padding: 15px 30px;
+}
+
+.button-primary:hover {
+    background-color: #c0392b;
+}
+
+.ikigai-container {
+    display: flex;
+    justify-content: flex-start; /* 左寄せに変更 */
+    margin-top: 20px;
+}
+
 .ikigai-diagram {
     position: relative;
     width: 400px;
     height: 400px;
-    margin: 40px auto;
 }
 
 .ikigai-circle {
