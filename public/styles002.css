@@ -87,10 +87,23 @@ p {
     text-align: center;
     text-decoration: none;
     cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .button:hover {
     background-color: #555;
+    transform: scale(1.05);
+}
+
+/* 目立つボタン用のスタイル */
+.button-primary {
+    background-color: #e74c3c;
+    font-size: 18px;
+    padding: 15px 30px;
+}
+
+.button-primary:hover {
+    background-color: #c0392b;
 }
 
 .ikigai-container {
