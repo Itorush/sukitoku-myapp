@@ -55,39 +55,48 @@ document.addEventListener("DOMContentLoaded", function() {
         ek2: 'あなたは学力に優れる特徴があるようです。この特徴は、知識を習得し、理解し、応用する能力を指します。これにより、学術的な成果を上げ、専門分野での成功に寄与します。'
     };
 
-    const skillScoreTable = [
-        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'g', sy3: 1, id: 'eg1', elementname: '論理' },
-        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'g', sy3: 2, id: 'eg2', elementname: '感情' },
-        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'h', sy3: 1, id: 'eh1', elementname: '精密性' },
-        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'h', sy3: 2, id: 'eh2', elementname: '全体像' },
-        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'i', sy3: 1, id: 'ei1', elementname: '伝統性' },
-        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'i', sy3: 2, id: 'ei2', elementname: '創造性' },
-        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'j', sy3: 1, id: 'ej1', elementname: '熟考' },
-        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'j', sy3: 2, id: 'ej2', elementname: '即座' },
-        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'k', sy3: 1, id: 'ek1', elementname: '身体能力' },
-        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'k', sy3: 2, id: 'ek2', elementname: '学力' }
-    ];
+    // 得意な要素の合計スコアを計算
+    const sumScores = {
+        eg1: 0,
+        eg2: 0,
+        eh1: 0,
+        eh2: 0,
+        ei1: 0,
+        ei2: 0,
+        ej1: 0,
+        ej2: 0,
+        ek1: 0,
+        ek2: 0
+    };
 
-    localStorage.setItem('skillScoreTable', JSON.stringify(skillScoreTable));
+    preprocessingTable.forEach(preprocess => {
+        const axis1Score = preprocess.axis1score;
+        const axis2Score = preprocess.axis2score;
 
-    // スコア結果表示
-    const scoreResultsBody = document.getElementById('scoreResultsBody');
+        if (preprocess.ax1_id) {
+            sumScores[preprocess.ax1_id] += axis1Score;
+        }
 
-    skillScoreTable.forEach(row => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-            <td>${row.score}</td>
-            <td>${row.sy1}</td>
-            <td>${row.sy2}</td>
-            <td>${row.sy3}</td>
-            <td>${row.id}</td>
-            <td>${row.elementname}</td>
-        `;
-        scoreResultsBody.appendChild(tr);
+        if (preprocess.ax2_id) {
+            sumScores[preprocess.ax2_id] += axis2Score;
+        }
     });
 
+    const elementSumScores = [
+        { score: sumScores.eg1, sy1: 'e', sy2: 'g', sy3: 1, id: 'eg1', elementname: '論理' },
+        { score: sumScores.eg2, sy1: 'e', sy2: 'g', sy3: 2, id: 'eg2', elementname: '感情' },
+        { score: sumScores.eh1, sy1: 'e', sy2: 'h', sy3: 1, id: 'eh1', elementname: '精密性' },
+        { score: sumScores.eh2, sy1: 'e', sy2: 'h', sy3: 2, id: 'eh2', elementname: '全体像' },
+        { score: sumScores.ei1, sy1: 'e', sy2: 'i', sy3: 1, id: 'ei1', elementname: '伝統性' },
+        { score: sumScores.ei2, sy1: 'e', sy2: 'i', sy3: 2, id: 'ei2', elementname: '創造性' },
+        { score: sumScores.ej1, sy1: 'e', sy2: 'j', sy3: 1, id: 'ej1', elementname: '熟考' },
+        { score: sumScores.ej2, sy1: 'e', sy2: 'j', sy3: 2, id: 'ej2', elementname: '即座' },
+        { score: sumScores.ek1, sy1: 'e', sy2: 'k', sy3: 1, id: 'ek1', elementname: '身体能力' },
+        { score: sumScores.ek2, sy1: 'e', sy2: 'k', sy3: 2, id: 'ek2', elementname: '学力' }
+    ];
+
     // 特に得意な要素を表示
-    const sortedSkillScores = skillScoreTable.sort((a, b) => b.score - a.score);
+    const sortedSkillScores = elementSumScores.sort((a, b) => b.score - a.score);
 
     const topExplanatory = [];
     let currentRank = 1;
