@@ -94,8 +94,65 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.setItem('skillScoreTable', JSON.stringify(skillScoreTable));
     }
 
+    function displayChosenResults() {
+        const diagnosisData = JSON.parse(localStorage.getItem('diagnosisData'));
+        const chosenHobbies = diagnosisData.hobbies;
+        const chosenLikeFactors = [
+            ...diagnosisData.likeFactors1,
+            ...diagnosisData.likeFactors2,
+            ...diagnosisData.likeFactors3,
+            ...diagnosisData.likeFactors4
+        ];
+        const chosenImportantFactors = diagnosisData.importantFactors;
+
+        const hobbyList = document.getElementById('hobby-list');
+        const likeFactorsList = document.getElementById('like-factors-list');
+        const importantFactorsList = document.getElementById('important-factors-list');
+
+        chosenHobbies.forEach(hobby => {
+            const listItem = document.createElement('li');
+            listItem.textContent = hobby;
+            hobbyList.appendChild(listItem);
+        });
+
+        chosenLikeFactors.forEach(factor => {
+            const listItem = document.createElement('li');
+            listItem.textContent = factor;
+            likeFactorsList.appendChild(listItem);
+        });
+
+        chosenImportantFactors.forEach(factor => {
+            const listItem = document.createElement('li');
+            listItem.textContent = factor;
+            importantFactorsList.appendChild(listItem);
+        });
+    }
+
+    function displayJobRecommendations() {
+        const jobList = document.getElementById('job-list');
+        const jobRecommendations = [
+            { title: 'ソフトウェアエンジニア', description: 'ソフトウェアの設計、開発、保守を担当します。', averageIncome: '800万円', companies: 'Google, Microsoft', qualifications: '基本情報技術者試験', jobSites: [{ name: 'Indeed', url: 'https://www.indeed.com' }] },
+            { title: 'データサイエンティスト', description: 'データの分析、モデルの構築、インサイトの提供を行います。', averageIncome: '900万円', companies: 'Facebook, Amazon', qualifications: 'データサイエンス資格', jobSites: [{ name: 'LinkedIn', url: 'https://www.linkedin.com' }] }
+        ];
+
+        jobRecommendations.forEach((job, index) => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <h3>${index + 1}. ${job.title}</h3>
+                <p>${job.description}</p>
+                <p><strong>平均年収:</strong> ${job.averageIncome}</p>
+                <p><strong>代表的な企業例:</strong> ${job.companies}</p>
+                <p><strong>関係のある資格:</strong> ${job.qualifications}</p>
+                <p><strong>専門求人サイト:</strong> <a href="${job.jobSites[0].url}">${job.jobSites[0].name}</a></p>
+            `;
+            jobList.appendChild(listItem);
+        });
+    }
+
     displayPreprocessingResults();
     displayScoreResults();
     generateSkillScoreTable();
     displaySkillScoreResults();
+    displayChosenResults();
+    displayJobRecommendations();
 });
