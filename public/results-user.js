@@ -55,16 +55,43 @@ document.addEventListener("DOMContentLoaded", function() {
         ek2: 'あなたは学力に優れる特徴があるようです。この特徴は、知識を習得し、理解し、応用する能力を指します。これにより、学術的な成果を上げ、専門分野での成功に寄与します。'
     };
 
-    const topSkills = scoreTable
+    const sortedScores = scoreTable
         .filter(item => item.sy1 === 'e')
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 2);
+        .sort((a, b) => b.score - a.score);
 
-    topSkills.forEach(skill => {
-        const listItem = document.createElement('li');
-        listItem.textContent = explanatoryText[skill.id];
-        skillsList.appendChild(listItem);
-    });
+    let currentRank = 1;
+    let previousScore = sortedScores[0].score;
+    let rankCount = 0;
+
+    for (let i = 0; i < sortedScores.length; i++) {
+        const currentItem = sortedScores[i];
+
+        if (currentItem.score !== previousScore) {
+            currentRank++;
+            previousScore = currentItem.score;
+            rankCount = 0;
+        }
+
+        rankCount++;
+
+        if (currentRank === 1 && rankCount === 1) {
+            const listItem = document.createElement('li');
+            listItem.textContent = explanatoryText[currentItem.id];
+            skillsList.appendChild(listItem);
+        } else if (currentRank === 1 && rankCount > 1) {
+            continue;
+        } else if (currentRank === 2 && rankCount === 1) {
+            const listItem = document.createElement('li');
+            listItem.textContent = explanatoryText[currentItem.id];
+            skillsList.appendChild(listItem);
+        } else if (currentRank === 3 && rankCount === 1) {
+            const listItem = document.createElement('li');
+            listItem.textContent = explanatoryText[currentItem.id];
+            skillsList.appendChild(listItem);
+        } else if (currentRank > 3) {
+            break;
+        }
+    }
 
     // 向いている仕事ランキングトップ10を表示（仮にデータを作成）
     const jobRecommendations = [
