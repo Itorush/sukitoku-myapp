@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const importantFactorsList = document.getElementById('important-factors-list');
         const skillsList = document.getElementById('skills-list');
 
-        // あなたの趣味に近いもの
+        // ①あなたの趣味に近いもの
         const hobbies = scoreTable.filter(row => row.sy1 === 'a' && row.score === '1');
         hobbies.forEach(hobby => {
             const listItem = document.createElement('li');
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function() {
             hobbyList.appendChild(listItem);
         });
 
-        // あなたの趣味に近い好きなことの要素
+        // ②あなたの趣味に近い好きなことの要素
         const likeFactors = scoreTable.filter(row => row.sy1 === 'i' && row.score === '1');
         likeFactors.forEach(factor => {
             const listItem = document.createElement('li');
@@ -94,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function() {
             likeFactorsList.appendChild(listItem);
         });
 
-        // あなたが仕事を選ぶうえで大事にしたいこと
+        // ③あなたが仕事を選ぶうえで大事にしたいこと
         const importantFactors = scoreTable.filter(row => row.sy1 === 'u' && row.score === '1');
         importantFactors.forEach(factor => {
             const listItem = document.createElement('li');
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function() {
             importantFactorsList.appendChild(listItem);
         });
 
-        // 特に得意なこと
+        // ④特に得意なこと
         const skills = scoreTable.filter(row => row.sy1 === 'e');
         const topSkills = [];
         let topScore = null;
