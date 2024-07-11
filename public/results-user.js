@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
     const diagnosisData = JSON.parse(localStorage.getItem('diagnosisData'));
-    const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
+    const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable'));
 
-    if (!diagnosisData || !scoreTable) {
-        console.error('診断データまたはスコアデータが見つかりませんでした。');
+    if (!diagnosisData || !preprocessingTable) {
+        console.error('診断データまたは前処理データが見つかりませんでした。');
         return;
     }
 
@@ -55,16 +55,27 @@ document.addEventListener("DOMContentLoaded", function() {
         ek2: 'あなたは学力に優れる特徴があるようです。この特徴は、知識を習得し、理解し、応用する能力を指します。これにより、学術的な成果を上げ、専門分野での成功に寄与します。'
     };
 
-    const sortedScores = scoreTable
-        .filter(item => item.sy1 === 'e')
-        .sort((a, b) => b.score - a.score);
+    const skillScoreTable = [
+        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'g', sy3: 1, id: 'eg1', elementname: '論理' },
+        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'g', sy3: 2, id: 'eg2', elementname: '感情' },
+        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'h', sy3: 1, id: 'eh1', elementname: '精密性' },
+        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'h', sy3: 2, id: 'eh2', elementname: '全体像' },
+        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'i', sy3: 1, id: 'ei1', elementname: '伝統性' },
+        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'i', sy3: 2, id: 'ei2', elementname: '創造性' },
+        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'j', sy3: 1, id: 'ej1', elementname: '熟考' },
+        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'j', sy3: 2, id: 'ej2', elementname: '即座' },
+        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'k', sy3: 1, id: 'ek1', elementname: '身体能力' },
+        { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'k', sy3: 2, id: 'ek2', elementname: '学力' }
+    ];
+
+    const sortedSkillScores = skillScoreTable.sort((a, b) => b.score - a.score);
 
     const topExplanatory = [];
     let currentRank = 1;
-    let previousScore = sortedScores[0].score;
+    let previousScore = sortedSkillScores[0].score;
 
-    for (let i = 0; i < sortedScores.length; i++) {
-        const currentItem = sortedScores[i];
+    for (let i = 0; i < sortedSkillScores.length; i++) {
+        const currentItem = sortedSkillScores[i];
 
         if (currentItem.score !== previousScore) {
             currentRank++;
