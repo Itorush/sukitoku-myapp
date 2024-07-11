@@ -122,8 +122,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // 向いている仕事ランキングトップ10を表示（仮にデータを作成）
     const jobRecommendations = [
         { title: 'ソフトウェアエンジニア', description: 'ソフトウェアの設計、開発、保守を担当します。', averageIncome: '800万円', companies: 'Google, Microsoft', qualifications: '基本情報技術者試験', jobSites: [{ name: 'Indeed', url: 'https://www.indeed.com' }] },
-        { title: 'データサイエンティスト', description: 'データの分析、モデルの構築、ビジネスへの応用を行います。', averageIncome: '900万円', companies: 'Amazon, Facebook', qualifications: '統計検定', jobSites: [{ name: 'LinkedIn', url: 'https://www.linkedin.com' }] },
-        // 他の職種データを追加
+        { title: 'データサイエンティスト', description: 'データの分析、モデルの構築、インサイトの提供を行います。', averageIncome: '900万円', companies: 'Facebook, Amazon', qualifications: 'データサイエンス資格', jobSites: [{ name: 'LinkedIn', url: 'https://www.linkedin.com' }] }
+        // 他の職業も追加
     ];
 
     jobRecommendations.forEach((job, index) => {

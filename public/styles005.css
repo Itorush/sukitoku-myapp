@@ -32,6 +32,12 @@ h2 {
     margin-bottom: 20px;
 }
 
+h3 {
+    font-size: 1.5em;
+    color: #34495e;
+    margin-bottom: 10px;
+}
+
 ul, ol {
     padding-left: 20px;
 }
@@ -57,24 +63,4 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #ecf0f1;
-}
-
-tr:nth-child(even) {
-    background-color: #f9f9f9;
 }
