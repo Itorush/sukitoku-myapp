@@ -68,28 +68,49 @@ document.addEventListener("DOMContentLoaded", function() {
         { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'k', sy3: 2, id: 'ek2', elementname: '学力' }
     ];
 
+    localStorage.setItem('skillScoreTable', JSON.stringify(skillScoreTable));
+
+    // スコア結果表示
+    const scoreResultsBody = document.getElementById('scoreResultsBody');
+
+    skillScoreTable.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.score}</td>
+            <td>${row.sy1}</td>
+            <td>${row.sy2}</td>
+            <td>${row.sy3}</td>
+            <td>${row.id}</td>
+            <td>${row.elementname}</td>
+        `;
+        scoreResultsBody.appendChild(tr);
+    });
+
+    // 特に得意な要素を表示
     const sortedSkillScores = skillScoreTable.sort((a, b) => b.score - a.score);
 
     const topExplanatory = [];
     let currentRank = 1;
     let previousScore = sortedSkillScores[0].score;
-    let firstPlaceCount = 0;
 
-    for (let i = 0; i < sortedSkillScores.length; i++) {
-        const currentItem = sortedSkillScores[i];
-
-        if (currentItem.score !== previousScore) {
-            currentRank++;
-            previousScore = currentItem.score;
-        }
-
-        if (currentRank === 1) {
-            topExplanatory.push(explanatoryText[currentItem.id]);
-            firstPlaceCount++;
-        } else if (currentRank === 2 && firstPlaceCount === 1) {
-            topExplanatory.push(explanatoryText[currentItem.id]);
-        } else {
+    for (const item of sortedSkillScores) {
+        if (item.score === previousScore && currentRank === 1) {
+            topExplanatory.push(explanatoryText[item.id]);
+        } else if (currentRank > 1) {
             break;
+        }
+        previousScore = item.score;
+        currentRank++;
+    }
+
+    if (topExplanatory.length === 1) {
+        const secondRankScore = sortedSkillScores[1].score;
+        for (const item of sortedSkillScores) {
+            if (item.score === secondRankScore) {
+                topExplanatory.push(explanatoryText[item.id]);
+            } else if (item.score < secondRankScore) {
+                break;
+            }
         }
     }
 
