@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
         importantFactorsList.appendChild(listItem);
     });
 
-    // 得意なことトップ3を表示
+    // 特に得意な要素を表示
     const explanatoryText = {
         eg1: 'あなたは論理的に考える特徴があるようです。この特徴は、事実やデータに基づいて物事を分析し、客観的かつ合理的に結論を導き出す能力を指します。これにより、問題解決や意思決定の際に正確で効果的な判断が可能となります。',
         eg2: 'あなたは感情に敏感な特徴があるようです。この特徴は、他人の気持ちを察し、共感し、感情を理解する能力を指します。これにより、対人関係が円滑になり、他者との協力やコミュニケーションが向上します。',
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const topSkills = scoreTable
         .filter(item => item.sy1 === 'e')
         .sort((a, b) => b.score - a.score)
-        .slice(0, 3);
+        .slice(0, 2);
 
     topSkills.forEach(skill => {
         const listItem = document.createElement('li');
