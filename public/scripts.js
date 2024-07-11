@@ -581,6 +581,12 @@ document.addEventListener("DOMContentLoaded", function() {
     function showResults() {
         generatePreprocessingTable();
         generateScoreTable();
+        window.location.href = 'diagnosis-results-user.html';
+    }
+
+    function showDeveloperResults() {
+        generatePreprocessingTable();
+        generateScoreTable();
         window.location.href = 'diagnosis-results.html';
     }
 
@@ -593,6 +599,11 @@ document.addEventListener("DOMContentLoaded", function() {
             saveSelectionsToLocalStorage(formData);
             showResults();
         }
+    });
+
+    document.getElementById('developerButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        showDeveloperResults();
     });
     
     generateQuestions();
