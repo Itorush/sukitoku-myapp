@@ -73,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const topExplanatory = [];
     let currentRank = 1;
     let previousScore = sortedSkillScores[0].score;
+    let firstPlaceCount = 0;
 
     for (let i = 0; i < sortedSkillScores.length; i++) {
         const currentItem = sortedSkillScores[i];
@@ -84,16 +85,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (currentRank === 1) {
             topExplanatory.push(explanatoryText[currentItem.id]);
-        } else if (currentRank === 2 && topExplanatory.length === 1) {
+            firstPlaceCount++;
+        } else if (currentRank === 2 && firstPlaceCount === 1) {
             topExplanatory.push(explanatoryText[currentItem.id]);
         } else {
             break;
         }
     }
 
-    topExplanatory.forEach(text => {
+    topExplanatory.forEach(explanatory => {
         const listItem = document.createElement('li');
-        listItem.textContent = text;
+        listItem.textContent = explanatory;
         skillsList.appendChild(listItem);
     });
 
