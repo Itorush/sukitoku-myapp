@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const likeFactorsList = document.getElementById('like-factors-list');
     const importantFactorsList = document.getElementById('important-factors-list');
     const skillsList = document.getElementById('skills-list');
-    const jobList = document.getElementById('job-list');
     const scoreResultsBody = document.getElementById('score-results-body');
+    const jobList = document.getElementById('job-list');
 
     // 診断者が選んだ趣味を表示
     diagnosisData.hobbies.forEach(hobby => {
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
         importantFactorsList.appendChild(listItem);
     });
 
-    // 特に得意な要素を表示
+    // 得意なことに関する説明文
     const explanatoryText = {
         eg1: 'あなたは論理的に考える特徴があるようです。この特徴は、事実やデータに基づいて物事を分析し、客観的かつ合理的に結論を導き出す能力を指します。これにより、問題解決や意思決定の際に正確で効果的な判断が可能となります。',
         eg2: 'あなたは感情に敏感な特徴があるようです。この特徴は、他人の気持ちを察し、共感し、感情を理解する能力を指します。これにより、対人関係が円滑になり、他者との協力やコミュニケーションが向上します。',
@@ -56,65 +56,39 @@ document.addEventListener("DOMContentLoaded", function() {
         ek2: 'あなたは学力に優れる特徴があるようです。この特徴は、知識を習得し、理解し、応用する能力を指します。これにより、学術的な成果を上げ、専門分野での成功に寄与します。'
     };
 
-    // 得意な要素の合計スコアを計算
-    const sumScores = {
-        eg1: 0,
-        eg2: 0,
-        eh1: 0,
-        eh2: 0,
-        ei1: 0,
-        ei2: 0,
-        ej1: 0,
-        ej2: 0,
-        ek1: 0,
-        ek2: 0
-    };
+    // スコアの計算と表示
+    const scoreTable = preprocessingTable.map(row => {
+        const questionData = diagnosisData.skills.find(skill => skill.includes(row.id));
+        if (!questionData) return { score: 0, sy1: row.sy1, sy2: row.sy2, sy3: row.sy3, id: row.id, elementname: row.elementname };
 
-    preprocessingTable.forEach(preprocess => {
-        const questionData = diagnosisData.skills.find(skill => skill.includes(preprocess.id));
-        if (!questionData) return;
+        const selectedOption = parseInt(questionData.split(':')[1], 10);
+        let score = 0;
 
-        const selectedOption = questionData.split(':')[1];
-        const score = parseInt(selectedOption, 10);
-        
-        if (score <= 3) {
-            sumScores[preprocess.ax1_id] += 4 - score;
-        } else {
-            sumScores[preprocess.ax2_id] += score - 3;
-        }
-    });
+        if (selectedOption === 1) score = 3;
+        else if (selectedOption === 2) score = 2;
+        else if (selectedOption === 3) score = 1;
+        else if (selectedOption === 4) score = 1;
+        else if (selectedOption === 5) score = 2;
+        else if (selectedOption === 6) score = 3;
 
-    const elementSumScores = [
-        { score: sumScores.eg1, sy1: 'e', sy2: 'g', sy3: 1, id: 'eg1', elementname: '論理' },
-        { score: sumScores.eg2, sy1: 'e', sy2: 'g', sy3: 2, id: 'eg2', elementname: '感情' },
-        { score: sumScores.eh1, sy1: 'e', sy2: 'h', sy3: 1, id: 'eh1', elementname: '精密性' },
-        { score: sumScores.eh2, sy1: 'e', sy2: 'h', sy3: 2, id: 'eh2', elementname: '全体像' },
-        { score: sumScores.ei1, sy1: 'e', sy2: 'i', sy3: 1, id: 'ei1', elementname: '伝統性' },
-        { score: sumScores.ei2, sy1: 'e', sy2: 'i', sy3: 2, id: 'ei2', elementname: '創造性' },
-        { score: sumScores.ej1, sy1: 'e', sy2: 'j', sy3: 1, id: 'ej1', elementname: '熟考' },
-        { score: sumScores.ej2, sy1: 'e', sy2: 'j', sy3: 2, id: 'ej2', elementname: '即座' },
-        { score: sumScores.ek1, sy1: 'e', sy2: 'k', sy3: 1, id: 'ek1', elementname: '身体能力' },
-        { score: sumScores.ek2, sy1: 'e', sy2: 'k', sy3: 2, id: 'ek2', elementname: '学力' }
-    ];
+        return { score, sy1: row.sy1, sy2: row.sy2, sy3: row.sy3, id: row.id, elementname: row.elementname };
+    }).filter(row => row.sy1 === 'e');
 
-    // Scoreの表を表示
-    elementSumScores.forEach(item => {
-        if (item.sy1 === 'e') {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.score}</td>
-                <td>${item.sy1}</td>
-                <td>${item.sy2}</td>
-                <td>${item.sy3}</td>
-                <td>${item.id}</td>
-                <td>${item.elementname}</td>
-            `;
-            scoreResultsBody.appendChild(row);
-        }
+    scoreTable.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${row.score}</td>
+            <td>${row.sy1}</td>
+            <td>${row.sy2}</td>
+            <td>${row.sy3}</td>
+            <td>${row.id}</td>
+            <td>${row.elementname}</td>
+        `;
+        scoreResultsBody.appendChild(tr);
     });
 
     // 特に得意な要素を表示
-    const sortedSkillScores = elementSumScores.sort((a, b) => b.score - a.score);
+    const sortedSkillScores = scoreTable.sort((a, b) => b.score - a.score);
 
     const topExplanatory = [];
     let currentRank = 1;
