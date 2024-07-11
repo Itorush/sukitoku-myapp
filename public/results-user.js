@@ -59,10 +59,9 @@ document.addEventListener("DOMContentLoaded", function() {
         .filter(item => item.sy1 === 'e')
         .sort((a, b) => b.score - a.score);
 
+    const topExplanatory = [];
     let currentRank = 1;
     let previousScore = sortedScores[0].score;
-    let rankCount = 0;
-    let displayCount = 0;
 
     for (let i = 0; i < sortedScores.length; i++) {
         const currentItem = sortedScores[i];
@@ -70,36 +69,22 @@ document.addEventListener("DOMContentLoaded", function() {
         if (currentItem.score !== previousScore) {
             currentRank++;
             previousScore = currentItem.score;
-            rankCount = 0;
         }
-
-        rankCount++;
 
         if (currentRank === 1) {
-            const listItem = document.createElement('li');
-            listItem.textContent = explanatoryText[currentItem.id];
-            skillsList.appendChild(listItem);
-            displayCount++;
-        }
-
-        if (currentRank === 2 && displayCount < 2) {
-            const listItem = document.createElement('li');
-            listItem.textContent = explanatoryText[currentItem.id];
-            skillsList.appendChild(listItem);
-            displayCount++;
-        }
-
-        if (currentRank === 3 && displayCount < 3) {
-            const listItem = document.createElement('li');
-            listItem.textContent = explanatoryText[currentItem.id];
-            skillsList.appendChild(listItem);
-            displayCount++;
-        }
-
-        if (displayCount >= 3) {
+            topExplanatory.push(explanatoryText[currentItem.id]);
+        } else if (currentRank === 2 && topExplanatory.length === 1) {
+            topExplanatory.push(explanatoryText[currentItem.id]);
+        } else {
             break;
         }
     }
+
+    topExplanatory.forEach(text => {
+        const listItem = document.createElement('li');
+        listItem.textContent = text;
+        skillsList.appendChild(listItem);
+    });
 
     // 向いている仕事ランキングトップ10を表示（仮にデータを作成）
     const jobRecommendations = [
