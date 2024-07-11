@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let topScore = null;
 
         skills.forEach(skill => {
-            const skillScore = parseInt(skill.score.split('/')[0]);
+            const skillScore = parseInt(skill.score, 10);  // スコアを整数としてパース
             if (topScore === null || skillScore > topScore) {
                 topSkills.length = 0;
                 topSkills.push(skill);
