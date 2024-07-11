@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const jobRecommendations = [
         { title: 'ソフトウェアエンジニア', description: 'ソフトウェアの設計、開発、保守を担当します。', averageIncome: '800万円', companies: 'Google, Microsoft', qualifications: '基本情報技術者試験', jobSites: [{ name: 'Indeed', url: 'https://www.indeed.com' }] },
         { title: 'データサイエンティスト', description: 'データの分析、モデルの構築、ビジネスへの応用を行います。', averageIncome: '900万円', companies: 'Amazon, Facebook', qualifications: '統計検定', jobSites: [{ name: 'LinkedIn', url: 'https://www.linkedin.com' }] },
-        // 8つの仮の職種データを追加
+        // 他の職種データを追加
     ];
 
     jobRecommendations.forEach((job, index) => {
