@@ -105,19 +105,16 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // ④特に得意なこと
         const skills = scoreTable.filter(row => row.sy1 === 'e');
-        const topSkills = [];
-        let topScore = null;
+        const sumScores = skills.reduce((acc, skill) => {
+            acc[skill.id] = (acc[skill.id] || 0) + parseInt(skill.score, 10);
+            return acc;
+        }, {});
 
-        skills.forEach(skill => {
-            const skillScore = parseInt(skill.score, 10);  // スコアを整数としてパース
-            if (topScore === null || skillScore > topScore) {
-                topSkills.length = 0;
-                topSkills.push(skill);
-                topScore = skillScore;
-            } else if (skillScore === topScore) {
-                topSkills.push(skill);
-            }
-        });
+        const sortedScores = Object.entries(sumScores).sort(([, a], [, b]) => b - a);
+        const one = sortedScores[0][1];
+        const two = sortedScores[1][1];
+        const topSkills = sortedScores.filter(([, score]) => score === one).map(([id]) => id);
+        const secondSkills = sortedScores.filter(([, score]) => score === two).map(([id]) => id);
 
         const skillDescriptions = {
             eg1: 'あなたは論理的に考える特徴があるようです。この特徴は、事実やデータに基づいて物事を分析し、客観的かつ合理的に結論を導き出す能力を指します。これにより、問題解決や意思決定の際に正確で効果的な判断が可能となります。',
@@ -132,11 +129,21 @@ document.addEventListener("DOMContentLoaded", function() {
             ek2: 'あなたは学力に優れる特徴があるようです。この特徴は、知識を習得し、理解し、応用する能力を指します。これにより、学術的な成果を上げ、専門分野での成功に寄与します。'
         };
 
-        topSkills.forEach(skill => {
-            const listItem = document.createElement('li');
-            listItem.textContent = skillDescriptions[skill.id];
-            skillsList.appendChild(listItem);
-        });
+        if (topSkills.length > 1) {
+            // ①のパターン
+            topSkills.forEach(id => {
+                const listItem = document.createElement('li');
+                listItem.textContent = skillDescriptions[id];
+                skillsList.appendChild(listItem);
+            });
+        } else {
+            // ②のパターン
+            topSkills.concat(secondSkills).forEach(id => {
+                const listItem = document.createElement('li');
+                listItem.textContent = skillDescriptions[id];
+                skillsList.appendChild(listItem);
+            });
+        }
     }
 
     function displayJobRecommendations() {
