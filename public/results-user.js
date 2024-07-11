@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const importantFactorsList = document.getElementById('important-factors-list');
     const skillsList = document.getElementById('skills-list');
     const jobList = document.getElementById('job-list');
+    const scoreResultsBody = document.getElementById('score-results-body');
 
     // 診断者が選んだ趣味を表示
     diagnosisData.hobbies.forEach(hobby => {
@@ -70,15 +71,16 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     preprocessingTable.forEach(preprocess => {
-        const axis1Score = preprocess.axis1score;
-        const axis2Score = preprocess.axis2score;
+        const questionData = diagnosisData.skills.find(skill => skill.includes(preprocess.id));
+        if (!questionData) return;
 
-        if (preprocess.ax1_id) {
-            sumScores[preprocess.ax1_id] += axis1Score;
-        }
-
-        if (preprocess.ax2_id) {
-            sumScores[preprocess.ax2_id] += axis2Score;
+        const selectedOption = questionData.split(':')[1];
+        const score = parseInt(selectedOption, 10);
+        
+        if (score <= 3) {
+            sumScores[preprocess.ax1_id] += 4 - score;
+        } else {
+            sumScores[preprocess.ax2_id] += score - 3;
         }
     });
 
@@ -95,33 +97,47 @@ document.addEventListener("DOMContentLoaded", function() {
         { score: sumScores.ek2, sy1: 'e', sy2: 'k', sy3: 2, id: 'ek2', elementname: '学力' }
     ];
 
+    // Scoreの表を表示
+    elementSumScores.forEach(item => {
+        if (item.sy1 === 'e') {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.score}</td>
+                <td>${item.sy1}</td>
+                <td>${item.sy2}</td>
+                <td>${item.sy3}</td>
+                <td>${item.id}</td>
+                <td>${item.elementname}</td>
+            `;
+            scoreResultsBody.appendChild(row);
+        }
+    });
+
     // 特に得意な要素を表示
     const sortedSkillScores = elementSumScores.sort((a, b) => b.score - a.score);
 
     const topExplanatory = [];
     let currentRank = 1;
-    let previousScore = sortedSkillScores[0].score;
+    let topRankScore = sortedSkillScores[0].score;
+    let secondRankScore = null;
 
-    for (const item of sortedSkillScores) {
-        if (item.score === previousScore && currentRank === 1) {
-            topExplanatory.push(explanatoryText[item.id]);
-        } else if (currentRank > 1) {
-            break;
-        }
-        previousScore = item.score;
-        currentRank++;
-    }
-
-    if (topExplanatory.length === 1) {
-        const secondRankScore = sortedSkillScores[1].score;
-        for (const item of sortedSkillScores) {
-            if (item.score === secondRankScore) {
+    sortedSkillScores.forEach((item, index) => {
+        if (index === 0 || item.score === topRankScore) {
+            if (currentRank === 1) {
                 topExplanatory.push(explanatoryText[item.id]);
-            } else if (item.score < secondRankScore) {
-                break;
             }
+        } else if (!secondRankScore || item.score === secondRankScore) {
+            if (currentRank === 1) {
+                currentRank = 2;
+                secondRankScore = item.score;
+            }
+            if (currentRank === 2) {
+                topExplanatory.push(explanatoryText[item.id]);
+            }
+        } else {
+            return;
         }
-    }
+    });
 
     topExplanatory.forEach(explanatory => {
         const listItem = document.createElement('li');
