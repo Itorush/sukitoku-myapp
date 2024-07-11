@@ -581,7 +581,7 @@ document.addEventListener("DOMContentLoaded", function() {
     function showResults() {
         generatePreprocessingTable();
         generateScoreTable();
-        window.location.href = 'diagnosis-results-user.html';
+        window.location.href = 'diagnosis-results.html'; // 変更箇所
     }
 
     function showDeveloperResults() {
