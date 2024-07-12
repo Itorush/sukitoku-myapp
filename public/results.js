@@ -147,6 +147,44 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function calculateJobScores() {
         const diagnosisData = JSON.parse(localStorage.getItem('diagnosisData'));
+        const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
+        if (!diagnosisData || !scoreTable) {
+            console.error('診断データまたはスコアテーブルが見つかりませんでした。');
+            return [];
+        }
+
+        // 選ばれたIDを取得
+        const selectedIds = [];
+
+        // SY1が'a', 'i', 'u'の行のIDを選択
+        scoreTable.forEach(row => {
+            if (['a', 'i', 'u'].includes(row.sy1) && row.score === '1') {
+                selectedIds.push(row.id);
+            }
+        });
+
+        // SY1が'e'の行の中で、SY2が'g', 'h', 'i', 'j', 'k'のそれぞれの行の中で最大スコアのIDを選択
+        const maxScoreBySy2 = {
+            g: { score: 0, id: '' },
+            h: { score: 0, id: '' },
+            i: { score: 0, id: '' },
+            j: { score: 0, id: '' },
+            k: { score: 0, id: '' },
+        };
+
+        scoreTable.forEach(row => {
+            if (row.sy1 === 'e' && maxScoreBySy2[row.sy2] && parseInt(row.score) > maxScoreBySy2[row.sy2].score) {
+                maxScoreBySy2[row.sy2] = { score: parseInt(row.score), id: row.id };
+            }
+        });
+
+        Object.values(maxScoreBySy2).forEach(item => {
+            if (item.id) {
+                selectedIds.push(item.id);
+            }
+        });
+
+        // 適職ランキングの計算
         const jobTable = [
             { z1: 'スーパーマーケットスタッフ', z2: '飲食店', z3: 'スーパーマーケットで商品を売るための準備やお客様の対応をする仕事です。地域の消費者に新鮮な食料品や日用品を提供し、便利で快適な買い物環境を提供します。', z4: 'お客様への対応、商品を棚に並べる、店をきれいに保つ、商品の値段を確認して表示する。', z5: '地域の顧客との交流が多く、サービス提供による満足感が得られますが、長時間立ち仕事や体力的な負担が課題となります。', z6: 'イオン、イトーヨーカドー', z7: '約300万円', z8: '食品衛生責任者', z9: 'FoodsLabo', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 0, id1: 1, id2: 0, ie1: 0, ie2: 1, ie3: 0, ie4: 1, ie5: 3, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 0, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 2, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 0, uf3: 0, uf4: 0, uf5: 2, uf6: 0, uf7: 3, uf8: 0, uf9: 0, uf10: 1, uf11: 0, uf12: 1, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 2, ek2: 0 },
             { z1: '本屋スタッフ', z2: '不明', z3: '本屋で本を売ったり、本をきれいに並べたり、お客様に本を案内する仕事です。読書好きのお客様に豊富な書籍とリラックスした環境を提供し、知識と楽しみを広げます。', z4: '本を陳列して整理する、お客様に本を勧める、レジでの会計を行う。', z5: '本好きにとって理想的な環境で働く喜びがありますが、在庫管理や重い本の運搬が課題です。', z6: '紀伊國屋書店、丸善', z7: '約300万円', z8: '司書', z9: '', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 1, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 0, ic2: 1, id1: 1, id2: 1, ie1: 0, ie2: 1, ie3: 0, ie4: 3, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 2, ie10: 0, ie11: 0, ie12: 1, ie13: 0, ie14: 0, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 0, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 3, uf11: 0, uf12: 0, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 0, ek2: 2 },
@@ -453,20 +491,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { z1: 'パティシエ', z2: '飲食店', z3: 'ケーキやデザートなどの菓子製造を専門に行う仕事です。顧客に美味しく見た目も美しいデザートを提供し、満足度を向上させます。', z4: 'スイーツのレシピ開発、菓子の製造、品質管理、デザートのデコレーション。', z5: '美味しいケーキやデザートを作り、多くの人々に喜ばれる仕事ですが、長時間労働や体力的な負担が課題です。', z6: 'ピエール・エルメ・パリ、キルフェボン', z7: '約450万円', z8: '製菓衛生師', z9: 'FoodsLabo', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 1, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 1, ie4: 1, ie5: 1, ie6: 0, ie7: 1, ie8: 1, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 3, ie14: 1, ie15: 1, ie16: 0, ie17: 2, ie18: 0, ie19: 1, ie20: 0, ie21: 1, ie22: 1, ie23: 0, ie24: 0, uf1: 1, uf2: 0, uf3: 0, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 0, uf10: 0, uf11: 0, uf12: 1, eg1: 2, eg2: 2, eh1: 2, eh2: 2, ei1: 2, ei2: 2, ej1: 0, ej2: 2, ek1: 0, ek2: 2 },
             { z1: '作家', z2: 'フリーランス', z3: '小説や随筆、評論などを執筆し、出版する仕事です。読者に魅力的で知識豊かな読み物を提供し、文学と文化の発展を支援します。', z4: '執筆活動、リサーチ、原稿の編集、出版交渉、読者イベントの参加。', z5: '自分の物語を創作し、多くの人々に楽しみを提供する仕事ですが、アイデアの枯渇や締め切りが課題です。', z6: '日本文藝家協会、日本ペンクラブ', z7: '約500万円', z8: 'なし', z9: 'ペイトナーファクタリング', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 1, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 1, ic1: 0, ic2: 1, id1: 0, id2: 1, ie1: 0, ie2: 1, ie3: 1, ie4: 1, ie5: 0, ie6: 1, ie7: 0, ie8: 2, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 1, ie14: 1, ie15: 1, ie16: 1, ie17: 1, ie18: 3, ie19: 0, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 1, uf3: 1, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 1, uf10: 0, uf11: 1, uf12: 1, eg1: 0, eg2: 2, eh1: 2, eh2: 2, ei1: 0, ei2: 2, ej1: 2, ej2: 0, ek1: 0, ek2: 2 },
             { z1: '不動産仲介業', z2: '不動産', z3: '不動産の売買や賃貸契約を仲介し、物件の情報提供や契約手続きをサポートする仕事です。クライアントに信頼性の高い不動産サービスを提供し、取引の成功を支援します。', z4: '物件情報の収集と提供、見学の案内、契約条件の交渉、契約書の作成と管理。', z5: '不動産の売買や賃貸を仲介し、クライアントを支援する仕事ですが、技術習得やクライアント対応が課題です。', z6: '三井のリハウス、住友不動産', z7: '約600万円', z8: '宅地建物取引士', z9: 'リアルエステートWORKS', aa1: 0, aa2: 1, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 0, ie4: 1, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 1, ie11: 0, ie12: 3, ie13: 0, ie14: 1, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 2, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 3, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 0, uf11: 1, uf12: 1, eg1: 2, eg2: 0, eh1: 2, eh2: 2, ei1: 2, ei2: 0, ej1: 2, ej2: 2, ek1: 2, ek2: 2 },
-        ];
-
-        const selectedIds = [
-            diagnosisData.hobbyOptions.id,
-            diagnosisData.likeFactorsOptions1.id,
-            diagnosisData.likeFactorsOptions2.id,
-            diagnosisData.likeFactorsOptions3.id,
-            diagnosisData.likeFactorsOptions4.id,
-            diagnosisData.importantFactorsOptions.id,
-            diagnosisData.sumScores.eg1 >= diagnosisData.sumScores.eg2 ? 'eg1' : 'eg2',
-            diagnosisData.sumScores.eh1 >= diagnosisData.sumScores.eh2 ? 'eh1' : 'eh2',
-            diagnosisData.sumScores.ei1 >= diagnosisData.sumScores.ei2 ? 'ei1' : 'ei2',
-            diagnosisData.sumScores.ej1 >= diagnosisData.sumScores.ej2 ? 'ej1' : 'ej2',
-            diagnosisData.sumScores.ek1 >= diagnosisData.sumScores.ek2 ? 'ek1' : 'ek2',
+            // 続けて他の行も同様に追加
         ];
 
         const jobScores = jobTable.map(row => {
@@ -476,48 +501,61 @@ document.addEventListener("DOMContentLoaded", function() {
             });
             return { 
                 jobName: row.z1, 
-                jobDescription: row.z3,
-                jobContent: row.z4,
-                satisfactionAndChallenges: row.z5,
-                companyExamples: row.z6,
-                averageIncome: row.z7,
-                relevantQualifications: row.z8,
-                jobSites: row.z9,
-                score: totalScore
+                description: row.z3,
+                content: row.z4,
+                satisfaction: row.z5,
+                companies: row.z6,
+                salary: row.z7,
+                qualifications: row.z8,
+                jobSite: row.z9,
+                score: totalScore 
             };
         });
 
         const sortedJobScores = jobScores.sort((a, b) => b.score - a.score);
 
-        const displayJobs = [];
+        const result = [];
         let currentRank = 1;
-        for (let i = 0; i < sortedJobScores.length && displayJobs.length < 20; i++) {
-            if (i > 0 && sortedJobScores[i].score < sortedJobScores[i - 1].score) {
+        let previousScore = sortedJobScores[0].score;
+        let currentJobs = [];
+        for (let i = 0; i < sortedJobScores.length; i++) {
+            if (sortedJobScores[i].score !== previousScore) {
+                result.push({ rank: currentRank, jobs: currentJobs });
+                if (result.reduce((acc, curr) => acc + curr.jobs.length, 0) >= 20) break;
                 currentRank++;
+                previousScore = sortedJobScores[i].score;
+                currentJobs = [];
             }
-            displayJobs.push({ ...sortedJobScores[i], rank: currentRank });
+            currentJobs.push(sortedJobScores[i]);
+        }
+        if (currentJobs.length > 0) {
+            result.push({ rank: currentRank, jobs: currentJobs });
         }
 
-        return displayJobs;
+        return result;
     }
 
     function displayJobRecommendations() {
         const jobList = document.getElementById('job-list');
         const jobRecommendations = calculateJobScores();
 
-        jobRecommendations.forEach(job => {
-            const listItem = document.createElement('li');
-            listItem.innerHTML = `
-                <h3>${job.rank}位: ${job.jobName}</h3>
-                <p><strong>仕事の説明:</strong> ${job.jobDescription}</p>
-                <p><strong>仕事の内容:</strong> ${job.jobContent}</p>
-                <p><strong>各職種で得られる満足感と直面する課題:</strong> ${job.satisfactionAndChallenges}</p>
-                <p><strong>代表的な企業例:</strong> ${job.companyExamples}</p>
-                <p><strong>一般的な年収:</strong> ${job.averageIncome}</p>
-                <p><strong>関係ある資格:</strong> ${job.relevantQualifications}</p>
-                <p><strong>専門求人サイト:</strong> <a href="${job.jobSites}" target="_blank">${job.jobSites}</a></p>
-            `;
-            jobList.appendChild(listItem);
+        jobRecommendations.forEach(rank => {
+            rank.jobs.forEach(job => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <strong>${rank.rank}位: ${job.jobName}</strong>
+                    <ul>
+                        <li><strong>仕事の説明:</strong> ${job.description}</li>
+                        <li><strong>仕事の内容:</strong> ${job.content}</li>
+                        <li><strong>各職種で得られる満足感と直面する課題:</strong> ${job.satisfaction}</li>
+                        <li><strong>代表的な企業例:</strong> ${job.companies}</li>
+                        <li><strong>一般的な年収:</strong> ${job.salary}</li>
+                        <li><strong>関係ある資格:</strong> ${job.qualifications}</li>
+                        <li><strong>専門求人サイト:</strong> <a href="${job.jobSite}">${job.jobSite}</a></li>
+                    </ul>
+                `;
+                jobList.appendChild(listItem);
+            });
         });
     }
 
