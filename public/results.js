@@ -48,10 +48,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function generateSkillScoreTable() {
-        const data = JSON.parse(localStorage.getItem('diagnosisData'));
         const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable'));
-        if (!data || !preprocessingTable) {
-            console.error('診断データまたは前処理データが見つかりませんでした。');
+        if (!preprocessingTable) {
+            console.error('前処理データが見つかりませんでした。');
             return;
         }
 
@@ -148,28 +147,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function calculateJobScores() {
         const diagnosisData = JSON.parse(localStorage.getItem('diagnosisData'));
-        const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
-        if (!diagnosisData || !scoreTable) {
-            console.error('診断データまたはスコア結果が見つかりませんでした。');
-            return [];
-        }
-
-        const selectedIds = [
-            diagnosisData.hobbyOptions.id,
-            diagnosisData.likeFactorsOptions1.id,
-            diagnosisData.likeFactorsOptions2.id,
-            diagnosisData.likeFactorsOptions3.id,
-            diagnosisData.likeFactorsOptions4.id,
-            diagnosisData.importantFactorsOptions.id,
-            diagnosisData.sumScores.eg1 >= diagnosisData.sumScores.eg2 ? 'eg1' : 'eg2',
-            diagnosisData.sumScores.eh1 >= diagnosisData.sumScores.eh2 ? 'eh1' : 'eh2',
-            diagnosisData.sumScores.ei1 >= diagnosisData.sumScores.ei2 ? 'ei1' : 'ei2',
-            diagnosisData.sumScores.ej1 >= diagnosisData.sumScores.ej2 ? 'ej1' : 'ej2',
-            diagnosisData.sumScores.ek1 >= diagnosisData.sumScores.ek2 ? 'ek1' : 'ek2',
-        ];
-
         const jobTable = [
-            // 計算表のデータをここに挿入（z1、その他の列データを含む）
             { No: 1, z1: 'スーパーマーケットスタッフ', z2: '飲食店', z3: 'スーパーマーケットで商品を売るための準備やお客様の対応をする仕事です。地域の消費者に新鮮な食料品や日用品を提供し、便利で快適な買い物環境を提供します。', z4: 'お客様への対応、商品を棚に並べる、店をきれいに保つ、商品の値段を確認して表示する。', z5: '地域の顧客との交流が多く、サービス提供による満足感が得られますが、長時間立ち仕事や体力的な負担が課題となります。', z6: 'イオン、イトーヨーカドー', z7: '約300万円', z8: '食品衛生責任者', z9: 'FoodsLabo', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 0, id1: 1, id2: 0, ie1: 0, ie2: 1, ie3: 0, ie4: 1, ie5: 3, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 0, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 2, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 0, uf3: 0, uf4: 0, uf5: 2, uf6: 0, uf7: 3, uf8: 0, uf9: 0, uf10: 1, uf11: 0, uf12: 1, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 2, ek2: 0 },
             { No: 2, z1: '本屋スタッフ', z2: '不明', z3: '本屋で本を売ったり、本をきれいに並べたり、お客様に本を案内する仕事です。読書好きのお客様に豊富な書籍とリラックスした環境を提供し、知識と楽しみを広げます。', z4: '本を陳列して整理する、お客様に本を勧める、レジでの会計を行う。', z5: '本好きにとって理想的な環境で働く喜びがありますが、在庫管理や重い本の運搬が課題です。', z6: '紀伊國屋書店、丸善', z7: '約300万円', z8: '司書', z9: '', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 1, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 0, ic2: 1, id1: 1, id2: 1, ie1: 0, ie2: 1, ie3: 0, ie4: 3, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 2, ie10: 0, ie11: 0, ie12: 1, ie13: 0, ie14: 0, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 0, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 3, uf11: 0, uf12: 0, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 0, ek2: 2 },
             { No: 3, z1: 'コンビニエンスストアスタッフ', z2: '飲食店', z3: 'コンビニで商品を売ったり、商品の管理をしたりする仕事です。地域住民や通勤者に24時間営業の便利な買い物場所と幅広い商品を提供します。', z4: '商品を棚に並べる、商品の賞味期限をチェックする、レジでの会計を行う、店を掃除する。', z5: '多様な業務をこなす達成感があり、顧客対応のスキルが磨かれますが、シフト勤務や夜勤が負担です。', z6: 'セブン-イレブン、ローソン', z7: '約300万円', z8: '食品衛生責任者', z9: 'FoodsLabo', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 0, id1: 1, id2: 0, ie1: 0, ie2: 1, ie3: 0, ie4: 1, ie5: 3, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 0, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 2, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 0, uf3: 0, uf4: 0, uf5: 2, uf6: 0, uf7: 3, uf8: 0, uf9: 0, uf10: 1, uf11: 0, uf12: 1, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 2, ek2: 0 },
@@ -478,6 +456,20 @@ document.addEventListener("DOMContentLoaded", function() {
           
         ];
 
+        const selectedIds = [
+            diagnosisData.hobbyOptions.id,
+            diagnosisData.likeFactorsOptions1.id,
+            diagnosisData.likeFactorsOptions2.id,
+            diagnosisData.likeFactorsOptions3.id,
+            diagnosisData.likeFactorsOptions4.id,
+            diagnosisData.importantFactorsOptions.id,
+            diagnosisData.sumScores.eg1 >= diagnosisData.sumScores.eg2 ? 'eg1' : 'eg2',
+            diagnosisData.sumScores.eh1 >= diagnosisData.sumScores.eh2 ? 'eh1' : 'eh2',
+            diagnosisData.sumScores.ei1 >= diagnosisData.sumScores.ei2 ? 'ei1' : 'ei2',
+            diagnosisData.sumScores.ej1 >= diagnosisData.sumScores.ej2 ? 'ej1' : 'ej2',
+            diagnosisData.sumScores.ek1 >= diagnosisData.sumScores.ek2 ? 'ek1' : 'ek2',
+        ];
+
         const jobScores = jobTable.map(row => {
             let totalScore = 0;
             selectedIds.forEach(id => {
@@ -495,12 +487,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const jobRecommendations = calculateJobScores();
 
         jobRecommendations.forEach((job, index) => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${index + 1}位: ${job.jobName}</td>
-                <td>${job.score}</td>
-            `;
-            jobList.appendChild(row);
+            const listItem = document.createElement('li');
+            listItem.textContent = `${index + 1}位: ${job.jobName}`;
+            jobList.appendChild(listItem);
         });
     }
 
