@@ -456,6 +456,11 @@ document.addEventListener("DOMContentLoaded", function() {
           
         ];
 
+        if (!diagnosisData) {
+            console.error('診断データが見つかりませんでした。');
+            return [];
+        }
+
         const selectedIds = [
             diagnosisData.hobbyOptions.id,
             diagnosisData.likeFactorsOptions1.id,
@@ -485,6 +490,11 @@ document.addEventListener("DOMContentLoaded", function() {
     function displayJobRecommendations() {
         const jobList = document.getElementById('job-list');
         const jobRecommendations = calculateJobScores();
+
+        if (!jobRecommendations || jobRecommendations.length === 0) {
+            console.error('向いている仕事ランキングが見つかりませんでした。');
+            return;
+        }
 
         jobRecommendations.forEach((job, index) => {
             const listItem = document.createElement('li');
