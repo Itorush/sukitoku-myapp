@@ -6,9 +6,14 @@ document.addEventListener("DOMContentLoaded", function() {
             return;
         }
 
-        const hobbiesList = document.getElementById('hobbies-list');
+        const hobbiesList = document.getElementById('hobby-list');
         const likeFactorsList = document.getElementById('like-factors-list');
         const importantFactorsList = document.getElementById('important-factors-list');
+
+        if (!hobbiesList || !likeFactorsList || !importantFactorsList) {
+            console.error('必須エレメントが見つかりませんでした。');
+            return;
+        }
 
         diagnosisData.hobbies.forEach(hobby => {
             const listItem = document.createElement('li');
@@ -38,6 +43,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const skillsList = document.getElementById('skills-list');
+        if (!skillsList) {
+            console.error('skills-list エレメントが見つかりませんでした。');
+            return;
+        }
+
         preprocessingTable.forEach(preprocess => {
             const listItem = document.createElement('li');
             listItem.textContent = `${preprocess.elementname}: ${preprocess.chosen ? '選択' : '未選択'}`;
@@ -53,6 +63,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const scoreList = document.getElementById('score-list');
+        if (!scoreList) {
+            console.error('score-list エレメントが見つかりませんでした。');
+            return;
+        }
+
         const scoreDescriptions = {
             eg1: '論理',
             eg2: '感情',
@@ -76,6 +91,10 @@ document.addEventListener("DOMContentLoaded", function() {
     function displayChosenResults() {
         const sumScores = JSON.parse(localStorage.getItem('sumScores'));
         const skillsList = document.getElementById('skills-list');
+        if (!skillsList) {
+            console.error('skills-list エレメントが見つかりませんでした。');
+            return;
+        }
 
         const topSkills = ['eg1', 'eh1', 'ei1', 'ej1', 'ek1'];
         const secondSkills = ['eg2', 'eh2', 'ei2', 'ej2', 'ek2'];
@@ -120,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log('診断データ:', diagnosisData); // デバッグ用
 
         const jobTable = [
-            { No: 1, z1: 'スーパーマーケットスタッフ', z2: '飲食店', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 0, id1: 1, id2: 0, ie1: 0, ie2: 1, ie3: 0, ie4: 1, ie5: 3, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 0, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 0, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 0, uf3: 0, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 0, uf11: 0, uf12: 0, eg1: 0, eg2: 0, eh1: 0, eh2: 0, ei1: 0, ei2: 0, ej1: 0, ej2: 0, ek1: 0, ek2: 0 },
+            { No: 1, z1: 'スーパーマーケットスタッフ', z2: '飲食店', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 0, ib2: 0, ic1: 0, ic2: 0, id1: 1, id2: 0, ie1: 0, ie2: 0, ie3: 0, ie4: 1, ie5: 0, ie6: 0, ie7: 0, ie8: 0, ie9: 0, ie10: 0, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 0, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 0, uf3: 0, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 0, uf11: 0, uf12: 0, eg1: 0, eg2: 0, eh1: 0, eh2: 0, ei1: 0, ei2: 0, ej1: 0, ej2: 0, ek1: 0, ek2: 0 },
             { No: 2, z1: '技術サポートエンジニア', z2: '技術・エンジニアリング', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 0, ib2: 1, ic1: 1, ic2: 0, id1: 0, id2: 1, ie1: 0, ie2: 1, ie3: 1, ie4: 0, ie5: 1, ie6: 0, ie7: 0, ie8: 1, ie9: 0, ie10: 1, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 0, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 1, uf2: 1, uf3: 0, uf4: 1, uf5: 0, uf6: 0, uf7: 0, uf8: 0, uf9: 0, uf10: 0, uf11: 1, uf12: 1, eg1: 0, eg2: 0, eh1: 0, eh2: 0, ei1: 0, ei2: 0, ej1: 0, ej2: 0, ek1: 0, ek2: 0 },
             { No: 3, z1: 'マーケティングスペシャリスト', z2: 'マーケティング・広告', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 0, ib2: 0, ic1: 0, ic2: 1, id1: 1, id2: 0, ie1: 0, ie2: 1, ie3: 1, ie4: 0, ie5: 1, ie6: 0, ie7: 0, ie8: 1, ie9: 0, ie10: 1, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 0, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 1, uf2: 1, uf3: 0, uf4: 1, uf5: 0, uf6: 0, uf7: 0, uf8: 0, uf9: 0, uf10: 0, uf11: 1, uf12: 1, eg1: 0, eg2: 0, eh1: 0, eh2: 0, ei1: 0, ei2: 0, ej1: 0, ej2: 0, ek1: 0, ek2: 0 }
         ];
@@ -173,11 +192,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function displayJobRecommendations() {
         const jobScores = calculateJobScores();
-        const jobList = document.getElementById('job-recommendations');
+        const jobList = document.getElementById('job-list');
+        if (!jobList) {
+            console.error('job-list エレメントが見つかりませんでした。');
+            return;
+        }
 
         jobScores.forEach((job, index) => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${index + 1}位: ${job.jobName}`;
+            const listItem = document.createElement('tr');
+            const jobNameCell = document.createElement('td');
+            const jobScoreCell = document.createElement('td');
+
+            jobNameCell.textContent = job.jobName;
+            jobScoreCell.textContent = job.totalScore;
+
+            listItem.appendChild(jobNameCell);
+            listItem.appendChild(jobScoreCell);
             jobList.appendChild(listItem);
         });
     }
