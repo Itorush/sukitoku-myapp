@@ -492,7 +492,6 @@ document.addEventListener("DOMContentLoaded", function() {
             { No: 303, z1: 'パティシエ', z2: '飲食店', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 1, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 1, ie4: 1, ie5: 1, ie6: 0, ie7: 1, ie8: 1, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 3, ie14: 1, ie15: 1, ie16: 0, ie17: 2, ie18: 0, ie19: 1, ie20: 0, ie21: 1, ie22: 1, ie23: 0, ie24: 0, uf1: 1, uf2: 0, uf3: 0, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 0, uf10: 0, uf11: 0, uf12: 1, eg1: 2, eg2: 2, eh1: 2, eh2: 2, ei1: 2, ei2: 2, ej1: 0, ej2: 2, ek1: 0, ek2: 2 },
             { No: 304, z1: '作家', z2: 'フリーランス', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 1, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 1, ic1: 0, ic2: 1, id1: 0, id2: 1, ie1: 0, ie2: 1, ie3: 1, ie4: 1, ie5: 0, ie6: 1, ie7: 0, ie8: 2, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 1, ie14: 1, ie15: 1, ie16: 1, ie17: 1, ie18: 3, ie19: 0, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 1, uf3: 1, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 1, uf10: 0, uf11: 1, uf12: 1, eg1: 0, eg2: 2, eh1: 2, eh2: 2, ei1: 0, ei2: 2, ej1: 2, ej2: 0, ek1: 0, ek2: 2 },
             { No: 305, z1: '不動産仲介業', z2: '不動産', aa1: 0, aa2: 1, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 0, ie4: 1, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 1, ie11: 0, ie12: 3, ie13: 0, ie14: 1, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 2, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 3, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 0, uf11: 1, uf12: 1, eg1: 2, eg2: 0, eh1: 2, eh2: 2, ei1: 2, ei2: 0, ej1: 2, ej2: 2, ek1: 2, ek2: 2 },
-          
         ];
 
         const jobScores = jobTable.map(row => {
@@ -503,18 +502,39 @@ document.addEventListener("DOMContentLoaded", function() {
             return { jobName: row.z1, score: totalScore };
         });
 
-        const sortedJobScores = jobScores.sort((a, b) => b.score - a.score).slice(0, 10);
-        return sortedJobScores;
+        const sortedJobScores = jobScores.sort((a, b) => b.score - a.score);
+
+        const result = [];
+        let currentRank = 1;
+        let previousScore = sortedJobScores[0].score;
+        let currentJobs = [];
+        for (let i = 0; i < sortedJobScores.length; i++) {
+            if (sortedJobScores[i].score !== previousScore) {
+                result.push({ rank: currentRank, jobs: currentJobs });
+                if (result.reduce((acc, curr) => acc + curr.jobs.length, 0) >= 20) break;
+                currentRank++;
+                previousScore = sortedJobScores[i].score;
+                currentJobs = [];
+            }
+            currentJobs.push(sortedJobScores[i].jobName);
+        }
+        if (currentJobs.length > 0) {
+            result.push({ rank: currentRank, jobs: currentJobs });
+        }
+
+        return result;
     }
 
     function displayJobRecommendations() {
         const jobList = document.getElementById('job-list');
         const jobRecommendations = calculateJobScores();
 
-        jobRecommendations.forEach((job, index) => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `${index + 1}位: ${job.jobName}`;
-            jobList.appendChild(listItem);
+        jobRecommendations.forEach(rank => {
+            rank.jobs.forEach(jobName => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${rank.rank}位: ${jobName}`;
+                jobList.appendChild(listItem);
+            });
         });
     }
 
