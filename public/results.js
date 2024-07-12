@@ -464,12 +464,12 @@ document.addEventListener("DOMContentLoaded", function() {
         ];
 
         const selectedIds = [
-            diagnosisData.hobbyOptions.id,
-            diagnosisData.likeFactorsOptions1.id,
-            diagnosisData.likeFactorsOptions2.id,
-            diagnosisData.likeFactorsOptions3.id,
-            diagnosisData.likeFactorsOptions4.id,
-            diagnosisData.importantFactorsOptions.id,
+            'hobbyOptions',
+            'likeFactors1',
+            'likeFactors2',
+            'likeFactors3',
+            'likeFactors4',
+            'importantFactors',
             diagnosisData.sumScores.eg1 >= diagnosisData.sumScores.eg2 ? 'eg1' : 'eg2',
             diagnosisData.sumScores.eh1 >= diagnosisData.sumScores.eh2 ? 'eh1' : 'eh2',
             diagnosisData.sumScores.ei1 >= diagnosisData.sumScores.ei2 ? 'ei1' : 'ei2',
