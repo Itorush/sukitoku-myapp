@@ -146,19 +146,41 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    function displayJobRecommendations() {
-        const jobList = document.getElementById('job-list');
-        const jobRecommendations = JSON.parse(localStorage.getItem('jobRecommendations'));
-
-        if (!jobRecommendations) {
-            console.error('向いている仕事ランキングが見つかりませんでした。');
-            return;
+    function calculateJobScores() {
+        const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
+        if (!scoreTable) {
+            console.error('スコア結果が見つかりませんでした。');
+            return [];
         }
 
+        const jobScores = {};
+
+        scoreTable.forEach(row => {
+            if (!jobScores[row.elementname]) {
+                jobScores[row.elementname] = 0;
+            }
+            jobScores[row.elementname] += parseInt(row.score, 10);
+        });
+
+        const sortedJobScores = Object.entries(jobScores)
+            .map(([elementname, score]) => ({ elementname, score }))
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 10);
+
+        return sortedJobScores;
+    }
+
+    function displayJobRecommendations() {
+        const jobList = document.getElementById('job-list');
+        const jobRecommendations = calculateJobScores();
+
         jobRecommendations.forEach(job => {
-            const listItem = document.createElement('li');
-            listItem.textContent = job;
-            jobList.appendChild(listItem);
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${job.elementname}</td>
+                <td>${job.score}</td>
+            `;
+            jobList.appendChild(row);
         });
     }
 
