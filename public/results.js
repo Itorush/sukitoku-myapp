@@ -147,6 +147,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function calculateJobScores() {
         const diagnosisData = JSON.parse(localStorage.getItem('diagnosisData'));
+        if (!diagnosisData) {
+            console.error('診断データが見つかりませんでした。');
+            return [];
+        }
+
+        console.log('診断データ:', diagnosisData); // デバッグ用
+
         const jobTable = [
             { No: 1, z1: 'スーパーマーケットスタッフ', z2: '飲食店', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 0, id1: 1, id2: 0, ie1: 0, ie2: 1, ie3: 0, ie4: 1, ie5: 3, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 0, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 2, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 0, uf3: 0, uf4: 0, uf5: 2, uf6: 0, uf7: 3, uf8: 0, uf9: 0, uf10: 1, uf11: 0, uf12: 1, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 2, ek2: 0 },
             { No: 2, z1: '本屋スタッフ', z2: '不明', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 1, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 0, ic2: 1, id1: 1, id2: 1, ie1: 0, ie2: 1, ie3: 0, ie4: 3, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 2, ie10: 0, ie11: 0, ie12: 1, ie13: 0, ie14: 0, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 0, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 3, uf11: 0, uf12: 0, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 0, ek2: 2 },
@@ -456,11 +463,6 @@ document.addEventListener("DOMContentLoaded", function() {
           
         ];
 
-        if (!diagnosisData) {
-            console.error('診断データが見つかりませんでした。');
-            return [];
-        }
-
         const selectedIds = [
             diagnosisData.hobbyOptions.id,
             diagnosisData.likeFactorsOptions1.id,
@@ -474,6 +476,8 @@ document.addEventListener("DOMContentLoaded", function() {
             diagnosisData.sumScores.ej1 >= diagnosisData.sumScores.ej2 ? 'ej1' : 'ej2',
             diagnosisData.sumScores.ek1 >= diagnosisData.sumScores.ek2 ? 'ek1' : 'ek2',
         ];
+
+        console.log('選択されたID:', selectedIds); // デバッグ用
 
         const jobScores = jobTable.map(row => {
             let totalScore = 0;
