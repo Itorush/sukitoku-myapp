@@ -147,8 +147,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function calculateJobScores() {
         const diagnosisData = JSON.parse(localStorage.getItem('diagnosisData'));
+        if (!diagnosisData) {
+            console.error('診断データが見つかりませんでした。');
+            return [];
+        }
+
+        const selectedIds = [
+            ...(diagnosisData.hobbies || []).map(hobby => hobbyOptions.find(option => option.elementname === hobby)?.id).filter(id => id),
+            diagnosisData.likeFactors1[0] && likeFactorsOptions1.find(option => option.elementname === diagnosisData.likeFactors1[0])?.id,
+            diagnosisData.likeFactors2[0] && likeFactorsOptions2.find(option => option.elementname === diagnosisData.likeFactors2[0])?.id,
+            diagnosisData.likeFactors3[0] && likeFactorsOptions3.find(option => option.elementname === diagnosisData.likeFactors3[0])?.id,
+            ...(diagnosisData.likeFactors4 || []).map(factor => likeFactorsOptions4.find(option => option.elementname === factor)?.id).filter(id => id),
+            ...(diagnosisData.importantFactors || []).map(factor => importantFactorsOptions.find(option => option.elementname === factor)?.id).filter(id => id),
+            diagnosisData.sumScores?.eg1 >= diagnosisData.sumScores?.eg2 ? 'eg1' : 'eg2',
+            diagnosisData.sumScores?.eh1 >= diagnosisData.sumScores?.eh2 ? 'eh1' : 'eh2',
+            diagnosisData.sumScores?.ei1 >= diagnosisData.sumScores?.ei2 ? 'ei1' : 'ei2',
+            diagnosisData.sumScores?.ej1 >= diagnosisData.sumScores?.ej2 ? 'ej1' : 'ej2',
+            diagnosisData.sumScores?.ek1 >= diagnosisData.sumScores?.ek2 ? 'ek1' : 'ek2',
+        ].filter(id => id);
+
         const jobTable = [
-            // 診断データをもとにした行をここに挿入
             { No: 1, z1: 'スーパーマーケットスタッフ', z2: '飲食店', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 0, id1: 1, id2: 0, ie1: 0, ie2: 1, ie3: 0, ie4: 1, ie5: 3, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 0, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 2, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 0, uf3: 0, uf4: 0, uf5: 2, uf6: 0, uf7: 3, uf8: 0, uf9: 0, uf10: 1, uf11: 0, uf12: 1, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 2, ek2: 0 },
             { No: 2, z1: '本屋スタッフ', z2: '不明', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 1, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 0, ic2: 1, id1: 1, id2: 1, ie1: 0, ie2: 1, ie3: 0, ie4: 3, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 2, ie10: 0, ie11: 0, ie12: 1, ie13: 0, ie14: 0, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 0, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 3, uf11: 0, uf12: 0, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 0, ek2: 2 },
             { No: 3, z1: 'コンビニエンスストアスタッフ', z2: '飲食店', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 0, id1: 1, id2: 0, ie1: 0, ie2: 1, ie3: 0, ie4: 1, ie5: 3, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 0, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 2, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 0, uf3: 0, uf4: 0, uf5: 2, uf6: 0, uf7: 3, uf8: 0, uf9: 0, uf10: 1, uf11: 0, uf12: 1, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 2, ek2: 0 },
@@ -454,20 +472,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { No: 303, z1: 'パティシエ', z2: '飲食店', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 1, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 1, ie4: 1, ie5: 1, ie6: 0, ie7: 1, ie8: 1, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 3, ie14: 1, ie15: 1, ie16: 0, ie17: 2, ie18: 0, ie19: 1, ie20: 0, ie21: 1, ie22: 1, ie23: 0, ie24: 0, uf1: 1, uf2: 0, uf3: 0, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 0, uf10: 0, uf11: 0, uf12: 1, eg1: 2, eg2: 2, eh1: 2, eh2: 2, ei1: 2, ei2: 2, ej1: 0, ej2: 2, ek1: 0, ek2: 2 },
             { No: 304, z1: '作家', z2: 'フリーランス', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 1, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 1, ic1: 0, ic2: 1, id1: 0, id2: 1, ie1: 0, ie2: 1, ie3: 1, ie4: 1, ie5: 0, ie6: 1, ie7: 0, ie8: 2, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 1, ie14: 1, ie15: 1, ie16: 1, ie17: 1, ie18: 3, ie19: 0, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 1, uf3: 1, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 1, uf10: 0, uf11: 1, uf12: 1, eg1: 0, eg2: 2, eh1: 2, eh2: 2, ei1: 0, ei2: 2, ej1: 2, ej2: 0, ek1: 0, ek2: 2 },
             { No: 305, z1: '不動産仲介業', z2: '不動産', aa1: 0, aa2: 1, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 0, ie4: 1, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 1, ie11: 0, ie12: 3, ie13: 0, ie14: 1, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 2, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 3, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 0, uf11: 1, uf12: 1, eg1: 2, eg2: 0, eh1: 2, eh2: 2, ei1: 2, ei2: 0, ej1: 2, ej2: 2, ek1: 2, ek2: 2 },
-        ];
-
-        const selectedIds = [
-            diagnosisData.hobbyOptions.id,
-            diagnosisData.likeFactorsOptions1.id,
-            diagnosisData.likeFactorsOptions2.id,
-            diagnosisData.likeFactorsOptions3.id,
-            diagnosisData.likeFactorsOptions4.id,
-            diagnosisData.importantFactorsOptions.id,
-            diagnosisData.sumScores.eg1 >= diagnosisData.sumScores.eg2 ? 'eg1' : 'eg2',
-            diagnosisData.sumScores.eh1 >= diagnosisData.sumScores.eh2 ? 'eh1' : 'eh2',
-            diagnosisData.sumScores.ei1 >= diagnosisData.sumScores.ei2 ? 'ei1' : 'ei2',
-            diagnosisData.sumScores.ej1 >= diagnosisData.sumScores.ej2 ? 'ej1' : 'ej2',
-            diagnosisData.sumScores.ek1 >= diagnosisData.sumScores.ek2 ? 'ek1' : 'ek2',
+          
         ];
 
         const jobScores = jobTable.map(row => {
