@@ -498,6 +498,8 @@ document.addEventListener("DOMContentLoaded", function() {
             });
         }
 
+        console.log('Ranked Jobs:', rankedJobs); // デバッグ用のログ
+
         return rankedJobs;
     }
 
