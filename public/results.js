@@ -1,126 +1,91 @@
 document.addEventListener("DOMContentLoaded", function() {
     function displayPreprocessingResults() {
-        const preprocessingResultsBody = document.getElementById('preprocessingResultsBody');
-        const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable'));
-
-        if (!preprocessingTable) {
-            console.error('前処理結果が見つかりませんでした。');
+        const diagnosisData = JSON.parse(localStorage.getItem('diagnosisData'));
+        if (!diagnosisData) {
+            console.error('診断データが見つかりませんでした。');
             return;
         }
 
-        preprocessingTable.forEach(row => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${row.chosen}</td>
-                <td>${row.axis1score}</td>
-                <td>${row.axis2score}</td>
-                <td>${row.sy1}</td>
-                <td>${row.sy2}</td>
-                <td>${row.sy3}</td>
-                <td>${row.id}</td>
-                <td>${row.elementname}</td>
-            `;
-            preprocessingResultsBody.appendChild(tr);
+        const hobbiesList = document.getElementById('hobbies-list');
+        const likeFactorsList = document.getElementById('like-factors-list');
+        const importantFactorsList = document.getElementById('important-factors-list');
+
+        diagnosisData.hobbies.forEach(hobby => {
+            const listItem = document.createElement('li');
+            listItem.textContent = hobby;
+            hobbiesList.appendChild(listItem);
+        });
+
+        const likeFactors = [...diagnosisData.likeFactors1, ...diagnosisData.likeFactors2, ...diagnosisData.likeFactors3, ...diagnosisData.likeFactors4];
+        likeFactors.forEach(likeFactor => {
+            const listItem = document.createElement('li');
+            listItem.textContent = likeFactor;
+            likeFactorsList.appendChild(listItem);
+        });
+
+        diagnosisData.importantFactors.forEach(importantFactor => {
+            const listItem = document.createElement('li');
+            listItem.textContent = importantFactor;
+            importantFactorsList.appendChild(listItem);
         });
     }
 
     function displayScoreResults() {
-        const scoreResultsBody = document.getElementById('scoreResultsBody');
-        const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
-
-        if (!scoreTable) {
-            console.error('スコア結果が見つかりませんでした。');
-            return;
-        }
-
-        scoreTable.forEach(row => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td>${row.score}</td>
-                <td>${row.sy1}</td>
-                <td>${row.sy2}</td>
-                <td>${row.sy3}</td>
-                <td>${row.id}</td>
-                <td>${row.elementname}</td>
-            `;
-            scoreResultsBody.appendChild(tr);
-        });
-    }
-
-    function generateSkillScoreTable() {
         const preprocessingTable = JSON.parse(localStorage.getItem('preprocessingTable'));
         if (!preprocessingTable) {
             console.error('前処理データが見つかりませんでした。');
             return;
         }
 
-        const skillScoreTable = [
-            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'g', sy3: 1, id: 'eg1', elementname: '論理' },
-            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'g', sy3: 2, id: 'eg2', elementname: '感情' },
-            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'h', sy3: 1, id: 'eh1', elementname: '精密性' },
-            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'h', sy3: 2, id: 'eh2', elementname: '全体像' },
-            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'i', sy3: 1, id: 'ei1', elementname: '伝統性' },
-            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'i', sy3: 2, id: 'ei2', elementname: '創造性' },
-            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'j', sy3: 1, id: 'ej1', elementname: '熟考' },
-            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'j', sy3: 2, id: 'ej2', elementname: '即座' },
-            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis1score || 0), 0), sy1: 'e', sy2: 'k', sy3: 1, id: 'ek1', elementname: '身体能力' },
-            { score: preprocessingTable.reduce((acc, row) => acc + (row.axis2score || 0), 0), sy1: 'e', sy2: 'k', sy3: 2, id: 'ek2', elementname: '学力' }
-        ];
+        const skillsList = document.getElementById('skills-list');
+        preprocessingTable.forEach(preprocess => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${preprocess.elementname}: ${preprocess.chosen ? '選択' : '未選択'}`;
+            skillsList.appendChild(listItem);
+        });
+    }
 
-        localStorage.setItem('skillScoreTable', JSON.stringify(skillScoreTable));
+    function generateSkillScoreTable() {
+        const sumScores = JSON.parse(localStorage.getItem('sumScores'));
+        if (!sumScores) {
+            console.error('得意な要素の合計スコアが見つかりませんでした。');
+            return;
+        }
+
+        const scoreList = document.getElementById('score-list');
+        const scoreDescriptions = {
+            eg1: '論理',
+            eg2: '感情',
+            eh1: '精密性',
+            eh2: '全体像',
+            ei1: '伝統性',
+            ei2: '創造性',
+            ej1: '熟考',
+            ej2: '即座',
+            ek1: '身体能力',
+            ek2: '学力'
+        };
+
+        Object.keys(sumScores).forEach(key => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${scoreDescriptions[key]}: ${sumScores[key]}`;
+            scoreList.appendChild(listItem);
+        });
     }
 
     function displayChosenResults() {
-        const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
-
-        const hobbyList = document.getElementById('hobby-list');
-        const likeFactorsList = document.getElementById('like-factors-list');
-        const importantFactorsList = document.getElementById('important-factors-list');
+        const sumScores = JSON.parse(localStorage.getItem('sumScores'));
         const skillsList = document.getElementById('skills-list');
 
-        // ①あなたの趣味に近いもの
-        const hobbies = scoreTable.filter(row => row.sy1 === 'a' && row.score === '1');
-        hobbies.forEach(hobby => {
-            const listItem = document.createElement('li');
-            listItem.textContent = hobby.elementname;
-            hobbyList.appendChild(listItem);
-        });
-
-        // ②あなたの趣味に近い好きなことの要素
-        const likeFactors = scoreTable.filter(row => row.sy1 === 'i' && row.score === '1');
-        likeFactors.forEach(factor => {
-            const listItem = document.createElement('li');
-            listItem.textContent = factor.elementname;
-            likeFactorsList.appendChild(listItem);
-        });
-
-        // ③あなたが仕事を選ぶうえで大事にしたいこと
-        const importantFactors = scoreTable.filter(row => row.sy1 === 'u' && row.score === '1');
-        importantFactors.forEach(factor => {
-            const listItem = document.createElement('li');
-            listItem.textContent = factor.elementname;
-            importantFactorsList.appendChild(listItem);
-        });
-
-        // ④特に得意なこと
-        const skills = scoreTable.filter(row => row.sy1 === 'e');
-        const sumScores = skills.reduce((acc, skill) => {
-            acc[skill.id] = (acc[skill.id] || 0) + parseInt(skill.score, 10);
-            return acc;
-        }, {});
-
-        const sortedScores = Object.entries(sumScores).sort(([, a], [, b]) => b - a);
-        const one = sortedScores[0][1];
-        const two = sortedScores[1][1];
-        const topSkills = sortedScores.filter(([, score]) => score === one).map(([id]) => id);
-        const secondSkills = sortedScores.filter(([, score]) => score === two).map(([id]) => id);
+        const topSkills = ['eg1', 'eh1', 'ei1', 'ej1', 'ek1'];
+        const secondSkills = ['eg2', 'eh2', 'ei2', 'ej2', 'ek2'];
 
         const skillDescriptions = {
-            eg1: 'あなたは論理的に考える特徴があるようです。この特徴は、事実やデータに基づいて物事を分析し、客観的かつ合理的に結論を導き出す能力を指します。これにより、問題解決や意思決定の際に正確で効果的な判断が可能となります。',
-            eg2: 'あなたは感情に敏感な特徴があるようです。この特徴は、他人の気持ちを察し、共感し、感情を理解する能力を指します。これにより、対人関係が円滑になり、他者との協力やコミュニケーションが向上します。',
-            eh1: 'あなたは精密性を持つ特徴があるようです。この特徴は、細部にまで注意を払い、正確さを重視する能力を指します。この能力は、高品質な成果物を生み出すのに役立ち、誤りやミスを減らすことができます。',
-            eh2: 'あなたは全体像を把握する特徴があるようです。この特徴は、物事を俯瞰的に捉え、長期的な視点で計画や戦略を立てる能力を指します。これにより、バランスの取れた判断ができ、プロジェクトやビジネスの成功に寄与します。',
-            ei1: 'あなたは伝統性を重んじる特徴があるようです。この特徴は、歴史や文化、慣習を大切にし、過去の知恵や経験を活かす能力を指します。これにより、安定した価値観を持ち続け、信頼性のある行動を取ることができます。',
+            eg1: 'あなたは論理的な特徴があるようです。この特徴は、物事を論理的に分析し、体系的に考える能力を指します。これにより、問題解決や意思決定において明確で効果的な方法を見つけることができます。',
+            eg2: 'あなたは感情的な特徴があるようです。この特徴は、他者の感情に敏感であり、共感する能力を指します。これにより、人間関係を築く際に優れたコミュニケーションスキルを発揮し、チームワークを強化できます。',
+            eh1: 'あなたは精密性に優れる特徴があるようです。この特徴は、細部に注意を払い、正確で丁寧な作業を行う能力を指します。これにより、高品質な成果物を提供し、信頼性のあるパフォーマンスを発揮できます。',
+            eh2: 'あなたは全体像を見る特徴があるようです。この特徴は、物事を広い視点から捉え、全体的な計画を立てる能力を指します。これにより、プロジェクトの進行を効果的に管理し、長期的な目標達成に寄与します。',
+            ei1: 'あなたは伝統性を重視する特徴があるようです。この特徴は、過去の知恵や経験を活かす能力を指します。これにより、安定した価値観を持ち続け、信頼性のある行動を取ることができます。',
             ei2: 'あなたは創造性に富む特徴があるようです。この特徴は、新しいアイデアや解決策を生み出す能力を指します。これにより、革新的なアプローチが可能となり、問題解決やプロジェクトの進行において新たな視点を提供します。',
             ej1: 'あなたは熟考する特徴があるようです。この特徴は、物事を深く考え、じっくりと検討する能力を指します。これにより、慎重で緻密な判断ができ、重要な決定をする際の信頼性が高まります。',
             ej2: 'あなたは即座に判断する特徴があるようです。この特徴は、瞬時に状況を把握し、素早く決断を下す能力を指します。これにより、迅速な対応が求められる状況で優れたパフォーマンスを発揮できます。',
@@ -460,47 +425,59 @@ document.addEventListener("DOMContentLoaded", function() {
             { No: 303, z1: 'パティシエ', z2: '飲食店', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 1, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 1, ie4: 1, ie5: 1, ie6: 0, ie7: 1, ie8: 1, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 3, ie14: 1, ie15: 1, ie16: 0, ie17: 2, ie18: 0, ie19: 1, ie20: 0, ie21: 1, ie22: 1, ie23: 0, ie24: 0, uf1: 1, uf2: 0, uf3: 0, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 0, uf10: 0, uf11: 0, uf12: 1, eg1: 2, eg2: 2, eh1: 2, eh2: 2, ei1: 2, ei2: 2, ej1: 0, ej2: 2, ek1: 0, ek2: 2 },
             { No: 304, z1: '作家', z2: 'フリーランス', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 1, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 1, ic1: 0, ic2: 1, id1: 0, id2: 1, ie1: 0, ie2: 1, ie3: 1, ie4: 1, ie5: 0, ie6: 1, ie7: 0, ie8: 2, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 1, ie14: 1, ie15: 1, ie16: 1, ie17: 1, ie18: 3, ie19: 0, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 1, uf3: 1, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 1, uf10: 0, uf11: 1, uf12: 1, eg1: 0, eg2: 2, eh1: 2, eh2: 2, ei1: 0, ei2: 2, ej1: 2, ej2: 0, ek1: 0, ek2: 2 },
             { No: 305, z1: '不動産仲介業', z2: '不動産', aa1: 0, aa2: 1, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 0, ie4: 1, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 1, ie11: 0, ie12: 3, ie13: 0, ie14: 1, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 2, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 3, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 0, uf11: 1, uf12: 1, eg1: 2, eg2: 0, eh1: 2, eh2: 2, ei1: 2, ei2: 0, ej1: 2, ej2: 2, ek1: 2, ek2: 2 },          
-            // 他の行も同様に追加
         ];
 
-        const selectedIds = [
-            'hobbies', // 'hobbyOptions' ではなく 'hobbies' を使用
-            'likeFactors1',
-            'likeFactors2',
-            'likeFactors3',
-            'likeFactors4',
-            'importantFactors',
-            diagnosisData.sumScores.eg1 >= diagnosisData.sumScores.eg2 ? 'eg1' : 'eg2',
-            diagnosisData.sumScores.eh1 >= diagnosisData.sumScores.eh2 ? 'eh1' : 'eh2',
-            diagnosisData.sumScores.ei1 >= diagnosisData.sumScores.ei2 ? 'ei1' : 'ei2',
-            diagnosisData.sumScores.ej1 >= diagnosisData.sumScores.ej2 ? 'ej1' : 'ej2',
-            diagnosisData.sumScores.ek1 >= diagnosisData.sumScores.ek2 ? 'ek1' : 'ek2',
+        const sumScores = {
+            eg1: 10,
+            eg2: 5,
+            eh1: 8,
+            eh2: 4,
+            ei1: 7,
+            ei2: 6,
+            ej1: 9,
+            ej2: 3,
+            ek1: 7,
+            ek2: 5
+        };
+
+        // Step 1: Select ids based on max score
+        const selectedIds = [];
+        const skillPairs = [
+            ['eg1', 'eg2'],
+            ['eh1', 'eh2'],
+            ['ei1', 'ei2'],
+            ['ej1', 'ej2'],
+            ['ek1', 'ek2']
         ];
 
-        console.log('選択されたID:', selectedIds); // デバッグ用
-
-        const jobScores = jobTable.map(row => {
-            let totalScore = 0;
-            selectedIds.forEach(id => {
-                totalScore += row[id] || 0;
-            });
-            return { jobName: row.z1, score: totalScore };
+        skillPairs.forEach(pair => {
+            selectedIds.push(sumScores[pair[0]] > sumScores[pair[1]] ? pair[0] : pair[1]);
         });
 
-        const sortedJobScores = jobScores.sort((a, b) => b.score - a.score).slice(0, 10);
-        return sortedJobScores;
+        console.log('selectedIds:', selectedIds); // デバッグ用
+
+        // Step 2: Calculate job scores
+        const jobScores = jobTable.map(job => {
+            const totalScore = selectedIds.reduce((acc, id) => acc + (job[id] || 0), 0);
+            return {
+                jobName: job.z1,
+                totalScore: totalScore
+            };
+        });
+
+        // Step 3: Sort jobs by score in descending order and get top 10
+        jobScores.sort((a, b) => b.totalScore - a.totalScore);
+
+        console.log('jobScores:', jobScores); // デバッグ用
+
+        return jobScores.slice(0, 10);
     }
 
     function displayJobRecommendations() {
-        const jobList = document.getElementById('job-list');
-        const jobRecommendations = calculateJobScores();
+        const jobScores = calculateJobScores();
+        const jobList = document.getElementById('job-recommendations');
 
-        if (!jobRecommendations || jobRecommendations.length === 0) {
-            console.error('向いている仕事ランキングが見つかりませんでした。');
-            return;
-        }
-
-        jobRecommendations.forEach((job, index) => {
+        jobScores.forEach((job, index) => {
             const listItem = document.createElement('li');
             listItem.textContent = `${index + 1}位: ${job.jobName}`;
             jobList.appendChild(listItem);
