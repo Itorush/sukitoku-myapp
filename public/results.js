@@ -42,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <td>${row.sy3}</td>
                 <td>${row.id}</td>
                 <td>${row.elementname}</td>
+                <td>${row.z3 ? row.z3 : ''}</td> <!-- z3列を追加 -->
             `;
             scoreResultsBody.appendChild(tr);
         });
@@ -146,28 +147,47 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function calculateJobScores() {
+        const diagnosisData = JSON.parse(localStorage.getItem('diagnosisData'));
         const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
-        if (!scoreTable) {
-            console.error('スコア結果が見つかりませんでした。');
+        if (!diagnosisData || !scoreTable) {
+            console.error('診断データまたはスコアテーブルが見つかりませんでした。');
             return [];
         }
 
+        // 選ばれたIDを取得
         const selectedIds = [];
+
+        // SY1が'a', 'i', 'u'の行のIDを選択
         scoreTable.forEach(row => {
-            if ((row.sy1 === 'a' || row.sy1 === 'i' || row.sy1 === 'u') && row.score === '1') {
+            if (['a', 'i', 'u'].includes(row.sy1) && row.score === '1') {
                 selectedIds.push(row.id);
             }
         });
 
-        ['g', 'h', 'i', 'j', 'k'].forEach(sy2 => {
-            const maxRow = scoreTable.filter(row => row.sy1 === 'e' && row.sy2 === sy2)
-                                    .reduce((max, row) => row.score > max.score ? row : max, { score: 0 });
-            if (maxRow.id) {
-                selectedIds.push(maxRow.id);
+        // SY1が'e'の行の中で、SY2が'g', 'h', 'i', 'j', 'k'のそれぞれの行の中で最大スコアのIDを選択
+        const maxScoreBySy2 = {
+            g: { score: 0, id: '' },
+            h: { score: 0, id: '' },
+            i: { score: 0, id: '' },
+            j: { score: 0, id: '' },
+            k: { score: 0, id: '' },
+        };
+
+        scoreTable.forEach(row => {
+            if (row.sy1 === 'e' && maxScoreBySy2[row.sy2] && parseInt(row.score) > maxScoreBySy2[row.sy2].score) {
+                maxScoreBySy2[row.sy2] = { score: parseInt(row.score), id: row.id };
             }
         });
 
+        Object.values(maxScoreBySy2).forEach(item => {
+            if (item.id) {
+                selectedIds.push(item.id);
+            }
+        });
+
+        // 適職ランキングの計算
         const jobTable = [
+            // jobTableのデータをここに記述
             { z1: 'スーパーマーケットスタッフ', z2: '飲食店', z3: 'スーパーマーケットで商品を売るための準備やお客様の対応をする仕事です。地域の消費者に新鮮な食料品や日用品を提供し、便利で快適な買い物環境を提供します。', z4: 'お客様への対応、商品を棚に並べる、店をきれいに保つ、商品の値段を確認して表示する。', z5: '地域の顧客との交流が多く、サービス提供による満足感が得られますが、長時間立ち仕事や体力的な負担が課題となります。', z6: 'イオン、イトーヨーカドー', z7: '約300万円', z8: '食品衛生責任者', z9: 'FoodsLabo', z10: '', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 0, id1: 1, id2: 0, ie1: 0, ie2: 1, ie3: 0, ie4: 1, ie5: 3, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 0, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 2, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 0, uf3: 0, uf4: 0, uf5: 2, uf6: 0, uf7: 3, uf8: 0, uf9: 0, uf10: 1, uf11: 0, uf12: 1, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 2, ek2: 0 },
             { z1: '本屋スタッフ', z2: '不明', z3: '本屋で本を売ったり、本をきれいに並べたり、お客様に本を案内する仕事です。読書好きのお客様に豊富な書籍とリラックスした環境を提供し、知識と楽しみを広げます。', z4: '本を陳列して整理する、お客様に本を勧める、レジでの会計を行う。', z5: '本好きにとって理想的な環境で働く喜びがありますが、在庫管理や重い本の運搬が課題です。', z6: '紀伊國屋書店、丸善', z7: '約300万円', z8: '司書', z9: '', z10: '', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 1, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 0, ic2: 1, id1: 1, id2: 1, ie1: 0, ie2: 1, ie3: 0, ie4: 3, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 2, ie10: 0, ie11: 0, ie12: 1, ie13: 0, ie14: 0, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 0, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 3, uf11: 0, uf12: 0, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 0, ek2: 2 },
             { z1: 'コンビニエンスストアスタッフ', z2: '飲食店', z3: 'コンビニで商品を売ったり、商品の管理をしたりする仕事です。地域住民や通勤者に24時間営業の便利な買い物場所と幅広い商品を提供します。', z4: '商品を棚に並べる、商品の賞味期限をチェックする、レジでの会計を行う、店を掃除する。', z5: '多様な業務をこなす達成感があり、顧客対応のスキルが磨かれますが、シフト勤務や夜勤が負担です。', z6: 'セブン-イレブン、ローソン', z7: '約300万円', z8: '食品衛生責任者', z9: 'FoodsLabo', z10: '', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 0, id1: 1, id2: 0, ie1: 0, ie2: 1, ie3: 0, ie4: 1, ie5: 3, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 0, ie11: 0, ie12: 0, ie13: 0, ie14: 0, ie15: 0, ie16: 0, ie17: 0, ie18: 0, ie19: 2, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 0, uf3: 0, uf4: 0, uf5: 2, uf6: 0, uf7: 3, uf8: 0, uf9: 0, uf10: 1, uf11: 0, uf12: 1, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 2, ei2: 0, ej1: 0, ej2: 2, ek1: 2, ek2: 0 },
@@ -472,8 +492,8 @@ document.addEventListener("DOMContentLoaded", function() {
             { z1: '声優', z2: '不明', z3: 'アニメーション、映画、ビデオゲーム、ラジオドラマなどで声の演技を行う仕事です。視聴者に魅力的で感動的な音声パフォーマンスを提供し、作品の価値を高めます。', z4: 'キャラクターの声の提供、台本の読み込み、声の録音、音声の編集協力。', z5: 'アニメやゲームのキャラクターの声を担当し、多くの人々に影響を与える仕事ですが、収入の不安定さやプレッシャーが課題です。', z6: '青二プロダクション、81プロデュース', z7: '約500万円', z8: '声優能力検定', z9: '', z10: '', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 1, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 1, ie3: 1, ie4: 1, ie5: 1, ie6: 0, ie7: 0, ie8: 3, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 0, ie14: 1, ie15: 1, ie16: 1, ie17: 2, ie18: 1, ie19: 1, ie20: 1, ie21: 1, ie22: 1, ie23: 0, ie24: 0, uf1: 1, uf2: 0, uf3: 0, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 1, uf10: 0, uf11: 1, uf12: 0, eg1: 0, eg2: 2, eh1: 0, eh2: 2, ei1: 0, ei2: 2, ej1: 2, ej2: 0, ek1: 0, ek2: 2 },
             { z1: 'パティシエ', z2: '飲食店', z3: 'ケーキやデザートなどの菓子製造を専門に行う仕事です。顧客に美味しく見た目も美しいデザートを提供し、満足度を向上させます。', z4: 'スイーツのレシピ開発、菓子の製造、品質管理、デザートのデコレーション。', z5: '美味しいケーキやデザートを作り、多くの人々に喜ばれる仕事ですが、長時間労働や体力的な負担が課題です。', z6: 'ピエール・エルメ・パリ、キルフェボン', z7: '約450万円', z8: '製菓衛生師', z9: 'FoodsLabo', z10: '', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 1, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 1, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 1, ie4: 1, ie5: 1, ie6: 0, ie7: 1, ie8: 1, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 3, ie14: 1, ie15: 1, ie16: 0, ie17: 2, ie18: 0, ie19: 1, ie20: 0, ie21: 1, ie22: 1, ie23: 0, ie24: 0, uf1: 1, uf2: 0, uf3: 0, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 0, uf10: 0, uf11: 0, uf12: 1, eg1: 2, eg2: 2, eh1: 2, eh2: 2, ei1: 2, ei2: 2, ej1: 0, ej2: 2, ek1: 0, ek2: 2 },
             { z1: '作家', z2: 'フリーランス', z3: '小説や随筆、評論などを執筆し、出版する仕事です。読者に魅力的で知識豊かな読み物を提供し、文学と文化の発展を支援します。', z4: '執筆活動、リサーチ、原稿の編集、出版交渉、読者イベントの参加。', z5: '自分の物語を創作し、多くの人々に楽しみを提供する仕事ですが、アイデアの枯渇や締め切りが課題です。', z6: '日本文藝家協会、日本ペンクラブ', z7: '約500万円', z8: 'なし', z9: 'ペイトナーファクタリング', z10: '', aa1: 0, aa2: 0, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 1, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 1, ic1: 0, ic2: 1, id1: 0, id2: 1, ie1: 0, ie2: 1, ie3: 1, ie4: 1, ie5: 0, ie6: 1, ie7: 0, ie8: 2, ie9: 1, ie10: 1, ie11: 1, ie12: 1, ie13: 1, ie14: 1, ie15: 1, ie16: 1, ie17: 1, ie18: 3, ie19: 0, ie20: 0, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 0, uf2: 1, uf3: 1, uf4: 2, uf5: 0, uf6: 3, uf7: 0, uf8: 0, uf9: 1, uf10: 0, uf11: 1, uf12: 1, eg1: 0, eg2: 2, eh1: 2, eh2: 2, ei1: 0, ei2: 2, ej1: 2, ej2: 0, ek1: 0, ek2: 2 },
-            { z1: '不動産仲介業', z2: '不動産', z3: '不動産の売買や賃貸契約を仲介し、物件の情報提供や契約手続きをサポートする仕事です。クライアントに信頼性の高い不動産サービスを提供し、取引の成功を支援します。', z4: '物件情報の収集と提供、見学の案内、契約条件の交渉、契約書の作成と管理。', z5: '不動産の売買や賃貸を仲介し、クライアントを支援する仕事ですが、技術習得やクライアント対応が課題です。', z6: '三井のリハウス、住友不動産', z7: '約600万円', z8: '宅地建物取引士', z9: 'リアルエステートWORKS', z10: '', aa1: 0, aa2: 1, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 0, ie4: 1, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 1, ie11: 0, ie12: 3, ie13: 0, ie14: 1, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 2, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 3, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 0, uf11: 1, uf12: 1, eg1: 2, eg2: 0, eh1: 2, eh2: 2, ei1: 2, ei2: 0, ej1: 2, ej2: 2, ek1: 2, ek2: 2 },          
-            // 続けて他の行も同様に追加
+            { z1: '不動産仲介業', z2: '不動産', z3: '不動産の売買や賃貸契約を仲介し、物件の情報提供や契約手続きをサポートする仕事です。クライアントに信頼性の高い不動産サービスを提供し、取引の成功を支援します。', z4: '物件情報の収集と提供、見学の案内、契約条件の交渉、契約書の作成と管理。', z5: '不動産の売買や賃貸を仲介し、クライアントを支援する仕事ですが、技術習得やクライアント対応が課題です。', z6: '三井のリハウス、住友不動産', z7: '約600万円', z8: '宅地建物取引士', z9: 'リアルエステートWORKS', z10: '', aa1: 0, aa2: 1, aa3: 0, aa4: 0, aa5: 0, aa6: 0, aa7: 0, aa8: 0, aa9: 0, aa10: 0, aa11: 0, aa12: 0, aa13: 0, aa14: 0, aa15: 0, aa16: 0, aa17: 0, aa18: 0, aa19: 0, aa20: 0, aa21: 0, aa22: 0, aa23: 0, aa24: 0, aa25: 0, aa26: 0, aa27: 0, aa28: 0, aa29: 0, aa30: 0, ib1: 1, ib2: 0, ic1: 1, ic2: 1, id1: 1, id2: 1, ie1: 1, ie2: 0, ie3: 0, ie4: 1, ie5: 1, ie6: 0, ie7: 0, ie8: 0, ie9: 1, ie10: 1, ie11: 0, ie12: 3, ie13: 0, ie14: 1, ie15: 1, ie16: 0, ie17: 1, ie18: 0, ie19: 1, ie20: 2, ie21: 0, ie22: 0, ie23: 0, ie24: 0, uf1: 2, uf2: 0, uf3: 3, uf4: 0, uf5: 1, uf6: 0, uf7: 1, uf8: 0, uf9: 0, uf10: 0, uf11: 1, uf12: 1, eg1: 2, eg2: 0, eh1: 2, eh2: 2, ei1: 2, ei2: 0, ej1: 2, ej2: 2, ek1: 2, ek2: 2 },
+          
         ];
 
         const jobScores = jobTable.map(row => {
@@ -481,46 +501,42 @@ document.addEventListener("DOMContentLoaded", function() {
             selectedIds.forEach(id => {
                 totalScore += row[id] || 0;
             });
-            return { jobName: row.z1, score: totalScore, z3: row.z3, z4: row.z4, z5: row.z5, z6: row.z6, z7: row.z7, z8: row.z8, z10: row.z10 };
+            return { jobName: row.z1, score: totalScore, z3: row.z3 };  // z3を含む
         });
 
         const sortedJobScores = jobScores.sort((a, b) => b.score - a.score);
 
-        const rankedJobs = [];
+        const result = [];
         let currentRank = 1;
-        let currentScore = sortedJobScores[0]?.score || 0;
-
-        for (const job of sortedJobScores) {
-            if (rankedJobs.length >= 20) break;
-
-            if (job.score < currentScore) {
-                currentRank += 1;
-                currentScore = job.score;
+        let previousScore = sortedJobScores[0].score;
+        let currentJobs = [];
+        for (let i = 0; i < sortedJobScores.length; i++) {
+            if (sortedJobScores[i].score !== previousScore) {
+                result.push({ rank: currentRank, jobs: currentJobs });
+                if (result.reduce((acc, curr) => acc + curr.jobs.length, 0) >= 20) break;
+                currentRank++;
+                previousScore = sortedJobScores[i].score;
+                currentJobs = [];
             }
-
-            rankedJobs.push({ rank: currentRank, ...job });
+            currentJobs.push(sortedJobScores[i].jobName);
+        }
+        if (currentJobs.length > 0) {
+            result.push({ rank: currentRank, jobs: currentJobs });
         }
 
-        return rankedJobs;
+        return result;
     }
 
     function displayJobRecommendations() {
         const jobList = document.getElementById('job-list');
         const jobRecommendations = calculateJobScores();
 
-        jobRecommendations.forEach(job => {
-            const listItem = document.createElement('li');
-            listItem.innerHTML = `
-                ${job.rank}位: ${job.jobName}<br>
-                ${job.z3}<br>
-                <strong>仕事内容:</strong> ${job.z4}<br>
-                <strong>各職種で得られる満足感と直面する課題:</strong> ${job.z5}<br>
-                <strong>代表的な企業例:</strong> ${job.z6}<br>
-                <strong>一般的な年収:</strong> ${job.z7}<br>
-                <strong>関係ある資格:</strong> ${job.z8}<br>
-                ${job.z10}
-            `;
-            jobList.appendChild(listItem);
+        jobRecommendations.forEach(rank => {
+            rank.jobs.forEach(job => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${rank.rank}位: ${job.jobName} - ${job.z3 ? job.z3 : ''}`;
+                jobList.appendChild(listItem);
+            });
         });
     }
 
