@@ -471,7 +471,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const sortedJobs = jobScores.sort((a, b) => b.totalScore - a.totalScore);
 
         for (const job of sortedJobs) {
-            if (displayedCount >= 20) break;
+            if (currentScore !== job.totalScore && displayedCount >= 20) break;
 
             if (currentScore !== job.totalScore) {
                 currentRank = displayedCount + 1;
