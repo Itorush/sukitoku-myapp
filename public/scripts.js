@@ -74,7 +74,6 @@ document.addEventListener("DOMContentLoaded", function() {
         { sy1: 'i', sy2: 'e', sy3: 24, id: 'ie24', elementname: 'いきものに関係している要素' }
     ];
 
-
     const importantFactorsOptions = [
         { sy1: 'u', sy2: 'f', sy3: 1, id: 'uf1', elementname: '個人の成長と学び' },
         { sy1: 'u', sy2: 'f', sy3: 2, id: 'uf2', elementname: '社会貢献' },
@@ -89,7 +88,6 @@ document.addEventListener("DOMContentLoaded", function() {
         { sy1: 'u', sy2: 'f', sy3: 11, id: 'uf11', elementname: '報酬と評価' },
         { sy1: 'u', sy2: 'f', sy3: 12, id: 'uf12', elementname: '倫理と道徳性' }
     ];
-
 
     const skillsQuestions = [
         { elementname: "仕事上の課題に直面したとき、どのように対処しますか？", option1: "事実やデータに基づき対処", option2: "感情や感覚を頼りに対処", axis1: "論理", axis2: "感情", el_sy1: "o", el_sy2: "l", el_sy3: 1, el_ID: "ol1", ax1_sy1: "e", ax1_sy2: "g", ax1_sy3: 1, ax1_id: "eg1", ax2_sy1: "e", ax2_sy2: "g", ax2_sy3: 2, ax2_id: "eg2" },
@@ -118,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function() {
         { elementname: "新しいスキルを習得するとき、どのように学びますか？", option1: "実践的に学ぶ", option2: "理論を学ぶ", axis1: "身体能力", axis2: "学力", el_sy1: "o", el_sy2: "p", el_sy3: 4, el_ID: "op4", ax1_sy1: "e", ax1_sy2: "k", ax1_sy3: 1, ax1_id: "ek1", ax2_sy1: "e", ax2_sy2: "k", ax2_sy3: 2, ax2_id: "ek2" },
         { elementname: "趣味や余暇の時間に、どのような活動を行いますか？", option1: "身体活動", option2: "勉強", axis1: "身体能力", axis2: "学力", el_sy1: "o", el_sy2: "p", el_sy3: 5, el_ID: "op5", ax1_sy1: "e", ax1_sy2: "k", ax1_sy3: 1, ax1_id: "ek1", ax2_sy1: "e", ax2_sy2: "k", ax2_sy3: 2, ax2_id: "ek2" }
     ];
-
 
     function showPhase(phase) {
         document.querySelectorAll('.phase').forEach(function(phaseDiv) {
@@ -418,7 +415,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         const preprocessingTable = skillsQuestions.map(question => {
-            const chosenButton = Array.from(document.querySelectorAll(`[name^="skills"]`)).find(input => {
+            const chosenButton = Array.from(document.querySelectorAll('[name^="skills"]')).find(input => {
                 const skillQuestion = skillsQuestions.find(q => q.elementname === question.elementname);
                 return skillQuestion && input.checked && input.getAttribute('data-firstname') === question.el_ID;
             });

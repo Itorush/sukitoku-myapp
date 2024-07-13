@@ -81,7 +81,14 @@ form {
     flex: 1;
     text-align: center;
     font-weight: normal;
-    font-size: 1em;
+    font-size: 0.9em; /* フォントサイズを小さくする */
+}
+
+.label-container .neutral {
+    flex: 2;
+    text-align: center;
+    font-weight: normal;
+    font-size: 0.9em; /* フォントサイズを小さくする */
 }
 
 .buttons-container {
@@ -129,14 +136,14 @@ form {
     flex: 1;
     text-align: center;
     font-weight: normal;
-    font-size: 1em;
+    font-size: 0.9em; /* フォントサイズを小さくする */
 }
 
 .label-row .neutral {
     flex: 2;
     text-align: center;
     font-weight: normal;
-    font-size: 1em;
+    font-size: 0.9em; /* フォントサイズを小さくする */
 }
 
 .options-row {
@@ -173,11 +180,7 @@ button:hover {
 }
 
 #developerButton {
-    background-color: #e74c3c;
-}
-
-#developerButton:hover {
-    background-color: #c0392b;
+    display: none; /* 開発者用ボタンを非表示にする */
 }
 
 @media (max-width: 600px) {
@@ -221,8 +224,12 @@ tr:nth-child(even) {
     width: 100%;
 }
 
-
-/* 開発者用ボタンを非表示にするスタイル */
-#developerButton {
-    display: none;
+/* 質問セットの外枠スタイル */
+.question-set {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
