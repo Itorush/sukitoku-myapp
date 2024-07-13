@@ -282,3 +282,38 @@ footer {
 .footer p {
     margin: 0;
 }
+
+/* スマホ用のスタイル */
+@media screen and (max-width: 600px) {
+    .ikigai-diagram {
+        width: 100%;
+        height: auto;
+    }
+
+    .ikigai-circle {
+        width: 45%;
+        height: auto;
+        font-size: 0.6em;
+        padding: 5px;
+    }
+
+    .circle-text-top, .circle-text-left, .circle-text-bottom, .circle-text-right {
+        font-size: 0.8em;
+    }
+
+    .ikigai-text {
+        font-size: 0.3em;
+    }
+
+    #ikigai {
+        font-size: 1em;
+    }
+
+    #text-passion, #text-mission, #text-profession, #text-vocation {
+        font-size: 0.7em;
+    }
+
+    .small-text {
+        font-size: 0.2em;
+    }
+}
