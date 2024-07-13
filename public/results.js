@@ -1093,7 +1093,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
               const trUrl = document.createElement('tr');
               trUrl.innerHTML = `
-                  <td>${jobDetailInfo.url}</td>
+                  <td><a href="${jobDetailInfo.url}" rel="nofollow">リンクはこちら</a></td>
               `;
               table.appendChild(trUrl);
 
