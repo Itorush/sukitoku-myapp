@@ -464,15 +464,26 @@ document.addEventListener("DOMContentLoaded", function() {
             // 他の職種も追加
         ];
 
-        const sortedJobs = jobScores.sort((a, b) => b.totalScore - a.totalScore).slice(0, 10);
+        let currentRank = 1;
+        let currentScore = null;
+        let displayedCount = 0;
 
-        sortedJobs.forEach((job, index) => {
+        const sortedJobs = jobScores.sort((a, b) => b.totalScore - a.totalScore);
+
+        for (const job of sortedJobs) {
+            if (displayedCount >= 20) break;
+
+            if (currentScore !== job.totalScore) {
+                currentRank = displayedCount + 1;
+                currentScore = job.totalScore;
+            }
+
             const jobDetailInfo = jobDetail.find(detail => detail.z1 === job.z1);
 
             if (jobDetailInfo) {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${index + 1}位: ${jobDetailInfo.z1}</td>
+                    <td>${currentRank}位: ${jobDetailInfo.z1}</td>
                 `;
                 recommendationBody.appendChild(tr);
 
@@ -517,10 +528,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     <td>${jobDetailInfo.url}</td>
                 `;
                 recommendationBody.appendChild(trUrl);
+
+                displayedCount++;
             } else {
                 console.error(`職種情報が見つかりませんでした: ${job.z1}`);
             }
-        });
+        }
     }
 
     function calculateJobScores() {
