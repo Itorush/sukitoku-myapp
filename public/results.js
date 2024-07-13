@@ -147,6 +147,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function displayJobRecommendations() {
         const recommendationBody = document.getElementById('recommendationBody');
+        if (!recommendationBody) {
+            console.error('recommendationBody要素が見つかりませんでした。');
+            return;
+        }
+
         const jobScores = calculateJobScores();
 
         const jobDetail = [
