@@ -263,6 +263,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <input type="radio" id="skill${index + 1}-6" name="skills${index + 1}" value="6" data-axis1="${question.axis1}" data-axis2="${question.axis2}" data-firstname="${question.el_ID}" data-secondname="${question.ax2_id}" data-thirdname="three">
                     <label for="skill${index + 1}-6"><span></span></label>
                 </div>
+                
                 <div class="options-row">
                     <div class="empty"></div>
                     <div class="option">${question.option1}</div>
