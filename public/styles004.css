@@ -219,32 +219,35 @@ tr:nth-child(even) {
 }
 
 /* 適職ランキング用スタイル */
-#recommendationBody tr {
-    margin-bottom: 20px;
+.job-table {
+    margin-bottom: 40px;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-collapse: collapse;
 }
 
-#recommendationBody td {
+.job-table td {
     padding: 12px;
     border: 1px solid #ccc;
 }
 
-#recommendationBody tr:nth-child(odd) td {
+.job-table tr:nth-child(odd) td {
     background-color: #f9f9f9;
 }
 
-#recommendationBody tr:nth-child(even) td {
+.job-table tr:nth-child(even) td {
     background-color: #ffffff;
 }
 
-#recommendationBody tr td:first-child {
+.job-table tr td:first-child {
     font-weight: bold;
     background-color: #ecf0f1;
 }
 
-#recommendationBody tr + tr {
+.job-table tr + tr {
     margin-top: 20px;
 }
 
-#recommendationBody tr:hover td {
+.job-table tr:hover td {
     background-color: #f1f1f1;
 }

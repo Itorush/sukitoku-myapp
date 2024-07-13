@@ -433,53 +433,58 @@ document.addEventListener("DOMContentLoaded", function() {
             const jobDetailInfo = jobDetail.find(detail => detail.z1 === job.z1);
 
             if (jobDetailInfo) {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
+                const table = document.createElement('table');
+                table.className = 'job-table';
+
+                const trRank = document.createElement('tr');
+                trRank.innerHTML = `
                     <td>${currentRank}位: ${jobDetailInfo.z1}</td>
                 `;
-                recommendationBody.appendChild(tr);
+                table.appendChild(trRank);
 
                 const trDescription = document.createElement('tr');
                 trDescription.innerHTML = `
                     <td>${jobDetailInfo.description}</td>
                 `;
-                recommendationBody.appendChild(trDescription);
+                table.appendChild(trDescription);
 
                 const trDuties = document.createElement('tr');
                 trDuties.innerHTML = `
                     <td>仕事内容: ${jobDetailInfo.duties}</td>
                 `;
-                recommendationBody.appendChild(trDuties);
+                table.appendChild(trDuties);
 
                 const trSatisfaction = document.createElement('tr');
                 trSatisfaction.innerHTML = `
                     <td>各職種で得られる満足感と直面する課題: ${jobDetailInfo.satisfaction}</td>
                 `;
-                recommendationBody.appendChild(trSatisfaction);
+                table.appendChild(trSatisfaction);
 
                 const trCompanies = document.createElement('tr');
                 trCompanies.innerHTML = `
                     <td>代表的な企業例: ${jobDetailInfo.companies}</td>
                 `;
-                recommendationBody.appendChild(trCompanies);
+                table.appendChild(trCompanies);
 
                 const trSalary = document.createElement('tr');
                 trSalary.innerHTML = `
                     <td>一般的な年収: ${jobDetailInfo.salary}</td>
                 `;
-                recommendationBody.appendChild(trSalary);
+                table.appendChild(trSalary);
 
                 const trQualifications = document.createElement('tr');
                 trQualifications.innerHTML = `
                     <td>関係ある資格: ${jobDetailInfo.qualifications}</td>
                 `;
-                recommendationBody.appendChild(trQualifications);
+                table.appendChild(trQualifications);
 
                 const trUrl = document.createElement('tr');
                 trUrl.innerHTML = `
                     <td>${jobDetailInfo.url}</td>
                 `;
-                recommendationBody.appendChild(trUrl);
+                table.appendChild(trUrl);
+
+                recommendationBody.appendChild(table);
 
                 displayedCount++;
             } else {
