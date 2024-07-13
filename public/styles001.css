@@ -113,7 +113,7 @@ h2 {
 
 .ikigai-container {
     display: flex;
-    justify-content: flex-start; /* 左寄せに変更 */
+    justify-content: center; /* 中央寄せに変更 */
     margin-top: 20px;
 }
 
@@ -276,6 +276,9 @@ footer p {
     .ikigai-diagram {
         width: 100%;
         height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .ikigai-circle {
@@ -295,6 +298,9 @@ footer p {
 
     #ikigai {
         font-size: 1em;
+        width: 100%;
+        position: static;
+        transform: none;
     }
 
     #text-passion, #text-mission, #text-profession, #text-vocation {
