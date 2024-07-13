@@ -26,11 +26,14 @@ header h1 {
 nav ul.nav-list {
     list-style: none;
     padding: 0;
-    text-align: left; /* 左寄せ */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 nav ul.nav-list li {
-    margin: 10px 0;
+    width: 50%; /* 2列にするために幅を50%に設定 */
+    text-align: left; /* 左寄せ */
 }
 
 nav ul.nav-list li a {
