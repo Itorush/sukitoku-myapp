@@ -107,7 +107,6 @@ document.addEventListener("DOMContentLoaded", function() {
       const jobScores = calculateJobScores();
 
       const jobDetail = [
-        { companies: z10: 仕事の説明0: 仕事内容0: 各職種で得られる満足感と直面する課題0: 代表的な企業例0: 一般的な年収0: 関係ある資格0: 専門求人サイトurl
           { z1: 'スーパーマーケットスタッフ', description: 'スーパーマーケットで商品を売るための準備やお客様の対応をする仕事です。地域の消費者に新鮮な食料品や日用品を提供し、便利で快適な買い物環境を提供します。', duties: 'お客様への対応、商品を棚に並べる、店をきれいに保つ、商品の値段を確認して表示する。', satisfaction: '地域の顧客との交流が多く、サービス提供による満足感が得られますが、長時間立ち仕事や体力的な負担が課題となります。', companies: 'イオン、イトーヨーカドー', salary: '約300万円', qualifications: '食品衛生責任者', url: '"<a href=""https://px.a8.net/svt/ejp?a8mat=3ZB8UF+3ZHICA+4I26+5ZEMP"" rel=""nofollow"">
         <img border=""0"" width=""320"" height=""50"" alt="""" src=""https://www29.a8.net/svt/bgt?aid=240709767241&wid=002&eno=01&mid=s00000021003001005000&mc=1""></a>
         <img border=""0"" width=""1"" height=""1"" src=""https://www12.a8.net/0.gif?a8mat=3ZB8UF+3ZHICA+4I26+5ZEMP"" alt="""">"' },
@@ -1023,7 +1022,6 @@ document.addEventListener("DOMContentLoaded", function() {
           { z1: '不動産仲介業', description: '不動産の売買や賃貸契約を仲介し、物件の情報提供や契約手続きをサポートする仕事です。クライアントに信頼性の高い不動産サービスを提供し、取引の成功を支援します。', duties: '物件情報の収集と提供、見学の案内、契約条件の交渉、契約書の作成と管理。', satisfaction: '不動産の売買や賃貸を仲介し、クライアントを支援する仕事ですが、技術習得やクライアント対応が課題です。', companies: '三井のリハウス、住友不動産', salary: '約600万円', qualifications: '宅地建物取引士', url: '"<a href=""https://px.a8.net/svt/ejp?a8mat=3ZB8UF+3ZHICA+4I26+5ZEMP"" rel=""nofollow"">
         <img border=""0"" width=""320"" height=""50"" alt="""" src=""https://www29.a8.net/svt/bgt?aid=240709767241&wid=002&eno=01&mid=s00000021003001005000&mc=1""></a>
         <img border=""0"" width=""1"" height=""1"" src=""https://www12.a8.net/0.gif?a8mat=3ZB8UF+3ZHICA+4I26+5ZEMP"" alt="""">"' },
-        
           // 他の職種も追加
       ];
 
@@ -1090,9 +1088,9 @@ document.addEventListener("DOMContentLoaded", function() {
               table.appendChild(trQualifications);
 
               const trUrl = document.createElement('tr');
-              trUrl.innerHTML = `
-                  <td>${jobDetailInfo.url}</td>
-              `;
+              const urlCell = document.createElement('td');
+              urlCell.innerHTML = jobDetailInfo.url;
+              trUrl.appendChild(urlCell);
               table.appendChild(trUrl);
 
               recommendationBody.appendChild(table);
