@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device=width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>診断結果</title>
     <link rel="stylesheet" href="styles004.css">
     
@@ -22,8 +22,6 @@
         <h1>診断結果</h1>
     </header>
     <main>
-        
-
         <section id="chosenResults">
             <h2>診断結果</h2>
             <h3>あなたの趣味に近いもの</h3>
@@ -45,11 +43,12 @@
         </section>
         <section id="jobRecommendations">
             <h2>適職ランキング</h2>
-            <table>
-                <tbody id="recommendationBody">
-                    <!-- 適職ランキングがここに表示されます -->
-                </tbody>
-            </table>
+            <div id="recommendationBody">
+                <!-- 適職ランキングがここに表示されます -->
+            </div>
+        </section>
+        <section>
+            <button id="backToHomeButton" onclick="location.href='index.html'">ホーム画面に戻る</button>
         </section>
     </main>
     <script src="results.js"></script>

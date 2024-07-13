@@ -251,3 +251,21 @@ tr:nth-child(even) {
 .job-table tr:hover td {
     background-color: #f1f1f1;
 }
+
+/* ホーム画面に戻るボタンのスタイル */
+#backToHomeButton {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    text-align: center;
+}
+
+#backToHomeButton:hover {
+    background-color: #2980b9;
+}
