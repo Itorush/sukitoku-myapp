@@ -23,24 +23,23 @@ header h1 {
     font-size: 2em;
 }
 
-nav ul {
+nav ul.nav-list {
     list-style: none;
     padding: 0;
-    text-align: center;
+    text-align: left; /* 左寄せ */
 }
 
-nav ul li {
-    display: inline;
-    margin: 0 15px;
+nav ul.nav-list li {
+    margin: 10px 0;
 }
 
-nav ul li a {
+nav ul.nav-list li a {
     color: #fff;
     text-decoration: none;
     font-weight: bold;
 }
 
-nav ul li a:hover {
+nav ul.nav-list li a:hover {
     text-decoration: underline;
 }
 
