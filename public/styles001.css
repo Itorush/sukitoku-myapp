@@ -119,15 +119,15 @@ h2 {
 
 .ikigai-diagram {
     position: relative;
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    max-width: 400px;
     aspect-ratio: 1 / 1;
 }
 
 .ikigai-circle {
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: 50%;
+    height: 50%;
     border-radius: 50%;
     border: 2px solid #333;
     display: flex;
@@ -140,60 +140,28 @@ h2 {
     font-size: 0.7em;
 }
 
-.circle-text-top {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.circle-text-left {
-    position: absolute;
-    top: 50%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-}
-
-.circle-text-bottom {
-    position: absolute;
-    bottom: 20%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-}
-
-.circle-text-right {
-    position: absolute;
-    top: 50%;
-    right: 20%;
-    transform: translate(50%, -50%);
-}
-
 #circle1 {
     background-color: rgba(255, 0, 0, 0.2);
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+    left: 25%;
 }
 
 #circle2 {
     background-color: rgba(0, 255, 0, 0.2);
-    top: 50%;
-    left: 25%;
-    transform: translate(-50%, -50%);
+    top: 25%;
+    left: 0;
 }
 
 #circle3 {
     background-color: rgba(0, 0, 255, 0.2);
-    bottom: 25%;
-    left: 50%;
-    transform: translate(-50%, 50%);
+    top: 50%;
+    left: 25%;
 }
 
 #circle4 {
     background-color: rgba(255, 255, 0, 0.2);
-    top: 50%;
-    right: 25%;
-    transform: translate(50%, -50%);
+    top: 25%;
+    left: 50%;
 }
 
 .ikigai-text {
@@ -213,52 +181,52 @@ h2 {
 }
 
 #text-passion {
-    top: 30%;
-    left: 30%;
+    top: 15%;
+    left: 15%;
     font-size: 1.0em;
 }
 
 #text-mission {
-    top: 30%;
-    right: 30%;
+    top: 15%;
+    right: 15%;
     font-size: 1.0em;
 }
 
 #text-profession {
-    bottom: 30%;
-    left: 30%;
+    bottom: 15%;
+    left: 15%;
     font-size: 1.0em;
 }
 
 #text-vocation {
-    bottom: 30%;
-    right: 30%;
+    bottom: 15%;
+    right: 15%;
     font-size: 1.0em;
 }
 
 .small-text {
-    font-size: 0.2em;
+    font-size: 0.4em;
     color: #555;
 }
 
 #text-love {
-    bottom: 36%;
-    right: 45%;
+    bottom: 22%;
+    right: 22%;
 }
 
 #text-good {
-    bottom: 48%;
-    left: 32%;
+    bottom: 22%;
+    left: 22%;
 }
 
 #text-paid {
-    top: 48%;
-    right: 32%;
+    top: 22%;
+    right: 22%;
 }
 
 #text-need {
-    top: 36%;
-    left: 45%;
+    top: 22%;
+    left: 22%;
 }
 
 footer {
