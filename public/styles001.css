@@ -121,13 +121,13 @@ h2 {
     position: relative;
     width: 400px;
     height: 400px;
-    aspect-ratio: 1;
+    aspect-ratio: 1 / 1;
 }
 
 .ikigai-circle {
     position: absolute;
-    width: 50%;
-    height: 50%;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     border: 2px solid #333;
     display: flex;
@@ -170,7 +170,7 @@ h2 {
 
 #circle1 {
     background-color: rgba(255, 0, 0, 0.2);
-    top: 35%;
+    top: 25%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -178,22 +178,22 @@ h2 {
 #circle2 {
     background-color: rgba(0, 255, 0, 0.2);
     top: 50%;
-    left: 35%;
+    left: 25%;
     transform: translate(-50%, -50%);
 }
 
 #circle3 {
     background-color: rgba(0, 0, 255, 0.2);
-    top: 65%;
+    bottom: 25%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 50%);
 }
 
 #circle4 {
     background-color: rgba(255, 255, 0, 0.2);
     top: 50%;
-    left: 65%;
-    transform: translate(-50%, -50%);
+    right: 25%;
+    transform: translate(50%, -50%);
 }
 
 .ikigai-text {
@@ -277,13 +277,12 @@ footer p {
     .ikigai-diagram {
         width: 100%;
         height: auto;
-        aspect-ratio: 1;
     }
 
     .ikigai-circle {
-        width: 45%;
+        width: 50%;
         height: auto;
-        font-size: 0.6em;
+        font-size: 0.7em;
         padding: 5px;
     }
 
@@ -292,21 +291,18 @@ footer p {
     }
 
     .ikigai-text {
-        font-size: 0.3em;
+        font-size: 0.5em;
     }
 
     #ikigai {
-        font-size: 1em;
-        width: 100%;
-        position: static;
-        transform: none;
+        font-size: 1.2em;
     }
 
     #text-passion, #text-mission, #text-profession, #text-vocation {
-        font-size: 0.7em;
+        font-size: 0.8em;
     }
 
     .small-text {
-        font-size: 0.2em;
+        font-size: 0.4em;
     }
 }
