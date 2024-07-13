@@ -220,3 +220,9 @@ tr:nth-child(even) {
     bottom: 0;
     width: 100%;
 }
+
+
+/* 開発者用ボタンを非表示にするスタイル */
+#developerButton {
+    display: none;
+}
