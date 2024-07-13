@@ -421,81 +421,84 @@ document.addEventListener("DOMContentLoaded", function() {
 
       const sortedJobs = jobScores.sort((a, b) => b.totalScore - a.totalScore);
 
-      for (const job of sortedJobs) {
-          if (currentScore !== job.totalScore && displayedCount >= 20) break;
+    for (const job of sortedJobs) {
+        if (currentScore !== job.totalScore && displayedCount >= 20) break;
 
-          if (currentScore !== job.totalScore) {
-              currentRank = displayedCount + 1;
-              currentScore = job.totalScore;
-          }
+        if (currentScore !== job.totalScore) {
+            currentRank = displayedCount + 1;
+            currentScore = job.totalScore;
+        }
 
-          const jobDetailInfo = jobDetail.find(detail => detail.z1 === job.z1);
+        const jobDetailInfo = jobDetail.find(detail => detail.z1 === job.z1);
 
-          if (jobDetailInfo) {
-              const table = document.createElement('table');
-              table.className = 'job-table';
+        if (jobDetailInfo) {
+            const containerDiv = document.createElement('div');
+            containerDiv.className = 'job-container';
 
-              const trRank = document.createElement('tr');
-              trRank.innerHTML = `
-                  <td>${currentRank}位: ${jobDetailInfo.z1}</td>
-              `;
-              table.appendChild(trRank);
+            const titleDiv = document.createElement('div');
+            titleDiv.className = 'job-title';
+            titleDiv.textContent = `${currentRank}位: ${jobDetailInfo.z1}`;
+            containerDiv.appendChild(titleDiv);
 
-              const trDescription = document.createElement('tr');
-              trDescription.innerHTML = `
-                  <td>${jobDetailInfo.description}</td>
-              `;
-              table.appendChild(trDescription);
+            const table = document.createElement('table');
+            table.className = 'job-table';
 
-              const trDuties = document.createElement('tr');
-              trDuties.innerHTML = `
-                  <td>仕事内容: ${jobDetailInfo.duties}</td>
-              `;
-              table.appendChild(trDuties);
+            const trDescription = document.createElement('tr');
+            trDescription.innerHTML = `
+                <td>${jobDetailInfo.description}</td>
+            `;
+            table.appendChild(trDescription);
 
-              const trSatisfaction = document.createElement('tr');
-              trSatisfaction.innerHTML = `
-                  <td>各職種で得られる満足感と直面する課題: ${jobDetailInfo.satisfaction}</td>
-              `;
-              table.appendChild(trSatisfaction);
+            const trDuties = document.createElement('tr');
+            trDuties.innerHTML = `
+                <td>仕事内容: ${jobDetailInfo.duties}</td>
+            `;
+            table.appendChild(trDuties);
 
-              const trCompanies = document.createElement('tr');
-              trCompanies.innerHTML = `
-                  <td>代表的な企業例: ${jobDetailInfo.companies}</td>
-              `;
-              table.appendChild(trCompanies);
+            const trSatisfaction = document.createElement('tr');
+            trSatisfaction.innerHTML = `
+                <td>各職種で得られる満足感と直面する課題: ${jobDetailInfo.satisfaction}</td>
+            `;
+            table.appendChild(trSatisfaction);
 
-              const trSalary = document.createElement('tr');
-              trSalary.innerHTML = `
-                  <td>一般的な年収: ${jobDetailInfo.salary}</td>
-              `;
-              table.appendChild(trSalary);
+            const trCompanies = document.createElement('tr');
+            trCompanies.innerHTML = `
+                <td>代表的な企業例: ${jobDetailInfo.companies}</td>
+            `;
+            table.appendChild(trCompanies);
 
-              const trQualifications = document.createElement('tr');
-              trQualifications.innerHTML = `
-                  <td>関係ある資格: ${jobDetailInfo.qualifications}</td>
-              `;
-              table.appendChild(trQualifications);
+            const trSalary = document.createElement('tr');
+            trSalary.innerHTML = `
+                <td>一般的な年収: ${jobDetailInfo.salary}</td>
+            `;
+            table.appendChild(trSalary);
 
-              const trUrl = document.createElement('tr');
-              const urlTd = document.createElement('td');
-              urlTd.innerHTML = `
-                  <a href="${jobDetailInfo.url}" rel="nofollow">
-                      <img border="0" width="320" height="50" alt="" src="https://www29.a8.net/svt/bgt?aid=240709767241&wid=002&eno=01&mid=s00000021003001005000&mc=1">
-                  </a>
-                  <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=3ZB8UF+3ZHICA+4I26+5ZEMP" alt="">
-              `;
-              trUrl.appendChild(urlTd);
-              table.appendChild(trUrl);
+            const trQualifications = document.createElement('tr');
+            trQualifications.innerHTML = `
+                <td>関係ある資格: ${jobDetailInfo.qualifications}</td>
+            `;
+            table.appendChild(trQualifications);
 
-              recommendationBody.appendChild(table);
+            const trUrl = document.createElement('tr');
+            const urlTd = document.createElement('td');
+            urlTd.innerHTML = `
+                <a href="${jobDetailInfo.url}" rel="nofollow">
+                    <img border="0" width="320" height="50" alt="" src="https://www29.a8.net/svt/bgt?aid=240709767241&wid=002&eno=01&mid=s00000021003001005000&mc=1">
+                </a>
+                <img border="0" width="1" height="1" src="https://www12.a8.net/0.gif?a8mat=3ZB8UF+3ZHICA+4I26+5ZEMP" alt="">
+            `;
+            trUrl.appendChild(urlTd);
+            table.appendChild(trUrl);
 
-              displayedCount++;
-          } else {
-              console.error(`職種情報が見つかりませんでした: ${job.z1}`);
-          }
-      }
-  }
+            containerDiv.appendChild(table);
+            recommendationBody.appendChild(containerDiv);
+
+            displayedCount++;
+        } else {
+            console.error(`職種情報が見つかりませんでした: ${job.z1}`);
+        }
+    }
+}
 
   function calculateJobScores() {
       const scoreTable = JSON.parse(localStorage.getItem('scoreTable'));
