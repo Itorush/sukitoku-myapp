@@ -219,8 +219,17 @@ tr:nth-child(even) {
 }
 
 /* 適職ランキング用スタイル */
-.job-table {
+.job-container {
     margin-bottom: 40px;
+}
+
+.job-title {
+    font-size: 1.5em;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.job-table {
     border: 1px solid #ccc;
     width: 100%;
     border-collapse: collapse;
@@ -237,15 +246,6 @@ tr:nth-child(even) {
 
 .job-table tr:nth-child(even) td {
     background-color: #ffffff;
-}
-
-.job-table tr td:first-child {
-    font-weight: bold;
-    background-color: #ecf0f1;
-}
-
-.job-table tr + tr {
-    margin-top: 20px;
 }
 
 .job-table tr:hover td {
