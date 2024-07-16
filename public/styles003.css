@@ -126,7 +126,6 @@ form {
 
 .label-row {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 10px;
 }
@@ -143,29 +142,27 @@ form {
 }
 
 .label-row .neutral {
-    flex-basis: 100%;
+    flex: 2;
     text-align: center;
     font-weight: normal;
     font-size: 0.9em; /* フォントサイズを小さくする */
-    margin-bottom: 10px;
 }
 
 .options-row {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
     margin-top: 10px;
     font-size: 1em;
 }
 
-.options-row .option {
-    flex-basis: 30%;
-    margin: 10px 0; /* 上下に適切なマージンを追加 */
-    padding: 10px;  /* option の内部にパディングを追加して読みやすくする */
-    border: 1px solid #ccc; /* option の視覚的区切りを追加 */
-    border-radius: 5px; /* option の角を丸める */
-    background-color: #f9f9f9; /* 背景色を追加 */
-    box-sizing: border-box; /* パディングを含めてサイズを計算 */
+.option {
+    font-weight: bold;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    width: 30%; /* 画面の1/3になるように設定 */
+    box-sizing: border-box;
 }
 
 .warning {
@@ -214,12 +211,8 @@ button:hover {
     #importantFactorsOptions {
         font-size: 0.7em; /* フォントサイズを小さくする */
     }
-    .question-label-container .question-label {
+    .question-label {
         font-size: 1em; /* スマホでのフォントサイズを調整 */
-    }
-    .options-row .option {
-        flex-basis: 100%;
-        margin: 10px 0; /* スマホでは少し広めのマージンを設定 */
     }
 }
 
@@ -284,5 +277,23 @@ tr:nth-child(even) {
 @media (max-width: 600px) {
     h2 {
         font-size: 1.2em; /* スマホでのフォントサイズを調整 */
+    }
+    .option {
+        width: 100%; /* スマホでのオプションの幅を調整 */
+    }
+}
+
+/* options-row の中の option 間の距離を調整 */
+.options-row .option {
+    margin: 10px 0; /* 上下に適切なマージンを追加 */
+    padding: 10px;  /* option の内部にパディングを追加して読みやすくする */
+    border: 1px solid #ccc; /* option の視覚的区切りを追加 */
+    border-radius: 5px; /* option の角を丸める */
+    background-color: #f9f9f9; /* 背景色を追加 */
+}
+
+@media (max-width: 600px) {
+    .options-row .option {
+        margin: 15px 0; /* スマホでは少し広めのマージンを設定 */
     }
 }
