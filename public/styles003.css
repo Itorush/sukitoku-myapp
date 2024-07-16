@@ -153,19 +153,28 @@ form {
     justify-content: space-between;
     margin-top: 10px;
     font-size: 1em;
+    width: 100%;
 }
 
-.option {
+.options-row .option {
+    width: 45%; /* 横幅を画面の半分に設定 */
     font-weight: bold;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-    width: 30%; /* 画面の1/3になるように設定 */
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center; /* 中央寄せ */
-    align-items: center; /* 中央寄せ */
+    box-sizing: border-box; /* パディングとボーダーを含めたボックスサイズ */
+}
+
+@media (max-width: 600px) {
+    .options-row {
+        flex-wrap: wrap; /* スマホではオプションを縦に並べる */
+    }
+
+    .options-row .option {
+        width: 45%; /* スマホでも横幅を画面の半分に設定 */
+        margin-bottom: 10px;
+    }
 }
 
 .warning {
@@ -214,6 +223,7 @@ button:hover {
     #importantFactorsOptions {
         font-size: 0.7em; /* フォントサイズを小さくする */
     }
+
     .question-label {
         font-size: 1em; /* スマホでのフォントサイズを調整 */
     }
@@ -281,9 +291,6 @@ tr:nth-child(even) {
     h2 {
         font-size: 1.2em; /* スマホでのフォントサイズを調整 */
     }
-    .option {
-        width: 100%; /* スマホでのオプションの幅を調整 */
-    }
 }
 
 /* options-row の中の option 間の距離を調整 */
@@ -293,13 +300,23 @@ tr:nth-child(even) {
     border: 1px solid #ccc; /* option の視覚的区切りを追加 */
     border-radius: 5px; /* option の角を丸める */
     background-color: #f9f9f9; /* 背景色を追加 */
-    display: flex;
-    justify-content: center; /* 中央寄せ */
-    align-items: center; /* 中央寄せ */
 }
 
 @media (max-width: 600px) {
     .options-row .option {
         margin: 15px 0; /* スマホでは少し広めのマージンを設定 */
     }
+}
+
+/* neutral の下にオプションが来ないように調整 */
+.label-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.neutral {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 10px;
 }
