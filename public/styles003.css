@@ -192,6 +192,11 @@ button:hover {
         width: calc(50% - 10px);
         margin: 5px;
     }
+    .label-row .strong-agree,
+    .label-row .neutral,
+    .options-row .option {
+        font-size: 0.7em; /* フォントサイズを小さくする */
+    }
 }
 
 table {
