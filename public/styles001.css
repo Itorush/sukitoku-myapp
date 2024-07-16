@@ -1,3 +1,4 @@
+/* 既存のスタイル */
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
@@ -22,6 +23,7 @@ header {
 header h1 {
     margin: 0;
     font-size: 2em;
+    white-space: nowrap; /* 改行を防ぐ */
 }
 
 nav ul.nav-list {
@@ -285,6 +287,10 @@ footer {
 
 /* Media Queries for responsiveness */
 @media (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+
     .ikigai-diagram {
         width: 300px;
         height: 300px;
