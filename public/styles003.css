@@ -263,3 +263,10 @@ tr:nth-child(even) {
         font-size: 0.8em; /* スマホでのフォントサイズを調整 */
     }
 }
+
+/* 追加のスタイル */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 1.2em; /* スマホでのフォントサイズを調整 */
+    }
+}
