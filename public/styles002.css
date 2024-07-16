@@ -344,3 +344,22 @@ footer {
     height: auto;
 }
 
+/* スマホ版のバナーを1列の箇条書きにするスタイル */
+@media (max-width: 600px) {
+    nav ul.nav-list {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul.nav-list li {
+        margin-bottom: 0; /* 隙間をなくすためにマージンを0に設定 */
+    }
+
+    nav ul.nav-list li .sub-list {
+        padding-left: 20px;
+    }
+
+    nav ul.nav-list li .sub-list li {
+        margin: 5px 0; /* サブリストの間隔を調整 */
+    }
+}
