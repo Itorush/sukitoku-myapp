@@ -151,9 +151,11 @@ form {
 .options-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 10px;
     font-size: 1em;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .options-row .option {
@@ -164,6 +166,7 @@ form {
     border-radius: 5px;
     background-color: #f9f9f9;
     box-sizing: border-box; /* パディングとボーダーを含めたボックスサイズ */
+    text-align: center;
 }
 
 @media (max-width: 600px) {
@@ -290,21 +293,6 @@ tr:nth-child(even) {
 @media (max-width: 600px) {
     h2 {
         font-size: 1.2em; /* スマホでのフォントサイズを調整 */
-    }
-}
-
-/* options-row の中の option 間の距離を調整 */
-.options-row .option {
-    margin: 10px 0; /* 上下に適切なマージンを追加 */
-    padding: 10px;  /* option の内部にパディングを追加して読みやすくする */
-    border: 1px solid #ccc; /* option の視覚的区切りを追加 */
-    border-radius: 5px; /* option の角を丸める */
-    background-color: #f9f9f9; /* 背景色を追加 */
-}
-
-@media (max-width: 600px) {
-    .options-row .option {
-        margin: 15px 0; /* スマホでは少し広めのマージンを設定 */
     }
 }
 
