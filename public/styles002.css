@@ -331,21 +331,15 @@ footer {
     #text-passion, #text-mission, #text-profession, #text-vocation {
         font-size: 0.8em;
     }
-}
 
-.affiliate-link {
-    display: flex;
-    justify-content: flex-start;
-    margin: 20px 0;
-}
+    h2 {
+        font-size: 1.4em; /* h2 の文字サイズを調整 */
+    }
 
-.affiliate-link img {
-    max-width: 100%;
-    height: auto;
-}
+    h3 {
+        font-size: 1.2em; /* h3 の文字サイズを調整 */
+    }
 
-/* スマホ版のバナーを1列の箇条書きにするスタイル */
-@media (max-width: 600px) {
     nav ul.nav-list {
         flex-direction: column;
         align-items: flex-start;
@@ -362,4 +356,15 @@ footer {
     nav ul.nav-list li .sub-list li {
         margin: 5px 0; /* サブリストの間隔を調整 */
     }
+}
+
+.affiliate-link {
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px 0;
+}
+
+.affiliate-link img {
+    max-width: 100%;
+    height: auto;
 }
