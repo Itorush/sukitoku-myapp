@@ -228,6 +228,9 @@ document.addEventListener("DOMContentLoaded", function() {
         selectedQuestions = shuffleArray(selectedQuestions);
 
         selectedQuestions.forEach((question, index) => {
+            const questionSetDiv = document.createElement('div');
+            questionSetDiv.className = 'question-set'; // 新しい枠のクラス
+
             const questionDiv = document.createElement('div');
             questionDiv.className = 'question';
             questionDiv.innerHTML = `
@@ -279,7 +282,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     <div class="empty"></div>
                 </div>
             `;
-            skillsQuestionsContainer.appendChild(questionDiv);
+
+            questionSetDiv.appendChild(questionDiv); // 各質問セットを枠で囲む
+            skillsQuestionsContainer.appendChild(questionSetDiv);
         });
     }
 
