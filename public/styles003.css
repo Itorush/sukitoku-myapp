@@ -174,7 +174,7 @@ form {
     }
 
     .options-row .option {
-        width: 45%; /* スマホでも横幅を画面の半分に設定 */
+        width: 100%; /* スマホでも横幅を画面の半分に設定 */
         margin-bottom: 10px;
     }
 }
@@ -211,7 +211,7 @@ button:hover {
     }
     .options label {
         flex: none;
-        width: calc(50% - 10px);
+        width: 100%;
         margin: 5px;
     }
     .label-row .strong-agree,
@@ -360,9 +360,10 @@ tr:nth-child(even) {
 
 /* チェックボックスのラベルを横並びにするスタイル */
 .option label {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     font-weight: normal;
+    width: auto;
 }
 
 .option label input[type="checkbox"],
@@ -374,7 +375,7 @@ tr:nth-child(even) {
 @media (max-width: 600px) {
     .option label {
         flex: none;
-        width: calc(50% - 10px);
+        width: 100%;
         margin: 5px;
     }
 }
