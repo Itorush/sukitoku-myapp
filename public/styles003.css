@@ -336,3 +336,21 @@ tr:nth-child(even) {
 .question-set .question {
     margin-bottom: 10px;
 }
+
+
+/* 既存のスタイルを維持しつつ、スマホ版のスタイルを調整 */
+@media screen and (max-width: 768px) {
+    .buttons-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: nowrap; /* ここで横並びにする */
+        margin: 10px 0;
+    }
+    .buttons-container label {
+        flex: 1; /* 各ボタンを均等に配置 */
+        text-align: center;
+    }
+    .buttons-container input[type="radio"] {
+        margin: 0 auto; /* 中央に配置 */
+    }
+}
