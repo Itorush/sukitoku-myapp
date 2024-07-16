@@ -352,10 +352,14 @@ footer {
     }
 
     nav ul.nav-list li {
-        margin-bottom: 10px;
+        margin-bottom: 0; /* 隙間をなくすためにマージンを0に設定 */
     }
 
     nav ul.nav-list li .sub-list {
         padding-left: 20px;
+    }
+
+    nav ul.nav-list li .sub-list li {
+        margin: 5px 0; /* サブリストの間隔を調整 */
     }
 }
