@@ -174,7 +174,7 @@ form {
     }
 
     .options-row .option {
-        width: 100%; /* スマホでも横幅を画面の半分に設定 */
+        width: 45%; /* スマホでも横幅を画面の半分に設定 */
         margin-bottom: 10px;
     }
 }
@@ -211,7 +211,7 @@ button:hover {
     }
     .options label {
         flex: none;
-        width: 100%;
+        width: calc(50% - 10px);
         margin: 5px;
     }
     .label-row .strong-agree,
@@ -358,24 +358,55 @@ tr:nth-child(even) {
     }
 }
 
-/* チェックボックスのラベルを横並びにするスタイル */
-.option label {
-    display: inline-flex;
+/* 6つの特定のdivのスタイル */
+#hobbyOptions .option,
+#likeFactorsOptions1 .option,
+#likeFactorsOptions2 .option,
+#likeFactorsOptions3 .option,
+#likeFactorsOptions4 .option,
+#importantFactorsOptions .option {
+    display: flex;
     align-items: center;
-    font-weight: normal;
-    width: auto;
+    white-space: nowrap; /* 改行を防ぐ */
 }
 
-.option label input[type="checkbox"],
-.option label input[type="radio"] {
+#hobbyOptions .option label,
+#likeFactorsOptions1 .option label,
+#likeFactorsOptions2 .option label,
+#likeFactorsOptions3 .option label,
+#likeFactorsOptions4 .option label,
+#importantFactorsOptions .option label {
+    flex: none;
+    margin-right: 10px; /* ラベルとチェックボックスの間にスペースを確保 */
+}
+
+#hobbyOptions .option label input[type="checkbox"],
+#likeFactorsOptions1 .option label input[type="radio"],
+#likeFactorsOptions2 .option label input[type="radio"],
+#likeFactorsOptions3 .option label input[type="radio"],
+#likeFactorsOptions4 .option label input[type="checkbox"],
+#importantFactorsOptions .option label input[type="checkbox"] {
     margin-right: 10px;
 }
 
 /* スマホ対応 */
 @media (max-width: 600px) {
-    .option label {
-        flex: none;
-        width: 100%;
-        margin: 5px;
+    #hobbyOptions .option,
+    #likeFactorsOptions1 .option,
+    #likeFactorsOptions2 .option,
+    #likeFactorsOptions3 .option,
+    #likeFactorsOptions4 .option,
+    #importantFactorsOptions .option {
+        width: 100%; /* 横幅を100%に設定 */
+        margin-bottom: 10px; /* 各オプションの間にスペースを確保 */
+    }
+    
+    #hobbyOptions .option label,
+    #likeFactorsOptions1 .option label,
+    #likeFactorsOptions2 .option label,
+    #likeFactorsOptions3 .option label,
+    #likeFactorsOptions4 .option label,
+    #importantFactorsOptions .option label {
+        width: auto; /* ラベルの横幅を自動に設定 */
     }
 }
