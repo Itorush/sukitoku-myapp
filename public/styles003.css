@@ -270,3 +270,18 @@ tr:nth-child(even) {
         font-size: 1.2em; /* スマホでのフォントサイズを調整 */
     }
 }
+
+/* options-row の中の option 間の距離を調整 */
+.options-row .option {
+    margin: 10px 0; /* 上下に適切なマージンを追加 */
+    padding: 10px;  /* option の内部にパディングを追加して読みやすくする */
+    border: 1px solid #ccc; /* option の視覚的区切りを追加 */
+    border-radius: 5px; /* option の角を丸める */
+    background-color: #f9f9f9; /* 背景色を追加 */
+}
+
+@media (max-width: 600px) {
+    .options-row .option {
+        margin: 15px 0; /* スマホでは少し広めのマージンを設定 */
+    }
+}
