@@ -1,3 +1,5 @@
+/* 既存のスタイル */
+
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
@@ -194,7 +196,13 @@ button:hover {
     }
     .label-row .strong-agree,
     .label-row .neutral,
-    .options-row .option {
+    .options-row .option,
+    #hobbyOptions,
+    #likeFactorsOptions1,
+    #likeFactorsOptions2,
+    #likeFactorsOptions3,
+    #likeFactorsOptions4,
+    #importantFactorsOptions {
         font-size: 0.7em; /* フォントサイズを小さくする */
     }
 }
@@ -237,4 +245,21 @@ tr:nth-child(even) {
     border-radius: 8px;
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* チェックボックスとラベルを横並びにするスタイル */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 1em; /* デフォルトのフォントサイズ */
+}
+
+.checkbox-label input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+@media (max-width: 600px) {
+    .checkbox-label {
+        font-size: 0.8em; /* スマホでのフォントサイズを調整 */
+    }
 }
