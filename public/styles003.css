@@ -357,3 +357,24 @@ tr:nth-child(even) {
         text-align: center;
     }
 }
+
+/* チェックボックスのラベルを横並びにするスタイル */
+.option label {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+}
+
+.option label input[type="checkbox"],
+.option label input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+    .option label {
+        flex: none;
+        width: calc(50% - 10px);
+        margin: 5px;
+    }
+}
