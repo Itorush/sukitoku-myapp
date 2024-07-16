@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /diagnosis-questions.html
+Disallow: /diagnosis-results.html
