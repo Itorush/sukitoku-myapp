@@ -157,6 +157,10 @@ form {
 
 .option {
     font-weight: bold;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
 }
 
 .warning {
@@ -284,4 +288,17 @@ tr:nth-child(even) {
     .options-row .option {
         margin: 15px 0; /* スマホでは少し広めのマージンを設定 */
     }
+}
+
+/* neutral の下にオプションが来ないように調整 */
+.label-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.neutral {
+    flex-basis: 100%;
+    text-align: center;
+    margin-bottom: 10px;
 }
