@@ -272,3 +272,18 @@ tr:nth-child(even) {
 #backToHomeButton:hover {
     background-color: #2980b9;
 }
+
+/* 新しいスタイルを追加 */
+.advertisement {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 10px;
+}
+.advertisement img {
+    max-width: 100%;
+}
+.advertisement-label {
+    font-weight: bold;
+    color: #d9534f;
+    margin-right: 5px;
+}

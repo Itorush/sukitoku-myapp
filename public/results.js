@@ -482,10 +482,13 @@ document.addEventListener("DOMContentLoaded", function() {
             const trUrl = document.createElement('tr');
             const urlTd = document.createElement('td');
             urlTd.innerHTML = `
-                <a href="${jobDetailInfo.AffiLink1}" rel="nofollow">
-                    <img border="0" width="320" height="50" alt="" src="${jobDetailInfo.AffiLink2}">
-                </a>
-                <img border="0" width="1" height="1" src="${jobDetailInfo.AffiLink3}" alt="">
+                <div class="advertisement">
+                    <span class="advertisement-label">広告</span>
+                    <a href="${jobDetailInfo.AffiLink1}" rel="nofollow">
+                        <img border="0" width="320" height="50" alt="広告" src="${jobDetailInfo.AffiLink2}">
+                    </a>
+                    <img border="0" width="1" height="1" src="${jobDetailInfo.AffiLink3}" alt="">
+                </div>
             `;
             trUrl.appendChild(urlTd);
             table.appendChild(trUrl);

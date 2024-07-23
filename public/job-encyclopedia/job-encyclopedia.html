@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仕事図鑑 - 好き得 仕事ナビ</title>
+    <link rel="stylesheet" href="job-encyclopedia.css">
+    <script>
+        function toggleJobList(id) {
+            var jobList = document.getElementById(id);
+            if (jobList.style.display === "none") {
+                jobList.style.display = "block";
+            } else {
+                jobList.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>仕事図鑑</h1>
+            <nav>
+                <ul class="nav-list">
+                    <li>
+                        <ul class="sub-list">
+                            <li><a href="index.html">ホーム</a></li>
+                            <li><a href="diagnosis-top.html">好き得 適職診断</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="sub-list">
+                            <li><a href="job-encyclopedia.html">仕事図鑑</a></li>
+                            <li><a href="qualification-encyclopedia.html">資格図鑑(準備中)</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <ul class="sub-list">
+                            <li><a href="learning-supporter.html">学習書お探しサポーター(準備中)</a></li>
+                            <li><a href="job-ranking.html">ジャンル別転職サイトランキング(準備中)</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="job-list">
+            <div class="container">
+                
+                <p>職種ジャンルごとに一覧を表示します。「職種を表示する」ボタンをクリックすると、その詳細が表示されます。</p>
+                <div class="job-categories">
+                    <div class="category-header">
+                        <h3>小売業</h3>
+                        <button onclick="toggleJobList('retail')">職種を表示する</button>
+                    </div>
+                    <ul id="retail" style="display:none;">
+                        <li><a href="job-details.html?job=1">スーパーマーケットスタッフ</a></li>
+                        <li><a href="job-details.html?job=2">本屋スタッフ</a></li>
+                        <li><a href="job-details.html?job=3">コンビニエンスストアスタッフ</a></li>
+                        <li><a href="job-details.html?job=4">家電量販店スタッフ</a></li>
+                        <li><a href="job-details.html?job=5">アパレル販売スタッフ</a></li>
+                        <li><a href="job-details.html?job=6">ドラッグストアスタッフ</a></li>
+                        <li><a href="job-details.html?job=7">花屋スタッフ</a></li>
+                        <li><a href="job-details.html?job=8">ガーデンセンタースタッフ</a></li>
+                        <li><a href="job-details.html?job=9">百貨店販売スタッフ</a></li>
+                        <li><a href="job-details.html?job=10">ペットショップスタッフ</a></li>
+                        <li><a href="job-details.html?job=11">スポーツ用品店スタッフ</a></li>
+                        <li><a href="job-details.html?job=12">玩具店スタッフ</a></li>
+                        <li><a href="job-details.html?job=13">雑貨店スタッフ</a></li>
+                        <li><a href="job-details.html?job=14">ガソリンスタンドスタッフ</a></li>
+                        <li><a href="job-details.html?job=15">クリーニング店スタッフ</a></li>
+                    </ul>
+                    <div class="category-header">
+                        <h3>接客業</h3>
+                        <button onclick="toggleJobList('hospitality')">職種を表示する</button>
+                    </div>
+                    <ul id="hospitality" style="display:none;">
+                        <li><a href="job-details.html?job=16">カフェスタッフ</a></li>
+                        <li><a href="job-details.html?job=17">ホテルフロントスタッフ</a></li>
+                        <li><a href="job-details.html?job=18">ホテルベルスタッフ</a></li>
+                        <li><a href="job-details.html?job=19">旅館スタッフ</a></li>
+                        <li><a href="job-details.html?job=28">カスタマーサービススタッフ</a></li>
+                        <li><a href="job-details.html?job=29">イベントスタッフ</a></li>
+                        <li><a href="job-details.html?job=30">ウェディングプランナー</a></li>
+                        <li><a href="job-details.html?job=31">レストランスタッフ</a></li>
+                        <li><a href="job-details.html?job=32">バーテンダー</a></li>
+                    </ul>
+                    <div class="category-header">
+                        <h3>製造業</h3>
+                        <button onclick="toggleJobList('manufacturing')">職種を表示する</button>
+                    </div>
+                    <ul id="manufacturing" style="display:none;">
+                        <li><a href="job-details.html?job=39">食品製造ラインスタッフ</a></li>
+                        <li><a href="job-details.html?job=40">化粧品製造スタッフ</a></li>
+                        <li><a href="job-details.html?job=41">製薬工場スタッフ</a></li>
+                        <li><a href="job-details.html?job=42">精密機器製造スタッフ</a></li>
+                        <li><a href="job-details.html?job=43">自動車部品製造スタッフ</a></li>
+                        <li><a href="job-details.html?job=44">プラスチック加工スタッフ</a></li>
+                        <li><a href="job-details.html?job=45">木工製品製造スタッフ</a></li>
+                        <li><a href="job-details.html?job=46">建築資材製造スタッフ</a></li>
+                        <li><a href="job-details.html?job=47">鉄鋼製造スタッフ</a></li>
+                        <li><a href="job-details.html?job=48">印刷オペレーター</a></li>
+                        <li><a href="job-details.html?job=49">CNCオペレーター</a></li>
+                        <li><a href="job-details.html?job=50">金属加工スタッフ</a></li>
+                        <li><a href="job-details.html?job=51">溶接工</a></li>
+                        <li><a href="job-details.html?job=52">ラインオペレーター</a></li>
+                        <li><a href="job-details.html?job=53">生産技術者</a></li>
+                        <li><a href="job-details.html?job=54">プロセスエンジニア</a></li>
+                        <li><a href="job-details.html?job=55">機械工</a></li>
+                        <li><a href="job-details.html?job=56">電気技師</a></li>
+                        <li><a href="job-details.html?job=57">化学技師</a></li>
+                        <li><a href="job-details.html?job=58">CADオペレーター</a></li>
+                        <li><a href="job-details.html?job=59">ドローンオペレーター</a></li>
+                        <li><a href="job-details.html?job=60">ドローン技術者</a></li>
+                        <li><a href="job-details.html?job=61">CNCプログラマー</a></li>
+                    </ul>
+                    
+                    <div class="category-header">
+                        <h3>建設業</h3>
+                        <button onclick="toggleJobList('construction')">職種を表示する</button>
+                    </div>
+                    <ul id="construction" style="display:none;">
+                        <li><a href="job-details.html?job=82">測量技術者</a></li>
+                        <li><a href="job-details.html?job=83">建設現場作業員</a></li>
+                        <li><a href="job-details.html?job=84">建設機械オペレーター</a></li>
+                        <li><a href="job-details.html?job=85">内装工</a></li>
+                        <li><a href="job-details.html?job=86">外装工</a></li>
+                        <li><a href="job-details.html?job=87">電気工事士</a></li>
+                        <li><a href="job-details.html?job=88">水道工事士</a></li>
+                        <li><a href="job-details.html?job=89">空調設備工事士</a></li>
+                        <li><a href="job-details.html?job=90">防水工</a></li>
+                        <li><a href="job-details.html?job=91">塗装工</a></li>
+                        <li><a href="job-details.html?job=92">解体作業員</a></li>
+                        <li><a href="job-details.html?job=93">建築設計士</a></li>
+                        <li><a href="job-details.html?job=94">土木技術者</a></li>
+                        <li><a href="job-details.html?job=95">建設管理者</a></li>
+                        <li><a href="job-details.html?job=96">造園設計士</a></li>
+                    </ul>
+                    
+                    <div class="category-header">
+                        <h3>農林水産業</h3>
+                        <button onclick="toggleJobList('agriculture-forestry-fisheries')">職種を表示する</button>
+                    </div>
+                    <ul id="agriculture-forestry-fisheries" style="display:none;">
+                        <li><a href="job-details.html?job=66">農業作業員</a></li>
+                        <li><a href="job-details.html?job=67">園芸スタッフ</a></li>
+                        <li><a href="job-details.html?job=68">水産業作業員</a></li>
+                        <li><a href="job-details.html?job=69">林業作業員</a></li>
+                        <li><a href="job-details.html?job=70">畜産業作業員</a></li>
+                        <li><a href="job-details.html?job=71">養蜂作業員</a></li>
+                        <li><a href="job-details.html?job=72">養殖業作業員</a></li>
+                        <li><a href="job-details.html?job=245">ガーデナー</a></li>
+                        <li><a href="job-details.html?job=266">農業経営者</a></li>
+                        <li><a href="job-details.html?job=267">林業技師</a></li>
+                    </ul>
+                    <div class="category-header">
+                        <h3>環境・エネルギー</h3>
+                        <button onclick="toggleJobList('environment-energy')">職種を表示する</button>
+                    </div>
+                    <ul id="environment-energy" style="display:none;">
+                        <li><a href="job-details.html?job=73">環境保護スタッフ</a></li>
+                        <li><a href="job-details.html?job=74">再生可能エネルギー技術者</a></li>
+                        <li><a href="job-details.html?job=75">環境アセスメント専門家</a></li>
+                        <li><a href="job-details.html?job=76">環境調査員</a></li>
+                        <li><a href="job-details.html?job=77">土壌検査技師</a></li>
+                        <li><a href="job-details.html?job=78">水質検査技師</a></li>
+                        <li><a href="job-details.html?job=79">環境コンサルタント</a></li>
+                        <li><a href="job-details.html?job=216">環境エンジニア</a></li>
+                    </ul>
+                    <div class="category-header">
+                        <h3>IT・エンジニアリング</h3>
+                        <button onclick="toggleJobList('it-engineering')">職種を表示する</button>
+                    </div>
+                    <ul id="it-engineering" style="display:none;">
+                        <li><a href="job-details.html?job=62">ロボティクスエンジニア</a></li>
+                        <li><a href="job-details.html?job=63">自動車エンジニア</a></li>
+                        <li><a href="job-details.html?job=64">バイオメディカルエンジニア</a></li>
+                        <li><a href="job-details.html?job=65">ITコンサルタント</a></li>
+                        <li><a href="job-details.html?job=80">システムアナリスト</a></li>
+                        <li><a href="job-details.html?job=81">ビジネスコンサルタント</a></li>
+                        <li><a href="job-details.html?job=179">ソフトウェアエンジニア</a></li>
+                        <li><a href="job-details.html?job=180">システムエンジニア</a></li>
+                        <li><a href="job-details.html?job=181">ネットワークエンジニア</a></li>
+                        <li><a href="job-details.html?job=182">データベースエンジニア</a></li>
+                        <li><a href="job-details.html?job=183">セキュリティエンジニア</a></li>
+                        <li><a href="job-details.html?job=184">データサイエンティスト</a></li>
+                        <li><a href="job-details.html?job=185">AIエンジニア</a></li>
+                        <li><a href="job-details.html?job=186">フロントエンドエンジニア</a></li>
+                        <li><a href="job-details.html?job=187">バックエンドエンジニア</a></li>
+                        <li><a href="job-details.html?job=188">クラウドエンジニア</a></li>
+                        <li><a href="job-details.html?job=189">モバイルアプリ開発者</a></li>
+                        <li><a href="job-details.html?job=191">ITサポートエンジニア</a></li>
+                        <li><a href="job-details.html?job=192">ファイナンシャルコンサルタント</a></li>
+                        <li><a href="job-details.html?job=193">データエンジニア</a></li>
+                        <li><a href="job-details.html?job=194">機械学習エンジニア</a></li>
+                        <li><a href="job-details.html?job=195">サイバーセキュリティエンジニア</a></li>
+                        <li><a href="job-details.html?job=196">ネットワークセキュリティエンジニア</a></li>
+                        <li><a href="job-details.html?job=197">ソフトウェア品質保証エンジニア</a></li>
+                        <li><a href="job-details.html?job=198">サイト信頼性エンジニア</a></li>
+                        <li><a href="job-details.html?job=199">クラウドアーキテクト</a></li>
+                        <li><a href="job-details.html?job=200">データウェアハウスエンジニア</a></li>
+                        <li><a href="job-details.html?job=201">人工知能研究者</a></li>
+                    </ul>
+                    
+                    <div class="category-header">
+                        <h3>ビジネス</h3>
+                        <button onclick="toggleJobList('business')">職種を表示する</button>
+                    </div>
+                    <ul id="business" style="display:none;">
+                        <li><a href="job-details.html?job=202">経理スタッフ</a></li>
+                        <li><a href="job-details.html?job=203">人事スタッフ</a></li>
+                        <li><a href="job-details.html?job=204">総務スタッフ</a></li>
+                        <li><a href="job-details.html?job=205">営業スタッフ</a></li>
+                        <li><a href="job-details.html?job=206">マーケティングスタッフ</a></li>
+                        <li><a href="job-details.html?job=207">プロジェクトマネージャー</a></li>
+                        <li><a href="job-details.html?job=208">経営企画スタッフ</a></li>
+                        <li><a href="job-details.html?job=209">ロジスティクススタッフ</a></li>
+                        <li><a href="job-details.html?job=210">事務スタッフ</a></li>
+                        <li><a href="job-details.html?job=211">秘書</a></li>
+                        <li><a href="job-details.html?job=212">翻訳者</a></li>
+                        <li><a href="job-details.html?job=213">通訳者</a></li>
+                        <li><a href="job-details.html?job=214">コールセンタースタッフ</a></li>
+                        <li><a href="job-details.html?job=215">クレーム対応スタッフ</a></li>
+                        <li><a href="job-details.html?job=305">不動産仲介業</a></li>
+                    </ul>
+                    
+                    <div class="category-header">
+                        <h3>法律・財務</h3>
+                        <button onclick="toggleJobList('legal-financial')">職種を表示する</button>
+                    </div>
+                    <ul id="legal-financial" style="display:none;">
+                        <li><a href="job-details.html?job=217">弁護士</a></li>
+                        <li><a href="job-details.html?job=218">司法書士</a></li>
+                        <li><a href="job-details.html?job=219">行政書士</a></li>
+                        <li><a href="job-details.html?job=220">パラリーガル</a></li>
+                        <li><a href="job-details.html?job=221">法務アシスタント</a></li>
+                        <li><a href="job-details.html?job=225">法律コンサルタント</a></li>
+                        <li><a href="job-details.html?job=226">公認会計士</a></li>
+                        <li><a href="job-details.html?job=227">ファイナンシャルプランナー</a></li>
+                        <li><a href="job-details.html?job=228">銀行員</a></li>
+                        <li><a href="job-details.html?job=229">証券アナリスト</a></li>
+                        <li><a href="job-details.html?job=230">保険アドバイザー</a></li>
+                        <li><a href="job-details.html?job=231">クレジットアナリスト</a></li>
+                        <li><a href="job-details.html?job=232">アセットマネージャー</a></li>
+                        <li><a href="job-details.html?job=233">トレーダー</a></li>
+                        <li><a href="job-details.html?job=234">リスクマネジメントスペシャリスト</a></li>
+                        <li><a href="job-details.html?job=235">財務アナリスト</a></li>
+                        <li><a href="job-details.html?job=236">簿記検定資格者</a></li>
+                        <li><a href="job-details.html?job=237">税理士</a></li>
+                    </ul>
+
+                    <div class="category-header">
+                        <h3>医療・福祉</h3>
+                        <button onclick="toggleJobList('medical-welfare')">職種を表示する</button>
+                    </div>
+                    <ul id="medical-welfare" style="display:none;">
+                        <li><a href="job-details.html?job=97">医療秘書</a></li>
+                        <li><a href="job-details.html?job=98">看護師</a></li>
+                        <li><a href="job-details.html?job=99">介護福祉士</a></li>
+                        <li><a href="job-details.html?job=103">臨床工学技士</a></li>
+                        <li><a href="job-details.html?job=104">放射線技師</a></li>
+                        <li><a href="job-details.html?job=105">臨床検査技師</a></li>
+                        <li><a href="job-details.html?job=106">救急救命士</a></li>
+                        <li><a href="job-details.html?job=107">栄養士</a></li>
+                        <li><a href="job-details.html?job=108">保育士</a></li>
+                        <li><a href="job-details.html?job=110">ソーシャルワーカー</a></li>
+                        <li><a href="job-details.html?job=111">精神保健福祉士</a></li>
+                        <li><a href="job-details.html?job=112">歯科衛生士</a></li>
+                        <li><a href="job-details.html?job=113">薬剤師</a></li>
+                        <li><a href="job-details.html?job=114">歯科医師</a></li>
+                        <li><a href="job-details.html?job=115">矯正歯科医師</a></li>
+                        <li><a href="job-details.html?job=116">獣医</a></li>
+                        <li><a href="job-details.html?job=117">精神科医</a></li>
+                        <li><a href="job-details.html?job=118">小児科医</a></li>
+                        <li><a href="job-details.html?job=119">内科医</a></li>
+                        <li><a href="job-details.html?job=120">外科医</a></li>
+                        <li><a href="job-details.html?job=121">訪問看護師</a></li>
+                        <li><a href="job-details.html?job=122">小児看護師</a></li>
+                        <li><a href="job-details.html?job=123">オンコロジーナース</a></li>
+                        <li><a href="job-details.html?job=124">感染管理ナース</a></li>
+                        <li><a href="job-details.html?job=126">精神科ソーシャルワーカー</a></li>
+                        <li><a href="job-details.html?job=129">臨床薬剤師</a></li>
+                        <li><a href="job-details.html?job=130">精神看護師</a></li>
+                        <li><a href="job-details.html?job=131">整形外科看護師</a></li>
+                        <li><a href="job-details.html?job=132">手術室看護師</a></li>
+                        <li><a href="job-details.html?job=133">ホスピス看護師</a></li>
+                        <li><a href="job-details.html?job=134">保育園教諭</a></li>
+                        <li><a href="job-details.html?job=135">幼稚園教諭</a></li>
+                        <li><a href="job-details.html?job=154">作業療法士</a></li>
+                        <li><a href="job-details.html?job=155">理学療法士</a></li>
+                        <li><a href="job-details.html?job=156">言語聴覚士</a></li>
+                        <li><a href="job-details.html?job=157">リハビリテーションセラピスト</a></li>
+                        <li><a href="job-details.html?job=158">言語療法士</a></li>
+                        <li><a href="job-details.html?job=159">療法士</a></li>
+                    </ul>
+                    
+                    <div class="category-header">
+                        <h3>美容・健康</h3>
+                        <button onclick="toggleJobList('beauty-health')">職種を表示する</button>
+                    </div>
+                    <ul id="beauty-health" style="display:none;">
+                        <li><a href="job-details.html?job=20">エステティシャン</a></li>
+                        <li><a href="job-details.html?job=21">スパセラピスト</a></li>
+                        <li><a href="job-details.html?job=22">マッサージセラピスト</a></li>
+                        <li><a href="job-details.html?job=23">理容師</a></li>
+                        <li><a href="job-details.html?job=24">美容師</a></li>
+                        <li><a href="job-details.html?job=25">ネイルアーティスト</a></li>
+                        <li><a href="job-details.html?job=33">フィットネストレーナー</a></li>
+                        <li><a href="job-details.html?job=109">ヨガインストラクター</a></li>
+                        <li><a href="job-details.html?job=238">パーソナルトレーナー</a></li>
+                        <li><a href="job-details.html?job=239">フィットネスインストラクター</a></li>
+                    </ul>
+
+                    <div class="category-header">
+                        <h3>教育・研究</h3>
+                        <button onclick="toggleJobList('education-research')">職種を表示する</button>
+                    </div>
+                    <ul id="education-research" style="display:none;">
+                        <li><a href="job-details.html?job=136">小学校教諭</a></li>
+                        <li><a href="job-details.html?job=137">中学校教諭</a></li>
+                        <li><a href="job-details.html?job=138">高校教諭</a></li>
+                        <li><a href="job-details.html?job=139">専門学校教員</a></li>
+                        <li><a href="job-details.html?job=140">大学教授</a></li>
+                        <li><a href="job-details.html?job=141">大学院教員</a></li>
+                        <li><a href="job-details.html?job=142">教材開発者</a></li>
+                        <li><a href="job-details.html?job=143">コンテンツクリエイター</a></li>
+                        <li><a href="job-details.html?job=144">YouTuber</a></li>
+                        <li><a href="job-details.html?job=145">教育研究者</a></li>
+                        <li><a href="job-details.html?job=148">大学講師</a></li>
+                        <li><a href="job-details.html?job=149">塾運営スタッフ</a></li>
+                        <li><a href="job-details.html?job=150">スクールマネージャー</a></li>
+                        <li><a href="job-details.html?job=151">eラーニングコンテンツ開発者</a></li>
+                        <li><a href="job-details.html?job=152">インターナショナルスクール教師</a></li>
+                        <li><a href="job-details.html?job=153">サポートティーチャー</a></li>
+                        <li><a href="job-details.html?job=168">教育コンサルタント</a></li>
+                        <li><a href="job-details.html?job=174">スクールカウンセラー</a></li>
+                        <li><a href="job-details.html?job=190">私塾講師</a></li>
+                        <li><a href="job-details.html?job=261">家庭教師</a></li>
+                        <li><a href="job-details.html?job=263">オンラインチューター</a></li>
+                        <li><a href="job-details.html?job=264">キャリアアドバイザー</a></li>
+                        <li><a href="job-details.html?job=268">科学研究員</a></li>
+                        <li><a href="job-details.html?job=269">医学研究員</a></li>
+                        <li><a href="job-details.html?job=270">環境科学者</a></li>
+                    </ul>
+
+                    <div class="category-header">
+                        <h3>観光・旅行業</h3>
+                        <button onclick="toggleJobList('tourism-travel')">職種を表示する</button>
+                    </div>
+                    <ul id="tourism-travel" style="display:none;">
+                        <li><a href="job-details.html?job=26">レンタカー受付スタッフ</a></li>
+                        <li><a href="job-details.html?job=27">観光案内所スタッフ</a></li>
+                        <li><a href="job-details.html?job=34">ツアーガイド</a></li>
+                        <li><a href="job-details.html?job=35">ホテルマネージャー</a></li>
+                        <li><a href="job-details.html?job=36">レストランマネージャー</a></li>
+                        <li><a href="job-details.html?job=37">旅行代理店スタッフ</a></li>
+                        <li><a href="job-details.html?job=38">イベントコーディネーター</a></li>
+                    </ul>
+                    
+                    <div class="category-header">
+                        <h3>スポーツ・レジャー</h3>
+                        <button onclick="toggleJobList('sports-leisure')">職種を表示する</button>
+                    </div>
+                    <ul id="sports-leisure" style="display:none;">
+                        <li><a href="job-details.html?job=241">スポーツコーチ</a></li>
+                        <li><a href="job-details.html?job=242">スポーツインストラクター</a></li>
+                        <li><a href="job-details.html?job=243">ペットシッター</a></li>
+                        <li><a href="job-details.html?job=244">ペットトレーナー</a></li>
+                        <li><a href="job-details.html?job=265">漁業従事者</a></li>
+                        <li><a href="job-details.html?job=281">テーマパークスタッフ</a></li>
+                        <li><a href="job-details.html?job=282">飼育員</a></li>
+                        <li><a href="job-details.html?job=290">アスリート</a></li>
+                        <li><a href="job-details.html?job=298">ダイビングインストラクター</a></li>
+                        <li><a href="job-details.html?job=299">スキューバダイビングガイド</a></li>
+                    </ul>
+
+                    <div class="category-header">
+                        <h3>クリエイティブ</h3>
+                        <button onclick="toggleJobList('creative')">職種を表示する</button>
+                    </div>
+                    <ul id="creative" style="display:none;">
+                        <li><a href="job-details.html?job=100">アートディレクター</a></li>
+                        <li><a href="job-details.html?job=101">プロダクトデザイナー</a></li>
+                        <li><a href="job-details.html?job=102">アートプロデューサー</a></li>
+                        <li><a href="job-details.html?job=125">ファッションデザイナー</a></li>
+                        <li><a href="job-details.html?job=127">インテリアデザイナー</a></li>
+                        <li><a href="job-details.html?job=146">文化財保護専門家</a></li>
+                        <li><a href="job-details.html?job=147">音楽家</a></li>
+                        <li><a href="job-details.html?job=160">UX/UIデザイナー</a></li>
+                        <li><a href="job-details.html?job=161">ゲームデザイナー</a></li>
+                        <li><a href="job-details.html?job=162">イラストレーター</a></li>
+                        <li><a href="job-details.html?job=163">フォトグラファー</a></li>
+                        <li><a href="job-details.html?job=164">ビデオグラファー</a></li>
+                        <li><a href="job-details.html?job=165">音響エンジニア</a></li>
+                        <li><a href="job-details.html?job=166">映像編集者</a></li>
+                        <li><a href="job-details.html?job=167">アニメーター</a></li>
+                        <li><a href="job-details.html?job=169">グラフィックデザイナー</a></li>
+                        <li><a href="job-details.html?job=170">ウェブデザイナー</a></li>
+                        <li><a href="job-details.html?job=171">漫画家</a></li>
+                        <li><a href="job-details.html?job=172">コンセプトアーティスト</a></li>
+                        <li><a href="job-details.html?job=173">ストーリーボードアーティスト</a></li>
+                        <li><a href="job-details.html?job=175">モーションデザイナー</a></li>
+                        <li><a href="job-details.html?job=176">ビジュアルエフェクトアーティスト</a></li>
+                        <li><a href="job-details.html?job=177">テレビプロデューサー</a></li>
+                        <li><a href="job-details.html?job=178">映画監督</a></li>
+                        <li><a href="job-details.html?job=246">クラフト作家</a></li>
+                        <li><a href="job-details.html?job=274">芸術家</a></li>
+                        <li><a href="job-details.html?job=275">博物館スタッフ</a></li>
+                        <li><a href="job-details.html?job=276">学芸員</a></li>
+                        <li><a href="job-details.html?job=284">歌手</a></li>
+                        <li><a href="job-details.html?job=285">モデル</a></li>
+                        <li><a href="job-details.html?job=286">芸人</a></li>
+                        <li><a href="job-details.html?job=287">ダンサー</a></li>
+                        <li><a href="job-details.html?job=291">アナウンサー</a></li>
+                        <li><a href="job-details.html?job=301">作曲家</a></li>
+                        <li><a href="job-details.html?job=302">声優</a></li>
+                        <li><a href="job-details.html?job=303">パティシエ</a></li>
+                        <li><a href="job-details.html?job=304">作家</a></li>
+                    </ul>
+                    <div class="category-header">
+                        <h3>フリーランス</h3>
+                        <button onclick="toggleJobList('freelance')">職種を表示する</button>
+                    </div>
+                    <ul id="freelance" style="display:none;">
+                        <li><a href="job-details.html?job=128">独立事業主</a></li>
+                        <li><a href="job-details.html?job=240">ブロガー</a></li>
+                        <li><a href="job-details.html?job=257">フリーランスデザイナー</a></li>
+                        <li><a href="job-details.html?job=258">フリーランスフォトグラファー</a></li>
+                        <li><a href="job-details.html?job=259">フリーランスエンジニア</a></li>
+                        <li><a href="job-details.html?job=260">コンサルタント</a></li>
+                        <li><a href="job-details.html?job=262">アフィリエイトマーケター</a></li>
+                        <li><a href="job-details.html?job=294">フリーランスライター</a></li>
+                    </ul>
+                    <div class="category-header">
+                        <h3>その他</h3>
+                        <button onclick="toggleJobList('others')">職種を表示する</button>
+                    </div>
+                    <ul id="others" style="display:none;">
+                        <li><a href="job-details.html?job=222">公務員</a></li>
+                        <li><a href="job-details.html?job=223">政府機関職員</a></li>
+                        <li><a href="job-details.html?job=224">国際機関職員</a></li>
+                        <li><a href="job-details.html?job=247">トラックドライバー</a></li>
+                        <li><a href="job-details.html?job=248">配送ドライバー</a></li>
+                        <li><a href="job-details.html?job=249">倉庫作業員</a></li>
+                        <li><a href="job-details.html?job=250">フォークリフトオペレーター</a></li>
+                        <li><a href="job-details.html?job=251">物流管理者</a></li>
+                        <li><a href="job-details.html?job=252">在庫管理者</a></li>
+                        <li><a href="job-details.html?job=253">航空貨物スタッフ</a></li>
+                        <li><a href="job-details.html?job=254">鉄道貨物スタッフ</a></li>
+                        <li><a href="job-details.html?job=255">海運スタッフ</a></li>
+                        <li><a href="job-details.html?job=256">児童相談員</a></li>
+                        <li><a href="job-details.html?job=271">警察官</a></li>
+                        <li><a href="job-details.html?job=272">消防士</a></li>
+                        <li><a href="job-details.html?job=273">料理人</a></li>
+                        <li><a href="job-details.html?job=277">自衛隊員</a></li>
+                        <li><a href="job-details.html?job=278">パイロット</a></li>
+                        <li><a href="job-details.html?job=279">航空管制官</a></li>
+                        <li><a href="job-details.html?job=280">航空整備士</a></li>
+                        <li><a href="job-details.html?job=283">タクシー運転手</a></li>
+                        <li><a href="job-details.html?job=288">裁判官</a></li>
+                        <li><a href="job-details.html?job=289">検察官</a></li>
+                        <li><a href="job-details.html?job=292">通関士</a></li>
+                        <li><a href="job-details.html?job=293">気象予報士</a></li>
+                        <li><a href="job-details.html?job=295">フライトアテンダント</a></li>
+                        <li><a href="job-details.html?job=296">鉄道運転士</a></li>
+                        <li><a href="job-details.html?job=297">船舶運航士</a></li>
+                        <li><a href="job-details.html?job=300">コピーライター</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 好き得 仕事ナビ. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
