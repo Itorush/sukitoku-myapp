@@ -123,3 +123,41 @@ footer {
         width: 100%;
     }
 }
+
+/* 新しいスタイルを追加 */
+.advertisement {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.advertisement img {
+    max-width: 100%;
+    height: auto;
+}
+
+.advertisement-label {
+    font-weight: bold;
+    color: #d9534f;
+    margin-right: 5px;
+}
+
+/* 新しいスタイルを追加 */
+.advertisement {
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.advertisement img {
+    max-width: 100%;
+    height: auto;
+}
+
+.advertisement-label {
+    font-weight: bold;
+    color: #d9534f;
+    margin-right: 5px;
+}
